@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./frontend/index.jsx");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./frontend/jinx.jsx");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./frontend/index.jsx":
-/*!****************************!*\
-  !*** ./frontend/index.jsx ***!
-  \****************************/
+/***/ "./frontend/jinx.jsx":
+/*!***************************!*\
+  !*** ./frontend/jinx.jsx ***!
+  \***************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -101,9 +101,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 
 
-Document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
   var root = document.getElementById('root');
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Test"), root);
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Jinx"), root);
 });
 
 /***/ }),
