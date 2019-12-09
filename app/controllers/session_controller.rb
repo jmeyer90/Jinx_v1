@@ -8,6 +8,7 @@ class SessionController < ApplicationController
       render json: @user
     else 
       render json: ["Wrong email, password combo"], status: 422
+    end
   end
 
   def destroy
