@@ -12,6 +12,7 @@ class UsersController < ApplicationController
       render json: @user
     else 
       render json: @user.errors.fullMessages, status: 422
+    end
   end
 
   private
