@@ -9,4 +9,7 @@
 #
 
 class BusinessType < ApplicationRecord
+
+  validates :type, presence: true
+  
 end

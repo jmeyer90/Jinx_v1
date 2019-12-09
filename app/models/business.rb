@@ -12,4 +12,9 @@
 #
 
 class Business < ApplicationRecord
+
+  has_many :reviews
+
+  validates :name, :address, :longitude, :latitude, presence: true
+  
 end

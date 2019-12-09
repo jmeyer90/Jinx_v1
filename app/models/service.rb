@@ -9,4 +9,7 @@
 #
 
 class Service < ApplicationRecord
+
+  validates :service, presence: true
+
 end

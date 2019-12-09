@@ -9,4 +9,7 @@
 #
 
 class MiscAttribute < ApplicationRecord
+
+  validates :attribute, presence: true
+  
 end

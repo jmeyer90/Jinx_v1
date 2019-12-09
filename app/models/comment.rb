@@ -12,4 +12,13 @@
 #
 
 class Comment < ApplicationRecord
+
+  belongs_to :user
+  belongs_to :review
+  
+  belongs_to :parent,
+    foreign_key: :parent_id,
+    class_name: :Comment
+
+  validates :body, presence: true
 end

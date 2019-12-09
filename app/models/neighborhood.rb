@@ -9,4 +9,7 @@
 #
 
 class Neighborhood < ApplicationRecord
+
+  validates :neighborhood, presence: true
+
 end

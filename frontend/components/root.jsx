@@ -6,10 +6,10 @@ import App from './app';
 const Root = ({ store })=> {
   return(
     <HashRouter>
-      {/* <Provider store={ store }> */}
+      <Provider store={ store }>
         <h1>Root Component redirects to:</h1>
         <App/>
-      {/* </Provider> */}
+      </Provider>
     </HashRouter>
   )
 };

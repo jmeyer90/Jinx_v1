@@ -9,4 +9,7 @@
 #
 
 class Cuisine < ApplicationRecord
+
+  validates :cuisine, presence: true
+  
 end

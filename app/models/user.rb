@@ -18,6 +18,9 @@ require 'securerandom'
 
 class User < ApplicationRecord
 
+  has_many :comments
+  has_many :reviews
+
   validates :email, :session_token, presence: true, uniqueness: true
   validates :password_digest, :f_name, :l_name, presence: true
   validates :password, length:{minimum: 6}, allow_nil: true
