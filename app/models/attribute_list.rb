@@ -1,0 +1,2 @@
+class AttributeList < ApplicationRecord
+end

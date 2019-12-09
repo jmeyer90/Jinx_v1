@@ -1,0 +1,8 @@
+Next steps- 
+
+1- Upon feedback, set up database, Models, and Controllers
+2- Start by setting up business#show
+3- Login, logout, sign up
+4- Set up home page
+5- NavBar & search results
+6- finish any styling
