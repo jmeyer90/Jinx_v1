@@ -1,19 +1,19 @@
 # == Schema Information
 #
-# Table name: businesses
+# Table name: comments
 #
 #  id         :bigint           not null, primary key
-#  name       :string           not null
-#  address    :string           not null
-#  longitude  :float            not null
-#  latitude   :float            not null
+#  user_id    :integer          not null
+#  review_id  :integer          not null
+#  parent_id  :integer
+#  body       :text             not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 require 'test_helper'
 
-class BusinessTest < ActiveSupport::TestCase
+class CommentTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

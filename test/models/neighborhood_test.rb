@@ -1,17 +1,16 @@
 # == Schema Information
 #
-# Table name: attribute_lists
+# Table name: neighborhoods
 #
 #  id           :bigint           not null, primary key
+#  neighborhood :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  business_id  :integer          not null
-#  price_rating :integer          not null
 #
 
 require 'test_helper'
 
-class AttributeListTest < ActiveSupport::TestCase
+class NeighborhoodTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

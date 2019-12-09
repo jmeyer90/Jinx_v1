@@ -1,13 +1,12 @@
 # == Schema Information
 #
-# Table name: attribute_lists
+# Table name: neighborhoods
 #
 #  id           :bigint           not null, primary key
+#  neighborhood :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  business_id  :integer          not null
-#  price_rating :integer          not null
 #
 
-class AttributeList < ApplicationRecord
+class Neighborhood < ApplicationRecord
 end

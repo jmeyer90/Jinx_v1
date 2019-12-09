@@ -1,14 +1,11 @@
 # == Schema Information
 #
-# Table name: businesses
+# Table name: neighborhoods
 #
-#  id         :bigint           not null, primary key
-#  name       :string           not null
-#  address    :string           not null
-#  longitude  :float            not null
-#  latitude   :float            not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :bigint           not null, primary key
+#  neighborhood :string           not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

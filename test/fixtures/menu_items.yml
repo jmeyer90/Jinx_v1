@@ -1,14 +1,14 @@
 # == Schema Information
 #
-# Table name: businesses
+# Table name: menu_items
 #
-#  id         :bigint           not null, primary key
-#  name       :string           not null
-#  address    :string           not null
-#  longitude  :float            not null
-#  latitude   :float            not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :bigint           not null, primary key
+#  menu_id     :integer          not null
+#  title       :string           not null
+#  price       :float            not null
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

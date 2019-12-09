@@ -1,19 +1,16 @@
 # == Schema Information
 #
-# Table name: businesses
+# Table name: services
 #
 #  id         :bigint           not null, primary key
-#  name       :string           not null
-#  address    :string           not null
-#  longitude  :float            not null
-#  latitude   :float            not null
+#  service    :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 require 'test_helper'
 
-class BusinessTest < ActiveSupport::TestCase
+class ServiceTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

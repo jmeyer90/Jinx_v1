@@ -1,19 +1,16 @@
 # == Schema Information
 #
-# Table name: reviews
+# Table name: menus
 #
 #  id          :bigint           not null, primary key
-#  user_id     :integer          not null
-#  business_id :integer          not null
-#  rating      :integer          not null
-#  body        :text
+#  business_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 
 require 'test_helper'
 
-class ReviewTest < ActiveSupport::TestCase
+class MenuTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
