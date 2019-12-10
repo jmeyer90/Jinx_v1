@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   window.getState = store.getState;
   // end of testing
 
-  debugger
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store}/>, root);

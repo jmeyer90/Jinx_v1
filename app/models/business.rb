@@ -5,16 +5,16 @@
 #  id         :bigint           not null, primary key
 #  name       :string           not null
 #  address    :string           not null
-#  longitude  :float            not null
-#  latitude   :float            not null
+#  longitude  :float            
+#  latitude   :float            
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 class Business < ApplicationRecord
 
-  has_many :reviews
+  # has_many :reviews
 
-  validates :name, :address, :longitude, :latitude, presence: true
+  validates :name, :address, presence: true
   
 end

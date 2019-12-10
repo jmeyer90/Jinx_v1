@@ -33,32 +33,39 @@ class SignUp extends React.Component{
     debugger
 
     return(
-      <div>
-        <form onSubmit={ (e)=>this.handleSubmit(e) }>
-          <h1>Sign Up</h1>
+      <div className="session-container">
+        <form onSubmit={ (e)=>this.handleSubmit(e) } className="session-form">
+          <h1 className="title">Sign Up</h1>
+          <label className="top greeting">
+            Connect with the wonderful wizarding world near you.
+          </label>
+          <h2 className="disclamer">By continuing, you agree to solemnly swear you are up to no good.</h2>
           <label>
-            Email:
-            <input type="email" value={ email } onChange={ this.update( "email" ) }/>
+            <input type="email" placeholder="Email" value={ email } onChange={ this.update( "email" ) }/>
+          </label>
+          <section className="name-section">
+            <label>
+              <input id="name" type="f_name" placeholder="First Name" value={ f_name } onChange={ this.update("f_name") } />
+            </label>
+            <label>
+              <input id="name" type="l_name" placeholder="Last Name" value={ l_name } onChange={ this.update("l_name") } />
+            </label>
+          </section>
+          <label>
+            <input type="password" placeholder="Password" value={password} onChange={this.update("password")} />
           </label>
           <label>
-            First Name:
-            <input type="f_name" value={ f_name } onChange={ this.update("f_name") } />
+            <input type="integer" placeholder="Zip Code" value={ zip_code } onChange={ this.update("zip_code") } />
           </label>
-          <label>
-            Last Name:
-            <input type="l_name" value={ l_name } onChange={ this.update("l_name") } />
+          <label className="bottom-disclamer"> 
+            You also understand that Jinx may send you owls requesting your help for perilous quests filled with adventure and near certain death.
           </label>
-          <label>
-            Zip Code:
-            <input type="integer" value={ zip_code } onChange={ this.update("zip_code") } />
-          </label>
-          <label>
-            Password:
-            <input type="password" value={ password } onChange={ this.update("password") } />
-          </label>
-          <input type="submit" value="Create an account"/>
+          <input className="submit" type="submit" value="Sign Up"/>
         </form>
-        <Link to="/login">Login</Link>
+        <label className="bottom change-session-form">
+          Already on Jinx?
+          <Link className="session-link" to="/login">Login</Link>
+        </label>
       </div>
     )
   }

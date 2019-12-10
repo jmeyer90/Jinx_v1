@@ -7,8 +7,7 @@ const Root = ({ store })=> {
   return(
     <HashRouter>
       <Provider store={ store }>
-        <h1>Root Component redirects to:</h1>
-        <App/>
+        <App className="app" />
       </Provider>
     </HashRouter>
   )

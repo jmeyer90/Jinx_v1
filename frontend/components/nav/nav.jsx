@@ -24,9 +24,8 @@ class Nav extends React.Component{
 
   render(){
     return(
-      <header id="nav-bar">
-        <h1>Jinx</h1>
-        <h2>Search Bar</h2>
+      <header className="nav-bar">
+        <h1 className="logo">Jinx</h1>
         <div className="session-buttons">
           { this.sessionLinks() }
         </div>

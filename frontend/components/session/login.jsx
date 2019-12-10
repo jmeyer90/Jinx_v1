@@ -26,20 +26,26 @@ class Login extends React.Component{
       let { email, password } = this.state;
 
       return (
-        <div>
-          <form onSubmit={ this.handleSubmit }>
-            <h1>Login</h1>
+        <div className="session-container">
+          <form onSubmit={ this.handleSubmit } className="session-form">
+            <h1 className="title">Log In to Jinx</h1>
+            <label className="top change-session-form">
+              New to Jinx? 
+              <Link className="session-link" to="/signup">Sign Up </Link>
+            </label>
+            <h2 className="disclamer">By logging in, you agree to solemnly swear you are up to no good</h2>
             <label>
-              Email:
-            <input type="email" value={email} onChange={this.update("email")} />
+            <input type="email" placeholder="Email" value={email} onChange={this.update("email")} />
             </label>
             <label>
-              Password:
-            <input type="password" value={password} onChange={this.update("password")} />
+            <input type="password" placeholder="Password" value={password} onChange={this.update("password")} />
             </label>
-            <input type="submit" value="Login" />
+            <input className="submit" type="submit" value="Log In" />
           </form>
-          <Link to="/signup">Sign Up</Link>
+          <label className="bottom change-session-form">
+            New to Jinx?
+            <Link className="session-link" to="/signup">Sign Up</Link>
+          </label>
         </div>
       )
     }
