@@ -11,13 +11,13 @@ const logoutUser = () =>({
   type: LOGOUT_USER
 })
 
-export const login = user => (
-  SessionUtil.createSesseion( user )
+export const login = user => dispatch => (
+  SessionUtil.createSession( user )
     .then( user => dispatch( loginUser( user.id )))
 );
 
 
-export const logout = () => (
+export const logout = () => dispatch => (
   SessionUtil.deleteSession()
-    .then( () => logoutUser())
+    .then( () => dispatch( logoutUser()))
 );

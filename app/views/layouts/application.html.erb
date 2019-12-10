@@ -8,7 +8,17 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <script></script>
+    <% current_user = current_user || nil %>
+    <% if current_user %>
+      <script>
+        window.current_user = current_user
+      </script>
+    <% else %>
+      <script>
+        window.current_user = null
+      </script>
+    <% end %>
+ 
   </head>
 
   <body>

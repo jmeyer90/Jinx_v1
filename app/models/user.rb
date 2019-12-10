@@ -22,7 +22,7 @@ class User < ApplicationRecord
   has_many :reviews
 
   validates :email, :session_token, presence: true, uniqueness: true
-  validates :password_digest, :f_name, :l_name, presence: true
+  validates :password_digest, :f_name, :l_name, :zip_code, presence: true
   validates :password, length:{minimum: 6}, allow_nil: true
 
   attr_reader :password
@@ -40,7 +40,7 @@ class User < ApplicationRecord
   end
 
   def is_password?( password )
-    bcp = BCrypt::Password( self.password_digest )
+    bcp = BCrypt::Password.new( self.password_digest )
     bcp.is_password?( password )
   end
 
