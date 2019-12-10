@@ -4,13 +4,13 @@ import configureStore from './store/store';
 import Root from './components/root';
 
 import { createUser } from './actions/user_actions';
-import { createSession } from './actions/session_actions';
+import { login } from './actions/session_actions';
 
 
 document.addEventListener('DOMContentLoaded', ()=>{
 
   // testing purposes
-  window.createSession = createSession;
+  window.login = login;
   window.createUser = createUser;
   // end of testing
 
