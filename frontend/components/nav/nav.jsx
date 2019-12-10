@@ -8,6 +8,7 @@ class Nav extends React.Component{
 
   sessionLinks(){
     if ( this.props.loggedIn ){
+      debugger
       return(
         <button onClick={()=> this.props.logout() }>Log Out</button>
       )

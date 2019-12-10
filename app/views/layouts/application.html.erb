@@ -6,12 +6,11 @@
     <%= csp_meta_tag %>
 
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <% current_user = current_user || nil %>
-    <% if current_user %>
+    <% if logged_in? %>
       <script>
-        window.current_user = current_user
+        window.current_user = <%= current_user %>
       </script>
     <% else %>
       <script>

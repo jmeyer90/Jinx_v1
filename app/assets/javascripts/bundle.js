@@ -264,6 +264,7 @@ function (_React$Component) {
       var _this = this;
 
       if (this.props.loggedIn) {
+        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             return _this.props.logout();
@@ -660,6 +661,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -669,10 +673,11 @@ __webpack_require__.r(__webpack_exports__);
 document.addEventListener('DOMContentLoaded', function () {
   var preloadedState = undefined;
 
-  if (window.currentUser) {
+  if (window.current_user) {
     preloadedState = {
+      users: _defineProperty({}, window.current_user.id, window.current_user),
       session: {
-        currentUserId: window.currentUser.id
+        currentUserId: window.current_user.id
       }
     };
   }
@@ -680,9 +685,11 @@ document.addEventListener('DOMContentLoaded', function () {
   var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState); // testing purposes
 
   window.login = _actions_session_actions__WEBPACK_IMPORTED_MODULE_5__["login"];
+  window.logout = _actions_session_actions__WEBPACK_IMPORTED_MODULE_5__["logout"];
   window.createUser = _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["createUser"];
   window.getState = store.getState; // end of testing
 
+  debugger;
   var root = document.getElementById('root');
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
@@ -744,6 +751,8 @@ var RootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/user_actions */ "./frontend/actions/user_actions.js");
+
 
 
 var SessionReducer = function SessionReducer() {
@@ -755,12 +764,21 @@ var SessionReducer = function SessionReducer() {
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["LOGIN_USER"]:
       newState = {
+        currentUserId: action.userId
+      };
+      return newState;
+
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USER"]:
+      newState = {
         currentUserId: action.user.id
       };
       return newState;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_USER"]:
-      newState = null;
+      newState = {
+        currentUserId: null
+      };
+      debugger;
       return newState;
 
     default:

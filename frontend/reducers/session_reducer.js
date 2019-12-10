@@ -1,14 +1,19 @@
 import { LOGIN_USER, LOGOUT_USER } from "../actions/session_actions";
+import { RECEIVE_USER } from '../actions/user_actions'
 
 const SessionReducer = (state = {}, action) => {
   Object.freeze(state);
   let newState;
   switch( action.type ){
     case LOGIN_USER:
+      newState = { currentUserId: action.userId }
+      return newState;
+    case RECEIVE_USER:
       newState = { currentUserId: action.user.id }
       return newState;
     case LOGOUT_USER:
-      newState = null;
+      newState = { currentUserId: null };
+      debugger;
       return newState;
     default:
       return state;

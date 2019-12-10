@@ -7,4 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Seed User
-
+User.destroy_all
+user1 = User.create(email: "user1@mail.com", f_name: "user1", l_name: "user1", password: "password", zip_code:11111)
+user2 = User.create(email: "user2@mail.com", f_name: "user2", l_name: "user2", password: "password", zip_code:11111)
+user3 = User.create(email: "user3@mail.com", f_name: "user3", l_name: "user3", password: "password", zip_code:11111)

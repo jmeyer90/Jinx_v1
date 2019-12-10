@@ -5,15 +5,19 @@ import Root from './components/root';
 
 import { createUser } from './actions/user_actions';
 import { login } from './actions/session_actions';
+import { logout } from './actions/session_actions';
 
 
 document.addEventListener('DOMContentLoaded', ()=>{
 
   let preloadedState = undefined;
-  if (window.currentUser) {
+  if (window.current_user) {
     preloadedState = {
+      users: {
+        [window.current_user.id]: window.current_user
+      },
       session: {
-        currentUserId: window.currentUser.id
+        currentUserId: window.current_user.id
       }
     };
   }
@@ -21,9 +25,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   // testing purposes
   window.login = login;
+  window.logout = logout;
   window.createUser = createUser;
   window.getState = store.getState;
   // end of testing
+
+  debugger
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store}/>, root);
