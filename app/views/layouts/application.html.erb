@@ -10,7 +10,8 @@
     <%= javascript_include_tag 'application' %>
     <% if logged_in? %>
       <script>
-        window.current_user = <%= current_user %>
+        window.current_user = 
+        <%= render( "api/users/user.json.jbuilder", user: current_user ) %>
       </script>
     <% else %>
       <script>

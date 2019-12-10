@@ -675,7 +675,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (window.current_user) {
     preloadedState = {
-      users: _defineProperty({}, window.current_user.id, window.current_user),
+      entities: {
+        users: _defineProperty({}, window.current_user.id, window.current_user)
+      },
       session: {
         currentUserId: window.current_user.id
       }
