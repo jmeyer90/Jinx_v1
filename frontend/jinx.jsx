@@ -9,11 +9,6 @@ import { login } from './actions/session_actions';
 
 document.addEventListener('DOMContentLoaded', ()=>{
 
-  // testing purposes
-  window.login = login;
-  window.createUser = createUser;
-  // end of testing
-
   let preloadedState = undefined;
   if (window.currentUser) {
     preloadedState = {
@@ -22,9 +17,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
       }
     };
   }
-
-
   const store = configureStore( preloadedState );
+
+  // testing purposes
+  window.login = login;
+  window.createUser = createUser;
+  window.getState = store.getState;
+  // end of testing
+
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store}/>, root);
 }); 

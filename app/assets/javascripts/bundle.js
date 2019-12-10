@@ -667,10 +667,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  // testing purposes
-  window.login = _actions_session_actions__WEBPACK_IMPORTED_MODULE_5__["login"];
-  window.createUser = _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["createUser"]; // end of testing
-
   var preloadedState = undefined;
 
   if (window.currentUser) {
@@ -681,7 +677,12 @@ document.addEventListener('DOMContentLoaded', function () {
     };
   }
 
-  var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
+  var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState); // testing purposes
+
+  window.login = _actions_session_actions__WEBPACK_IMPORTED_MODULE_5__["login"];
+  window.createUser = _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["createUser"];
+  window.getState = store.getState; // end of testing
+
   var root = document.getElementById('root');
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
@@ -794,7 +795,7 @@ var UsersReducer = function UsersReducer() {
 
   switch (action.type) {
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
-      newState = _defineProperty({}, action.user.id, action.user.id);
+      newState = _defineProperty({}, action.user.id, action.user);
       return Object.assign({}, state, newState);
 
     default:

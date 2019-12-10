@@ -6,3 +6,14 @@ Next steps-
 4- Set up home page
 5- NavBar & search results
 6- finish any styling
+
+User Auth-
+1- remove index with unique property on :users, :zip_code
+2- continue debugging
+3- seed database
+
+Business Show Page-
+1- migrations
+2- seed database
+3- Create show page for single business
+
