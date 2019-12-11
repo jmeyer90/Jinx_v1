@@ -277,7 +277,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_sign_up_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session/sign_up_component */ "./frontend/components/session/sign_up_component.js");
 /* harmony import */ var _session_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./session/login_component */ "./frontend/components/session/login_component.js");
 /* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./nav/nav_component */ "./frontend/components/nav/nav_component.js");
-/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.js");
+/* harmony import */ var _business_business_show_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./business/business_show_component */ "./frontend/components/business/business_show_component.js");
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.js");
+
 
 
 
@@ -289,16 +291,139 @@ var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/",
     component: _nav_nav_component__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/businesses/:businessId",
+    component: _business_business_show_component__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
     path: "/signup",
     component: _session_sign_up_component__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
     path: "/login",
     component: _session_login_component__WEBPACK_IMPORTED_MODULE_3__["default"]
   }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./frontend/components/business/buiness_show.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/business/buiness_show.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reviews/business_reviews */ "./frontend/components/business/reviews/business_reviews.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var BusinessShow =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(BusinessShow, _React$Component);
+
+  function BusinessShow(props) {
+    _classCallCheck(this, BusinessShow);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(BusinessShow).call(this, props));
+  }
+
+  _createClass(BusinessShow, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchBusiness(this.props.bussiness.id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "business-show"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        business: this.props.business
+      }));
+    }
+  }]);
+
+  return BusinessShow;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (BusinessShow);
+
+/***/ }),
+
+/***/ "./frontend/components/business/business_show_component.js":
+/*!*****************************************************************!*\
+  !*** ./frontend/components/business/business_show_component.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _buiness_show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./buiness_show */ "./frontend/components/business/buiness_show.jsx");
+/* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
+
+
+
+
+var msp = function msp(state, ownProps) {
+  return {
+    bussiness: state.businesses[ownProps.match.params.businessId]
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    fetchBusiness: function fetchBusiness(businessId) {
+      return dispatch(Object(_actions_business_actions__WEBPACK_IMPORTED_MODULE_2__["fetchBusiness"])(businessId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_buiness_show__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/business/reviews/business_reviews.jsx":
+/*!*******************************************************************!*\
+  !*** ./frontend/components/business/reviews/business_reviews.jsx ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var BusinessReviews = function BusinessReviews(props) {
+  return React.createElement("section", {
+    className: "business-reviews"
+  }, "BusinessReviews");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BusinessReviews);
 
 /***/ }),
 
@@ -910,7 +1035,7 @@ var BusinessesReducer = function BusinessesReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/entitites/users_reducer.jsx");
+/* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/entitites/users_reducer.js");
 /* harmony import */ var _businesses_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./businesses_reducer */ "./frontend/reducers/entitites/businesses_reducer.js");
 
 
@@ -923,14 +1048,37 @@ var EntitiesRedcuer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 
 /***/ }),
 
-/***/ "./frontend/reducers/entitites/users_reducer.jsx":
-/*!*******************************************************!*\
-  !*** ./frontend/reducers/entitites/users_reducer.jsx ***!
-  \*******************************************************/
+/***/ "./frontend/reducers/entitites/users_reducer.js":
+/*!******************************************************!*\
+  !*** ./frontend/reducers/entitites/users_reducer.js ***!
+  \******************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/frontend/reducers/entitites/users_reducer.jsx'");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var UsersReducer = function UsersReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var newState;
+
+  switch (action.type) {
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
+      newState = _defineProperty({}, action.user.id, action.user);
+      return Object.assign({}, state, newState);
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (UsersReducer);
 
 /***/ }),
 
@@ -943,7 +1091,7 @@ throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
 
 var nullState = [];
 
@@ -953,7 +1101,7 @@ var BusinessReducer = function BusinessReducer() {
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["BUSINESS_ERRORS"]:
+    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["BUSINESS_ERRORS"]:
       var newState = action.errors;
       return newState;
 

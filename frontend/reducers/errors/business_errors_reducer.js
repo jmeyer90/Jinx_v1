@@ -1,4 +1,4 @@
-import { BUSINESS_ERRORS } from '../../actions/session_actions';
+import { BUSINESS_ERRORS } from '../../actions/business_actions';
 
 const nullState = [];
 
