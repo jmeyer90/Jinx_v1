@@ -13,7 +13,6 @@ class SessionForm extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
     this.props.action(this.state);
   }
 
@@ -64,11 +63,11 @@ class SessionForm extends React.Component {
           <h2 className="disclamer">{this.props.disclamer}</h2>
           <hr />
           <label>
-            <input type="email" placeholder="Email" value={ email } onChange={ this.update("email") } />
+            <input type="email" placeholder="Email" value={ email } onChange={ this.update("email") } required />
           </label>
           < SignupFields formType={ this.props.formType} user={ this.state } update={ this.update }/>
           <label>
-            <input type="password" placeholder="Password" value={ password } onChange={this.update("password")} />
+            <input type="password" placeholder="Password" value={password} onChange={this.update("password")} required />
           </label>
           { this.bottomNotes() }
           <input className="submit" type="submit" value={this.props.formType} />

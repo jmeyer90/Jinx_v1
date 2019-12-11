@@ -530,7 +530,6 @@ function (_React$Component) {
   _createClass(SessionForm, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault();
       this.props.action(this.state);
     }
   }, {
@@ -595,7 +594,8 @@ function (_React$Component) {
         type: "email",
         placeholder: "Email",
         value: email,
-        onChange: this.update("email")
+        onChange: this.update("email"),
+        required: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_session_form_signup_fields__WEBPACK_IMPORTED_MODULE_2__["default"], {
         formType: this.props.formType,
         user: this.state,
@@ -604,7 +604,8 @@ function (_React$Component) {
         type: "password",
         placeholder: "Password",
         value: password,
-        onChange: this.update("password")
+        onChange: this.update("password"),
+        required: true
       })), this.bottomNotes(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "submit",
         type: "submit",
@@ -651,18 +652,21 @@ var SessionSignupField = function SessionSignupField(props) {
       type: "f_name",
       placeholder: "First Name",
       value: f_name,
-      onChange: props.update("f_name")
+      onChange: props.update("f_name"),
+      required: true
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       id: "name",
       type: "l_name",
       placeholder: "Last Name",
       value: l_name,
-      onChange: props.update("l_name")
+      onChange: props.update("l_name"),
+      required: true
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "integer",
       placeholder: "Zip Code",
       value: zip_code,
-      onChange: props.update("zip_code")
+      onChange: props.update("zip_code"),
+      required: true
     })));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
