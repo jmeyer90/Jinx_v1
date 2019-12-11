@@ -524,6 +524,7 @@ function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.topGreeting = _this.topGreeting.bind(_assertThisInitialized(_this));
     _this.bottomNotes = _this.bottomNotes.bind(_assertThisInitialized(_this));
+    _this.logDemoUser = _this.logDemoUser.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -540,6 +541,20 @@ function (_React$Component) {
       return function (e) {
         _this2.setState(_defineProperty({}, field, e.currentTarget.value));
       };
+    }
+  }, {
+    key: "logDemoUser",
+    value: function logDemoUser() {
+      var demoUser = {
+        email: "demo@mail.com",
+        password: "password"
+      };
+
+      if (this.props.formType === "Log In") {
+        this.props.action(demoUser);
+      } else {
+        this.props.login(demoUser);
+      }
     }
   }, {
     key: "topGreeting",
@@ -576,10 +591,7 @@ function (_React$Component) {
           password = _this$state.password;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: function onSubmit(e) {
-          return _this3.handleSubmit(e);
-        },
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "title"
@@ -590,7 +602,11 @@ function (_React$Component) {
         }
       }, "Log In with Demo User"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "disclamer"
-      }, this.props.disclamer), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, this.props.disclamer), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: function onSubmit(e) {
+          return _this3.handleSubmit(e);
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "email",
         placeholder: "Email",
         value: email,
@@ -615,7 +631,7 @@ function (_React$Component) {
       }, this.props.linkTitle, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "session-link",
         to: this.props.alternatePath
-      }, this.props.alternateForm)));
+      }, this.props.alternateForm))));
     }
   }]);
 
@@ -688,7 +704,9 @@ var SessionSignupField = function SessionSignupField(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
-/* harmony import */ var _session_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session_form */ "./frontend/components/session/session_form.jsx");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _session_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./session_form */ "./frontend/components/session/session_form.jsx");
+
 
 
 
@@ -716,11 +734,14 @@ var mdp = function mdp(dispatch) {
   return {
     action: function action(user) {
       return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["createUser"])(user));
+    },
+    login: function login(user) {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["login"])(user));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_session_form__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_session_form__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 

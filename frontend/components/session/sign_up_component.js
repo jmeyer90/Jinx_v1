@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { createUser } from '../../actions/user_actions';
+import { login } from '../../actions/session_actions';
 import SessionForm from './session_form';
  
 const disclamer = "By continuing, you agree to solemnly swear you are up to no good.";
@@ -20,10 +21,9 @@ const msp = state => ({
   alternateForm: "Log In"
 });
 
-const mdp = dispatch =>{
-  return({
-    action: user => dispatch( createUser( user ))
-  })
-}
+const mdp = dispatch =>({
+  action: user => dispatch( createUser( user )),
+  login: user => dispatch( login( user ))
+})
 
 export default connect( msp, mdp )( SessionForm )
