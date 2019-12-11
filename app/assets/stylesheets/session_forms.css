@@ -49,6 +49,11 @@
   padding: 15px;
 }
 
+.submit:hover{
+  transition-duration: 1s;
+  background-color: #45b6d9;
+}
+
 .change-session-form{
   margin: 15px;
   font-weight: 700;

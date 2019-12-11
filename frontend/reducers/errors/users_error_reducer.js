@@ -1,13 +1,15 @@
 import { RECEIVE_ERRORS } from '../../actions/user_actions';
 
-const UsersReducer = (state = {}, action) => {
+const nullState = [];
+
+const UsersReducer = (state = nullState, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_ERRORS:
       let newState = action.errors;
       return newState;
     default:
-      return state;
+      return nullState;
   }
 };
 
