@@ -14,7 +14,7 @@ class AttributeItem < ApplicationRecord
   has_many :attribute_lists
   has_many :businesses, through: :attribute_lists
 
-  const TYPES = %w(
+  TYPES = %w(
     Cuisine, 
     Neighborhood, 
     Service, 
