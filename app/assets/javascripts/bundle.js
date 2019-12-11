@@ -86,25 +86,87 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/business_actions.js":
+/*!**********************************************!*\
+  !*** ./frontend/actions/business_actions.js ***!
+  \**********************************************/
+/*! exports provided: RECEIVE_BUSINESSES, RECEIVE_BUSINESS, BUSINESS_ERRORS, fetchBusinesses, fetchBusiness */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BUSINESSES", function() { return RECEIVE_BUSINESSES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BUSINESS", function() { return RECEIVE_BUSINESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BUSINESS_ERRORS", function() { return BUSINESS_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBusinesses", function() { return fetchBusinesses; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBusiness", function() { return fetchBusiness; });
+/* harmony import */ var _util_business_utl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/business_utl */ "./frontend/util/business_utl.js");
+
+var RECEIVE_BUSINESSES = "RECEIVE_BUSINESSES";
+var RECEIVE_BUSINESS = "RECEIVE_BUSINESS";
+var BUSINESS_ERRORS = "BUSINESS_ERRORS";
+
+var receiveBusinesses = function receiveBusinesses(businesses) {
+  return {
+    type: RECEIVE_BUSINESSES,
+    businesses: businesses
+  };
+};
+
+var receiveBusiness = function receiveBusiness(business) {
+  return {
+    type: RECEIVE_BUSINESS,
+    business: business
+  };
+};
+
+var businessErrors = function businessErrors(errors) {
+  return {
+    type: BUSINESS_ERRORS,
+    errors: errors
+  };
+};
+
+var fetchBusinesses = function fetchBusinesses() {
+  return function (dispatch) {
+    return _util_business_utl__WEBPACK_IMPORTED_MODULE_0__["fetchBusinesses"]().then(function (businesses) {
+      return dispatch(receiveBusinesses(businesses));
+    }, function (errors) {
+      return dispatch(businessErrors(errors.responseJSON));
+    });
+  };
+};
+var fetchBusiness = function fetchBusiness(businessId) {
+  return function (dispatch) {
+    return _util_business_utl__WEBPACK_IMPORTED_MODULE_0__["fetchBusiness"](businessId).then(function (business) {
+      return dispatch(receiveBusiness(business));
+    }, function (errors) {
+      return dispatch(businessErrors(errors.responseJSON));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
   \*********************************************/
-/*! exports provided: LOGOUT_USER, LOGIN_USER, RECEIVE_ERRORS, login, logout */
+/*! exports provided: LOGOUT_USER, LOGIN_USER, SESSION_ERRORS, login, logout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_USER", function() { return LOGOUT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN_USER", function() { return LOGIN_USER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ERRORS", function() { return RECEIVE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SESSION_ERRORS", function() { return SESSION_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony import */ var _util_session_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/session_util */ "./frontend/util/session_util.js");
 
 var LOGOUT_USER = "LOGOUT_USER";
 var LOGIN_USER = "LOGIN_USER";
-var RECEIVE_ERRORS = "RECEIVE_ERRORS";
+var SESSION_ERRORS = "SESSION_ERRORS";
 
 var loginUser = function loginUser(userId) {
   return {
@@ -119,9 +181,9 @@ var logoutUser = function logoutUser() {
   };
 };
 
-var receiveErrors = function receiveErrors(errors) {
+var sessionErrors = function sessionErrors(errors) {
   return {
-    type: RECEIVE_ERRORS,
+    type: SESSION_ERRORS,
     errors: errors
   };
 };
@@ -131,7 +193,7 @@ var login = function login(user) {
     return _util_session_util__WEBPACK_IMPORTED_MODULE_0__["createSession"](user).then(function (user) {
       return dispatch(loginUser(user.id));
     }, function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
+      return dispatch(sessionErrors(errors.responseJSON));
     });
   };
 };
@@ -140,7 +202,7 @@ var logout = function logout() {
     return _util_session_util__WEBPACK_IMPORTED_MODULE_0__["deleteSession"]().then(function () {
       return dispatch(logoutUser());
     }, function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
+      return dispatch(sessionErrors(errors.responseJSON));
     });
   };
 };
@@ -151,19 +213,19 @@ var logout = function logout() {
 /*!******************************************!*\
   !*** ./frontend/actions/user_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_USER, RECEIVE_ERRORS, fetchUser, createUser */
+/*! exports provided: RECEIVE_USER, USER_ERRORS, fetchUser, createUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER", function() { return RECEIVE_USER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ERRORS", function() { return RECEIVE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_ERRORS", function() { return USER_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUser", function() { return createUser; });
 /* harmony import */ var _util_user_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/user_util */ "./frontend/util/user_util.js");
 
 var RECEIVE_USER = "RECEIVE_USER";
-var RECEIVE_ERRORS = "RECEIVE_ERRORS";
+var USER_ERRORS = "USER_ERRORS";
 
 var receiveUser = function receiveUser(user) {
   return {
@@ -172,9 +234,9 @@ var receiveUser = function receiveUser(user) {
   };
 };
 
-var receiveErrors = function receiveErrors(errors) {
+var userErrors = function userErrors(errors) {
   return {
-    type: RECEIVE_ERRORS,
+    type: USER_ERRORS,
     errors: errors
   };
 };
@@ -184,7 +246,7 @@ var fetchUser = function fetchUser(userId) {
     return _util_user_util__WEBPACK_IMPORTED_MODULE_0__["fetchUser"](userId).then(function (user) {
       return dispatch(receiveUser(user));
     }, function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
+      return dispatch(userErrors(errors.responseJSON));
     });
   };
 };
@@ -193,7 +255,7 @@ var createUser = function createUser(user) {
     return _util_user_util__WEBPACK_IMPORTED_MODULE_0__["createUser"](user).then(function (user) {
       return dispatch(receiveUser(user));
     }, function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
+      return dispatch(userErrors(errors.responseJSON));
     });
   };
 };
@@ -800,6 +862,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./frontend/reducers/entitites/businesses_reducer.js":
+/*!***********************************************************!*\
+  !*** ./frontend/reducers/entitites/businesses_reducer.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var BusinessesReducer = function BusinessesReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var newState;
+
+  switch (action.type) {
+    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESSES"]:
+      newState = action.bussinesses;
+      return newState;
+
+    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESS"]:
+      newState = _defineProperty({}, action.bussiness.id, action.bussiness);
+      return Object.assign({}, state, newState);
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BusinessesReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entitites/entities_reducer.js":
 /*!*********************************************************!*\
   !*** ./frontend/reducers/entitites/entities_reducer.js ***!
@@ -811,10 +911,13 @@ document.addEventListener('DOMContentLoaded', function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/entitites/users_reducer.jsx");
+/* harmony import */ var _businesses_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./businesses_reducer */ "./frontend/reducers/entitites/businesses_reducer.js");
+
 
 
 var EntitiesRedcuer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  businesses: _businesses_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (EntitiesRedcuer);
 
@@ -825,32 +928,41 @@ var EntitiesRedcuer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
   !*** ./frontend/reducers/entitites/users_reducer.jsx ***!
   \*******************************************************/
 /*! exports provided: default */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/frontend/reducers/entitites/users_reducer.jsx'");
+
+/***/ }),
+
+/***/ "./frontend/reducers/errors/business_errors_reducer.js":
+/*!*************************************************************!*\
+  !*** ./frontend/reducers/errors/business_errors_reducer.js ***!
+  \*************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 
+var nullState = [];
 
-
-var UsersReducer = function UsersReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+var BusinessReducer = function BusinessReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : nullState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
-  var newState;
 
   switch (action.type) {
-    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
-      newState = _defineProperty({}, action.user.id, action.user);
-      return Object.assign({}, state, newState);
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["BUSINESS_ERRORS"]:
+      var newState = action.errors;
+      return newState;
 
     default:
-      return state;
+      return nullState;
   }
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (UsersReducer);
+/* harmony default export */ __webpack_exports__["default"] = (BusinessReducer);
 
 /***/ }),
 
@@ -866,12 +978,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/errors/session_errors_reducer.js");
 /* harmony import */ var _users_error_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users_error_reducer */ "./frontend/reducers/errors/users_error_reducer.js");
+/* harmony import */ var _business_errors_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./business_errors_reducer */ "./frontend/reducers/errors/business_errors_reducer.js");
+
 
 
 
 var ErrorsRedcuer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   sessionErrors: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  usersErros: _users_error_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  usersErrors: _users_error_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  businessErrors: _business_errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (ErrorsRedcuer);
 
@@ -896,7 +1011,7 @@ var SessionReducer = function SessionReducer() {
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ERRORS"]:
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["SESSION_ERRORS"]:
       var newState = action.errors;
       return newState;
 
@@ -928,7 +1043,7 @@ var UsersReducer = function UsersReducer() {
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ERRORS"]:
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["USER_ERRORS"]:
       var newState = action.errors;
       return newState;
 
@@ -1043,6 +1158,32 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/business_utl.js":
+/*!***************************************!*\
+  !*** ./frontend/util/business_utl.js ***!
+  \***************************************/
+/*! exports provided: fetchBusinesses, fetchBusiness */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBusinesses", function() { return fetchBusinesses; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBusiness", function() { return fetchBusiness; });
+var fetchBusinesses = function fetchBusinesses() {
+  return $.ajax({
+    url: "/api/businesses",
+    method: "GET"
+  });
+};
+var fetchBusiness = function fetchBusiness(businessId) {
+  return $.ajax({
+    url: "/api/businesses/".concat(businessId),
+    method: "GET"
+  });
+};
 
 /***/ }),
 

@@ -11,7 +11,7 @@
 
 class AttributeItem < ApplicationRecord
 
-  has_many :attribute_lists
+  has_many :attribute_lists, dependent: :destroy
   has_many :businesses, through: :attribute_lists
 
   TYPES = %w(

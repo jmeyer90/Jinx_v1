@@ -1,11 +1,11 @@
-import { RECEIVE_ERRORS } from '../../actions/user_actions';
+import { USER_ERRORS } from '../../actions/user_actions';
 
 const nullState = [];
 
 const UsersReducer = (state = nullState, action) => {
   Object.freeze(state);
   switch (action.type) {
-    case RECEIVE_ERRORS:
+    case USER_ERRORS:
       let newState = action.errors;
       return newState;
     default:

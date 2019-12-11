@@ -17,7 +17,7 @@ require 'securerandom'
 
 class User < ApplicationRecord
 
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   validates :email, :session_token, presence: true, uniqueness: true
   validates :password_digest, :f_name, :l_name, :zip_code, presence: true

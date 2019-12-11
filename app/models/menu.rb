@@ -11,6 +11,6 @@
 class Menu < ApplicationRecord
 
   belongs_to :business
-  has_many :menu_items
+  has_many :menu_items, dependent: :destroy
   
 end

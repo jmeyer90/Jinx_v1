@@ -13,14 +13,13 @@
 
 class Business < ApplicationRecord
 
-  has_one :menu
-  has_many :reviews
-  has_many :hours_of_operation
+  has_one :menu, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
-  has_many :attribute_lists
+  has_many :attribute_lists, dependent: :destroy
   has_many :attribute_items, through: :attribute_lists, source: :attribute_item
 
-  has_many :shared_business_hours
+  has_many :shared_business_hours, dependent: :destroy
   has_many :hours_of_operation, through: :shared_business_hours
 
   validates :name, :address, presence: true, uniqueness: true
