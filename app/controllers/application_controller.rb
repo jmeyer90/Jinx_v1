@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   def login!( user )
     session[ :session_token ] = user.session_token
     current_user
-    debugger
   end
 
   def logout!

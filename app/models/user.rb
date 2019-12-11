@@ -29,9 +29,7 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
 
   def self.find_by_credentials( email, password )
-    debugger
     user = User.find_by( email: email )
-    debugger
     return nil unless user && user.is_password?( password )
     user
   end

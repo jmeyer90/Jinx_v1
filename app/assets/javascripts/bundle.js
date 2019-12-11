@@ -289,31 +289,49 @@ function (_React$Component) {
     value: function sessionLinks() {
       var _this = this;
 
-      if (this.props.loggedIn) {
+      var path = this.props.location.pathname;
+
+      if (path && path === '/login' || path === '/signup') {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+      } else if (this.props.loggedIn) {
         debugger;
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          className: "search-bar",
+          type: "text",
+          placeholder: "Search Bar"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "session-buttons"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             return _this.props.logout();
           }
-        }, "Log Out");
+        }, "Log Out")));
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          className: "search-bar",
+          type: "text",
+          placeholder: "Search Bar"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "session-buttons"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/login"
         }, "Login"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/signup"
-        }, "Sign Up"));
+        }, "Sign Up")));
       }
     }
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+        className: "nav-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
         className: "nav-bar"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/",
         className: "logo"
-      }, "Jinx"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "session-buttons"
-      }, this.sessionLinks()));
+      }, "Jinx"), this.sessionLinks()));
     }
   }]);
 
@@ -338,9 +356,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 
 
+ // import { withRouter } from 'react-router-dom';
 
-
-var msp = function msp(state) {
+var msp = function msp(state, ownProps) {
   return {
     loggedIn: Boolean(state.session.currentUserId)
   };
@@ -354,7 +372,7 @@ var mdp = function mdp(dispacth) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_nav__WEBPACK_IMPORTED_MODULE_1__["default"])); // export default Nav;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_nav__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -479,7 +497,7 @@ function (_React$Component) {
         to: "/signup"
       }, "Sign Up ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "disclamer"
-      }, "By logging in, you agree to solemnly swear you are up to no good"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "By logging in, you agree to solemnly swear you are up to no good"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "email",
         placeholder: "Email",
         value: email,
@@ -637,7 +655,6 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      debugger;
       this.props.createUser(this.state);
     }
   }, {
@@ -651,7 +668,6 @@ function (_React$Component) {
           l_name = _this$state.l_name,
           password = _this$state.password,
           zip_code = _this$state.zip_code;
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -665,7 +681,7 @@ function (_React$Component) {
         className: "top greeting"
       }, "Connect with the wonderful wizarding world near you."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "disclamer"
-      }, "By continuing, you agree to solemnly swear you are up to no good."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "By continuing, you agree to solemnly swear you are up to no good."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "email",
         placeholder: "Email",
         value: email,
@@ -705,7 +721,7 @@ function (_React$Component) {
       }, "Already on Jinx?", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "session-link",
         to: "/login"
-      }, "Login")));
+      }, "Log in")));
     }
   }]);
 
@@ -810,7 +826,6 @@ var UsersReducer = function UsersReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
   var newState;
-  debugger;
 
   switch (action.type) {
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
@@ -974,7 +989,6 @@ var SessionReducer = function SessionReducer() {
       newState = {
         currentUserId: null
       };
-      debugger;
       return newState;
 
     default:

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import Nav from './nav';
 import { logout } from '../../actions/session_actions';
+// import { withRouter } from 'react-router-dom';
 
-
-const msp = state => ({
-  loggedIn: Boolean(state.session.currentUserId)
+const msp = ( state, ownProps ) => ({  
+  loggedIn: Boolean( state.session.currentUserId )
 });
 
 const mdp = dispacth =>({
@@ -12,5 +12,3 @@ const mdp = dispacth =>({
 });
 
 export default connect(msp, mdp)( Nav );
-
-// export default Nav;

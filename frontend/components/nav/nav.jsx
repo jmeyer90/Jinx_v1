@@ -7,28 +7,42 @@ class Nav extends React.Component{
   }
 
   sessionLinks(){
-    if ( this.props.loggedIn ){
+    const path = this.props.location.pathname;
+
+    if ( path && ( path === '/login' ) || ( path === '/signup' ) ){
+      return ( <></> )
+    } else if ( this.props.loggedIn ){
       debugger
-      return(
-        <button onClick={()=> this.props.logout() }>Log Out</button>
+      return (
+        <>
+          <input className="search-bar" type="text" placeholder="Search Bar" />
+          <div className="session-buttons">
+            <button onClick={ ()=> this.props.logout() }>Log Out</button>
+          </div>
+        </>
       )
     } else {
-      return(
+      return (
         <>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <input className="search-bar" type="text" placeholder="Search Bar" />
+          <div className="session-buttons">
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </div>
         </>
       )
     }
   }
 
   render(){
+    debugger
     return(
-      <header className="nav-bar">
-        <h1 className="logo">Jinx</h1>
-        <div className="session-buttons">
-          { this.sessionLinks() }
-        </div>
+
+      <header className="nav-container">
+        <nav className="nav-bar">
+        <Link to="/" className="logo">Jinx</Link>
+        { this.sessionLinks() }
+        </nav>
       </header>
     )
   }

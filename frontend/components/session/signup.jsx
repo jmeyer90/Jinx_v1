@@ -23,14 +23,11 @@ class SignUp extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    debugger;
     this.props.createUser( this.state );
   }
 
   render(){
     let { email, f_name, l_name, password, zip_code } = this.state;
-
-    debugger
 
     return(
       <div className="session-container">
@@ -40,6 +37,7 @@ class SignUp extends React.Component{
             Connect with the wonderful wizarding world near you.
           </label>
           <h2 className="disclamer">By continuing, you agree to solemnly swear you are up to no good.</h2>
+          <hr/>
           <label>
             <input type="email" placeholder="Email" value={ email } onChange={ this.update( "email" ) }/>
           </label>
@@ -64,7 +62,7 @@ class SignUp extends React.Component{
         </form>
         <label className="bottom change-session-form">
           Already on Jinx?
-          <Link className="session-link" to="/login">Login</Link>
+          <Link className="session-link" to="/login">Log in</Link>
         </label>
       </div>
     )

@@ -34,6 +34,7 @@ class Login extends React.Component{
               <Link className="session-link" to="/signup">Sign Up </Link>
             </label>
             <h2 className="disclamer">By logging in, you agree to solemnly swear you are up to no good</h2>
+            <hr/>
             <label>
             <input type="email" placeholder="Email" value={email} onChange={this.update("email")} />
             </label>
