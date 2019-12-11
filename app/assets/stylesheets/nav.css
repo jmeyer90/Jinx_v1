@@ -9,7 +9,7 @@
 .nav-bar {
   display: flex;
   position: relative;
-  width: 900px;
+  width: 1200px;
   padding: 20px;
   justify-content: space-between;
   align-items: center;
@@ -47,6 +47,8 @@
   font-weight: 700;
   padding: 10px;
   border: solid white 2px;
+  font-family: inherit;
+  color: #452487;
   border-radius: 4px;
 }
 
@@ -55,8 +57,22 @@
   margin-right: 5px;
   font-size: 18px;
   font-weight: 700;
+  font-family: inherit;
   padding: 10px;
   border: solid white 2px;
+  color: #452487;
   border-radius: 4px;
   background-color: transparent;
+}
+
+.session-buttons a:hover{
+  transition-duration: 1s;
+  color: #6391db;
+  background-color: white;
+}
+
+.session-buttons button:hover{
+  transition-duration: 1s;
+  color: #6391db;
+  background-color: white;
 }

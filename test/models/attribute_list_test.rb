@@ -2,11 +2,11 @@
 #
 # Table name: attribute_lists
 #
-#  id           :bigint           not null, primary key
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  business_id  :integer          not null
-#  price_rating :integer          not null
+#  id                :bigint           not null, primary key
+#  business_id       :integer          not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  attribute_item_id :integer          not null
 #
 
 require 'test_helper'

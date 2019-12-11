@@ -1,15 +1,18 @@
 # == Schema Information
 #
-# Table name: business_types
+# Table name: atrributes
 #
 #  id         :bigint           not null, primary key
 #  type       :string           not null
+#  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class BusinessType < ApplicationRecord
+require 'test_helper'
 
-  validates :type, presence: true
-  
+class AtrributeTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

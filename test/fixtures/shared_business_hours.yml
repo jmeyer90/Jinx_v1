@@ -1,12 +1,12 @@
 # == Schema Information
 #
-# Table name: attribute_lists
+# Table name: shared_business_hours
 #
-#  id                :bigint           not null, primary key
-#  business_id       :integer          not null
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  attribute_item_id :integer          not null
+#  id                    :bigint           not null, primary key
+#  business_id           :integer          not null
+#  hours_of_operation_id :integer          not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

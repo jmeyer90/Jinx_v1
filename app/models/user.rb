@@ -2,23 +2,21 @@
 #
 # Table name: users
 #
-#  id                                                              :bigint           not null, primary key
-#  email                                                           :string           not null
-#  session_token                                                   :string           not null
-#  password_digest                                                 :string           not null
-#  f_name                                                          :string           not null
-#  l_name                                                          :string           not null
-#  created_at                                                      :datetime         not null
-#  updated_at                                                      :datetime         not null
-#  zip_code                                                        :integer
-#  #<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition :integer
+#  id              :bigint           not null, primary key
+#  email           :string           not null
+#  f_name          :string           not null
+#  l_name          :string           not null
+#  session_token   :string           not null
+#  password_digest :string           not null
+#  zip_code        :integer          not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 
 require 'securerandom'
 
 class User < ApplicationRecord
 
-  has_many :comments
   has_many :reviews
 
   validates :email, :session_token, presence: true, uniqueness: true

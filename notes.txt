@@ -16,4 +16,19 @@ Business Show Page-
 1- migrations
 2- seed database
 3- Create show page for single business
+4- all images- uploaded by users
+5- reviews- protected route
+  a- images- uploaded by users
+6- attribute_list
+  a- joins table between attributes ( call it attribute_items? )
+7- rating- average of review ratings
+8- map
+9- business hours- open now
 
+Home Page-
+1- search Bar in Nav
+  a- have attributes object in entities
+
+Footer-
+1- image
+2- links

@@ -4,13 +4,23 @@ import { Link } from 'react-router-dom';
 class Nav extends React.Component{
   constructor(props){
     super(props);
+    this.logDemoUser = this.logDemoUser.bind(this);
+  }
+
+  logDemoUser(){
+    this.props.login({
+      email: "demo@mail.com",
+      password: "password"
+    });
   }
 
   sessionLinks(){
     const path = this.props.location.pathname;
 
     if ( path && ( path === '/login' ) || ( path === '/signup' ) ){
-      return ( <></> )
+      return ( 
+        <></>
+       )
     } else if ( this.props.loggedIn ){
       debugger
       return (
@@ -28,6 +38,7 @@ class Nav extends React.Component{
           <div className="session-buttons">
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
+            <button onClick={ ()=>this.logDemoUser() }>Demo User</button>
           </div>
         </>
       )

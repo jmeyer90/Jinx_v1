@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_10_224453) do
+ActiveRecord::Schema.define(version: 2019_12_11_172532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,24 @@ ActiveRecord::Schema.define(version: 2019_12_10_224453) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "attribute_items", force: :cascade do |t|
+    t.string "type", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_attribute_items_on_name", unique: true
+    t.index ["type"], name: "index_attribute_items_on_type", unique: true
+  end
+
+  create_table "attribute_lists", force: :cascade do |t|
+    t.integer "business_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "attribute_item_id", null: false
+    t.index ["attribute_item_id"], name: "index_attribute_lists_on_attribute_item_id"
+    t.index ["business_id"], name: "index_attribute_lists_on_business_id"
+  end
+
   create_table "businesses", force: :cascade do |t|
     t.string "name", null: false
     t.string "address", null: false
@@ -45,6 +63,53 @@ ActiveRecord::Schema.define(version: 2019_12_10_224453) do
     t.datetime "updated_at", null: false
     t.index ["address"], name: "index_businesses_on_address", unique: true
     t.index ["name"], name: "index_businesses_on_name", unique: true
+  end
+
+  create_table "hours_of_operation", force: :cascade do |t|
+    t.integer "day", null: false
+    t.datetime "time", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["day"], name: "index_hours_of_operation_on_day"
+    t.index ["time"], name: "index_hours_of_operation_on_time"
+  end
+
+  create_table "menu_items", force: :cascade do |t|
+    t.integer "menu_id", null: false
+    t.string "title", null: false
+    t.integer "price", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_menu_items_on_title"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.integer "business_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_menus_on_business_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "business_id", null: false
+    t.integer "rating", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_reviews_on_business_id"
+    t.index ["rating"], name: "index_reviews_on_rating"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "shared_business_hours", force: :cascade do |t|
+    t.integer "business_id", null: false
+    t.integer "hours_of_operation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["business_id"], name: "index_shared_business_hours_on_business_id"
+    t.index ["hours_of_operation_id"], name: "index_shared_business_hours_on_hours_of_operation_id"
   end
 
   create_table "users", force: :cascade do |t|

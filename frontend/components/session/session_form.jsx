@@ -60,6 +60,7 @@ class SessionForm extends React.Component {
         <form onSubmit={ (e) => this.handleSubmit(e) } className="session-form">
           <h1 className="title">{ this.props.formType }</h1>
           { this.topGreeting() }
+          <button className="submit" onClick={() => this.logDemoUser()}>Log In with Demo User</button>
           <h2 className="disclamer">{this.props.disclamer}</h2>
           <hr />
           <label>

@@ -262,9 +262,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -279,15 +279,27 @@ function (_React$Component) {
   _inherits(Nav, _React$Component);
 
   function Nav(props) {
+    var _this;
+
     _classCallCheck(this, Nav);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Nav).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Nav).call(this, props));
+    _this.logDemoUser = _this.logDemoUser.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(Nav, [{
+    key: "logDemoUser",
+    value: function logDemoUser() {
+      this.props.login({
+        email: "demo@mail.com",
+        password: "password"
+      });
+    }
+  }, {
     key: "sessionLinks",
     value: function sessionLinks() {
-      var _this = this;
+      var _this2 = this;
 
       var path = this.props.location.pathname;
 
@@ -303,7 +315,7 @@ function (_React$Component) {
           className: "session-buttons"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
-            return _this.props.logout();
+            return _this2.props.logout();
           }
         }, "Log Out")));
       } else {
@@ -317,7 +329,11 @@ function (_React$Component) {
           to: "/login"
         }, "Login"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/signup"
-        }, "Sign Up")));
+        }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this2.logDemoUser();
+          }
+        }, "Demo User")));
       }
     }
   }, {
@@ -368,6 +384,9 @@ var mdp = function mdp(dispacth) {
   return {
     logout: function logout() {
       return dispacth(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["logout"])());
+    },
+    login: function login(user) {
+      return dispacth(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["login"])(user));
     }
   };
 };
@@ -565,7 +584,12 @@ function (_React$Component) {
         className: "session-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "title"
-      }, this.props.formType), this.topGreeting(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+      }, this.props.formType), this.topGreeting(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "submit",
+        onClick: function onClick() {
+          return _this3.logDemoUser();
+        }
+      }, "Log In with Demo User"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "disclamer"
       }, this.props.disclamer), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "email",
