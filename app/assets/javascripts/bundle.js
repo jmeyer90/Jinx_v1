@@ -100,13 +100,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BUSINESS_ERRORS", function() { return BUSINESS_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBusinesses", function() { return fetchBusinesses; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBusiness", function() { return fetchBusiness; });
-/* harmony import */ var _util_business_utl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/business_utl */ "./frontend/util/business_utl.js");
+/* harmony import */ var _util_business_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/business_util */ "./frontend/util/business_util.js");
 
 var RECEIVE_BUSINESSES = "RECEIVE_BUSINESSES";
 var RECEIVE_BUSINESS = "RECEIVE_BUSINESS";
 var BUSINESS_ERRORS = "BUSINESS_ERRORS";
 
 var receiveBusinesses = function receiveBusinesses(businesses) {
+  debugger;
   return {
     type: RECEIVE_BUSINESSES,
     businesses: businesses
@@ -114,6 +115,7 @@ var receiveBusinesses = function receiveBusinesses(businesses) {
 };
 
 var receiveBusiness = function receiveBusiness(business) {
+  debugger;
   return {
     type: RECEIVE_BUSINESS,
     business: business
@@ -121,6 +123,7 @@ var receiveBusiness = function receiveBusiness(business) {
 };
 
 var businessErrors = function businessErrors(errors) {
+  debugger;
   return {
     type: BUSINESS_ERRORS,
     errors: errors
@@ -129,7 +132,8 @@ var businessErrors = function businessErrors(errors) {
 
 var fetchBusinesses = function fetchBusinesses() {
   return function (dispatch) {
-    return _util_business_utl__WEBPACK_IMPORTED_MODULE_0__["fetchBusinesses"]().then(function (businesses) {
+    debugger;
+    return _util_business_util__WEBPACK_IMPORTED_MODULE_0__["fetchBusinesses"]().then(function (businesses) {
       return dispatch(receiveBusinesses(businesses));
     }, function (errors) {
       return dispatch(businessErrors(errors.responseJSON));
@@ -138,7 +142,8 @@ var fetchBusinesses = function fetchBusinesses() {
 };
 var fetchBusiness = function fetchBusiness(businessId) {
   return function (dispatch) {
-    return _util_business_utl__WEBPACK_IMPORTED_MODULE_0__["fetchBusiness"](businessId).then(function (business) {
+    debugger;
+    return _util_business_util__WEBPACK_IMPORTED_MODULE_0__["fetchBusiness"](businessId).then(function (business) {
       return dispatch(receiveBusiness(business));
     }, function (errors) {
       return dispatch(businessErrors(errors.responseJSON));
@@ -278,7 +283,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./session/login_component */ "./frontend/components/session/login_component.js");
 /* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./nav/nav_component */ "./frontend/components/nav/nav_component.js");
 /* harmony import */ var _business_business_show_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./business/business_show_component */ "./frontend/components/business/business_show_component.js");
-/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.js");
+/* harmony import */ var _splash_splash_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./splash/splash_component */ "./frontend/components/splash/splash_component.jsx");
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.js");
+
 
 
 
@@ -292,12 +299,16 @@ var App = function App() {
     path: "/",
     component: _nav_nav_component__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/",
+    component: _splash_splash_component__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/businesses/:businessId",
     component: _business_business_show_component__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
     path: "/signup",
     component: _session_sign_up_component__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
     path: "/login",
     component: _session_login_component__WEBPACK_IMPORTED_MODULE_3__["default"]
   }));
@@ -346,24 +357,43 @@ function (_React$Component) {
   _inherits(BusinessShow, _React$Component);
 
   function BusinessShow(props) {
+    var _this;
+
     _classCallCheck(this, BusinessShow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(BusinessShow).call(this, props));
-  }
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(BusinessShow).call(this, props));
+    _this.state = {
+      business: _this.props.business
+    }; // this.businessTitle = this.businessTitle.bind(this);
+
+    return _this;
+  } // businessTitle(){
+  //   if (!this.state){
+  //     this.props.fetchBusiness(this.props.businessId);
+  //     const biz = this.props.businesses[this.props.businessId];
+  //     return(
+  //       <h2>{biz.name}</h2>
+  //     )
+  //   } 
+  // }
+
 
   _createClass(BusinessShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchBusiness(this.props.bussiness.id);
+      this.props.fetchBusiness(this.props.businessId);
+      this.setState({
+        business: this.props.business
+      });
+      debugger;
     }
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "business-show"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        business: this.props.business
-      }));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name));
     }
   }]);
 
@@ -371,6 +401,33 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (BusinessShow);
+
+/***/ }),
+
+/***/ "./frontend/components/business/business_index_item.jsx":
+/*!**************************************************************!*\
+  !*** ./frontend/components/business/business_index_item.jsx ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+var BusinessIndexItem = function BusinessIndexItem(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    key: props.business.id,
+    className: "business-index-item",
+    to: "/businesses/".concat(props.business.id)
+  }, props.business.name));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BusinessIndexItem);
 
 /***/ }),
 
@@ -386,13 +443,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _buiness_show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./buiness_show */ "./frontend/components/business/buiness_show.jsx");
 /* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 
 
 var msp = function msp(state, ownProps) {
+  // debugger
+  // let businesses = state.entities.business;
+  // let business;
+  // if ( businesses ){
+  //   debugger
+  // business = businesses[[ownProps.match.params.businessId]];
+  // } else {
+  //   debugger
+  //  business = {};
+  // }
+  debugger;
   return {
-    bussiness: state.businesses[ownProps.match.params.businessId]
+    business: state.entities.businesses[ownProps.match.params.businessId],
+    businessId: ownProps.match.params.businessId
   };
 };
 
@@ -493,7 +564,6 @@ function (_React$Component) {
       if (path && path === '/login' || path === '/signup') {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
       } else if (this.props.loggedIn) {
-        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           className: "search-bar",
           type: "text",
@@ -526,7 +596,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
         className: "nav-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
@@ -932,6 +1001,134 @@ var mdp = function mdp(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/splash/splash.jsx":
+/*!***********************************************!*\
+  !*** ./frontend/components/splash/splash.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _business_business_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../business/business_index_item */ "./frontend/components/business/business_index_item.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var Splash =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Splash, _React$Component);
+
+  function Splash(props) {
+    var _this;
+
+    _classCallCheck(this, Splash);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Splash).call(this, props));
+    _this.state = {
+      businesses: {}
+    };
+    return _this;
+  }
+
+  _createClass(Splash, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchBusinesses();
+      debugger;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var businesses = Object.values(this.props.businesses);
+      debugger;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "Splash"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, businesses.map(function (business) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_business_business_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: business.id,
+          business: business
+        });
+      })));
+    }
+  }]);
+
+  return Splash;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Splash);
+
+/***/ }),
+
+/***/ "./frontend/components/splash/splash_component.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/components/splash/splash_component.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _splash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./splash */ "./frontend/components/splash/splash.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
+
+
+ // import BuinessIndexItem from '../business/business_index_item';
+
+var msp = function msp(state) {
+  return {
+    businesses: state.entities.businesses
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    fetchBusiness: function fetchBusiness(businessId) {
+      return dispatch(Object(_actions_business_actions__WEBPACK_IMPORTED_MODULE_2__["fetchBusiness"])(businessId));
+    },
+    fetchBusinesses: function fetchBusinesses() {
+      return dispatch(Object(_actions_business_actions__WEBPACK_IMPORTED_MODULE_2__["fetchBusinesses"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp, mdp)(_splash__WEBPACK_IMPORTED_MODULE_0__["default"])); // const businesses = fetchBusinesses();
+// debugger
+// const allBusiness = (businesses) => {
+//   arrBiz = Object.values(businesses);
+//   return(
+//     <ul>
+//       { arrBiz.map( business=>(
+//       <Link to={`/api/businesses/${business.id}`}>{business.name}</Link>
+//       ))}
+//     </ul>
+//   )
+// }
+// export default allBusiness;
+
+/***/ }),
+
 /***/ "./frontend/jinx.jsx":
 /*!***************************!*\
   !*** ./frontend/jinx.jsx ***!
@@ -947,8 +1144,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/user_actions */ "./frontend/actions/user_actions.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/business_actions */ "./frontend/actions/business_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -956,28 +1152,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-
 document.addEventListener('DOMContentLoaded', function () {
-  var preloadedState = undefined;
+  var preloadedState;
 
   if (window.current_user) {
     preloadedState = {
       entities: {
-        users: _defineProperty({}, window.current_user.id, window.current_user)
+        users: _defineProperty({}, window.current_user.id, window.current_user),
+        businesses: {}
       },
       session: {
         currentUserId: window.current_user.id
       }
     };
-  }
+  } else {
+    preloadedState = {
+      entities: {
+        businesses: {}
+      }
+    };
+  } // fetchBusinesses();
+
 
   var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState); // testing purposes
 
-  window.login = _actions_session_actions__WEBPACK_IMPORTED_MODULE_5__["login"];
-  window.logout = _actions_session_actions__WEBPACK_IMPORTED_MODULE_5__["logout"];
-  window.createUser = _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["createUser"];
-  window.getState = store.getState; // end of testing
+  window.getState = store.getState;
+  window.fetchBusinesses = _actions_business_actions__WEBPACK_IMPORTED_MODULE_4__["fetchBusinesses"];
+  window.fetchBusiness = _actions_business_actions__WEBPACK_IMPORTED_MODULE_4__["fetchBusiness"]; // end of testing
+  // store.subscribe( fetchBusinesses() ); c
 
   var root = document.getElementById('root');
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -1005,15 +1207,22 @@ var BusinessesReducer = function BusinessesReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
-  var newState;
+  var newState = {};
 
   switch (action.type) {
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESSES"]:
-      newState = action.bussinesses;
+      debugger;
+      var businesses = Object.values(action.businesses);
+      businesses.forEach(function (business) {
+        debugger;
+        newState[business.id] = business;
+      });
       return newState;
 
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESS"]:
-      newState = _defineProperty({}, action.bussiness.id, action.bussiness);
+      debugger;
+      newState = _defineProperty({}, action.bussiness.id, action.business);
+      debugger;
       return Object.assign({}, state, newState);
 
     default:
@@ -1103,6 +1312,7 @@ var BusinessReducer = function BusinessReducer() {
   switch (action.type) {
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["BUSINESS_ERRORS"]:
       var newState = action.errors;
+      debugger;
       return newState;
 
     default:
@@ -1309,10 +1519,10 @@ var configureStore = function configureStore() {
 
 /***/ }),
 
-/***/ "./frontend/util/business_utl.js":
-/*!***************************************!*\
-  !*** ./frontend/util/business_utl.js ***!
-  \***************************************/
+/***/ "./frontend/util/business_util.js":
+/*!****************************************!*\
+  !*** ./frontend/util/business_util.js ***!
+  \****************************************/
 /*! exports provided: fetchBusinesses, fetchBusiness */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

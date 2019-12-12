@@ -2,13 +2,20 @@ import { RECEIVE_BUSINESS, RECEIVE_BUSINESSES } from "../../actions/business_act
 
 const BusinessesReducer = (state = {}, action) => {
   Object.freeze(state);
-  let newState;
+  let newState = {};
   switch (action.type) {
     case RECEIVE_BUSINESSES:
-      newState = action.bussinesses;
+      debugger
+      const businesses = Object.values( action.businesses );
+      businesses.forEach( business => {
+        debugger
+        newState[business.id] = business;
+      });
       return newState;
     case RECEIVE_BUSINESS:
-      newState = { [action.bussiness.id]: action.bussiness };
+      debugger
+      newState = { [action.bussiness.id]: action.business };
+      debugger
       return Object.assign({}, state, newState);
     default:
       return state;

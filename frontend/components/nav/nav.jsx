@@ -22,7 +22,6 @@ class Nav extends React.Component{
         <></>
        )
     } else if ( this.props.loggedIn ){
-      debugger
       return (
         <>
           <input className="search-bar" type="text" placeholder="Search Bar" />
@@ -46,7 +45,6 @@ class Nav extends React.Component{
   }
 
   render(){
-    debugger
     return(
 
       <header className="nav-container">
