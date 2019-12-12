@@ -3,25 +3,28 @@ class Api::BusinessesController < ApplicationController
   
   def index
     @businesses = Business.includes(
-      menu: :menu, 
-      reviews: :reviews,
-      attribute_items: :attribute_items,
-      hours_of_operation: :hours_of_operation
+      :menu, 
+      :reviews,
+      :attribute_items,
+      :hours_of_operation
     ).all
+    debugger
 
     if @businesses
+      debugger
       render json: @businesses
     else
+      debugger
       render json: @businesses.errors.full_messages, status: 422
     end
   end
 
   def show
     @business = Business.includes(
-      menu: :menu, 
-      reviews: :reviews,
-      attribute_items: :attribute_items,
-      hours_of_operation: :hours_of_operation
+      :menu, 
+      :reviews,
+      :attribute_items,
+      :hours_of_operation
     ).find( params[:id] )
     if @business
       render json: @business

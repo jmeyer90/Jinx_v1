@@ -18,3 +18,10 @@ Business.destroy_all
 business1 = Business.create(name: "business1", address:"address1")
 business2 = Business.create(name: "business2", address:"address2")
 business3 = Business.create(name: "business3", address:"address3")
+
+#Seed Review
+Review.destroy_all
+review1 = Review.create(user_id: user1.id, business_id: business1.id, rating: 5, body: "Review One: Testing Reviews")
+review2 = Review.create(user_id: user2.id, business_id: business2.id, rating: 4, body: "Review Two: Testing Reviews")
+review3 = Review.create(user_id: user3.id, business_id: business3.id, rating: 3, body: "Review Three: Testing Reviews")
+review4 = Review.create(user_id: user1.id, business_id: business2.id, rating: 3, body: "Review Four: Testing Reviews")

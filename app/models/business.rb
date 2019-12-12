@@ -14,7 +14,7 @@
 class Business < ApplicationRecord
 
   has_one :menu, dependent: :destroy
-  has_many :reviews, dependent: :destroy
+  has_many :reviews, foreign_key: :business_id, dependent: :destroy
 
   has_many :attribute_lists, dependent: :destroy
   has_many :attribute_items, through: :attribute_lists, source: :attribute_item

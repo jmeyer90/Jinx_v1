@@ -1,5 +1,5 @@
 import React from 'react';
-import BusinessReviews from './reviews/business_reviews';
+import BusinessReviewsConstructor from './reviews/business_reviews_constructor';
 
 class BusinessShow extends React.Component{
   constructor(props){
@@ -60,7 +60,7 @@ class BusinessShow extends React.Component{
         {this.bizRating()}
         {this.bizAttrs()}
         {this.bizHoursofOp()}
-        <BusinessReviews businessId={ this.props.business.id } />
+        <BusinessReviewsConstructor businessId={ this.props.businessId } />
       </div>
     )
   }
