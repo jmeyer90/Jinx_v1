@@ -1,7 +1,9 @@
+import React from 'react';
+
 const BusinessReviews = ( props ) =>{
 
   return(
-    <section className="business-reviews">BusinessReviews</section>
+    <section className="business-reviews">Business Reviews</section>
   )
 }
 

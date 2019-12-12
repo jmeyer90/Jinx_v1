@@ -282,7 +282,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_sign_up_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session/sign_up_component */ "./frontend/components/session/sign_up_component.js");
 /* harmony import */ var _session_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./session/login_component */ "./frontend/components/session/login_component.js");
 /* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./nav/nav_component */ "./frontend/components/nav/nav_component.js");
-/* harmony import */ var _business_business_show_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./business/business_show_component */ "./frontend/components/business/business_show_component.js");
+/* harmony import */ var _business_business_show_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./business/business_show_container */ "./frontend/components/business/business_show_container.js");
 /* harmony import */ var _splash_splash_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./splash/splash_component */ "./frontend/components/splash/splash_component.jsx");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.js");
 
@@ -304,7 +304,7 @@ var App = function App() {
     component: _splash_splash_component__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/businesses/:businessId",
-    component: _business_business_show_component__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _business_business_show_container__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
     path: "/signup",
     component: _session_sign_up_component__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -340,9 +340,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -364,28 +364,45 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(BusinessShow).call(this, props));
     _this.state = {
       business: _this.props.business
-    }; // this.businessTitle = this.businessTitle.bind(this);
-
+    };
+    _this.bizRating = _this.bizRating.bind(_assertThisInitialized(_this));
+    _this.bizAttrs = _this.bizAttrs.bind(_assertThisInitialized(_this));
+    _this.bizHoursofOp = _this.bizHoursofOp.bind(_assertThisInitialized(_this));
+    _this.bizImage = _this.bizImage.bind(_assertThisInitialized(_this));
+    _this.bizRatingImages = _this.bizRatingImages.bind(_assertThisInitialized(_this));
     return _this;
-  } // businessTitle(){
-  //   if (!this.state){
-  //     this.props.fetchBusiness(this.props.businessId);
-  //     const biz = this.props.businesses[this.props.businessId];
-  //     return(
-  //       <h2>{biz.name}</h2>
-  //     )
-  //   } 
-  // }
-
+  }
 
   _createClass(BusinessShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchBusiness(this.props.businessId);
-      this.setState({
-        business: this.props.business
-      });
       debugger;
+    }
+  }, {
+    key: "bizImage",
+    value: function bizImage() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Business Image");
+    }
+  }, {
+    key: "bizRatingImages",
+    value: function bizRatingImages() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Business Images from Ratings");
+    }
+  }, {
+    key: "bizRating",
+    value: function bizRating() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Business Rating Function");
+    }
+  }, {
+    key: "bizAttrs",
+    value: function bizAttrs() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Business Attribute List");
+    }
+  }, {
+    key: "bizHoursofOp",
+    value: function bizHoursofOp() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Business Hours of Operation");
     }
   }, {
     key: "render",
@@ -393,7 +410,9 @@ function (_React$Component) {
       debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "business-show"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name), this.bizImage(), this.bizRatingImages(), this.bizRating(), this.bizAttrs(), this.bizHoursofOp(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        businessId: this.props.business.id
+      }));
     }
   }]);
 
@@ -431,9 +450,9 @@ var BusinessIndexItem = function BusinessIndexItem(props) {
 
 /***/ }),
 
-/***/ "./frontend/components/business/business_show_component.js":
+/***/ "./frontend/components/business/business_show_container.js":
 /*!*****************************************************************!*\
-  !*** ./frontend/components/business/business_show_component.js ***!
+  !*** ./frontend/components/business/business_show_container.js ***!
   \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -450,19 +469,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownProps) {
-  // debugger
-  // let businesses = state.entities.business;
-  // let business;
-  // if ( businesses ){
-  //   debugger
-  // business = businesses[[ownProps.match.params.businessId]];
-  // } else {
-  //   debugger
-  //  business = {};
-  // }
   debugger;
   return {
-    business: state.entities.businesses[ownProps.match.params.businessId],
+    business: state.entities.businesses[ownProps.match.params.businessId] || {},
     businessId: ownProps.match.params.businessId
   };
 };
@@ -471,6 +480,9 @@ var mdp = function mdp(dispatch) {
   return {
     fetchBusiness: function fetchBusiness(businessId) {
       return dispatch(Object(_actions_business_actions__WEBPACK_IMPORTED_MODULE_2__["fetchBusiness"])(businessId));
+    },
+    fetchBusinesses: function fetchBusinesses() {
+      return dispatch(Object(_actions_business_actions__WEBPACK_IMPORTED_MODULE_2__["fetchBusinesses"])());
     }
   };
 };
@@ -488,10 +500,14 @@ var mdp = function mdp(dispatch) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
 var BusinessReviews = function BusinessReviews(props) {
-  return React.createElement("section", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "business-reviews"
-  }, "BusinessReviews");
+  }, "Business Reviews");
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (BusinessReviews);
@@ -1221,7 +1237,7 @@ var BusinessesReducer = function BusinessesReducer() {
 
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESS"]:
       debugger;
-      newState = _defineProperty({}, action.bussiness.id, action.business);
+      newState = _defineProperty({}, action.business.id, action.business);
       debugger;
       return Object.assign({}, state, newState);
 

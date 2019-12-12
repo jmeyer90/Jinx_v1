@@ -1,0 +1,19 @@
+import { connect } from 'react-redux';
+import BusinessShow from './buiness_show';
+import { fetchBusiness, fetchBusinesses } from '../../actions/business_actions';
+import { withRouter } from 'react-router-dom'
+
+const msp =  ( state, ownProps ) =>{
+  debugger
+  return({
+    business: state.entities.businesses[ownProps.match.params.businessId]|| {},
+    businessId: ownProps.match.params.businessId 
+  })
+};
+
+const mdp = dispatch =>({
+  fetchBusiness: businessId => dispatch( fetchBusiness( businessId )),
+  fetchBusinesses: () => dispatch( fetchBusinesses() )
+});
+
+export default connect( msp, mdp )( BusinessShow );

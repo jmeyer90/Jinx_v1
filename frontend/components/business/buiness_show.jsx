@@ -7,24 +7,46 @@ class BusinessShow extends React.Component{
     this.state={
       business: this.props.business
     };
-    // this.businessTitle = this.businessTitle.bind(this);
+    this.bizRating = this.bizRating.bind(this);
+    this.bizAttrs = this.bizAttrs.bind(this);
+    this.bizHoursofOp = this.bizHoursofOp.bind(this);
+    this.bizImage = this.bizImage.bind(this);
+    this.bizRatingImages = this.bizRatingImages.bind(this);
   }
-
-  // businessTitle(){
-  //   if (!this.state){
-  //     this.props.fetchBusiness(this.props.businessId);
-
-  //     const biz = this.props.businesses[this.props.businessId];
-  //     return(
-  //       <h2>{biz.name}</h2>
-  //     )
-  //   } 
-  // }
 
   componentDidMount(){
     this.props.fetchBusiness( this.props.businessId );
-    this.setState({ business: this.props.business });
     debugger
+  }
+
+  bizImage(){
+    return (
+      <div>Business Image</div>
+    )
+  }
+
+  bizRatingImages(){
+    return(
+      <div>Business Images from Ratings</div>
+    )
+  }
+
+  bizRating(){
+    return(
+      <div>Business Rating Function</div>
+    )
+  }
+
+  bizAttrs() {
+    return (
+      <div>Business Attribute List</div>
+    )
+  }
+
+  bizHoursofOp(){
+    return(
+      <div>Business Hours of Operation</div>
+    )
   }
 
   render(){
@@ -33,7 +55,12 @@ class BusinessShow extends React.Component{
       <div className="business-show">
         <h1>Business Show Page</h1>
         <h2>{this.props.business.name}</h2>
-        {/* <BusinessReviews businessId={ this.props.business.id } /> */}
+        {this.bizImage()}
+        {this.bizRatingImages()}
+        {this.bizRating()}
+        {this.bizAttrs()}
+        {this.bizHoursofOp()}
+        <BusinessReviews businessId={ this.props.business.id } />
       </div>
     )
   }

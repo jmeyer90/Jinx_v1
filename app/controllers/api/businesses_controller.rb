@@ -22,13 +22,10 @@ class Api::BusinessesController < ApplicationController
       reviews: :reviews,
       attribute_items: :attribute_items,
       hours_of_operation: :hours_of_operation
-    ).find( params[id] )
-    debugger
+    ).find( params[:id] )
     if @business
-      debugger
       render json: @business
     else
-      debugger
       render json: @business.errors.full_messages, status: 422
     end
   end
@@ -36,7 +33,7 @@ class Api::BusinessesController < ApplicationController
   private
 
   def business_params
-    params.require(:business).permit( :menu, :reviews, :attribute_items, :hours_of_operation )
+    params.require(:business).permit( :name, :address, :latitude, :longitude, :menu, :reviews, :attribute_items, :hours_of_operation )
   end
 
 end

@@ -14,7 +14,7 @@ const BusinessesReducer = (state = {}, action) => {
       return newState;
     case RECEIVE_BUSINESS:
       debugger
-      newState = { [action.bussiness.id]: action.business };
+      newState = { [action.business.id]: action.business };
       debugger
       return Object.assign({}, state, newState);
     default:
