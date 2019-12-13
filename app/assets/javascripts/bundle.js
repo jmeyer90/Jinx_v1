@@ -1064,14 +1064,14 @@ var SessionSignupField = function SessionSignupField(props) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: "name-section"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      id: "name",
+      className: "user-name",
       type: "f_name",
       placeholder: "First Name",
       value: f_name,
       onChange: props.update("f_name"),
       required: true
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      id: "name",
+      className: "user-name",
       type: "l_name",
       placeholder: "Last Name",
       value: l_name,

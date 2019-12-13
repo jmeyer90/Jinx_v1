@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_13_191146) do
+ActiveRecord::Schema.define(version: 2019_12_13_203939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2019_12_13_191146) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["attr_type"], name: "index_attribute_items_on_attr_type", unique: true
+    t.index ["attr_type"], name: "index_attribute_items_on_attr_type"
     t.index ["name"], name: "index_attribute_items_on_name", unique: true
   end
 

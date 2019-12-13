@@ -21,8 +21,8 @@ class AttributeItem < ApplicationRecord
     Misc Attribute
   )
 
-  validates :attr_type, :name, presence: true, uniqueness: true
-  validates :attr_type, inclusion: { in: TYPES, message: "Not a valid attribute type."}
+  validates :attr_type, :name, presence: true
+  # validates :attr_type, inclusion: { in: TYPES, message: "Not a valid attribute type."}
 
   
 end

@@ -80,7 +80,7 @@
   justify-content: space-between;
 }
 
-#name{
+.user-name{
   display: block;
   width: 97%;
 }

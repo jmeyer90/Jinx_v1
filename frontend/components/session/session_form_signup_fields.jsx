@@ -10,10 +10,10 @@ const SessionSignupField = props =>{
       <>
         <section className="name-section">
           <label>
-            <input id="name" type="f_name" placeholder="First Name" value={f_name} onChange={props.update("f_name")} required />
+            <input className="user-name" type="f_name" placeholder="First Name" value={f_name} onChange={props.update("f_name")} required />
           </label>
           <label>
-            <input id="name" type="l_name" placeholder="Last Name" value={l_name} onChange={props.update("l_name")} required />
+            <input className="user-name" type="l_name" placeholder="Last Name" value={l_name} onChange={props.update("l_name")} required />
           </label>
         </section>
         <label>
