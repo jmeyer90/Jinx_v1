@@ -1,4 +1,5 @@
 import { RECEIVE_REVIEW, RECEIVE_REVIEWS, REMOVE_REVIEW } from '../../actions/review_actions';
+import { extractAsObj } from '../../util/reducer utils';
 
 const ReviewsReducer = (state={}, action) =>{
   Object.freeze( state );

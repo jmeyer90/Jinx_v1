@@ -523,6 +523,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "business-show"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name), this.bizImage(), this.bizRatingImages(), this.bizRating(), this.bizAttrs(), this.bizHoursofOp(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -585,12 +586,25 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   var business = state.entities.businesses[ownProps.match.params.businessId] || {};
-  return {
-    business: business,
-    reviews: business.reviews || {},
-    authors: business.users || {},
-    businessId: ownProps.match.params.businessId
-  };
+  var mappedState = {};
+
+  if (business.reviews) {
+    mappedState = {
+      business: business,
+      reviews: Object.assign(business.reviews) || {},
+      authors: Object.assign(business.users) || {},
+      businessId: ownProps.match.params.businessId
+    };
+  } else {
+    mappedState = {
+      businessId: ownProps.match.params.businessId,
+      business: business
+    };
+  }
+
+  ;
+  debugger;
+  return mappedState;
 };
 
 var mdp = function mdp(dispatch) {
@@ -1369,7 +1383,9 @@ document.addEventListener('DOMContentLoaded', function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
+/* harmony import */ var _util_reducer_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/reducer utils */ "./frontend/util/reducer utils.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1388,7 +1404,12 @@ var BusinessesReducer = function BusinessesReducer() {
       return newState;
 
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESS"]:
-      newState = _defineProperty({}, action.business.id, action.business);
+      newState = _defineProperty({}, action.business.id, action.business); // take out users and reveiws, activate extractAsObj
+
+      var reviews = Object(_util_reducer_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(newState.business, reviews);
+      var users = Object(_util_reducer_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(newState.business, users); // turn each into a POJO action, dispatch with type RECEVIE_REVIEWS, REVECEIVE_USERS
+
+      debugger;
       return Object.assign({}, state, newState);
 
     default:
@@ -1436,7 +1457,9 @@ var EntitiesRedcuer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/review_actions */ "./frontend/actions/review_actions.js");
+/* harmony import */ var _util_reducer_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/reducer utils */ "./frontend/util/reducer utils.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1481,7 +1504,9 @@ var ReviewsReducer = function ReviewsReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _util_reducer_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/reducer utils */ "./frontend/util/reducer utils.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1789,6 +1814,40 @@ var fetchBusiness = function fetchBusiness(businessId) {
     url: "/api/businesses/".concat(businessId),
     method: "GET"
   });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/reducer utils.js":
+/*!****************************************!*\
+  !*** ./frontend/util/reducer utils.js ***!
+  \****************************************/
+/*! exports provided: extractAsObj */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "extractAsObj", function() { return extractAsObj; });
+// convert array to object
+// sort alphabetically by attribute_item name, menu_item name, business_name
+// in serach utils- write b-search algorithm
+var arrayToObject = function arrayToObject(array) {
+  var newObj = {};
+
+  for (i = 0; i < array.length; i++) {
+    var el = arr.pop();
+    newObj.shift(el);
+  }
+
+  return newObj;
+};
+
+var extractAsObj = function extractAsObj(Obj, key) {
+  var extracted = Obj.key;
+  delete Obj.key;
+  s;
+  extracted = arrayToObject(extracted);
+  return extracted;
 };
 
 /***/ }),

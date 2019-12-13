@@ -75,7 +75,7 @@ class BusinessShow extends React.Component{
   }
 
   render(){
-    
+    debugger
     return(
       <div className="business-show">
         <h1>Business Show Page</h1>
