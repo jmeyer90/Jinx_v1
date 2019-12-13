@@ -99,6 +99,8 @@
   display: flex;
   justify-content: flex-end;
   font-weight: 400;
+  font-family: sans-serif;
+  font-size: 18px;
   color: gray;
   margin: 0;
   padding: 0;
