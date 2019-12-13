@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_13_213844) do
+ActiveRecord::Schema.define(version: 2019_12_13_214904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,9 +110,6 @@ ActiveRecord::Schema.define(version: 2019_12_13_213844) do
     t.datetime "updated_at", null: false
     t.index ["business_id"], name: "index_shared_business_hours_on_business_id"
     t.index ["hours_of_operation_id"], name: "index_shared_business_hours_on_hours_of_operation_id"
-  end
-
-  create_table "time_column_in_hrs_of_ops", force: :cascade do |t|
   end
 
   create_table "users", force: :cascade do |t|
