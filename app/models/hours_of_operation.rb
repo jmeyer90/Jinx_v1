@@ -4,8 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  day        :string           not null
-#  open       :datetime         not null
-#  close      :datetime         not null
+#  time       :datetime         not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -17,5 +16,6 @@ class HoursOfOperation < ApplicationRecord
 
   validates :day, :time, presence: true
   validates :day, inclusion: 0..6
+  validates :time, inclusion: 0...24
 
 end

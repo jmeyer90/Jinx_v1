@@ -12,7 +12,6 @@ class BusinessShow extends React.Component{
     this.bizHoursofOp = this.bizHoursofOp.bind(this);
     this.bizImage = this.bizImage.bind(this);
     this.bizRatingImages = this.bizRatingImages.bind(this);
-    this.bizReviews = this.bizReviews.bind(this);
   }
 
   componentDidMount(){

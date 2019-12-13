@@ -3,7 +3,7 @@
 # Table name: attribute_items
 #
 #  id         :bigint           not null, primary key
-#  type       :string           not null
+#  attr_type  :string           not null
 #  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -16,14 +16,13 @@ class AttributeItem < ApplicationRecord
 
   TYPES = %w(
     Cuisine, 
-    Neighborhood, 
-    Service, 
+    Neighborhood,
     Business Type, 
     Misc Attribute
   )
 
-  validates :type, :name, presence: true, uniqueness: true
-  validates :type, inclusion: { in: TYPES, message: "%{type} is not a valid attribute type."}
+  validates :attr_type, :name, presence: true, uniqueness: true
+  validates :attr_type, inclusion: { in: TYPES, message: "Not a valid attribute type."}
 
   
 end

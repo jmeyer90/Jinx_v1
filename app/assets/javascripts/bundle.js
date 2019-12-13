@@ -480,7 +480,6 @@ function (_React$Component) {
     _this.bizHoursofOp = _this.bizHoursofOp.bind(_assertThisInitialized(_this));
     _this.bizImage = _this.bizImage.bind(_assertThisInitialized(_this));
     _this.bizRatingImages = _this.bizRatingImages.bind(_assertThisInitialized(_this));
-    _this.bizReviews = _this.bizReviews.bind(_assertThisInitialized(_this));
     return _this;
   }
 
