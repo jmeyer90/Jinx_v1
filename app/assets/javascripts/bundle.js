@@ -107,7 +107,6 @@ var RECEIVE_BUSINESS = "RECEIVE_BUSINESS";
 var BUSINESS_ERRORS = "BUSINESS_ERRORS";
 
 var receiveBusinesses = function receiveBusinesses(businesses) {
-  debugger;
   return {
     type: RECEIVE_BUSINESSES,
     businesses: businesses
@@ -115,7 +114,6 @@ var receiveBusinesses = function receiveBusinesses(businesses) {
 };
 
 var receiveBusiness = function receiveBusiness(business) {
-  debugger;
   return {
     type: RECEIVE_BUSINESS,
     business: business
@@ -123,7 +121,6 @@ var receiveBusiness = function receiveBusiness(business) {
 };
 
 var businessErrors = function businessErrors(errors) {
-  debugger;
   return {
     type: BUSINESS_ERRORS,
     errors: errors
@@ -132,7 +129,6 @@ var businessErrors = function businessErrors(errors) {
 
 var fetchBusinesses = function fetchBusinesses() {
   return function (dispatch) {
-    debugger;
     return _util_business_util__WEBPACK_IMPORTED_MODULE_0__["fetchBusinesses"]().then(function (businesses) {
       return dispatch(receiveBusinesses(businesses));
     }, function (errors) {
@@ -142,7 +138,6 @@ var fetchBusinesses = function fetchBusinesses() {
 };
 var fetchBusiness = function fetchBusiness(businessId) {
   return function (dispatch) {
-    debugger;
     return _util_business_util__WEBPACK_IMPORTED_MODULE_0__["fetchBusiness"](businessId).then(function (business) {
       return dispatch(receiveBusiness(business));
     }, function (errors) {
@@ -179,7 +174,6 @@ var REMOVE_REVIEW = "REMOVE_REVIEW";
 var REVIEW_ERRORS = "REVIEW_ERRORS";
 
 var receiveReviews = function receiveReviews(reviews) {
-  debugger;
   return {
     type: RECEIVE_REVIEWS,
     reviews: reviews
@@ -187,7 +181,6 @@ var receiveReviews = function receiveReviews(reviews) {
 };
 
 var receiveReview = function receiveReview(review) {
-  debugger;
   return {
     type: RECEIVE_REVIEW,
     review: review
@@ -195,14 +188,12 @@ var receiveReview = function receiveReview(review) {
 };
 
 var removeReview = function removeReview(review) {
-  debugger;
   return {
     type: REMOVE_REVIEW
   };
 };
 
 var reviewErrors = function reviewErrors(errors) {
-  debugger;
   return {
     type: REVIEW_ERRORS,
     errors: errors
@@ -211,7 +202,6 @@ var reviewErrors = function reviewErrors(errors) {
 
 var fetchReviews = function fetchReviews(businessId) {
   return function (dispatch) {
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["fetchReviews"](businessId).then(function (reviews) {
       return dispatch(receiveReviews(reviews));
     }, function (errors) {
@@ -221,7 +211,6 @@ var fetchReviews = function fetchReviews(businessId) {
 };
 var fetchReview = function fetchReview(reviewId) {
   return function (dispatch) {
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["fetchReview"](reviewId).then(function (review) {
       return dispatch(receiveReview(review));
     }, function (errors) {
@@ -231,7 +220,6 @@ var fetchReview = function fetchReview(reviewId) {
 };
 var updateReview = function updateReview(review) {
   return function (dispatch) {
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["updateReview"](review).then(function (review) {
       return dispatch(receiveReview(review));
     }, function (errors) {
@@ -241,7 +229,6 @@ var updateReview = function updateReview(review) {
 };
 var createReview = function createReview(review) {
   return function (dispatch) {
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["createReview"](review).then(function (review) {
       return dispatch(receiveReview(review));
     }, function (errors) {
@@ -251,7 +238,6 @@ var createReview = function createReview(review) {
 };
 var deleteReview = function deleteReview(reviewId) {
   return function (dispatch) {
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["deleteReview"](reviewId).then(function (reviewId) {
       return dispatch(removeReview(reviewId));
     }, function (errors) {
@@ -438,7 +424,7 @@ var App = function App() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _reviews_business_reviews_constructor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reviews/business_reviews_constructor */ "./frontend/components/business/reviews/business_reviews_constructor.js");
+/* harmony import */ var _reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reviews/business_reviews */ "./frontend/components/business/reviews/business_reviews.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -457,6 +443,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+ // import BusinessReviewsConstructor from './reviews/business_reviews_constructor';
 
 
 
@@ -479,6 +466,7 @@ function (_React$Component) {
     _this.bizHoursofOp = _this.bizHoursofOp.bind(_assertThisInitialized(_this));
     _this.bizImage = _this.bizImage.bind(_assertThisInitialized(_this));
     _this.bizRatingImages = _this.bizRatingImages.bind(_assertThisInitialized(_this));
+    _this.bizReviews = _this.bizReviews.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -486,7 +474,6 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchBusiness(this.props.businessId);
-      debugger;
     }
   }, {
     key: "bizImage",
@@ -514,13 +501,32 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Business Hours of Operation");
     }
   }, {
+    key: "bizReviews",
+    value: function bizReviews() {
+      if (this.props.business.reviews) {
+        var reviews = Object.values(this.props.business.reviews);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+          className: "business-review-list"
+        }, reviews.map(function (reviewKey) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: reviewKey
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, reviewKey[1].body));
+        }));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+          className: "business-review-list"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: 0
+        }));
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "business-show"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name), this.bizImage(), this.bizRatingImages(), this.bizRating(), this.bizAttrs(), this.bizHoursofOp(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_reviews_constructor__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        businessId: this.props.businessId
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name), this.bizImage(), this.bizRatingImages(), this.bizRating(), this.bizAttrs(), this.bizHoursofOp(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        business: this.props.business
       }));
     }
   }]);
@@ -578,9 +584,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownProps) {
-  debugger;
+  var business = state.entities.businesses[ownProps.match.params.businessId] || {};
   return {
-    business: state.entities.businesses[ownProps.match.params.businessId] || {},
+    business: business,
+    reviews: business.reviews || {},
+    authors: business.users || {},
     businessId: ownProps.match.params.businessId
   };
 };
@@ -611,105 +619,66 @@ var mdp = function mdp(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
+var user = function user(users, user_id) {};
 
-var BusinessReviews =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(BusinessReviews, _React$Component);
-
-  function BusinessReviews(props) {
-    _classCallCheck(this, BusinessReviews);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(BusinessReviews).call(this, props));
+var BusinessReviews = function BusinessReviews(props) {
+  if (props.business && props.business.reviews) {
+    var reviewKeys = Object.keys(props.business.reviews[0]);
+    var users = props.business.users[0];
+    var review;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "business-reviews"
+    }, props.business.name, " Reviews:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      className: "business-review-list"
+    }, reviewKeys.map(function (rKey) {
+      review = props.business.reviews[0][rKey];
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        key: review.id,
+        className: "business-review-item"
+      }, "User: ", users[review.user_id].f_name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "review-body"
+      }, review.body));
+    })));
+  } else {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
   }
-
-  _createClass(BusinessReviews, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      debugger;
-      this.props.fetchReviews(this.props.businessId);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      debugger;
-      var reviews = this.props.business.reviews ? Object.values(this.props.business.reviews) : [];
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "business-reviews"
-      }, this.props.business.name, " Reviews:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: "business-review-list"
-      }, reviews.map(function (review) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "business-review-item"
-        }, "User: ", review.user.name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          className: "review-body"
-        }, review.body));
-      })));
-    }
-  }]);
-
-  return BusinessReviews;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (BusinessReviews);
-
-/***/ }),
-
-/***/ "./frontend/components/business/reviews/business_reviews_constructor.js":
-/*!******************************************************************************!*\
-  !*** ./frontend/components/business/reviews/business_reviews_constructor.js ***!
-  \******************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _business_reviews__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./business_reviews */ "./frontend/components/business/reviews/business_reviews.jsx");
-/* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../actions/review_actions */ "./frontend/actions/review_actions.js");
-
-
-
-
-var msp = function msp(state, ownProps) {
-  debugger;
-  return {
-    business: state.entities.businesses[ownProps.businessId] || {}
-  };
 };
 
-var mdp = function mdp(dispatch) {
-  debugger;
-  return {
-    fetchReviews: function fetchReviews(businessId) {
-      return dispatch(Object(_actions_review_actions__WEBPACK_IMPORTED_MODULE_2__["fetchReviews"])(businessId));
-    },
-    fetchReview: function fetchReview(businessId, reviewId) {
-      return dispatch(Object(_actions_review_actions__WEBPACK_IMPORTED_MODULE_2__["fetchReview"])(businessId, reviewId));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_business_reviews__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (BusinessReviews); // class BusinessReviews extends React.Component{
+//   constructor(props){
+//     super(props);
+//   }
+//   componentDidMount(){
+//     debugger
+//     this.props.fetchReviews(this.props.businessId)
+//     if (this.props.reviews){
+//       const reviews = Object.values(this.props.reviews)
+//       reviews.forEach( review =>(
+//         <div></div>// placeholder
+//       ))
+//     }
+//   }
+//   render(){
+//     debugger
+//     const reviews = this.props.reviews ? Object.values(this.props.reviews) : [];
+//     return (
+//       <section className="business-reviews" >
+//         {this.props.business.name} Reviews:
+//         <ul className="business-review-list" >
+//           {reviews.map(review => (
+//             <li key={review.id} className="business-review-item">
+//               {/* User: {review.user.name} */}
+//               <p className="review-body">{review.body}</p>
+//             </li>
+//           ))}
+//         </ul>
+//       </section >
+//     )
+//   }
+// }
+// export default BusinessReviews;
 
 /***/ }),
 
@@ -1270,13 +1239,11 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchBusinesses();
-      debugger;
     }
   }, {
     key: "render",
     value: function render() {
       var businesses = Object.values(this.props.businesses);
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "Splash"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, businesses.map(function (business) {
@@ -1309,7 +1276,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
 
 
- // import BuinessIndexItem from '../business/business_index_item';
+
 
 var msp = function msp(state) {
   return {
@@ -1328,19 +1295,7 @@ var mdp = function mdp(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp, mdp)(_splash__WEBPACK_IMPORTED_MODULE_0__["default"])); // const businesses = fetchBusinesses();
-// debugger
-// const allBusiness = (businesses) => {
-//   arrBiz = Object.values(businesses);
-//   return(
-//     <ul>
-//       { arrBiz.map( business=>(
-//       <Link to={`/api/businesses/${business.id}`}>{business.name}</Link>
-//       ))}
-//     </ul>
-//   )
-// }
-// export default allBusiness;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp, mdp)(_splash__WEBPACK_IMPORTED_MODULE_0__["default"]));
 
 /***/ }),
 
@@ -1426,18 +1381,14 @@ var BusinessesReducer = function BusinessesReducer() {
 
   switch (action.type) {
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESSES"]:
-      debugger;
       var businesses = Object.values(action.businesses);
       businesses.forEach(function (business) {
-        debugger;
         newState[business.id] = business;
       });
       return newState;
 
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESS"]:
-      debugger;
       newState = _defineProperty({}, action.business.id, action.business);
-      debugger;
       return Object.assign({}, state, newState);
 
     default:
@@ -1469,7 +1420,7 @@ __webpack_require__.r(__webpack_exports__);
 var EntitiesRedcuer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   businesses: _businesses_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  review: _reviews_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  reviews: _reviews_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (EntitiesRedcuer);
 
@@ -1497,13 +1448,10 @@ var ReviewsReducer = function ReviewsReducer() {
 
   switch (action.type) {
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_REVIEWS"]:
-      debugger;
       var reviews = Object.values(action.reviews);
-      debugger;
       reviews.forEach(function (review) {
         return newState[review.id] = review;
       });
-      debugger;
       return newState;
 
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_REVIEW"]:
@@ -1578,7 +1526,6 @@ var BusinessReducer = function BusinessReducer() {
   switch (action.type) {
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["BUSINESS_ERRORS"]:
       var newState = action.errors;
-      debugger;
       return newState;
 
     default:
@@ -1861,7 +1808,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateReview", function() { return updateReview; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteReview", function() { return deleteReview; });
 var fetchReviews = function fetchReviews(businessId) {
-  debugger;
   return $.ajax({
     url: "/api/businesses/".concat(businessId, "/reviews"),
     method: "GET"

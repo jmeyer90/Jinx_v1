@@ -11,13 +11,13 @@ class Splash extends React.Component{
 
   componentDidMount(){
     this.props.fetchBusinesses() ;
-    debugger
+    
   }
 
   render(){
 
     const businesses = Object.values (this.props.businesses);
-    debugger
+    
     return(
       <section className="Splash">
       <ul>

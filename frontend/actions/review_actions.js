@@ -6,7 +6,7 @@ export const REMOVE_REVIEW = "REMOVE_REVIEW";
 export const REVIEW_ERRORS = "REVIEW_ERRORS";
 
 const receiveReviews = reviews => {
-  debugger
+  
   return {
     type: RECEIVE_REVIEWS,
     reviews
@@ -14,7 +14,7 @@ const receiveReviews = reviews => {
 };
 
 const receiveReview = review => {
-  debugger
+  
   return {
     type: RECEIVE_REVIEW,
     review
@@ -22,14 +22,14 @@ const receiveReview = review => {
 };
 
 const removeReview = review => {
-  debugger
+  
   return {
     type: REMOVE_REVIEW,
   }
 };
 
 const reviewErrors = (errors) => {
-  debugger
+  
   return {
     type: REVIEW_ERRORS,
     errors
@@ -37,7 +37,7 @@ const reviewErrors = (errors) => {
 };
 
 export const fetchReviews = businessId => dispatch => {
-  debugger
+  
   return (ReviewUtils.fetchReviews( businessId )
     .then(
       reviews => dispatch(receiveReviews(reviews)),
@@ -46,7 +46,7 @@ export const fetchReviews = businessId => dispatch => {
 };
 
 export const fetchReview = reviewId => dispatch => {
-  debugger
+  
   return (
     ReviewUtils.fetchReview(reviewId)
       .then(
@@ -57,7 +57,7 @@ export const fetchReview = reviewId => dispatch => {
 }
 
 export const updateReview = review => dispatch =>{
-  debugger
+  
   return (
     ReviewUtils.updateReview(review)
     .then(
@@ -68,7 +68,7 @@ export const updateReview = review => dispatch =>{
 }
 
 export const createReview = review => dispatch => {
-  debugger
+  
   return (
     ReviewUtils.createReview(review)
       .then(
@@ -79,7 +79,7 @@ export const createReview = review => dispatch => {
 }
 
 export const deleteReview = reviewId => dispatch => {
-  debugger
+  
   return (
     ReviewUtils.deleteReview(reviewId)
       .then(

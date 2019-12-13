@@ -1,5 +1,5 @@
 export const fetchReviews = businessId => {
-  debugger
+  
   return(
     $.ajax({
       url: `/api/businesses/${businessId}/reviews`,

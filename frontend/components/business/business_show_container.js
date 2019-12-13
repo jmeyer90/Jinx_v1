@@ -4,9 +4,12 @@ import { fetchBusiness, fetchBusinesses } from '../../actions/business_actions';
 import { withRouter } from 'react-router-dom'
 
 const msp =  ( state, ownProps ) =>{
-  debugger
+  const business = state.entities.businesses[ownProps.match.params.businessId] || {}
+  
   return({
-    business: state.entities.businesses[ownProps.match.params.businessId]|| {},
+    business: business,
+    reviews: business.reviews || {},
+    authors: business.users || {},
     businessId: ownProps.match.params.businessId 
   })
 };

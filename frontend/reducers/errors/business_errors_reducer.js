@@ -7,7 +7,7 @@ const BusinessReducer = (state = nullState, action) => {
   switch (action.type) {
     case BUSINESS_ERRORS:
       let newState = action.errors;
-      debugger
+      
       return newState;
     default:
       return nullState;

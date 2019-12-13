@@ -6,7 +6,7 @@ import ReviewsReducer from './reviews_reducer';
 const EntitiesRedcuer = combineReducers({
   users: UsersReducer,
   businesses: BusinessesReducer,
-  review: ReviewsReducer
+  reviews: ReviewsReducer
 });
 
 export default EntitiesRedcuer;

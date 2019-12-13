@@ -1,10 +1,10 @@
 class Api::ReviewsController < ApplicationController
 
   def index
-    debugger
     @reviews = Review.includes(:user).where('reviews.business_id =?', params[:business_id]).references(:reviews)
-    debugger
+    
     if @reviews
+      
       render json: @reviews
     else 
       render json: @reviews.errors.full_messages
@@ -49,7 +49,7 @@ class Api::ReviewsController < ApplicationController
   private
 
   def review_params
-    debugger
+    
     params.require(:review).permit(:business_id, :rating, :body)
   end
 

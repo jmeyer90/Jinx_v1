@@ -1,5 +1,6 @@
 import React from 'react';
-import BusinessReviewsConstructor from './reviews/business_reviews_constructor';
+// import BusinessReviewsConstructor from './reviews/business_reviews_constructor';
+import BusinessReviews from './reviews/business_reviews';
 
 class BusinessShow extends React.Component{
   constructor(props){
@@ -12,11 +13,12 @@ class BusinessShow extends React.Component{
     this.bizHoursofOp = this.bizHoursofOp.bind(this);
     this.bizImage = this.bizImage.bind(this);
     this.bizRatingImages = this.bizRatingImages.bind(this);
+    this.bizReviews = this.bizReviews.bind(this);
   }
 
   componentDidMount(){
     this.props.fetchBusiness( this.props.businessId );
-    debugger
+    
   }
 
   bizImage(){
@@ -49,8 +51,31 @@ class BusinessShow extends React.Component{
     )
   }
 
+  bizReviews(){
+    
+    if (this.props.business.reviews){
+      const reviews = Object.values(this.props.business.reviews);
+      return (
+        <ul className="business-review-list">
+          {reviews.map(reviewKey => (
+            <li key={reviewKey}>
+              <p>{reviewKey[1].body}</p>
+            </li>
+          ))}
+        </ul>
+      )
+    } else {
+      return(
+        <ul className="business-review-list">
+          <li key={0}></li>
+        </ul>
+      )
+    }
+    
+  }
+
   render(){
-    debugger
+    
     return(
       <div className="business-show">
         <h1>Business Show Page</h1>
@@ -60,7 +85,8 @@ class BusinessShow extends React.Component{
         {this.bizRating()}
         {this.bizAttrs()}
         {this.bizHoursofOp()}
-        <BusinessReviewsConstructor businessId={ this.props.businessId } />
+        <BusinessReviews business={ this.props.business } />
+        {/* {this.bizReviews()} */}
       </div>
     )
   }

@@ -5,13 +5,13 @@ const ReviewsReducer = (state={}, action) =>{
   let newState={};
   switch( action.type ){
     case RECEIVE_REVIEWS:
-      debugger
+      
       const reviews = Object.values(action.reviews);
-      debugger
+      
       reviews.forEach( review =>(
         newState[review.id] = review
       ))
-      debugger
+      
       return newState;
     case RECEIVE_REVIEW:
       newState = {[action.review.id]: action.review}
