@@ -5,13 +5,15 @@ export const RECEIVE_BUSINESSES = "RECEIVE_BUSINESSES";
 export const RECEIVE_BUSINESS = "RECEIVE_BUSINESS";
 export const BUSINESS_ERRORS = "BUSINESS_ERRORS";
 
-const receiveBusinesses = businesses =>{
-  // const reviews = extractAsObj(buiness, "reviews");
-  // const users = extractAsObj( business, "users")
-  debugger
+const receiveBusinesses = businessesInfo =>{
+  const reviews = extractAsObj(businessesInfo, "reviews");
+  const users = extractAsObj(businessesInfo, "users");
+  const businesses = extractAsObj(businessesInfo, "businesses");
   return {
     type: RECEIVE_BUSINESSES,
-    businesses
+    businesses,
+    reviews,
+    users
   }
 };
 

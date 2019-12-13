@@ -4,24 +4,23 @@ class Api::BusinessesController < ApplicationController
   def index
     @businesses = Business.all.includes(
       :menu, 
-      :reviews,
       :attribute_items,
       :hours_of_operation
     )
-    
 
+    @reviews = @businesses.map do |business|
+      review = business.mainReview
+    end
+    
     if @businesses
-      
-      render json: @businesses
+      render :index
     else
-      
       render json: @businesses.errors.full_messages, status: 422
     end
   end
 
   def show
     @business = Business.find( params[:id] )
-    # @menu = @business.menu.includes(:menu_items)
     @reviews = @business.reviews.includes(:user)
     
     if @business

@@ -1,14 +1,18 @@
 import { RECEIVE_REVIEW, RECEIVE_REVIEWS, REMOVE_REVIEW } from '../../actions/review_actions';
-import { RECEIVE_BUSINESS } from '../../actions/business_actions';
+import { RECEIVE_BUSINESS, RECEIVE_BUSINESSES } from '../../actions/business_actions';
 
 
 const ReviewsReducer = (state={}, action) =>{
   Object.freeze( state );
   let newState={};
-  switch( action.type ){
-    case RECEIVE_BUSINESS:
+  switch (action.type) {
+    case RECEIVE_BUSINESSES:
       newState = action.reviews;
       debugger
+      return newState;
+
+    case RECEIVE_BUSINESS:
+      newState = action.reviews;
       return newState;
 
     case RECEIVE_REVIEWS:

@@ -16,7 +16,7 @@ const arrayToObject = ( array ) =>{
 
 export const extractAsObj = ( Obj, key ) =>{
   let extracted = Obj[key];
-  delete Obj[key]
+  delete Obj[key];
   extracted = arrayToObject(extracted);
   return extracted
 };

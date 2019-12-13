@@ -23,5 +23,10 @@ class Business < ApplicationRecord
   has_many :hours_of_operation, through: :shared_business_hours
 
   validates :name, :address, presence: true, uniqueness: true
+
+  def mainReview
+    review = reviews[0]
+    review
+  end
   
 end

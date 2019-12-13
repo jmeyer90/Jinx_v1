@@ -108,13 +108,15 @@ var RECEIVE_BUSINESSES = "RECEIVE_BUSINESSES";
 var RECEIVE_BUSINESS = "RECEIVE_BUSINESS";
 var BUSINESS_ERRORS = "BUSINESS_ERRORS";
 
-var receiveBusinesses = function receiveBusinesses(businesses) {
-  // const reviews = extractAsObj(buiness, "reviews");
-  // const users = extractAsObj( business, "users")
-  debugger;
+var receiveBusinesses = function receiveBusinesses(businessesInfo) {
+  var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(businessesInfo, "reviews");
+  var users = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(businessesInfo, "users");
+  var businesses = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(businessesInfo, "businesses");
   return {
     type: RECEIVE_BUSINESSES,
-    businesses: businesses
+    businesses: businesses,
+    reviews: reviews,
+    users: users
   };
 };
 
@@ -456,7 +458,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
- // import BusinessReviewsConstructor from './reviews/business_reviews_constructor';
 
 
 
@@ -512,26 +513,6 @@ function (_React$Component) {
     key: "bizHoursofOp",
     value: function bizHoursofOp() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Business Hours of Operation");
-    }
-  }, {
-    key: "bizReviews",
-    value: function bizReviews() {
-      if (this.props.business.reviews) {
-        var reviews = Object.values(this.props.business.reviews);
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-          className: "business-review-list"
-        }, reviews.map(function (reviewKey) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            key: reviewKey
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, reviewKey[1].body));
-        }));
-      } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-          className: "business-review-list"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: 0
-        }));
-      }
     }
   }, {
     key: "render",
@@ -658,39 +639,7 @@ var BusinessReviews = function BusinessReviews(props) {
   })));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (BusinessReviews); // class BusinessReviews extends React.Component{
-//   constructor(props){
-//     super(props);
-//   }
-//   componentDidMount(){
-//     debugger
-//     this.props.fetchReviews(this.props.businessId)
-//     if (this.props.reviews){
-//       const reviews = Object.values(this.props.reviews)
-//       reviews.forEach( review =>(
-//         <div></div>// placeholder
-//       ))
-//     }
-//   }
-//   render(){
-//     debugger
-//     const reviews = this.props.reviews ? Object.values(this.props.reviews) : [];
-//     return (
-//       <section className="business-reviews" >
-//         {this.props.business.name} Reviews:
-//         <ul className="business-review-list" >
-//           {reviews.map(review => (
-//             <li key={review.id} className="business-review-item">
-//               {/* User: {review.user.name} */}
-//               <p className="review-body">{review.body}</p>
-//             </li>
-//           ))}
-//         </ul>
-//       </section >
-//     )
-//   }
-// }
-// export default BusinessReviews;
+/* harmony default export */ __webpack_exports__["default"] = (BusinessReviews);
 
 /***/ }),
 
@@ -1466,9 +1415,13 @@ var ReviewsReducer = function ReviewsReducer() {
   var newState = {};
 
   switch (action.type) {
-    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESS"]:
+    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESSES"]:
       newState = action.reviews;
       debugger;
+      return newState;
+
+    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESS"]:
+      newState = action.reviews;
       return newState;
 
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_REVIEWS"]:
@@ -1518,9 +1471,13 @@ var UsersReducer = function UsersReducer() {
   var newState;
 
   switch (action.type) {
-    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESS"]:
+    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESSES"]:
       newState = action.users;
       debugger;
+      return newState;
+
+    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESS"]:
+      newState = action.users;
       return newState;
 
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:

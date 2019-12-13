@@ -1,5 +1,4 @@
 import React from 'react';
-// import BusinessReviewsConstructor from './reviews/business_reviews_constructor';
 import BusinessReviews from './reviews/business_reviews';
 
 class BusinessShow extends React.Component{
@@ -51,29 +50,6 @@ class BusinessShow extends React.Component{
     )
   }
 
-  bizReviews(){
-    
-    if (this.props.business.reviews){
-      const reviews = Object.values(this.props.business.reviews);
-      return (
-        <ul className="business-review-list">
-          {reviews.map(reviewKey => (
-            <li key={reviewKey}>
-              <p>{reviewKey[1].body}</p>
-            </li>
-          ))}
-        </ul>
-      )
-    } else {
-      return(
-        <ul className="business-review-list">
-          <li key={0}></li>
-        </ul>
-      )
-    }
-    
-  }
-
   render(){
     debugger
     return(
@@ -86,7 +62,6 @@ class BusinessShow extends React.Component{
         {this.bizAttrs()}
         {this.bizHoursofOp()}
         <BusinessReviews reviews={ this.props.reviews } users={ this.props.users } business={ this.props.business }/>
-        {/* {this.bizReviews()} */}
       </div>
     )
   }
