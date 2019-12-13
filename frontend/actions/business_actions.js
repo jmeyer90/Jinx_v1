@@ -1,11 +1,14 @@
 import * as BusinessUtils from '../util/business_util';
+import { extractAsObj } from '../util/action utils';
 
 export const RECEIVE_BUSINESSES = "RECEIVE_BUSINESSES";
 export const RECEIVE_BUSINESS = "RECEIVE_BUSINESS";
 export const BUSINESS_ERRORS = "BUSINESS_ERRORS";
 
 const receiveBusinesses = businesses =>{
-  
+  // const reviews = extractAsObj(buiness, "reviews");
+  // const users = extractAsObj( business, "users")
+  debugger
   return {
     type: RECEIVE_BUSINESSES,
     businesses
@@ -13,10 +16,15 @@ const receiveBusinesses = businesses =>{
 };
 
 const receiveBusiness = business => {
-  
+  debugger
+  const reviews = extractAsObj(business, "reviews");
+  const users = extractAsObj(business, "users")
+  debugger
   return {
     type: RECEIVE_BUSINESS,
-    business
+    business,
+    reviews,
+    users
   }
 };
 

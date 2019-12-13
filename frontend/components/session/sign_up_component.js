@@ -15,7 +15,7 @@ const user = {
 const msp = state => ({
   user: user,
   formType: "Sign Up",
-  linkTitle: "New to Jinx?",
+  linkTitle: "Already on Jinx?",
   alternatePath: "/login",
   disclamer: disclamer,
   alternateForm: "Log In"

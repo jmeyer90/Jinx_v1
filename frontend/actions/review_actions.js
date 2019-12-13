@@ -21,7 +21,7 @@ const receiveReview = review => {
   }
 };
 
-const removeReview = review => {
+const removeReview = reviewId => {
   
   return {
     type: REMOVE_REVIEW,

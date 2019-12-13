@@ -101,12 +101,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBusinesses", function() { return fetchBusinesses; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBusiness", function() { return fetchBusiness; });
 /* harmony import */ var _util_business_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/business_util */ "./frontend/util/business_util.js");
+/* harmony import */ var _util_action_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/action utils */ "./frontend/util/action utils.js");
+
 
 var RECEIVE_BUSINESSES = "RECEIVE_BUSINESSES";
 var RECEIVE_BUSINESS = "RECEIVE_BUSINESS";
 var BUSINESS_ERRORS = "BUSINESS_ERRORS";
 
 var receiveBusinesses = function receiveBusinesses(businesses) {
+  // const reviews = extractAsObj(buiness, "reviews");
+  // const users = extractAsObj( business, "users")
+  debugger;
   return {
     type: RECEIVE_BUSINESSES,
     businesses: businesses
@@ -114,9 +119,15 @@ var receiveBusinesses = function receiveBusinesses(businesses) {
 };
 
 var receiveBusiness = function receiveBusiness(business) {
+  debugger;
+  var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(business, "reviews");
+  var users = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(business, "users");
+  debugger;
   return {
     type: RECEIVE_BUSINESS,
-    business: business
+    business: business,
+    reviews: reviews,
+    users: users
   };
 };
 
@@ -187,7 +198,7 @@ var receiveReview = function receiveReview(review) {
   };
 };
 
-var removeReview = function removeReview(review) {
+var removeReview = function removeReview(reviewId) {
   return {
     type: REMOVE_REVIEW
   };
@@ -313,18 +324,20 @@ var logout = function logout() {
 /*!******************************************!*\
   !*** ./frontend/actions/user_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_USER, USER_ERRORS, fetchUser, createUser */
+/*! exports provided: RECEIVE_USER, RECEIVE_USERS, USER_ERRORS, fetchUser, createUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER", function() { return RECEIVE_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USERS", function() { return RECEIVE_USERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_ERRORS", function() { return USER_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUser", function() { return createUser; });
 /* harmony import */ var _util_user_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/user_util */ "./frontend/util/user_util.js");
 
 var RECEIVE_USER = "RECEIVE_USER";
+var RECEIVE_USERS = "RECEIVE_USERS";
 var USER_ERRORS = "USER_ERRORS";
 
 var receiveUser = function receiveUser(user) {
@@ -527,6 +540,8 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "business-show"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name), this.bizImage(), this.bizRatingImages(), this.bizRating(), this.bizAttrs(), this.bizHoursofOp(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        reviews: this.props.reviews,
+        users: this.props.users,
         business: this.props.business
       }));
     }
@@ -586,23 +601,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   var business = state.entities.businesses[ownProps.match.params.businessId] || {};
-  var mappedState = {};
-
-  if (business.reviews) {
-    mappedState = {
-      business: business,
-      reviews: Object.assign(business.reviews) || {},
-      authors: Object.assign(business.users) || {},
-      businessId: ownProps.match.params.businessId
-    };
-  } else {
-    mappedState = {
-      businessId: ownProps.match.params.businessId,
-      business: business
-    };
-  }
-
-  ;
+  var mappedState = {
+    business: business,
+    reviews: state.entities.reviews || {},
+    users: state.entities.users || {},
+    businessId: ownProps.match.params.businessId
+  };
   debugger;
   return mappedState;
 };
@@ -635,29 +639,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
-var user = function user(users, user_id) {};
+var reviewItems = function reviewItems(user, review) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    key: review.id,
+    className: "business-review-item"
+  }, user.f_name, "'s Review: ", review.body);
+};
 
 var BusinessReviews = function BusinessReviews(props) {
-  if (props.business && props.business.reviews) {
-    var reviewKeys = Object.keys(props.business.reviews[0]);
-    var users = props.business.users[0];
-    var review;
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-      className: "business-reviews"
-    }, props.business.name, " Reviews:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-      className: "business-review-list"
-    }, reviewKeys.map(function (rKey) {
-      review = props.business.reviews[0][rKey];
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        key: review.id,
-        className: "business-review-item"
-      }, "User: ", users[review.user_id].f_name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "review-body"
-      }, review.body));
-    })));
-  } else {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
-  }
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "business-reviews"
+  }, props.business.name, " Reviews:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "business-review-list"
+  }, Object.keys(props.reviews).map(function (reviewId) {
+    var review = props.reviews[reviewId];
+    var user = props.users[review.user_id];
+    return reviewItems(user, review);
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (BusinessReviews); // class BusinessReviews extends React.Component{
@@ -1177,7 +1175,7 @@ var msp = function msp(state) {
   return {
     user: user,
     formType: "Sign Up",
-    linkTitle: "New to Jinx?",
+    linkTitle: "Already on Jinx?",
     alternatePath: "/login",
     disclamer: disclamer,
     alternateForm: "Log In"
@@ -1383,8 +1381,10 @@ document.addEventListener('DOMContentLoaded', function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
-/* harmony import */ var _util_reducer_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/reducer utils */ "./frontend/util/reducer utils.js");
+/* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/review_actions */ "./frontend/actions/review_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1404,11 +1404,7 @@ var BusinessesReducer = function BusinessesReducer() {
       return newState;
 
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESS"]:
-      newState = _defineProperty({}, action.business.id, action.business); // take out users and reveiws, activate extractAsObj
-
-      var reviews = Object(_util_reducer_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(newState.business, reviews);
-      var users = Object(_util_reducer_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(newState.business, users); // turn each into a POJO action, dispatch with type RECEVIE_REVIEWS, REVECEIVE_USERS
-
+      newState = _defineProperty({}, action.business.id, action.business);
       debugger;
       return Object.assign({}, state, newState);
 
@@ -1457,7 +1453,7 @@ var EntitiesRedcuer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/review_actions */ "./frontend/actions/review_actions.js");
-/* harmony import */ var _util_reducer_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/reducer utils */ "./frontend/util/reducer utils.js");
+/* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -1470,6 +1466,11 @@ var ReviewsReducer = function ReviewsReducer() {
   var newState = {};
 
   switch (action.type) {
+    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESS"]:
+      newState = action.reviews;
+      debugger;
+      return newState;
+
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_REVIEWS"]:
       var reviews = Object.values(action.reviews);
       reviews.forEach(function (review) {
@@ -1504,7 +1505,7 @@ var ReviewsReducer = function ReviewsReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
-/* harmony import */ var _util_reducer_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/reducer utils */ "./frontend/util/reducer utils.js");
+/* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -1517,6 +1518,11 @@ var UsersReducer = function UsersReducer() {
   var newState;
 
   switch (action.type) {
+    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESS"]:
+      newState = action.users;
+      debugger;
+      return newState;
+
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
       newState = _defineProperty({}, action.user.id, action.user);
       return Object.assign({}, state, newState);
@@ -1792,6 +1798,40 @@ var configureStore = function configureStore() {
 
 /***/ }),
 
+/***/ "./frontend/util/action utils.js":
+/*!***************************************!*\
+  !*** ./frontend/util/action utils.js ***!
+  \***************************************/
+/*! exports provided: extractAsObj */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "extractAsObj", function() { return extractAsObj; });
+// convert array to object
+// sort alphabetically by attribute_item name, menu_item name, business_name
+// in serach utils- write b-search algorithm
+var arrayToObject = function arrayToObject(array) {
+  var newObj = {};
+  var length = array.length;
+
+  for (var i = 0; i < length; i++) {
+    var el = array.shift();
+    newObj[Object.keys(el)[0]] = Object.values(el)[0];
+  }
+
+  return newObj;
+};
+
+var extractAsObj = function extractAsObj(Obj, key) {
+  var extracted = Obj[key];
+  delete Obj[key];
+  extracted = arrayToObject(extracted);
+  return extracted;
+};
+
+/***/ }),
+
 /***/ "./frontend/util/business_util.js":
 /*!****************************************!*\
   !*** ./frontend/util/business_util.js ***!
@@ -1814,40 +1854,6 @@ var fetchBusiness = function fetchBusiness(businessId) {
     url: "/api/businesses/".concat(businessId),
     method: "GET"
   });
-};
-
-/***/ }),
-
-/***/ "./frontend/util/reducer utils.js":
-/*!****************************************!*\
-  !*** ./frontend/util/reducer utils.js ***!
-  \****************************************/
-/*! exports provided: extractAsObj */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "extractAsObj", function() { return extractAsObj; });
-// convert array to object
-// sort alphabetically by attribute_item name, menu_item name, business_name
-// in serach utils- write b-search algorithm
-var arrayToObject = function arrayToObject(array) {
-  var newObj = {};
-
-  for (i = 0; i < array.length; i++) {
-    var el = arr.pop();
-    newObj.shift(el);
-  }
-
-  return newObj;
-};
-
-var extractAsObj = function extractAsObj(Obj, key) {
-  var extracted = Obj.key;
-  delete Obj.key;
-  s;
-  extracted = arrayToObject(extracted);
-  return extracted;
 };
 
 /***/ }),

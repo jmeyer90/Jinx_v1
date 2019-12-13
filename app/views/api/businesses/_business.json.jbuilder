@@ -3,7 +3,7 @@ json.extract! business, :id, :name, :address, :longitude, :latitude
 json.reviews reviews do |review|
 
   json.set! review.id do
-    json.extract! review, :id, :body, :rating
+    json.extract! review, :id, :body, :rating, :business_id
     json.user_id review.user.id
   end
 

@@ -85,7 +85,7 @@ class BusinessShow extends React.Component{
         {this.bizRating()}
         {this.bizAttrs()}
         {this.bizHoursofOp()}
-        <BusinessReviews business={ this.props.business } />
+        <BusinessReviews reviews={ this.props.reviews } users={ this.props.users } business={ this.props.business }/>
         {/* {this.bizReviews()} */}
       </div>
     )

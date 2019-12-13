@@ -5,25 +5,17 @@ import { withRouter } from 'react-router-dom'
 
 const msp =  ( state, ownProps ) =>{
   const business = state.entities.businesses[ownProps.match.params.businessId] || {};
-  let mappedState = {};
 
-  if (business.reviews){
-    mappedState = {
+  const mappedState = {
       business: business,
-      reviews: Object.assign(business.reviews) || {},
-      authors: Object.assign(business.users) || {},
+      reviews: state.entities.reviews || {},
+      users: state.entities.users || {},
       businessId: ownProps.match.params.businessId
-    } 
-  } else {
-    mappedState = {
-      businessId: ownProps.match.params.businessId,
-      business: business
     }
-  };
 
-  debugger
+    debugger
 
-  return(mappedState)
+    return mappedState;
 };
 
 const mdp = dispatch =>({

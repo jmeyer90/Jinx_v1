@@ -1,35 +1,29 @@
 import React from 'react';
 
-const user = (users, user_id) =>{
-
+const reviewItems = (user, review) =>{
+  return(
+    <li key={review.id} className="business-review-item">
+      {user.f_name}'s Review: {review.body}
+    </li>
+  )
 };
 
 const BusinessReviews = (props) =>{
-
-  if( props.business && props.business.reviews ){
-    const reviewKeys = Object.keys(props.business.reviews[0]);
-    const users = props.business.users[0]
-    let review;
     
-    return (
-      <section className="business-reviews" >
-        {props.business.name} Reviews:
-        <ul className="business-review-list" >
-          { reviewKeys.map(rKey => {
-            review = props.business.reviews[0][rKey];
-            return(
-              <li key={review.id} className="business-review-item">
-                User: {users[review.user_id].f_name}
-                <p className="review-body">{review.body}</p>
-              </li>
-            )}
+  return (
+    <section className="business-reviews" >
+      {props.business.name} Reviews:
+      <ul className="business-review-list" >
+        { Object.keys(props.reviews).map( reviewId => {
+          let review = props.reviews[reviewId];
+          let user = props.users[review.user_id];
+          return(
+            reviewItems (user, review)
           )}
-        </ul>
-      </section >
-    )
-  } else {
-    return( <div></div> )
-  }
+        )}
+      </ul>
+    </section >
+  )
 }
 
 export default BusinessReviews;
