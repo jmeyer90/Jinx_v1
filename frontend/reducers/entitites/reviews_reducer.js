@@ -8,7 +8,6 @@ const ReviewsReducer = (state={}, action) =>{
   switch (action.type) {
     case RECEIVE_BUSINESSES:
       newState = action.reviews;
-      debugger
       return newState;
 
     case RECEIVE_BUSINESS:

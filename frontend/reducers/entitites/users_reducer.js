@@ -7,7 +7,6 @@ const UsersReducer = ( state={}, action ) => {
   switch (action.type) {
     case RECEIVE_BUSINESSES:
       newState = action.users;
-      debugger
       return newState;
 
     case RECEIVE_BUSINESS:

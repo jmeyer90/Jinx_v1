@@ -121,10 +121,8 @@ var receiveBusinesses = function receiveBusinesses(businessesInfo) {
 };
 
 var receiveBusiness = function receiveBusiness(business) {
-  debugger;
   var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(business, "reviews");
   var users = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(business, "users");
-  debugger;
   return {
     type: RECEIVE_BUSINESS,
     business: business,
@@ -439,7 +437,7 @@ var App = function App() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reviews/business_reviews */ "./frontend/components/business/reviews/business_reviews.jsx");
+/* harmony import */ var _reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reviews/business_reviews */ "./frontend/components/reviews/business_reviews.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -491,27 +489,66 @@ function (_React$Component) {
   }, {
     key: "bizImage",
     value: function bizImage() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Business Image");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business Image");
     }
   }, {
     key: "bizRatingImages",
     value: function bizRatingImages() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Business Images from Ratings");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business Images from Ratings");
     }
   }, {
     key: "bizRating",
     value: function bizRating() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Business Rating Function");
+      debugger;
+      var ratings = Object.values(this.props.reviews).map(function (review) {
+        return review.rating;
+      });
+      var length = ratings.length;
+      var sum = length > 0 ? ratings.reduce(function (acc, el) {
+        return acc + el;
+      }) : 0;
+      var avgRating = sum / length;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business Rating: ", avgRating);
     }
   }, {
     key: "bizAttrs",
     value: function bizAttrs() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Business Attribute List");
+      var categories = {};
+      var attr_items = this.props.business.attribute_items || [];
+      debugger;
+
+      for (var i = 0; i < attr_items.length; i++) {
+        var category = attr_items[i].attr_type;
+        debugger;
+        categories[category] = categories[category] || [];
+        categories[category].push(attr_items[i].name);
+        debugger;
+      }
+
+      debugger;
+
+      if (attr_items) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+          className: "attribute-list"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business Attribute List:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(categories).map(function (category) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            className: "attribute-categories-container"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+            className: "attribute-categories"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Category: ", category), categories[category].map(function (attr) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+              className: "attr-name"
+            }, attr);
+          })));
+        })));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }
     }
   }, {
     key: "bizHoursofOp",
     value: function bizHoursofOp() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Business Hours of Operation");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business Hours of Operation");
     }
   }, {
     key: "render",
@@ -519,11 +556,7 @@ function (_React$Component) {
       debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "business-show"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name), this.bizImage(), this.bizRatingImages(), this.bizRating(), this.bizAttrs(), this.bizHoursofOp(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        reviews: this.props.reviews,
-        users: this.props.users,
-        business: this.props.business
-      }));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business name: ", this.props.business.name), this.bizImage(), this.bizRatingImages(), this.bizRating(), this.bizAttrs(), this.bizHoursofOp(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__["default"], null));
     }
   }]);
 
@@ -581,14 +614,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   var business = state.entities.businesses[ownProps.match.params.businessId] || {};
-  var mappedState = {
+  return {
     business: business,
     reviews: state.entities.reviews || {},
     users: state.entities.users || {},
     businessId: ownProps.match.params.businessId
   };
-  debugger;
-  return mappedState;
 };
 
 var mdp = function mdp(dispatch) {
@@ -603,42 +634,6 @@ var mdp = function mdp(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_buiness_show__WEBPACK_IMPORTED_MODULE_1__["default"]));
-
-/***/ }),
-
-/***/ "./frontend/components/business/reviews/business_reviews.jsx":
-/*!*******************************************************************!*\
-  !*** ./frontend/components/business/reviews/business_reviews.jsx ***!
-  \*******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var reviewItems = function reviewItems(user, review) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    key: review.id,
-    className: "business-review-item"
-  }, user.f_name, "'s Review: ", review.body);
-};
-
-var BusinessReviews = function BusinessReviews(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "business-reviews"
-  }, props.business.name, " Reviews:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "business-review-list"
-  }, Object.keys(props.reviews).map(function (reviewId) {
-    var review = props.reviews[reviewId];
-    var user = props.users[review.user_id];
-    return reviewItems(user, review);
-  })));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (BusinessReviews);
 
 /***/ }),
 
@@ -792,6 +787,17 @@ var mdp = function mdp(dispacth) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_nav__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/reviews/business_reviews.jsx":
+/*!**********************************************************!*\
+  !*** ./frontend/components/reviews/business_reviews.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/frontend/components/reviews/business_reviews.jsx: Support for the experimental syntax 'classProperties' isn't currently enabled (16:15):\n\n\u001b[0m \u001b[90m 14 | \u001b[39m  }\u001b[0m\n\u001b[0m \u001b[90m 15 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 16 | \u001b[39m  reviewItems \u001b[33m=\u001b[39m (user\u001b[33m,\u001b[39m review) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 17 | \u001b[39m    \u001b[36mreturn\u001b[39m (\u001b[0m\n\u001b[0m \u001b[90m 18 | \u001b[39m      \u001b[33m<\u001b[39m\u001b[33mli\u001b[39m key\u001b[33m=\u001b[39m{review\u001b[33m.\u001b[39mid} className\u001b[33m=\u001b[39m\u001b[32m\"business-review-item\"\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 19 | \u001b[39m        \u001b[33m<\u001b[39m\u001b[33mh2\u001b[39m\u001b[33m>\u001b[39m{user\u001b[33m.\u001b[39mf_name}\u001b[32m's Review: </h2>\u001b[39m\u001b[0m\n\nAdd @babel/plugin-proposal-class-properties (https://git.io/vb4SL) to the 'plugins' section of your Babel config to enable transformation.\n    at Object.raise (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:6975:17)\n    at Object.expectPlugin (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:8373:18)\n    at Object.parseClassProperty (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11663:12)\n    at Object.pushClassProperty (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11628:30)\n    at Object.parseClassMemberWithIsStatic (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11561:14)\n    at Object.parseClassMember (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11498:10)\n    at withTopicForbiddingContext (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11453:14)\n    at Object.withTopicForbiddingContext (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:10531:14)\n    at Object.parseClassBody (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11430:10)\n    at Object.parseClass (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11404:22)\n    at Object.parseStatementContent (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:10698:21)\n    at Object.parseStatement (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:10656:17)\n    at Object.parseBlockOrModuleBlockBody (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11232:25)\n    at Object.parseBlockBody (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11219:10)\n    at Object.parseTopLevel (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:10587:10)\n    at Object.parse (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:12097:10)\n    at parse (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:12148:38)\n    at parser (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/core/lib/transformation/normalize-file.js:168:34)\n    at normalizeFile (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/core/lib/transformation/normalize-file.js:102:11)\n    at runSync (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/core/lib/transformation/index.js:44:43)\n    at runAsync (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/core/lib/transformation/index.js:35:14)\n    at process.nextTick (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/core/lib/transform.js:34:34)\n    at process._tickCallback (internal/process/next_tick.js:61:11)");
 
 /***/ }),
 
@@ -1353,7 +1359,6 @@ var BusinessesReducer = function BusinessesReducer() {
 
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESS"]:
       newState = _defineProperty({}, action.business.id, action.business);
-      debugger;
       return Object.assign({}, state, newState);
 
     default:
@@ -1416,7 +1421,6 @@ var ReviewsReducer = function ReviewsReducer() {
   switch (action.type) {
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESSES"]:
       newState = action.reviews;
-      debugger;
       return newState;
 
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESS"]:
@@ -1472,7 +1476,6 @@ var UsersReducer = function UsersReducer() {
   switch (action.type) {
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESSES"]:
       newState = action.users;
-      debugger;
       return newState;
 
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESS"]:

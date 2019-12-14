@@ -3,7 +3,7 @@ class Api::BusinessesController < ApplicationController
   
   def index
     @businesses = Business.all.includes(
-      :menu, 
+      :menu_items,
       :attribute_items,
       :hours_of_operation
     )

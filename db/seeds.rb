@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
 AttributeItem.destroy_all
 Review.destroy_all
 User.destroy_all
@@ -59,7 +58,7 @@ business3 = Business.create(name: "business3", address:"address3")
 # Seed Menu
 menu1 = Menu.create(business_id: business1.id)
 menu2 = Menu.create(business_id: business2.id)
-menu3= Menu.create(business_id: business3.id)
+menu3 = Menu.create(business_id: business3.id)
 
 # Seed MenuItem
 menuItem1 = MenuItem.create(menu_id: menu1.id, title: "Boiled Newt", price: 1.5)
@@ -76,7 +75,31 @@ user2 = User.create(email: "user2@mail.com", f_name: "user2", l_name: "user2", p
 user3 = User.create(email: "user3@mail.com", f_name: "user3", l_name: "user3", password: "password", zip_code:11111)
 
 # Seed Review
-review1 = Review.create(user_id: user1.id, business_id: business1.id, rating: 5, body: "Review One: Testing Reviews")
-review2 = Review.create(user_id: user2.id, business_id: business2.id, rating: 4, body: "Review Two: Testing Reviews")
-review3 = Review.create(user_id: user3.id, business_id: business3.id, rating: 3, body: "Review Three: Testing Reviews")
-review4 = Review.create(user_id: user1.id, business_id: business2.id, rating: 3, body: "Review Four: Testing Reviews")
+review1 = Review.create(user_id: user1.id, business_id: business1.id, rating: 5, body: "Review One, Testing Reviews")
+review2 = Review.create(user_id: user2.id, business_id: business2.id, rating: 4, body: "Review Two, Testing Reviews")
+review3 = Review.create(user_id: user3.id, business_id: business3.id, rating: 3, body: "Review Three, Testing Reviews")
+review4 = Review.create(user_id: user1.id, business_id: business2.id, rating: 3, body: "Review Four, Testing Reviews")
+
+# Seed AttributeLists: Joins table for Bussiness and AttributeItem
+AttrListB1A1 = AttributeList.create(business_id: business1.id, attribute_item_id: attr1.id)
+AttrListB1A13 = AttributeList.create(business_id: business1.id, attribute_item_id: attr13.id)
+AttrListB1A21 = AttributeList.create(business_id: business1.id, attribute_item_id: attr21.id)
+AttrListB1A30 = AttributeList.create(business_id: business1.id, attribute_item_id: attr30.id)
+AttrListB1A35 = AttributeList.create(business_id: business1.id, attribute_item_id: attr25.id)
+AttrListB1A33 = AttributeList.create(business_id: business1.id, attribute_item_id: attr33.id)
+
+AttrListB2A2 = AttributeList.create(business_id: business2.id, attribute_item_id: attr2.id)
+AttrListB2A3 = AttributeList.create(business_id: business2.id, attribute_item_id: attr3.id)
+AttrListB2A16 = AttributeList.create(business_id: business2.id, attribute_item_id: attr16.id)
+AttrListB2A21 = AttributeList.create(business_id: business2.id, attribute_item_id: attr21.id)
+AttrListB2A24 = AttributeList.create(business_id: business2.id, attribute_item_id: attr24.id)
+AttrListB2A32 = AttributeList.create(business_id: business2.id, attribute_item_id: attr32.id)
+AttrListB2A33 = AttributeList.create(business_id: business2.id, attribute_item_id: attr33.id)
+
+AttrListB3A8 = AttributeList.create(business_id: business3.id, attribute_item_id: attr8.id)
+AttrListB3A10 = AttributeList.create(business_id: business3.id, attribute_item_id: attr10.id)
+AttrListB3A17 = AttributeList.create(business_id: business3.id, attribute_item_id: attr17.id)
+AttrListB3A21 = AttributeList.create(business_id: business3.id, attribute_item_id: attr21.id)
+AttrListB3A27 = AttributeList.create(business_id: business3.id, attribute_item_id: attr27.id)
+AttrListB3A29 = AttributeList.create(business_id: business3.id, attribute_item_id: attr29.id)
+AttrListB3A33 = AttributeList.create(business_id: business3.id, attribute_item_id: attr33.id)

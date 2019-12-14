@@ -6,16 +6,12 @@ import { withRouter } from 'react-router-dom'
 const msp =  ( state, ownProps ) =>{
   const business = state.entities.businesses[ownProps.match.params.businessId] || {};
 
-  const mappedState = {
-      business: business,
-      reviews: state.entities.reviews || {},
-      users: state.entities.users || {},
-      businessId: ownProps.match.params.businessId
-    }
-
-    debugger
-
-    return mappedState;
+  return({
+    business: business,
+    reviews: state.entities.reviews || {},
+    users: state.entities.users || {},
+    businessId: ownProps.match.params.businessId
+  })
 };
 
 const mdp = dispatch =>({

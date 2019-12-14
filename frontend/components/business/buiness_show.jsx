@@ -1,5 +1,5 @@
 import React from 'react';
-import BusinessReviews from './reviews/business_reviews';
+import BusinessReviews from '../reviews/business_reviews';
 
 class BusinessShow extends React.Component{
   constructor(props){
@@ -21,31 +21,68 @@ class BusinessShow extends React.Component{
 
   bizImage(){
     return (
-      <div>Business Image</div>
+      <h2>Business Image</h2>
     )
   }
 
   bizRatingImages(){
     return(
-      <div>Business Images from Ratings</div>
+      <h2>Business Images from Ratings</h2>
     )
   }
 
   bizRating(){
+    debugger
+    const ratings = Object.values(this.props.reviews).map( review => review.rating );
+    let length = ratings.length;
+    let sum = length > 0 ? ratings.reduce(( acc, el )=> acc + el ) : 0;
+    let avgRating = sum/length;
+    
     return(
-      <div>Business Rating Function</div>
+      <h2>Business Rating: {avgRating}</h2>
     )
   }
 
   bizAttrs() {
-    return (
-      <div>Business Attribute List</div>
-    )
+    let categories = {};
+    const attr_items = this.props.business.attribute_items || [];
+    debugger
+    for (let i=0; i< attr_items.length; i++){
+      let category = attr_items[i].attr_type;
+      debugger
+      categories[category] = categories[category]  || [];
+      categories[category].push(attr_items[i].name)
+      debugger
+    }
+    debugger
+    if( attr_items){
+      return (
+        <section className="attribute-list">
+          <h2>Business Attribute List:</h2>
+          <ul>
+            {Object.keys(categories).map( category =>(
+              <li className="attribute-categories-container">
+                <ul className="attribute-categories">
+                  <h2>Category: {category}</h2>
+                  {categories[category].map(attr=>(
+                    <li className="attr-name">
+                      {attr}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    } else {
+      return( <div></div> )
+    }
   }
 
   bizHoursofOp(){
     return(
-      <div>Business Hours of Operation</div>
+      <h2>Business Hours of Operation</h2>
     )
   }
 
@@ -54,13 +91,13 @@ class BusinessShow extends React.Component{
     return(
       <div className="business-show">
         <h1>Business Show Page</h1>
-        <h2>{this.props.business.name}</h2>
+        <h2>Business name: {this.props.business.name}</h2>
         {this.bizImage()}
         {this.bizRatingImages()}
         {this.bizRating()}
         {this.bizAttrs()}
         {this.bizHoursofOp()}
-        <BusinessReviews reviews={ this.props.reviews } users={ this.props.users } business={ this.props.business }/>
+        <BusinessReviews />
       </div>
     )
   }
