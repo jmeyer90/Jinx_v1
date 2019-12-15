@@ -49,7 +49,7 @@ class BusinessReviews extends React.Component{
 
   displayUpdateForm(review){
     if(this.state.reviewsDisp[review.id]){
-      const title = "Update Review";
+      const title = "Update Review"; 
       const buttonText = "Update Review";
       return(
         <section className="update-review">
@@ -72,12 +72,12 @@ class BusinessReviews extends React.Component{
   }
 
   reviewForm(action, title, buttonText){
-    debugger
     const review = {
       business_id: this.props.business_id,
       body: this.state.body,
       rating: this.state.rating
     }
+    debugger
     return(
       <ReviewForm business={this.props.business} 
         action={action} currentUserId={this.props.currentUserId}
@@ -89,7 +89,6 @@ class BusinessReviews extends React.Component{
   updateField(field){
     debugger
     return(e)=>{
-      debugger
       this.setState({[field]: e.currentTarget.value})
       debugger
     }
@@ -102,8 +101,8 @@ class BusinessReviews extends React.Component{
       rating: this.state.rating, 
       id: this.state.id
     }
+
     this.setState({ id: "", body: "", rating: "", reviewsDisp: { [review.id]: false } })
-    debugger
     action(this.props.business.id, review)
   }
 

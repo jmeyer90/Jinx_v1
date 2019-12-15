@@ -827,11 +827,12 @@ var ReviewForm = function ReviewForm(props) {
       onSubmit: function onSubmit(e) {
         return props.handleSubmit(e, props.action);
       }
-    }, selectRating(props.update), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+    }, selectRating(props.update, review.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
       className: "review-textarea",
       placeholder: "Sample Review Body",
       onChange: props.update("body"),
-      value: review.body
+      value: review.body,
+      required: true
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "submit",
       value: props.buttonText
@@ -841,23 +842,25 @@ var ReviewForm = function ReviewForm(props) {
   }
 };
 
-var selectRating = function selectRating(update) {
+var selectRating = function selectRating(update, reviewRating) {
   var ratings = [];
 
   for (var i = 1; i <= 5; i++) {
     ratings.push(i);
   }
 
+  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "ratings-selection"
   }, ratings.map(function (rating) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, rating, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       className: "rating-option",
       type: "radio",
       name: "rating",
       value: rating,
-      onClick: update("rating")
-    });
+      onChange: update("rating"),
+      required: true
+    }));
   }));
 };
 
@@ -1047,12 +1050,12 @@ function (_React$Component) {
   }, {
     key: "reviewForm",
     value: function reviewForm(action, title, buttonText) {
-      debugger;
       var review = {
         business_id: this.props.business_id,
         body: this.state.body,
         rating: this.state.rating
       };
+      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
         business: this.props.business,
         action: action,
@@ -1071,8 +1074,6 @@ function (_React$Component) {
 
       debugger;
       return function (e) {
-        debugger;
-
         _this4.setState(_defineProperty({}, field, e.currentTarget.value));
 
         debugger;
@@ -1093,7 +1094,6 @@ function (_React$Component) {
         rating: "",
         reviewsDisp: _defineProperty({}, review.id, false)
       });
-      debugger;
       action(this.props.business.id, review);
     }
   }, {
