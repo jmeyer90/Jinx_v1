@@ -1,6 +1,7 @@
 import React from 'react';
 import ReviewForm from './_review_form'
 import ReviewItemActions from './review_item_actions'
+import { displayRating } from '../../util/display_util';
 
 class BusinessReviews extends React.Component{
   constructor(props){
@@ -28,9 +29,11 @@ class BusinessReviews extends React.Component{
   reviewItems(user, review){
     return (
       <li key={review.id} className="business-review-item">
-        <h2>{user.f_name}'s Review: </h2>
+        <h2 className="rating-display-username">{user.f_name}'s Review: </h2>
+        <section className="user-rating-container">
+          {review.rating} {displayRating( review.rating )}
+        </section> 
         <p>Review Body: {review.body}</p>
-        {user.f_name}'s Rating: {review.rating}
         <ReviewItemActions review={review} currentUserId={this.props.currentUserId} 
           business={this.props.business} handleSubmit={this.handleSubmit} 
           updateField={this.updateField} deleteReview={this.props.deleteReview} 

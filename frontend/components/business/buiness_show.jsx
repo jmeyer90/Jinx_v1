@@ -1,5 +1,6 @@
 import React from 'react';
 import BusinessReviewConstructor from '../reviews/business_review_constructor';
+import { displayRating } from './../../util/display_util'
 
 class BusinessShow extends React.Component{
   constructor(props){
@@ -38,7 +39,7 @@ class BusinessShow extends React.Component{
     let avgRating = sum/length;
     
     return(
-      <h2>Business Rating: {avgRating}</h2>
+       displayRating( avgRating )
     )
   }
 

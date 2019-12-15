@@ -15,9 +15,7 @@ const ReviewForm= props =>{
         <form className="review-form" onSubmit={(e)=>props.handleSubmit(e, props.action)}>
           {selectRating(props.update)}
 
-          <textarea className="review-textarea"
-            placeholder="Sample Review Body"
-            onChange={props.update("body")} value={review.body} required/>
+          {reviewDeatils(review, props.update)}
 
           <input type="submit" value={props.buttonText} />
         </form>
@@ -43,6 +41,14 @@ const selectRating = (update) => {
       </label>
       ))}
     </section>
+  )
+}
+
+const reviewDeatils = (review, update) => {
+  return(
+    <textarea className="review-textarea"
+      placeholder="Sample Review Body"
+      onChange={update("body")} value={review.body} />
   )
 }
 
