@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import SignUpComponent from './session/sign_up_component';
-import LoginComponent from './session/login_component';
+import SignUpComponent from './session/sign_up_constructor';
+import LoginComponent from './session/login_constructor';
 import NavComponent from './nav/nav_component';
 import BusinessShowContainer from './business/business_show_container';
 import SplashComponent from './splash/splash_component';

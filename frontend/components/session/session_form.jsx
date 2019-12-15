@@ -15,7 +15,6 @@ class SessionForm extends React.Component {
 
   handleSubmit(e) {
     this.props.action(this.state);
-
   }
 
   update(field) {

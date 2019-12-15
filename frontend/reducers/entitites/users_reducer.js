@@ -1,5 +1,6 @@
 import { RECEIVE_USER } from "../../actions/user_actions";
 import { RECEIVE_BUSINESS, RECEIVE_BUSINESSES } from '../../actions/business_actions';
+import { RECEIVE_REVIEW, RECEIVE_REVIEWS } from '../../actions/review_actions'
 
 const UsersReducer = ( state={}, action ) => {
   Object.freeze( state );
@@ -12,6 +13,15 @@ const UsersReducer = ( state={}, action ) => {
     case RECEIVE_BUSINESS:
       newState = action.users;
       return newState;
+
+    case RECEIVE_REVIEWS:
+      newState = action.users;
+      return newState;
+
+    case RECEIVE_REVIEW:
+      newState = action.user;
+      debugger
+      return Object.assign({}, state, newState);
 
     case RECEIVE_USER:
       newState = {[action.user.id]: action.user};

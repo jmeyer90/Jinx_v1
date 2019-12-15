@@ -163,44 +163,54 @@ var fetchBusiness = function fetchBusiness(businessId) {
 /*!********************************************!*\
   !*** ./frontend/actions/review_actions.js ***!
   \********************************************/
-/*! exports provided: RECEIVE_REVIEWS, RECEIVE_REVIEW, REMOVE_REVIEW, REVIEW_ERRORS, fetchReviews, fetchReview, updateReview, createReview, deleteReview */
+/*! exports provided: REMOVE_REVIEW, REVIEW_ERRORS, RECEIVE_REVIEW, RECEIVE_REVIEWS, fetchReviews, fetchReview, updateReview, createReview, deleteReview */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_REVIEWS", function() { return RECEIVE_REVIEWS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_REVIEW", function() { return RECEIVE_REVIEW; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_REVIEW", function() { return REMOVE_REVIEW; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REVIEW_ERRORS", function() { return REVIEW_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_REVIEW", function() { return RECEIVE_REVIEW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_REVIEWS", function() { return RECEIVE_REVIEWS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchReviews", function() { return fetchReviews; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchReview", function() { return fetchReview; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateReview", function() { return updateReview; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createReview", function() { return createReview; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteReview", function() { return deleteReview; });
 /* harmony import */ var _util_review_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/review_util */ "./frontend/util/review_util.js");
+/* harmony import */ var _util_action_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/action utils */ "./frontend/util/action utils.js");
 
-var RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
-var RECEIVE_REVIEW = "RECEIVE_REVIEW";
+
 var REMOVE_REVIEW = "REMOVE_REVIEW";
 var REVIEW_ERRORS = "REVIEW_ERRORS";
+var RECEIVE_REVIEW = "RECEIVE_REVIEW";
+var RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
 
-var receiveReviews = function receiveReviews(reviews) {
+var receiveReviews = function receiveReviews(reviewsInfo) {
+  var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(reviewsInfo, "reviews");
+  var users = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(reviewsInfo, "users");
   return {
     type: RECEIVE_REVIEWS,
-    reviews: reviews
+    reviews: reviews,
+    users: users
   };
 };
 
-var receiveReview = function receiveReview(review) {
+var receiveReview = function receiveReview(reviewInfo) {
+  var review = reviewInfo.review;
+  var user = reviewInfo.user;
   return {
     type: RECEIVE_REVIEW,
-    review: review
+    review: review,
+    user: user
   };
 };
 
 var removeReview = function removeReview(reviewId) {
+  debugger;
   return {
-    type: REMOVE_REVIEW
+    type: REMOVE_REVIEW,
+    reviewId: reviewId
   };
 };
 
@@ -229,18 +239,20 @@ var fetchReview = function fetchReview(reviewId) {
     });
   };
 };
-var updateReview = function updateReview(review) {
+var updateReview = function updateReview(businessId, review) {
   return function (dispatch) {
-    return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["updateReview"](review).then(function (review) {
+    return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["updateReview"](businessId, review).then(function (review) {
       return dispatch(receiveReview(review));
     }, function (errors) {
       return dispatch(reviewErrors(errors.responseJSON));
     });
   };
 };
-var createReview = function createReview(review) {
+var createReview = function createReview(businessId, review) {
   return function (dispatch) {
-    return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["createReview"](review).then(function (review) {
+    review.business_id = businessId;
+    debugger;
+    return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["createReview"](businessId, review).then(function (review) {
       return dispatch(receiveReview(review));
     }, function (errors) {
       return dispatch(reviewErrors(errors.responseJSON));
@@ -249,6 +261,7 @@ var createReview = function createReview(review) {
 };
 var deleteReview = function deleteReview(reviewId) {
   return function (dispatch) {
+    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["deleteReview"](reviewId).then(function (reviewId) {
       return dispatch(removeReview(reviewId));
     }, function (errors) {
@@ -387,8 +400,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _session_sign_up_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session/sign_up_component */ "./frontend/components/session/sign_up_component.js");
-/* harmony import */ var _session_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./session/login_component */ "./frontend/components/session/login_component.js");
+/* harmony import */ var _session_sign_up_constructor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session/sign_up_constructor */ "./frontend/components/session/sign_up_constructor.js");
+/* harmony import */ var _session_login_constructor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./session/login_constructor */ "./frontend/components/session/login_constructor.js");
 /* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./nav/nav_component */ "./frontend/components/nav/nav_component.js");
 /* harmony import */ var _business_business_show_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./business/business_show_container */ "./frontend/components/business/business_show_container.js");
 /* harmony import */ var _splash_splash_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./splash/splash_component */ "./frontend/components/splash/splash_component.jsx");
@@ -415,10 +428,10 @@ var App = function App() {
     component: _business_business_show_container__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
     path: "/signup",
-    component: _session_sign_up_component__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _session_sign_up_constructor__WEBPACK_IMPORTED_MODULE_2__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
     path: "/login",
-    component: _session_login_component__WEBPACK_IMPORTED_MODULE_3__["default"]
+    component: _session_login_constructor__WEBPACK_IMPORTED_MODULE_3__["default"]
   }));
 };
 
@@ -437,7 +450,7 @@ var App = function App() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reviews/business_reviews */ "./frontend/components/reviews/business_reviews.jsx");
+/* harmony import */ var _reviews_business_review_constructor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reviews/business_review_constructor */ "./frontend/components/reviews/business_review_constructor.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -499,7 +512,6 @@ function (_React$Component) {
   }, {
     key: "bizRating",
     value: function bizRating() {
-      debugger;
       var ratings = Object.values(this.props.reviews).map(function (review) {
         return review.rating;
       });
@@ -515,28 +527,25 @@ function (_React$Component) {
     value: function bizAttrs() {
       var categories = {};
       var attr_items = this.props.business.attribute_items || [];
-      debugger;
 
       for (var i = 0; i < attr_items.length; i++) {
         var category = attr_items[i].attr_type;
-        debugger;
         categories[category] = categories[category] || [];
         categories[category].push(attr_items[i].name);
-        debugger;
       }
-
-      debugger;
 
       if (attr_items) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "attribute-list"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business Attribute List:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(categories).map(function (category) {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business Attribute List:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(categories).map(function (category, idx1) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: idx1,
             className: "attribute-categories-container"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
             className: "attribute-categories"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Category: ", category), categories[category].map(function (attr) {
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Category: ", category), categories[category].map(function (attr, idx2) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+              key: idx2,
               className: "attr-name"
             }, attr);
           })));
@@ -553,10 +562,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "business-show"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business name: ", this.props.business.name), this.bizImage(), this.bizRatingImages(), this.bizRating(), this.bizAttrs(), this.bizHoursofOp(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_reviews__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business name: ", this.props.business.name), this.bizImage(), this.bizRatingImages(), this.bizRating(), this.bizAttrs(), this.bizHoursofOp(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_review_constructor__WEBPACK_IMPORTED_MODULE_1__["default"], null));
     }
   }]);
 
@@ -790,14 +798,305 @@ var mdp = function mdp(dispacth) {
 
 /***/ }),
 
+/***/ "./frontend/components/reviews/_review_form.jsx":
+/*!******************************************************!*\
+  !*** ./frontend/components/reviews/_review_form.jsx ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var ReviewForm = function ReviewForm(props) {
+  if (props.business && props.currentUserId) {
+    debugger;
+    var review = props.review || {
+      body: "",
+      rating: ""
+    };
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "review-form-container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, props.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      className: "review-form",
+      onSubmit: function onSubmit(e) {
+        return props.handleSubmit(e, props.action);
+      }
+    }, selectRating(props.update), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      className: "review-textarea",
+      placeholder: "Sample Review Body",
+      onChange: props.update("body"),
+      name: review.body
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "submit",
+      value: props.buttonText
+    })));
+  } else {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+  }
+};
+
+var selectRating = function selectRating(update) {
+  var ratings = [];
+
+  for (var i = 1; i <= 5; i++) {
+    ratings.push(i);
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "ratings-selection"
+  }, ratings.map(function (rating) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      className: "rating-option",
+      type: "radio",
+      value: rating,
+      onClick: update("rating")
+    });
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ReviewForm);
+
+/***/ }),
+
+/***/ "./frontend/components/reviews/business_review_constructor.js":
+/*!********************************************************************!*\
+  !*** ./frontend/components/reviews/business_review_constructor.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/review_actions */ "./frontend/actions/review_actions.js");
+/* harmony import */ var _business_reviews__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./business_reviews */ "./frontend/components/reviews/business_reviews.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+
+
+var msp = function msp(state) {
+  var business = Object.values(state.entities.businesses)[0];
+  return {
+    business: business,
+    reviews: state.entities.reviews || {},
+    users: state.entities.users || {},
+    currentUserId: state.session.currentUserId
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    createReview: function createReview(businessId, review) {
+      return dispatch(Object(_actions_review_actions__WEBPACK_IMPORTED_MODULE_1__["createReview"])(businessId, review));
+    },
+    updateReview: function updateReview(businessId, review) {
+      return dispatch(Object(_actions_review_actions__WEBPACK_IMPORTED_MODULE_1__["updateReview"])(businessId, review));
+    },
+    deleteReview: function deleteReview(reviewId) {
+      return dispatch(Object(_actions_review_actions__WEBPACK_IMPORTED_MODULE_1__["deleteReview"])(reviewId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_business_reviews__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/components/reviews/business_reviews.jsx":
 /*!**********************************************************!*\
   !*** ./frontend/components/reviews/business_reviews.jsx ***!
   \**********************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/frontend/components/reviews/business_reviews.jsx: Support for the experimental syntax 'classProperties' isn't currently enabled (16:15):\n\n\u001b[0m \u001b[90m 14 | \u001b[39m  }\u001b[0m\n\u001b[0m \u001b[90m 15 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 16 | \u001b[39m  reviewItems \u001b[33m=\u001b[39m (user\u001b[33m,\u001b[39m review) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 17 | \u001b[39m    \u001b[36mreturn\u001b[39m (\u001b[0m\n\u001b[0m \u001b[90m 18 | \u001b[39m      \u001b[33m<\u001b[39m\u001b[33mli\u001b[39m key\u001b[33m=\u001b[39m{review\u001b[33m.\u001b[39mid} className\u001b[33m=\u001b[39m\u001b[32m\"business-review-item\"\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 19 | \u001b[39m        \u001b[33m<\u001b[39m\u001b[33mh2\u001b[39m\u001b[33m>\u001b[39m{user\u001b[33m.\u001b[39mf_name}\u001b[32m's Review: </h2>\u001b[39m\u001b[0m\n\nAdd @babel/plugin-proposal-class-properties (https://git.io/vb4SL) to the 'plugins' section of your Babel config to enable transformation.\n    at Object.raise (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:6975:17)\n    at Object.expectPlugin (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:8373:18)\n    at Object.parseClassProperty (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11663:12)\n    at Object.pushClassProperty (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11628:30)\n    at Object.parseClassMemberWithIsStatic (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11561:14)\n    at Object.parseClassMember (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11498:10)\n    at withTopicForbiddingContext (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11453:14)\n    at Object.withTopicForbiddingContext (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:10531:14)\n    at Object.parseClassBody (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11430:10)\n    at Object.parseClass (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11404:22)\n    at Object.parseStatementContent (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:10698:21)\n    at Object.parseStatement (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:10656:17)\n    at Object.parseBlockOrModuleBlockBody (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11232:25)\n    at Object.parseBlockBody (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:11219:10)\n    at Object.parseTopLevel (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:10587:10)\n    at Object.parse (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:12097:10)\n    at parse (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/parser/lib/index.js:12148:38)\n    at parser (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/core/lib/transformation/normalize-file.js:168:34)\n    at normalizeFile (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/core/lib/transformation/normalize-file.js:102:11)\n    at runSync (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/core/lib/transformation/index.js:44:43)\n    at runAsync (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/core/lib/transformation/index.js:35:14)\n    at process.nextTick (/home/justin/Desktop/App Academy Exercises/Fullstack/Jinx/node_modules/@babel/core/lib/transform.js:34:34)\n    at process._tickCallback (internal/process/next_tick.js:61:11)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _review_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_review_form */ "./frontend/components/reviews/_review_form.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var BusinessReviews =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(BusinessReviews, _React$Component);
+
+  function BusinessReviews(props) {
+    var _this;
+
+    _classCallCheck(this, BusinessReviews);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(BusinessReviews).call(this, props));
+    _this.state = {
+      body: "",
+      rating: "",
+      reviewsDisp: _this.reviewsDisp()
+    };
+    _this.reviewItems = _this.reviewItems.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.reviewActions = _this.reviewActions.bind(_assertThisInitialized(_this));
+    _this.reviewForm = _this.reviewForm.bind(_assertThisInitialized(_this));
+    _this.updateField = _this.updateField.bind(_assertThisInitialized(_this));
+    _this.reviewsDisp = _this.reviewsDisp.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(BusinessReviews, [{
+    key: "reviewsDisp",
+    value: function reviewsDisp() {
+      if (this.props.reivews) {
+        var reviewsArr = Object.values(this.props.reivews);
+        var reviewsDisp = {};
+        reviewsArr.forEach(function (review) {
+          reviewsDisp[review.id] = false;
+        });
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }
+    }
+  }, {
+    key: "reviewItems",
+    value: function reviewItems(user, review) {
+      debugger;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        key: review.id,
+        className: "business-review-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, user.f_name, "'s Review: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Review Body: ", review.body), user.f_name, "'s Rating: ", review.rating, this.reviewActions(review));
+    }
+  }, {
+    key: "reviewActions",
+    value: function reviewActions(review) {
+      var _this2 = this;
+
+      if (review.user_id === this.props.currentUserId) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+          className: "review-actions"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "review-actions-button",
+          onClick: function onClick() {
+            return _this2.props.deleteReview(review.id);
+          }
+        }, "Delete Review"), this.displayUpdateForm(review));
+      }
+    }
+  }, {
+    key: "displayUpdateForm",
+    value: function displayUpdateForm(review) {
+      var _this3 = this;
+
+      debugger;
+
+      if (this.state.reviewsDisp[review.id]) {
+        var title = "Update Review";
+        var buttonText = "Update Review";
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+          className: "update-review"
+        }, this.reviewForm(this.props.updateReview, title, buttonText, review), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "review-actions-button",
+          onClick: function onClick() {
+            return _this3.setState({
+              reviewsDisp: _defineProperty({}, review.id, false)
+            });
+          }
+        }, "Hide"));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "review-actions-button",
+          onClick: function onClick() {
+            return _this3.setState({
+              reviewsDisp: _defineProperty({}, review.id, true)
+            });
+          }
+        }, "Update Review");
+      }
+    }
+  }, {
+    key: "reviewForm",
+    value: function reviewForm(action, title, buttonText, review) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        business: this.props.business,
+        action: action,
+        currentUserId: this.props.currentUserId,
+        update: this.updateField,
+        handleSubmit: this.handleSubmit,
+        title: title,
+        buttonText: buttonText,
+        review: review
+      });
+    }
+  }, {
+    key: "updateField",
+    value: function updateField(field) {
+      var _this4 = this;
+
+      return function (e) {
+        _this4.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e, action) {
+      var review = {
+        business_id: this.props.business_id,
+        body: this.state.body,
+        rating: this.state.rating
+      };
+      action(this.props.business.id, review);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this5 = this;
+
+      if (this.props.business) {
+        var title = "Create a New Review";
+        var buttonText = "Post Review";
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+          className: "business-reviews"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name, " Reviews:"), this.reviewForm(this.props.createReview, title, buttonText), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+          className: "business-review-list"
+        }, Object.keys(this.props.reviews).map(function (reviewId) {
+          var review = _this5.props.reviews[reviewId];
+          var user = _this5.props.users[review.user_id];
+          return _this5.reviewItems(user, review);
+        })));
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }
+    }
+  }]);
+
+  return BusinessReviews;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (BusinessReviews);
 
 /***/ }),
 
@@ -833,10 +1132,10 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
-/***/ "./frontend/components/session/login_component.js":
-/*!********************************************************!*\
-  !*** ./frontend/components/session/login_component.js ***!
-  \********************************************************/
+/***/ "./frontend/components/session/login_constructor.js":
+/*!**********************************************************!*\
+  !*** ./frontend/components/session/login_constructor.js ***!
+  \**********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1099,10 +1398,10 @@ var SessionSignupField = function SessionSignupField(props) {
 
 /***/ }),
 
-/***/ "./frontend/components/session/sign_up_component.js":
-/*!**********************************************************!*\
-  !*** ./frontend/components/session/sign_up_component.js ***!
-  \**********************************************************/
+/***/ "./frontend/components/session/sign_up_constructor.js":
+/*!************************************************************!*\
+  !*** ./frontend/components/session/sign_up_constructor.js ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1407,8 +1706,6 @@ var EntitiesRedcuer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/review_actions */ "./frontend/actions/review_actions.js");
 /* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -1435,9 +1732,13 @@ var ReviewsReducer = function ReviewsReducer() {
       return newState;
 
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_REVIEW"]:
-      newState = _defineProperty({}, action.review.id, action.review);
+      debugger;
+      newState = action.review;
+      debugger;
+      return Object.assign({}, state, newState);
 
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_REVIEW"]:
+      debugger;
       newState = Object.assign({}, state);
       delete newState[action.reviewId];
       return newState;
@@ -1462,7 +1763,9 @@ var ReviewsReducer = function ReviewsReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
+/* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/review_actions */ "./frontend/actions/review_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1481,6 +1784,15 @@ var UsersReducer = function UsersReducer() {
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_BUSINESS"]:
       newState = action.users;
       return newState;
+
+    case _actions_review_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_REVIEWS"]:
+      newState = action.users;
+      return newState;
+
+    case _actions_review_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_REVIEW"]:
+      newState = action.user;
+      debugger;
+      return Object.assign({}, state, newState);
 
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
       newState = _defineProperty({}, action.user.id, action.user);
@@ -1577,6 +1889,7 @@ var ReviewReducer = function ReviewReducer() {
   switch (action.type) {
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__["REVIEW_ERRORS"]:
       var newState = action.errors;
+      debugger;
       return newState;
 
     default:
@@ -1847,14 +2160,18 @@ var createReview = function createReview(businessId, review) {
   return $.ajax({
     url: "/api/businesses/".concat(businessId, "/reviews"),
     method: "POST",
-    data: review
+    data: {
+      review: review
+    }
   });
 };
 var updateReview = function updateReview(businessId, review) {
   return $.ajax({
     url: "/api/businesses/".concat(businessId, "/reviews/").concat(review.id),
     method: "PATCH",
-    data: review
+    data: {
+      review: review
+    }
   });
 };
 var deleteReview = function deleteReview(reviewId) {

@@ -1,35 +1,42 @@
 import * as ReviewUtils from '../util/review_util';
+import { extractAsObj } from '../util/action utils';
 
-export const RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
-export const RECEIVE_REVIEW = "RECEIVE_REVIEW";
 export const REMOVE_REVIEW = "REMOVE_REVIEW";
 export const REVIEW_ERRORS = "REVIEW_ERRORS";
+export const RECEIVE_REVIEW = "RECEIVE_REVIEW";
+export const RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
 
-const receiveReviews = reviews => {
+const receiveReviews = reviewsInfo => {
+  const reviews = extractAsObj(reviewsInfo, "reviews");
+  const users = extractAsObj(reviewsInfo, "users");
   
   return {
     type: RECEIVE_REVIEWS,
-    reviews
+    reviews,
+    users
   }
 };
 
-const receiveReview = review => {
-  
+const receiveReview = reviewInfo => {
+  const review = reviewInfo.review;
+  const user = reviewInfo.user;
+
   return {
     type: RECEIVE_REVIEW,
-    review
+    review,
+    user
   }
 };
 
 const removeReview = reviewId => {
-  
+  debugger
   return {
     type: REMOVE_REVIEW,
+    reviewId
   }
 };
 
 const reviewErrors = (errors) => {
-  
   return {
     type: REVIEW_ERRORS,
     errors
@@ -56,10 +63,10 @@ export const fetchReview = reviewId => dispatch => {
   )
 }
 
-export const updateReview = review => dispatch =>{
-  
+export const updateReview = (businessId, review) => dispatch =>{
+
   return (
-    ReviewUtils.updateReview(review)
+    ReviewUtils.updateReview(businessId, review)
     .then(
       review => dispatch(receiveReview(review)),
       errors => dispatch(reviewErrors(errors.responseJSON))
@@ -67,10 +74,12 @@ export const updateReview = review => dispatch =>{
   )
 }
 
-export const createReview = review => dispatch => {
-  
+export const createReview = (businessId, review )=> dispatch => {
+  review.business_id = businessId;
+
+  debugger
   return (
-    ReviewUtils.createReview(review)
+    ReviewUtils.createReview(businessId, review)
       .then(
         review => dispatch(receiveReview(review)),
         errors => dispatch(reviewErrors(errors.responseJSON))
@@ -79,7 +88,7 @@ export const createReview = review => dispatch => {
 }
 
 export const deleteReview = reviewId => dispatch => {
-  
+  debugger
   return (
     ReviewUtils.deleteReview(reviewId)
       .then(

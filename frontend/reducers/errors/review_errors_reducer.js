@@ -7,6 +7,7 @@ const ReviewReducer = (state = nullState, action) => {
   switch (action.type) {
     case REVIEW_ERRORS:
       let newState = action.errors;
+      debugger
       return newState;
     default:
       return nullState;

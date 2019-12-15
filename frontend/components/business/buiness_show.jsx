@@ -1,5 +1,5 @@
 import React from 'react';
-import BusinessReviews from '../reviews/business_reviews';
+import BusinessReviewConstructor from '../reviews/business_review_constructor';
 
 class BusinessShow extends React.Component{
   constructor(props){
@@ -32,7 +32,6 @@ class BusinessShow extends React.Component{
   }
 
   bizRating(){
-    debugger
     const ratings = Object.values(this.props.reviews).map( review => review.rating );
     let length = ratings.length;
     let sum = length > 0 ? ratings.reduce(( acc, el )=> acc + el ) : 0;
@@ -46,26 +45,24 @@ class BusinessShow extends React.Component{
   bizAttrs() {
     let categories = {};
     const attr_items = this.props.business.attribute_items || [];
-    debugger
+
     for (let i=0; i< attr_items.length; i++){
       let category = attr_items[i].attr_type;
-      debugger
       categories[category] = categories[category]  || [];
       categories[category].push(attr_items[i].name)
-      debugger
     }
-    debugger
+
     if( attr_items){
       return (
         <section className="attribute-list">
           <h2>Business Attribute List:</h2>
           <ul>
-            {Object.keys(categories).map( category =>(
-              <li className="attribute-categories-container">
+            {Object.keys(categories).map(( category, idx1 )=>(
+              <li key={idx1} className="attribute-categories-container">
                 <ul className="attribute-categories">
                   <h2>Category: {category}</h2>
-                  {categories[category].map(attr=>(
-                    <li className="attr-name">
+                  {categories[category].map(( attr,idx2 )=>(
+                    <li key={idx2} className="attr-name">
                       {attr}
                     </li>
                   ))}
@@ -87,7 +84,6 @@ class BusinessShow extends React.Component{
   }
 
   render(){
-    debugger
     return(
       <div className="business-show">
         <h1>Business Show Page</h1>
@@ -97,7 +93,7 @@ class BusinessShow extends React.Component{
         {this.bizRating()}
         {this.bizAttrs()}
         {this.bizHoursofOp()}
-        <BusinessReviews />
+        <BusinessReviewConstructor />
       </div>
     )
   }

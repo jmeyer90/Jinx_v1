@@ -1,22 +1,22 @@
 import { connect } from 'react-redux';
 import { createReview, updateReview, deleteReview } from '../../actions/review_actions';
 import BusinessReviews from './business_reviews';
+import { withRouter } from 'react-router-dom'
 
-const msp = state => {
-  const business = state.entities.businesses[ownProps.match.params.businessId] || {};
+const msp = (state) => {
+  const business = Object.values( state.entities.businesses )[0];
 
   return({
     business: business,
     reviews: state.entities.reviews || {},
     users: state.entities.users || {},
-    currentUserId: state.session.currentUserId,
-    businessId: ownProps.match.params.businessId
+    currentUserId: state.session.currentUserId
   })
 }
 
 const mdp = dispatch =>({
-  createReview: review => dispatch( createReview( review )),
-  updateReview: review => dispatch( updateReview ( review )),
+  createReview: (businessId, review) => dispatch(createReview(businessId, review )),
+  updateReview: (businessId, review) => dispatch(updateReview(businessId, review )),
   deleteReview: reviewId => dispatch( deleteReview( reviewId ))
 })
 
