@@ -241,6 +241,7 @@ var fetchReview = function fetchReview(reviewId) {
 };
 var updateReview = function updateReview(businessId, review) {
   return function (dispatch) {
+    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["updateReview"](businessId, review).then(function (review) {
       return dispatch(receiveReview(review));
     }, function (errors) {
@@ -813,11 +814,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var ReviewForm = function ReviewForm(props) {
   if (props.business && props.currentUserId) {
-    debugger;
     var review = props.review || {
       body: "",
-      rating: ""
+      rating: "",
+      id: null
     };
+    debugger;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: "review-form-container"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, props.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -829,7 +831,7 @@ var ReviewForm = function ReviewForm(props) {
       className: "review-textarea",
       placeholder: "Sample Review Body",
       onChange: props.update("body"),
-      name: review.body
+      value: review.body
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "submit",
       value: props.buttonText
@@ -852,6 +854,7 @@ var selectRating = function selectRating(update) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       className: "rating-option",
       type: "radio",
+      name: "rating",
       value: rating,
       onClick: update("rating")
     });
@@ -955,6 +958,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(BusinessReviews).call(this, props));
     _this.state = {
+      id: "",
       body: "",
       rating: "",
       reviewsDisp: _this.reviewsDisp()
@@ -984,7 +988,6 @@ function (_React$Component) {
   }, {
     key: "reviewItems",
     value: function reviewItems(user, review) {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         key: review.id,
         className: "business-review-item"
@@ -1011,17 +1014,18 @@ function (_React$Component) {
     value: function displayUpdateForm(review) {
       var _this3 = this;
 
-      debugger;
-
       if (this.state.reviewsDisp[review.id]) {
         var title = "Update Review";
         var buttonText = "Update Review";
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "update-review"
-        }, this.reviewForm(this.props.updateReview, title, buttonText, review), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, this.reviewForm(this.props.updateReview, title, buttonText), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "review-actions-button",
           onClick: function onClick() {
             return _this3.setState({
+              id: "",
+              body: "",
+              rating: "",
               reviewsDisp: _defineProperty({}, review.id, false)
             });
           }
@@ -1031,6 +1035,9 @@ function (_React$Component) {
           className: "review-actions-button",
           onClick: function onClick() {
             return _this3.setState({
+              id: review.id,
+              body: review.body,
+              rating: review.rating,
               reviewsDisp: _defineProperty({}, review.id, true)
             });
           }
@@ -1039,7 +1046,13 @@ function (_React$Component) {
     }
   }, {
     key: "reviewForm",
-    value: function reviewForm(action, title, buttonText, review) {
+    value: function reviewForm(action, title, buttonText) {
+      debugger;
+      var review = {
+        business_id: this.props.business_id,
+        body: this.state.body,
+        rating: this.state.rating
+      };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
         business: this.props.business,
         action: action,
@@ -1056,18 +1069,31 @@ function (_React$Component) {
     value: function updateField(field) {
       var _this4 = this;
 
+      debugger;
       return function (e) {
+        debugger;
+
         _this4.setState(_defineProperty({}, field, e.currentTarget.value));
+
+        debugger;
       };
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e, action) {
       var review = {
-        business_id: this.props.business_id,
+        business_id: this.props.business.id,
         body: this.state.body,
-        rating: this.state.rating
+        rating: this.state.rating,
+        id: this.state.id
       };
+      this.setState({
+        id: "",
+        body: "",
+        rating: "",
+        reviewsDisp: _defineProperty({}, review.id, false)
+      });
+      debugger;
       action(this.props.business.id, review);
     }
   }, {
@@ -1080,7 +1106,7 @@ function (_React$Component) {
         var buttonText = "Post Review";
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "business-reviews"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name, " Reviews:"), this.reviewForm(this.props.createReview, title, buttonText), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name, " Reviews:"), this.reviewForm(this.props.createReview, title, buttonText, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           className: "business-review-list"
         }, Object.keys(this.props.reviews).map(function (reviewId) {
           var review = _this5.props.reviews[reviewId];
@@ -2166,6 +2192,7 @@ var createReview = function createReview(businessId, review) {
   });
 };
 var updateReview = function updateReview(businessId, review) {
+  debugger;
   return $.ajax({
     url: "/api/businesses/".concat(businessId, "/reviews/").concat(review.id),
     method: "PATCH",

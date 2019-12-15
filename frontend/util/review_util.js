@@ -23,13 +23,16 @@ export const createReview = (businessId, review) => (
   })
 )
 
-export const updateReview = (businessId, review)  => (
-  $.ajax({
-    url: `/api/businesses/${businessId}/reviews/${review.id}`,
-    method: "PATCH",
-    data: { review }
-  })
-)
+export const updateReview = (businessId, review)  => {
+  debugger
+  return(
+    $.ajax({
+      url: `/api/businesses/${businessId}/reviews/${review.id}`,
+      method: "PATCH",
+      data: { review }
+    })
+  )
+}
 
 export const deleteReview = (reviewId) =>(
   $.ajax({

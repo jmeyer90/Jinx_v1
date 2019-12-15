@@ -36,7 +36,6 @@ class Api::ReviewsController < ApplicationController
     @review = current_user.reviews.find(params[:id])
     @user = current_user
 
-    debugger
     if @review.update_attributes(review_params)
       render :update
     else

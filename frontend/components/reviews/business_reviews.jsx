@@ -4,7 +4,7 @@ import ReviewForm from './_review_form';
 class BusinessReviews extends React.Component{
   constructor(props){
     super(props);
-    this.state = { body: "", rating: "", reviewsDisp: this.reviewsDisp()};
+    this.state = { id:"", body: "", rating: "", reviewsDisp: this.reviewsDisp()};
     this.reviewItems = this.reviewItems.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.reviewActions = this.reviewActions.bind(this);
@@ -26,7 +26,6 @@ class BusinessReviews extends React.Component{
   }
 
   reviewItems(user, review){
-    debugger
     return (
       <li key={review.id} className="business-review-item">
         <h2>{user.f_name}'s Review: </h2>
@@ -49,31 +48,36 @@ class BusinessReviews extends React.Component{
   }
 
   displayUpdateForm(review){
-    debugger
     if(this.state.reviewsDisp[review.id]){
       const title = "Update Review";
       const buttonText = "Update Review";
       return(
         <section className="update-review">
-        {this.reviewForm(this.props.updateReview, title, buttonText, review)}
+        {this.reviewForm(this.props.updateReview, title, buttonText)}
         < button className = "review-actions-button" 
-          onClick = {() => this.setState({ reviewsDisp: { [review.id]: false } })}>
+            onClick={() => this.setState({ id: "", body: "", rating: "", reviewsDisp: { [review.id]: false } })}>
             Hide
         </button >
         </section>
       )
     } else {
       return(
-
         <button className="review-actions-button" 
-          onClick={() => this.setState({ reviewsDisp: { [review.id]: true } })}>
+          onClick={() => this.setState({ id: review.id, body: review.body, rating: review.rating, 
+            reviewsDisp: { [review.id]: true } })}>
             Update Review
         </button>
       )
     }
   }
 
-  reviewForm(action, title, buttonText, review){
+  reviewForm(action, title, buttonText){
+    debugger
+    const review = {
+      business_id: this.props.business_id,
+      body: this.state.body,
+      rating: this.state.rating
+    }
     return(
       <ReviewForm business={this.props.business} 
         action={action} currentUserId={this.props.currentUserId}
@@ -83,17 +87,23 @@ class BusinessReviews extends React.Component{
   }
 
   updateField(field){
+    debugger
     return(e)=>{
+      debugger
       this.setState({[field]: e.currentTarget.value})
+      debugger
     }
   }
 
   handleSubmit(e, action){
     const review = {
-      business_id: this.props.business_id,
+      business_id: this.props.business.id,
       body: this.state.body,
-      rating: this.state.rating
+      rating: this.state.rating, 
+      id: this.state.id
     }
+    this.setState({ id: "", body: "", rating: "", reviewsDisp: { [review.id]: false } })
+    debugger
     action(this.props.business.id, review)
   }
 
@@ -105,7 +115,7 @@ class BusinessReviews extends React.Component{
         <section className="business-reviews" >
        
           <h2>{this.props.business.name} Reviews:</h2>
-          {this.reviewForm(this.props.createReview, title, buttonText)}
+          {this.reviewForm(this.props.createReview, title, buttonText, null)}
 
           <ul className="business-review-list" >
             { Object.keys(this.props.reviews).map( reviewId => {

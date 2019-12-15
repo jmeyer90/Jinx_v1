@@ -2,21 +2,22 @@ import React from 'react';
 
 const ReviewForm= props =>{
   if (props.business && props.currentUserId) {
-    debugger
     const review = props.review || {
       body: "",
-      rating: ""
-    }
+      rating: "",
+      id: null
+    };
+    debugger
+
     return (
       <section className="review-form-container">
         <h2>{props.title}</h2>
         <form className="review-form" onSubmit={(e)=>props.handleSubmit(e, props.action)}>
-
           {selectRating(props.update)}
 
           <textarea className="review-textarea"
             placeholder="Sample Review Body"
-            onChange={props.update("body")} name={review.body}/>
+            onChange={props.update("body")} value={review.body}/>
 
           <input type="submit" value={props.buttonText} />
         </form>
@@ -36,7 +37,7 @@ const selectRating = (update) => {
   return (
     <section className="ratings-selection">
       {ratings.map(rating => (
-        <input className="rating-option" type="radio" value={rating}
+        <input className="rating-option" type="radio" name="rating" value={rating}
           onClick={update("rating")} />
       ))}
     </section>
