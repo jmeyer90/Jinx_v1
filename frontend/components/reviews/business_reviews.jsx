@@ -1,5 +1,6 @@
 import React from 'react';
-import ReviewForm from './_review_form';
+import ReviewForm from './_review_form'
+import ReviewItemActions from './review_item_actions'
 
 class BusinessReviews extends React.Component{
   constructor(props){
@@ -7,10 +8,9 @@ class BusinessReviews extends React.Component{
     this.state = { id:"", body: "", rating: "", reviewsDisp: this.reviewsDisp()};
     this.reviewItems = this.reviewItems.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.reviewActions = this.reviewActions.bind(this);
-    this.reviewForm = this.reviewForm.bind(this);
     this.updateField = this.updateField.bind(this);
     this.reviewsDisp = this.reviewsDisp.bind(this);
+    this.setReviewState = this.setReviewState.bind(this);
   }
 
   reviewsDisp(){
@@ -31,63 +31,20 @@ class BusinessReviews extends React.Component{
         <h2>{user.f_name}'s Review: </h2>
         <p>Review Body: {review.body}</p>
         {user.f_name}'s Rating: {review.rating}
-        {this.reviewActions(review)}
+        <ReviewItemActions review={review} currentUserId={this.props.currentUserId} 
+          business={this.props.business} handleSubmit={this.handleSubmit} 
+          updateField={this.updateField} deleteReview={this.props.deleteReview} 
+          updateReview={this.props.updateReview} reviewState={this.state} 
+          setReviewState={this.setReviewState}/>
       </li>
     )
   };
 
-  reviewActions(review){
-    if( review.user_id === this.props.currentUserId ){
-      return(
-        <section className="review-actions">
-          <button className="review-actions-button" onClick={() =>this.props.deleteReview(review.id)}>Delete Review</button>
-          {this.displayUpdateForm(review)}
-        </section>
-      )
-    }
-  }
-
-  displayUpdateForm(review){
-    if(this.state.reviewsDisp[review.id]){
-      const title = "Update Review"; 
-      const buttonText = "Update Review";
-      return(
-        <section className="update-review">
-        {this.reviewForm(this.props.updateReview, title, buttonText)}
-        < button className = "review-actions-button" 
-            onClick={() => this.setState({ id: "", body: "", rating: "", reviewsDisp: { [review.id]: false } })}>
-            Hide
-        </button >
-        </section>
-      )
-    } else {
-      return(
-        <button className="review-actions-button" 
-          onClick={() => this.setState({ id: review.id, body: review.body, rating: review.rating, 
-            reviewsDisp: { [review.id]: true } })}>
-            Update Review
-        </button>
-      )
-    }
-  }
-
-  reviewForm(action, title, buttonText){
-    const review = {
-      business_id: this.props.business_id,
-      body: this.state.body,
-      rating: this.state.rating
-    }
-    debugger
-    return(
-      <ReviewForm business={this.props.business} 
-        action={action} currentUserId={this.props.currentUserId}
-        update={this.updateField} handleSubmit ={this.handleSubmit}
-        title={title} buttonText={buttonText} review={review}/>
-    )
+  setReviewState(review){
+    this.setState(review);
   }
 
   updateField(field){
-    debugger
     return(e)=>{
       this.setState({[field]: e.currentTarget.value})
       debugger
@@ -110,11 +67,19 @@ class BusinessReviews extends React.Component{
     if (this.props.business) {
       const title = "Create a New Review";
       const buttonText = "Post Review";
+      const review={
+        body: this.state.body,
+        rating: this.state.rating
+      }
+
       return (
         <section className="business-reviews" >
        
           <h2>{this.props.business.name} Reviews:</h2>
-          {this.reviewForm(this.props.createReview, title, buttonText, null)}
+          <ReviewForm business={this.props.business} action={this.props.createReview}
+            currentUserId={this.props.currentUserId} update={this.updateField}
+            handleSubmit={this.handleSubmit} title={title} 
+            buttonText={buttonText} review={review}/>
 
           <ul className="business-review-list" >
             { Object.keys(this.props.reviews).map( reviewId => {

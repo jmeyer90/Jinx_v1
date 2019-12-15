@@ -13,7 +13,7 @@ const ReviewForm= props =>{
       <section className="review-form-container">
         <h2>{props.title}</h2>
         <form className="review-form" onSubmit={(e)=>props.handleSubmit(e, props.action)}>
-          {selectRating(props.update, review.rating)}
+          {selectRating(props.update)}
 
           <textarea className="review-textarea"
             placeholder="Sample Review Body"
@@ -28,13 +28,12 @@ const ReviewForm= props =>{
   }
 };
 
-const selectRating = (update, reviewRating) => {
+const selectRating = (update) => {
   const ratings = [];
   for (let i = 1; i <= 5; i++) {
     ratings.push(i);
   }
 
-  debugger
   return (
     <section className="ratings-selection">
       {ratings.map(rating => (

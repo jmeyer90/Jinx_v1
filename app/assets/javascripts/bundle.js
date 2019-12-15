@@ -827,7 +827,7 @@ var ReviewForm = function ReviewForm(props) {
       onSubmit: function onSubmit(e) {
         return props.handleSubmit(e, props.action);
       }
-    }, selectRating(props.update, review.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+    }, selectRating(props.update), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
       className: "review-textarea",
       placeholder: "Sample Review Body",
       onChange: props.update("body"),
@@ -842,14 +842,13 @@ var ReviewForm = function ReviewForm(props) {
   }
 };
 
-var selectRating = function selectRating(update, reviewRating) {
+var selectRating = function selectRating(update) {
   var ratings = [];
 
   for (var i = 1; i <= 5; i++) {
     ratings.push(i);
   }
 
-  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "ratings-selection"
   }, ratings.map(function (rating) {
@@ -926,6 +925,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _review_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_review_form */ "./frontend/components/reviews/_review_form.jsx");
+/* harmony import */ var _review_item_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./review_item_actions */ "./frontend/components/reviews/review_item_actions.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -949,6 +949,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var BusinessReviews =
 /*#__PURE__*/
 function (_React$Component) {
@@ -968,10 +969,9 @@ function (_React$Component) {
     };
     _this.reviewItems = _this.reviewItems.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.reviewActions = _this.reviewActions.bind(_assertThisInitialized(_this));
-    _this.reviewForm = _this.reviewForm.bind(_assertThisInitialized(_this));
     _this.updateField = _this.updateField.bind(_assertThisInitialized(_this));
     _this.reviewsDisp = _this.reviewsDisp.bind(_assertThisInitialized(_this));
+    _this.setReviewState = _this.setReviewState.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -994,87 +994,30 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         key: review.id,
         className: "business-review-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, user.f_name, "'s Review: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Review Body: ", review.body), user.f_name, "'s Rating: ", review.rating, this.reviewActions(review));
-    }
-  }, {
-    key: "reviewActions",
-    value: function reviewActions(review) {
-      var _this2 = this;
-
-      if (review.user_id === this.props.currentUserId) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-          className: "review-actions"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "review-actions-button",
-          onClick: function onClick() {
-            return _this2.props.deleteReview(review.id);
-          }
-        }, "Delete Review"), this.displayUpdateForm(review));
-      }
-    }
-  }, {
-    key: "displayUpdateForm",
-    value: function displayUpdateForm(review) {
-      var _this3 = this;
-
-      if (this.state.reviewsDisp[review.id]) {
-        var title = "Update Review";
-        var buttonText = "Update Review";
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-          className: "update-review"
-        }, this.reviewForm(this.props.updateReview, title, buttonText), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "review-actions-button",
-          onClick: function onClick() {
-            return _this3.setState({
-              id: "",
-              body: "",
-              rating: "",
-              reviewsDisp: _defineProperty({}, review.id, false)
-            });
-          }
-        }, "Hide"));
-      } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "review-actions-button",
-          onClick: function onClick() {
-            return _this3.setState({
-              id: review.id,
-              body: review.body,
-              rating: review.rating,
-              reviewsDisp: _defineProperty({}, review.id, true)
-            });
-          }
-        }, "Update Review");
-      }
-    }
-  }, {
-    key: "reviewForm",
-    value: function reviewForm(action, title, buttonText) {
-      var review = {
-        business_id: this.props.business_id,
-        body: this.state.body,
-        rating: this.state.rating
-      };
-      debugger;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        business: this.props.business,
-        action: action,
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, user.f_name, "'s Review: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Review Body: ", review.body), user.f_name, "'s Rating: ", review.rating, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_item_actions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        review: review,
         currentUserId: this.props.currentUserId,
-        update: this.updateField,
+        business: this.props.business,
         handleSubmit: this.handleSubmit,
-        title: title,
-        buttonText: buttonText,
-        review: review
-      });
+        updateField: this.updateField,
+        deleteReview: this.props.deleteReview,
+        updateReview: this.props.updateReview,
+        reviewState: this.state,
+        setReviewState: this.setReviewState
+      }));
+    }
+  }, {
+    key: "setReviewState",
+    value: function setReviewState(review) {
+      this.setState(review);
     }
   }, {
     key: "updateField",
     value: function updateField(field) {
-      var _this4 = this;
+      var _this2 = this;
 
-      debugger;
       return function (e) {
-        _this4.setState(_defineProperty({}, field, e.currentTarget.value));
+        _this2.setState(_defineProperty({}, field, e.currentTarget.value));
 
         debugger;
       };
@@ -1099,19 +1042,32 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this3 = this;
 
       if (this.props.business) {
         var title = "Create a New Review";
         var buttonText = "Post Review";
+        var review = {
+          body: this.state.body,
+          rating: this.state.rating
+        };
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "business-reviews"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name, " Reviews:"), this.reviewForm(this.props.createReview, title, buttonText, null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name, " Reviews:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          business: this.props.business,
+          action: this.props.createReview,
+          currentUserId: this.props.currentUserId,
+          update: this.updateField,
+          handleSubmit: this.handleSubmit,
+          title: title,
+          buttonText: buttonText,
+          review: review
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           className: "business-review-list"
         }, Object.keys(this.props.reviews).map(function (reviewId) {
-          var review = _this5.props.reviews[reviewId];
-          var user = _this5.props.users[review.user_id];
-          return _this5.reviewItems(user, review);
+          var review = _this3.props.reviews[reviewId];
+          var user = _this3.props.users[review.user_id];
+          return _this3.reviewItems(user, review);
         })));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
@@ -1123,6 +1079,105 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (BusinessReviews);
+
+/***/ }),
+
+/***/ "./frontend/components/reviews/review_item_actions.jsx":
+/*!*************************************************************!*\
+  !*** ./frontend/components/reviews/review_item_actions.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _review_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./_review_form */ "./frontend/components/reviews/_review_form.jsx");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+ // props: 
+//   business:
+//   currentUserId:
+//   deleteReview: (reviewId)
+//   handleSubmit: (e, action)
+//   review: {id, body, rating, business_id, user_id}
+//   reviewState: {id, body, rating, reviewsDisp{}}
+//   setReviewState: ƒ(review)
+//   updateField: ƒ(field)
+//   updateReview: (review)
+
+var ReviewItemActions = function ReviewItemActions(props) {
+  if (props.review.user_id === props.currentUserId) {
+    props;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "review-actions"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "review-actions-button",
+      onClick: function onClick() {
+        return props.deleteReview(props.review.id);
+      }
+    }, "Delete Review"), displayUpdateForm(props));
+  } else {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+  }
+};
+
+var displayUpdateForm = function displayUpdateForm(props) {
+  if (props.reviewState.reviewsDisp[props.review.id]) {
+    var title = "Update Review";
+    var buttonText = "Update Review";
+    debugger;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "update-review"
+    }, reviewForm(title, buttonText, props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "review-actions-button",
+      onClick: function onClick() {
+        return props.setReviewState({
+          id: "",
+          body: "",
+          rating: "",
+          reviewsDisp: _defineProperty({}, props.review.id, false)
+        });
+      }
+    }, "Hide"));
+  } else {
+    debugger;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "review-actions-button",
+      onClick: function onClick() {
+        return props.setReviewState({
+          id: props.review.id,
+          body: props.review.body,
+          rating: props.review.rating,
+          reviewsDisp: _defineProperty({}, props.review.id, true)
+        });
+      }
+    }, "Update Review");
+  }
+};
+
+var reviewForm = function reviewForm(title, buttonText, props) {
+  var review = {
+    business_id: props.business.id,
+    body: props.reviewState.body,
+    rating: props.reviewState.rating
+  };
+  debugger;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    business: props.business,
+    action: props.updateReview,
+    currentUserId: props.currentUserId,
+    update: props.updateField,
+    handleSubmit: props.handleSubmit,
+    title: title,
+    buttonText: buttonText,
+    review: review
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ReviewItemActions);
 
 /***/ }),
 
