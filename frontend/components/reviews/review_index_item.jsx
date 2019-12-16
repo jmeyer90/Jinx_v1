@@ -19,7 +19,7 @@ const ReviewIndexItem = props =>{
     <li key={props.review.id} className="business-review-item">
         <section className="user-info">
           <span className="username">{props.user.f_name} {props.user.l_name}</span>
-          <figure className="profile-img">User</figure>
+          <figure key={props.user.id} className="profile-img">User</figure>
         </section>
         <span className="review-item-details"> 
         {/* conditionally render.update form here in place of this.Use reviewsDisp */}

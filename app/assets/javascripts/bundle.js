@@ -723,8 +723,9 @@ var ContactInfo = function ContactInfo() {
     className: "business-contact-info"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "business-contact-items"
-  }, contactInfo.map(function (contact) {
+  }, contactInfo.map(function (contact, idx) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: idx,
       className: "contact-detail-container"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
       className: "contact-info-category"
@@ -951,8 +952,11 @@ var selectRating = function selectRating(update, htmlClass) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: 'ratings-selection-'.concat(htmlClass)
-  }, ratings.map(function (rating) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, ratings.map(function (rating, idx) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      key: rating
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      key: rating,
       className: 'rating-option-'.concat(htmlClass),
       type: "radio",
       name: "rating",
@@ -1103,6 +1107,7 @@ function (_React$Component) {
     value: function reviewItems(user, review) {
       // send to review index items, pass everything we pass to ReviewIndexItem plus user
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        key: review.id,
         review: review,
         user: user,
         currentUserId: this.props.currentUserId,
@@ -1236,6 +1241,7 @@ var ReviewIndexItem = function ReviewIndexItem(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "username"
   }, props.user.f_name, " ", props.user.l_name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
+    key: props.user.id,
     className: "profile-img"
   }, "User")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "review-item-details"
@@ -2388,6 +2394,7 @@ var displayRating = function displayRating(rating) {
 
 var htmlRatingDispaly = function htmlRatingDispaly(lefthalf, righthalf, idx) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
+    key: idx,
     className: "star"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
     className: "left-half"

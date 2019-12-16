@@ -45,9 +45,9 @@ const selectRating = (update, htmlClass) => {
 
   return (
     <section className={'ratings-selection-'.concat(htmlClass)}>
-      {ratings.map(rating => (
-        <label>
-          <input className={'rating-option-'.concat(htmlClass)} type='radio' name='rating' value={rating}
+      {ratings.map((rating, idx )=> (
+        <label key={rating}>
+          <input key={rating} className={'rating-option-'.concat(htmlClass)} type='radio' name='rating' value={rating}
           onChange={update('rating')} required/>
           {/* onChnage={(e) => rating=e.currentTarget.value} */}
       </label>

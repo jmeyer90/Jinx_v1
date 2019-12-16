@@ -27,7 +27,7 @@ class BusinessReviews extends React.Component{
 
   reviewItems(user, review){ // send to review index items, pass everything we pass to ReviewIndexItem plus user
     return (
-        <ReviewIndexItem review={review} user={user} 
+        <ReviewIndexItem key={review.id} review={review} user={user} 
           currentUserId={this.props.currentUserId} business={this.props.business} 
           handleSubmit={this.handleSubmit} updateField={this.updateField} 
           deleteReview={this.props.deleteReview} updateReview={this.props.updateReview} 

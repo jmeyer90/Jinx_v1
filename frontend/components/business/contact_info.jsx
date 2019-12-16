@@ -11,8 +11,8 @@ const ContactInfo = () => {
     <span className="conact-info-container">
       <section className="business-contact-info">
         <ul className="business-contact-items">
-          {contactInfo.map(contact => (
-            <li className="contact-detail-container">
+          {contactInfo.map((contact, idx )=> (
+            <li key={idx} className="contact-detail-container">
               <h2 className="contact-info-category">
                 {Object.keys(contact)[0]}
               </h2>

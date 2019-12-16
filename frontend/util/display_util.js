@@ -19,7 +19,7 @@ export const displayRating = rating =>{
 
 const htmlRatingDispaly = ( lefthalf, righthalf, idx ) =>{
   return(
-    <figure className="star">
+    <figure key={idx} className="star">
       <figure className="left-half">
         <div className={filled(lefthalf)}>
           {idx}
