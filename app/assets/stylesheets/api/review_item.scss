@@ -1,0 +1,43 @@
+.business-review-list{
+  display: inline-block;
+  width: 640px;
+  height: 100%;
+}
+
+.business-review-item{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 15px 0 15px 0;
+  border-bottom: 1px solid lightgray;
+  padding: 0 0 15px 0;
+}
+
+.user-info{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 120px;
+}
+
+.username{
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.review-item-details{
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: 100%;
+}
+
+.user-rating-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.review-body{
+  margin: 10px 0;
+}

@@ -1,0 +1,25 @@
+.review-actions{
+  display: flex;
+  justify-content: flex-end;
+  width:100%;
+}
+
+.review-actions-button{
+  display: flex;
+  padding: 5px;
+  margin: 5px;
+  background-color: transparent;
+  color: #452487;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.review-actions-button:hover{
+  background-color: #c9f5f5;
+  transition-duration: 2s;
+}
+
+.update-review{
+
+}
+

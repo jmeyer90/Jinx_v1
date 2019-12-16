@@ -75,7 +75,7 @@ class SessionForm extends React.Component {
           { this.topGreeting() }
           <button className="submit" onClick={() => this.logDemoUser()}>Log In with Demo User</button>
           <h2 className="disclamer">{this.props.disclamer}</h2>
-          <hr />
+          <hr className="session-line"/>
           <form onSubmit={(e) => this.handleSubmit(e)}>
             <label>
               <input type="email" placeholder="Email" value={ email } onChange={ this.update("email") } required />

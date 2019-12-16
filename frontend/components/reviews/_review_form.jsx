@@ -3,21 +3,21 @@ import React from 'react';
 const ReviewForm= props =>{
   if (props.business && props.currentUserId) {
     const review = props.review || {
-      body: "",
-      rating: "",
+      body: '',
+      rating: '',
       id: null
     };
     debugger
 
     return (
-      <section className="review-form-container">
-        <h2>{props.title}</h2>
-        <form className="review-form" onSubmit={(e)=>props.handleSubmit(e, props.action)}>
-          {selectRating(props.update)}
+      <section className={'review-form-container-'.concat(props.htmlClass)}>
+        {profileImg(props.htmlClass)}
+        <form className={'review-form-'.concat(props.htmlClass)} onSubmit={(e)=>props.handleSubmit(e, props.action)}>
+          {selectRating(props.update, props.htmlClass)}
+          <hr className={'review-line-'.concat(props.htmlClass)}/>
+          {reviewDeatils(review, props.update, props.htmlClass)}
 
-          {reviewDeatils(review, props.update)}
-
-          <input type="submit" value={props.buttonText} />
+          <input className={'review-submit-'.concat(props.htmlClass)} type='submit' value={props.buttonText} />
         </form>
       </section>
     )
@@ -26,29 +26,39 @@ const ReviewForm= props =>{
   }
 };
 
-const selectRating = (update) => {
+const profileImg = htmlClass =>{
+  if(htmlClass === 'create'){
+    return(
+      <h2 className='profile-img'>User</h2>
+    )
+  } else {
+    return( <div></div> )
+  }
+}
+
+const selectRating = (update, htmlClass) => {
   const ratings = [];
   for (let i = 1; i <= 5; i++) {
     ratings.push(i);
   }
 
   return (
-    <section className="ratings-selection">
+    <section className={'ratings-selection-'.concat(htmlClass)}>
       {ratings.map(rating => (
-        <label>{rating}
-        <input className="rating-option" type="radio" name="rating" value={rating}
-          onChange={update("rating")} required/>
+        <label>
+          <input className={'rating-option-'.concat(htmlClass)} type='radio' name='rating' value={rating}
+          onChange={update('rating')} required/>
       </label>
       ))}
     </section>
   )
 }
 
-const reviewDeatils = (review, update) => {
+const reviewDeatils = (review, update, htmlClass) => {
   return(
-    <textarea className="review-textarea"
-      placeholder="Sample Review Body"
-      onChange={update("body")} value={review.body} />
+    <textarea className={'review-textarea-'.concat(htmlClass)}
+      placeholder='Sample Review Body'
+      onChange={update('body')} value={review.body} />
   )
 }
 

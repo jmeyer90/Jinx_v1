@@ -10,8 +10,10 @@ export const displayRating = rating =>{
   }
 
   return (
-    <section className="star-container"> 
-      {numStarHalves.map(starHalfIdx => htmlRatingDispaly( stars[ starHalfIdx*2 ], stars[ starHalfIdx*2 + 1], starHalfIdx ))}
+    <section className="star-container">
+      <span className="star-sub-container">
+        {numStarHalves.map(starHalfIdx => htmlRatingDispaly( stars[ starHalfIdx*2 ], stars[ starHalfIdx*2 + 1], starHalfIdx ))}
+      </span>
     </section> )
 }
 
@@ -20,12 +22,12 @@ const htmlRatingDispaly = ( lefthalf, righthalf, idx ) =>{
     <figure className="star">
       <figure className="left-half">
         <div className={filled(lefthalf)}>
-          left-half {idx} {filled(lefthalf)}
+          {idx}
         </div>
       </figure>
       <figure className="right-half">
         <div className={filled(righthalf)}>
-          right-half {idx} {filled(righthalf)}
+          {idx}
         </div>
       </figure>
     </figure>

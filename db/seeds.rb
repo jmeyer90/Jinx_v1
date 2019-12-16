@@ -49,9 +49,9 @@ attr32 = AttributeItem.create(attr_type: "Misc Attribute", name: "Pets Allowed")
 attr33 = AttributeItem.create(attr_type: "Misc Attribute", name: "Wheelchair Accessible")
 
 # Seed Business
-business1 = Business.create(name: "business1", address:"address1")
-business2 = Business.create(name: "business2", address:"address2")
-business3 = Business.create(name: "business3", address:"address3")
+business1 = Business.create(name: "Business 1", address:"address1")
+business2 = Business.create(name: "Business 2", address:"address2")
+business3 = Business.create(name: "Business 3", address:"address3")
 
 # Seed HoursOfOperation
 

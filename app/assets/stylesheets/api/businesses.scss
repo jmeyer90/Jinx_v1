@@ -1,3 +1,120 @@
 // Place all the styles related to the api::businesses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.business-show-container{
+  display: inline-block;
+  width: 100%;
+  background-color: #f5f5f5;
+  padding: 15px;
+  margin: auto;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.business-show{
+  display: flex-wrap;
+  position: relative;
+  justify-content: center;
+  width: 1000px;
+  margin: auto;
+}
+
+.business-review-images{
+  display: block;
+  width: inherit;
+  height: 250px;
+}
+
+.business-details{
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+  margin: auto;
+}
+
+.business-name-rating{
+  display: inline-block;
+  width: 580px;
+  height: 120px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.business-name{
+  display: inline-block;
+  width: 100%;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #67b4e0;
+  margin: 10px 10px 10px 0;
+}
+
+.modal-form-button{
+  font-size: 14px;
+  color:  #452487;
+  font-weight: 600;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  background-color: transparent;
+  font-weight: 700;
+  font-family: inherit;
+  padding: 4px;
+}
+
+.modal-form-button:hover{
+  background-color: #c9f5f5;
+  transition-duration: 2s;
+}
+
+.business-map-hrs{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 580px;
+  height: 250px;
+  justify-content: left;
+  margin: 15px 5px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.map{
+  display: flex;
+  width: 60%;
+}
+
+.hours-of-op{
+  display: flex;
+  width: 40%;
+}
+
+.business-attr{
+ position: sticky;
+ top: 120px;
+}
+
+.show-attribute-list{
+ display: flex;
+ width: 350px;
+ margin: 15px 0 0 0;
+ border: 1px solid lightgrey;
+ border-radius: 3px;
+ padding: 18px;
+ position: sticky;
+ top: 120px;
+}
+
+.attr-sticky{
+ position: sticky;
+ top: 120px;
+}
+
+.attribute-categories-container{
+  line-height: 1.25;
+  margin: 10px 0;
+}
+
+.category{
+  font-weight: 700;
+  font-size: 20px;
+}

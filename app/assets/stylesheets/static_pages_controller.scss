@@ -4,6 +4,7 @@
 
 .app {
   pointer-events: auto;
+  background-color: #f5f5f5;
 }
 
 a{
@@ -12,5 +13,9 @@ a{
 
 button{
   cursor: pointer;
+  text-decoration: none;
 }
 
+li{
+  list-style: none;
+}

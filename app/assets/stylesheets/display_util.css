@@ -1,0 +1,19 @@
+.star-container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 200px;
+  height: 30px;
+}
+
+.star-sub-container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: center;
+}
+
+.star{
+  display: flex;
+  padding: 3px;
+}

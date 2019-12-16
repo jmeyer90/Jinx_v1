@@ -492,7 +492,6 @@ function (_React$Component) {
     _this.bizRating = _this.bizRating.bind(_assertThisInitialized(_this));
     _this.bizAttrs = _this.bizAttrs.bind(_assertThisInitialized(_this));
     _this.bizHoursofOp = _this.bizHoursofOp.bind(_assertThisInitialized(_this));
-    _this.bizImage = _this.bizImage.bind(_assertThisInitialized(_this));
     _this.bizRatingImages = _this.bizRatingImages.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -503,14 +502,11 @@ function (_React$Component) {
       this.props.fetchBusiness(this.props.businessId);
     }
   }, {
-    key: "bizImage",
-    value: function bizImage() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business Image");
-    }
-  }, {
     key: "bizRatingImages",
     value: function bizRatingImages() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business Images from Ratings");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "business-review-images"
+      }, "Business Images from Ratings");
     }
   }, {
     key: "bizRating",
@@ -539,20 +535,24 @@ function (_React$Component) {
 
       if (attr_items) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-          className: "attribute-list"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business Attribute List:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(categories).map(function (category, idx1) {
+          className: "show-attribute-list"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+          className: "attr-sticky"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(categories).map(function (category, idx1) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: idx1,
             className: "attribute-categories-container"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
             className: "attribute-categories"
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Category: ", category), categories[category].map(function (attr, idx2) {
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+            className: "category"
+          }, category), categories[category].map(function (attr, idx2) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
               key: idx2,
               className: "attr-name"
             }, attr);
           })));
-        })));
+        }))));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
       }
@@ -560,14 +560,52 @@ function (_React$Component) {
   }, {
     key: "bizHoursofOp",
     value: function bizHoursofOp() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business Hours of Operation");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "hours-of-op"
+      }, "Business Hours of Operation");
+    }
+  }, {
+    key: "bizMap",
+    value: function bizMap() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "map"
+      }, "Map");
+    }
+  }, {
+    key: "reviewbutton",
+    value: function reviewbutton() {
+      debugger;
+
+      if (this.props.currentUserId) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "modal-form-button"
+        }, "Write a Review");
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }
     }
   }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "business-show-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "business-show"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Business Show Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Business name: ", this.props.business.name), this.bizImage(), this.bizRatingImages(), this.bizRating(), this.bizAttrs(), this.bizHoursofOp(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_review_constructor__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+      }, this.bizRatingImages(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "business-details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "name-rating-map-hrs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "business-name-rating"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "business-name"
+      }, this.props.business.name), this.bizRating(), this.reviewbutton()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "business-map-hrs"
+      }, this.bizMap(), this.bizHoursofOp())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "business-attr"
+      }, this.bizAttrs())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_business_review_constructor__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        className: "review-container"
+      })));
     }
   }]);
 
@@ -625,11 +663,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   var business = state.entities.businesses[ownProps.match.params.businessId] || {};
+  debugger;
   return {
     business: business,
     reviews: state.entities.reviews || {},
     users: state.entities.users || {},
-    businessId: ownProps.match.params.businessId
+    businessId: ownProps.match.params.businessId,
+    currentUserId: state.session.currentUserId
   };
 };
 
@@ -817,19 +857,22 @@ __webpack_require__.r(__webpack_exports__);
 var ReviewForm = function ReviewForm(props) {
   if (props.business && props.currentUserId) {
     var review = props.review || {
-      body: "",
-      rating: "",
+      body: '',
+      rating: '',
       id: null
     };
     debugger;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-      className: "review-form-container"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, props.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-      className: "review-form",
+      className: 'review-form-container-'.concat(props.htmlClass)
+    }, profileImg(props.htmlClass), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      className: 'review-form-'.concat(props.htmlClass),
       onSubmit: function onSubmit(e) {
         return props.handleSubmit(e, props.action);
       }
-    }, selectRating(props.update), reviewDeatils(review, props.update), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, selectRating(props.update, props.htmlClass), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+      className: 'review-line-'.concat(props.htmlClass)
+    }), reviewDeatils(review, props.update, props.htmlClass), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      className: 'review-submit-'.concat(props.htmlClass),
       type: "submit",
       value: props.buttonText
     })));
@@ -838,7 +881,17 @@ var ReviewForm = function ReviewForm(props) {
   }
 };
 
-var selectRating = function selectRating(update) {
+var profileImg = function profileImg(htmlClass) {
+  if (htmlClass === 'create') {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+      className: "profile-img"
+    }, "User");
+  } else {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+  }
+};
+
+var selectRating = function selectRating(update, htmlClass) {
   var ratings = [];
 
   for (var i = 1; i <= 5; i++) {
@@ -846,24 +899,24 @@ var selectRating = function selectRating(update) {
   }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "ratings-selection"
+    className: 'ratings-selection-'.concat(htmlClass)
   }, ratings.map(function (rating) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, rating, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-      className: "rating-option",
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      className: 'rating-option-'.concat(htmlClass),
       type: "radio",
       name: "rating",
       value: rating,
-      onChange: update("rating"),
+      onChange: update('rating'),
       required: true
     }));
   }));
 };
 
-var reviewDeatils = function reviewDeatils(review, update) {
+var reviewDeatils = function reviewDeatils(review, update, htmlClass) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-    className: "review-textarea",
+    className: 'review-textarea-'.concat(htmlClass),
     placeholder: "Sample Review Body",
-    onChange: update("body"),
+    onChange: update('body'),
     value: review.body
   });
 };
@@ -1001,11 +1054,19 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         key: review.id,
         className: "business-review-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "rating-display-username"
-      }, user.f_name, "'s Review: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "user-info"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "username"
+      }, user.f_name, " ", user.l_name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
+        className: "profile-img"
+      }, "User")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "review-item-details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "user-rating-container"
-      }, review.rating, " ", Object(_util_display_util__WEBPACK_IMPORTED_MODULE_3__["displayRating"])(review.rating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Review Body: ", review.body), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_item_actions__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, Object(_util_display_util__WEBPACK_IMPORTED_MODULE_3__["displayRating"])(review.rating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "review-body"
+      }, review.body)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_item_actions__WEBPACK_IMPORTED_MODULE_2__["default"], {
         review: review,
         currentUserId: this.props.currentUserId,
         business: this.props.business,
@@ -1056,23 +1117,25 @@ function (_React$Component) {
       var _this3 = this;
 
       if (this.props.business) {
-        var title = "Create a New Review";
         var buttonText = "Post Review";
+        var htmlClass = "create";
         var review = {
           body: this.state.body,
           rating: this.state.rating
         };
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "business-reviews"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, this.props.business.name, " Reviews:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+          className: "reviews-heading"
+        }, "Recommended Reviews:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
           business: this.props.business,
           action: this.props.createReview,
           currentUserId: this.props.currentUserId,
           update: this.updateField,
           handleSubmit: this.handleSubmit,
-          title: title,
           buttonText: buttonText,
-          review: review
+          review: review,
+          htmlClass: htmlClass
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           className: "business-review-list"
         }, Object.keys(this.props.reviews).map(function (reviewId) {
@@ -1137,12 +1200,11 @@ var ReviewItemActions = function ReviewItemActions(props) {
 
 var displayUpdateForm = function displayUpdateForm(props) {
   if (props.reviewState.reviewsDisp[props.review.id]) {
-    var title = "Update Review";
     var buttonText = "Update Review";
     debugger;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: "update-review"
-    }, reviewForm(title, buttonText, props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, reviewForm(buttonText, props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "review-actions-button",
       onClick: function onClick() {
         return props.setReviewState({
@@ -1169,7 +1231,8 @@ var displayUpdateForm = function displayUpdateForm(props) {
   }
 };
 
-var reviewForm = function reviewForm(title, buttonText, props) {
+var reviewForm = function reviewForm(buttonText, props) {
+  var htmlClass = "update";
   var review = {
     business_id: props.business.id,
     body: props.reviewState.body,
@@ -1182,9 +1245,9 @@ var reviewForm = function reviewForm(title, buttonText, props) {
     currentUserId: props.currentUserId,
     update: props.updateField,
     handleSubmit: props.handleSubmit,
-    title: title,
     buttonText: buttonText,
-    review: review
+    review: review,
+    htmlClass: htmlClass
   });
 };
 
@@ -1399,7 +1462,9 @@ function (_React$Component) {
         }
       }, "Log In with Demo User"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "disclamer"
-      }, this.props.disclamer), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, this.props.disclamer), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+        className: "session-line"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: function onSubmit(e) {
           return _this3.handleSubmit(e);
         }
@@ -2248,9 +2313,11 @@ var displayRating = function displayRating(rating) {
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "star-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "star-sub-container"
   }, numStarHalves.map(function (starHalfIdx) {
     return htmlRatingDispaly(stars[starHalfIdx * 2], stars[starHalfIdx * 2 + 1], starHalfIdx);
-  }));
+  })));
 };
 
 var htmlRatingDispaly = function htmlRatingDispaly(lefthalf, righthalf, idx) {
@@ -2260,11 +2327,11 @@ var htmlRatingDispaly = function htmlRatingDispaly(lefthalf, righthalf, idx) {
     className: "left-half"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: filled(lefthalf)
-  }, "left-half ", idx, " ", filled(lefthalf))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
+  }, idx)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
     className: "right-half"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: filled(righthalf)
-  }, "right-half ", idx, " ", filled(righthalf))));
+  }, idx)));
 };
 
 var filled = function filled(half) {

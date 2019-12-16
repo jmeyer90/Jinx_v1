@@ -28,12 +28,11 @@ const ReviewItemActions = (props) => {
 
 const displayUpdateForm =(props) =>{
   if (props.reviewState.reviewsDisp[props.review.id]) {
-    const title = "Update Review";
     const buttonText = "Update Review";
     debugger
     return (
       <section className="update-review">
-        {reviewForm(title, buttonText, props)}
+        {reviewForm(buttonText, props)}
         < button className="review-actions-button"
           onClick={() => props.setReviewState({ id: "", body: "", rating: "", reviewsDisp: { [props.review.id]: false } })}>
           Hide
@@ -54,7 +53,8 @@ const displayUpdateForm =(props) =>{
   }
 }
 
-const reviewForm=(title, buttonText, props) => {
+const reviewForm = (buttonText, props) => {
+  const htmlClass = "update";
   const review = {
     business_id: props.business.id,
     body: props.reviewState.body,
@@ -65,7 +65,7 @@ const reviewForm=(title, buttonText, props) => {
     <ReviewForm business={props.business}
       action={props.updateReview} currentUserId={props.currentUserId}
       update={props.updateField} handleSubmit={props.handleSubmit}
-      title={title} buttonText={buttonText} review={review} />
+      buttonText={buttonText} review={review} htmlClass={htmlClass}/>
   )
 }
 

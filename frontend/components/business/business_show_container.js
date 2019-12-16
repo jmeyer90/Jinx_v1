@@ -6,11 +6,13 @@ import { withRouter } from 'react-router-dom'
 const msp =  ( state, ownProps ) =>{
   const business = state.entities.businesses[ownProps.match.params.businessId] || {};
 
+  debugger
   return({
     business: business,
     reviews: state.entities.reviews || {},
     users: state.entities.users || {},
-    businessId: ownProps.match.params.businessId
+    businessId: ownProps.match.params.businessId,
+    currentUserId: state.session.currentUserId
   })
 };
 

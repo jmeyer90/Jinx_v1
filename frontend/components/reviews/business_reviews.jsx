@@ -29,11 +29,16 @@ class BusinessReviews extends React.Component{
   reviewItems(user, review){
     return (
       <li key={review.id} className="business-review-item">
-        <h2 className="rating-display-username">{user.f_name}'s Review: </h2>
-        <section className="user-rating-container">
-          {review.rating} {displayRating( review.rating )}
-        </section> 
-        <p>Review Body: {review.body}</p>
+        <section className="user-info">
+          <span className="username">{user.f_name} {user.l_name}</span>
+          <figure className="profile-img">User</figure>
+        </section>
+        <span className="review-item-details">
+          <section className="user-rating-container">
+            {displayRating( review.rating )}
+          </section> 
+          <p className="review-body">{review.body}</p>
+        </span>
         <ReviewItemActions review={review} currentUserId={this.props.currentUserId} 
           business={this.props.business} handleSubmit={this.handleSubmit} 
           updateField={this.updateField} deleteReview={this.props.deleteReview} 
@@ -68,8 +73,8 @@ class BusinessReviews extends React.Component{
 
   render(){
     if (this.props.business) {
-      const title = "Create a New Review";
       const buttonText = "Post Review";
+      const htmlClass ="create";
       const review={
         body: this.state.body,
         rating: this.state.rating
@@ -78,11 +83,11 @@ class BusinessReviews extends React.Component{
       return (
         <section className="business-reviews" >
        
-          <h2>{this.props.business.name} Reviews:</h2>
+          <h2 className="reviews-heading">Recommended Reviews:</h2>
           <ReviewForm business={this.props.business} action={this.props.createReview}
             currentUserId={this.props.currentUserId} update={this.updateField}
-            handleSubmit={this.handleSubmit} title={title} 
-            buttonText={buttonText} review={review}/>
+            handleSubmit={this.handleSubmit} buttonText={buttonText} 
+            review={review} htmlClass={htmlClass}/>
 
           <ul className="business-review-list" >
             { Object.keys(this.props.reviews).map( reviewId => {

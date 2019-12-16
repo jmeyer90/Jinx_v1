@@ -4,6 +4,7 @@
   height: 100%;
   justify-content: center;
   margin: auto;
+  background-color: inherit;
 }
 
 .session-form{
@@ -117,7 +118,7 @@
   margin-bottom: 15px;
 }
 
-hr {
+.session-line{
   margin: 20px;
   padding-top: 15px;
 }
