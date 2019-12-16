@@ -51,7 +51,7 @@ class BusinessShow extends React.Component{
       return (
         <section className="show-attribute-list">
           <h2 className="attribute-heading">Known For</h2>
-          <ul>
+          <ul className="all-attributes-container">
             {Object.keys(categories).map(( category, idx1 )=>(
               <li key={idx1} className="attribute-categories-container">
                 <ul className="attribute-categories">

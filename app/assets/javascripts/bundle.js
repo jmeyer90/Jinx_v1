@@ -540,7 +540,9 @@ function (_React$Component) {
           className: "show-attribute-list"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
           className: "attribute-heading"
-        }, "Known For"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(categories).map(function (category, idx1) {
+        }, "Known For"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+          className: "all-attributes-container"
+        }, Object.keys(categories).map(function (category, idx1) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: idx1,
             className: "attribute-categories-container"
@@ -965,9 +967,7 @@ var reviewDeatils = function reviewDeatils(review, update, htmlClass) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     className: 'review-textarea-'.concat(htmlClass),
     placeholder: "Sample Review Body",
-    onChange: function onChange(e) {
-      return review = e.currentTarget.value;
-    },
+    onChange: update('body'),
     value: review.body
   }) // onChange={(e) => review=e.currentTarget.value}
   ;

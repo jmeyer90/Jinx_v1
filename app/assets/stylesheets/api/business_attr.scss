@@ -14,11 +14,23 @@
 .attribute-heading{
   width: 100%;
   margin: 10px 0;
+  font-size: 18px;
+}
+
+.all-attributes-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .attribute-categories-container{
-  display: flex;
-  flex-direction: row;
   width: 50%;
-  justify-content: space-between;
+  margin: 10px 0;
+  line-height: 1.35;
+}
+
+.category{
+  margin: 7px 0;
 }

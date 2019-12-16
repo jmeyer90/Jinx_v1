@@ -60,7 +60,7 @@ const reviewDeatils = (review, update, htmlClass) => {
   return(
     <textarea className={'review-textarea-'.concat(htmlClass)}
       placeholder='Sample Review Body'
-      onChange={(e) => review = e.currentTarget.value} value={review.body} />
+      onChange={update('body')} value={review.body} />
       // onChange={(e) => review=e.currentTarget.value}
   )
 }
