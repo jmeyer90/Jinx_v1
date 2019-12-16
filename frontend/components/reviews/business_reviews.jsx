@@ -1,7 +1,6 @@
 import React from 'react';
 import ReviewForm from './_review_form'
-import ReviewItemActions from './review_item_actions'
-import { displayRating } from '../../util/display_util';
+import ReviewIndexItem from './review_index_item'
 
 class BusinessReviews extends React.Component{
   constructor(props){
@@ -26,25 +25,13 @@ class BusinessReviews extends React.Component{
     }
   }
 
-  reviewItems(user, review){
+  reviewItems(user, review){ // send to review index items, pass everything we pass to ReviewIndexItem plus user
     return (
-      <li key={review.id} className="business-review-item">
-        <section className="user-info">
-          <span className="username">{user.f_name} {user.l_name}</span>
-          <figure className="profile-img">User</figure>
-        </section>
-        <span className="review-item-details">
-          <section className="user-rating-container">
-            {displayRating( review.rating )}
-          </section> 
-          <p className="review-body">{review.body}</p>
-        </span>
-        <ReviewItemActions review={review} currentUserId={this.props.currentUserId} 
-          business={this.props.business} handleSubmit={this.handleSubmit} 
-          updateField={this.updateField} deleteReview={this.props.deleteReview} 
-          updateReview={this.props.updateReview} reviewState={this.state} 
-          setReviewState={this.setReviewState}/>
-      </li>
+        <ReviewIndexItem review={review} user={user} 
+          currentUserId={this.props.currentUserId} business={this.props.business} 
+          handleSubmit={this.handleSubmit} updateField={this.updateField} 
+          deleteReview={this.props.deleteReview} updateReview={this.props.updateReview} 
+          reviewState={this.state} setReviewState={this.setReviewState}/>
     )
   };
 
@@ -52,7 +39,7 @@ class BusinessReviews extends React.Component{
     this.setState(review);
   }
 
-  updateField(field){
+  updateField(field){//unnecessary? onChange- update review directly in form
     return(e)=>{
       this.setState({[field]: e.currentTarget.value})
       debugger
@@ -60,14 +47,14 @@ class BusinessReviews extends React.Component{
   }
 
   handleSubmit(e, action){
-    const review = {
+    const review = { //set state to equal review
       business_id: this.props.business.id,
       body: this.state.body,
       rating: this.state.rating, 
       id: this.state.id
     }
 
-    this.setState({ id: "", body: "", rating: "", reviewsDisp: { [review.id]: false } })
+    this.setState({ id: "", body: "", rating: "", reviewsDisp: { [review.id]: false } })//reset state after dispatch action
     action(this.props.business.id, review)
   }
 
@@ -76,8 +63,8 @@ class BusinessReviews extends React.Component{
       const buttonText = "Post Review";
       const htmlClass ="create";
       const review={
-        body: this.state.body,
-        rating: this.state.rating
+        body: this.state.body, //set to empty string
+        rating: this.state.rating //set to empty string
       }
 
       return (

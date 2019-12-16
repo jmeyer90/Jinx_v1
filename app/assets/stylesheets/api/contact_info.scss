@@ -1,0 +1,43 @@
+.contact-info-container{
+ position: sticky;
+ top: 120px;
+}
+
+.business-contact-info{
+ display: flex;
+ width: 350px;
+ margin: 15px 0 0 0;
+ border: 1px solid lightgrey;
+ border-radius: 3px;
+ padding: 13px 18px;
+ position: sticky;
+ top: 120px;
+}
+
+.business-contact-items{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.contact-detail-container{
+  display: flex;
+  flex-direction: row;
+  line-height: 1.25;
+  margin: 5px 0;
+  padding: 5px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.contact-detail-container:last-child{
+  border-bottom: none;
+}
+
+.contact-info-category{
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.contact-info-details{
+  padding: 0 15px;
+}

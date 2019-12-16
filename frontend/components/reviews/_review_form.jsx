@@ -11,6 +11,7 @@ const ReviewForm= props =>{
 
     return (
       <section className={'review-form-container-'.concat(props.htmlClass)}>
+        {/* use partial for rendering user info */}
         {profileImg(props.htmlClass)}
         <form className={'review-form-'.concat(props.htmlClass)} onSubmit={(e)=>props.handleSubmit(e, props.action)}>
           {selectRating(props.update, props.htmlClass)}
@@ -26,7 +27,7 @@ const ReviewForm= props =>{
   }
 };
 
-const profileImg = htmlClass =>{
+const profileImg = htmlClass =>{ // partial for displaying user profile pic? or just image tag?
   if(htmlClass === 'create'){
     return(
       <h2 className='profile-img'>User</h2>
@@ -48,6 +49,7 @@ const selectRating = (update, htmlClass) => {
         <label>
           <input className={'rating-option-'.concat(htmlClass)} type='radio' name='rating' value={rating}
           onChange={update('rating')} required/>
+          {/* onChnage={(e) => rating=e.currentTarget.value} */}
       </label>
       ))}
     </section>
@@ -58,7 +60,8 @@ const reviewDeatils = (review, update, htmlClass) => {
   return(
     <textarea className={'review-textarea-'.concat(htmlClass)}
       placeholder='Sample Review Body'
-      onChange={update('body')} value={review.body} />
+      onChange={(e) => review = e.currentTarget.value} value={review.body} />
+      // onChange={(e) => review=e.currentTarget.value}
   )
 }
 

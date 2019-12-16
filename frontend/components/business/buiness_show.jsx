@@ -1,6 +1,7 @@
 import React from 'react';
 import BusinessReviewConstructor from '../reviews/business_review_constructor';
 import { displayRating } from './../../util/display_util'
+import ContactInfo from './contact_info';
 
 class BusinessShow extends React.Component{
   constructor(props){
@@ -49,22 +50,21 @@ class BusinessShow extends React.Component{
     if( attr_items){
       return (
         <section className="show-attribute-list">
-          <section className="attr-sticky">
-            <ul>
-              {Object.keys(categories).map(( category, idx1 )=>(
-                <li key={idx1} className="attribute-categories-container">
-                  <ul className="attribute-categories">
-                    <h2 className="category">{category}</h2>
-                    {categories[category].map(( attr,idx2 )=>(
-                      <li key={idx2} className="attr-name">
-                        {attr}
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          </section>
+          <h2 className="attribute-heading">Known For</h2>
+          <ul>
+            {Object.keys(categories).map(( category, idx1 )=>(
+              <li key={idx1} className="attribute-categories-container">
+                <ul className="attribute-categories">
+                  <h2 className="category">{category}</h2>
+                  {categories[category].map(( attr,idx2 )=>(
+                    <li key={idx2} className="attr-name">
+                      {attr}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
         </section>
       )
     } else {
@@ -100,25 +100,30 @@ class BusinessShow extends React.Component{
   render(){
     return(
       <div className="business-show-container">
+        {this.bizRatingImages()}
         <section className="business-show">
-          {this.bizRatingImages()}
-          <span className="business-details">
-            <span className="name-rating-map-hrs">
-              <span className="business-name-rating">
-                <h2 className="business-name">{this.props.business.name}</h2>
-                {this.bizRating()}
-                {this.reviewbutton()}
+          <section className="business-show-col1">
+            <span className="business-details">
+              <span className="name-rating-map-hrs">
+                <span className="business-name-rating">
+                  <h2 className="business-name">{this.props.business.name}</h2>
+                  {this.bizRating()}
+                  {this.reviewbutton()}
+                </span>
+                <span className="business-map-hrs">
+                  {this.bizMap()}
+                  {this.bizHoursofOp()}
+                </span>
               </span>
-              <span className="business-map-hrs">
-                {this.bizMap()}
-                {this.bizHoursofOp()}
+              <span className="business-attr">
+                {this.bizAttrs()}
               </span>
+              <BusinessReviewConstructor className="review-container" />
             </span>
-            <span className="business-attr">
-              {this.bizAttrs()}
-            </span>
-          </span>
-          <BusinessReviewConstructor className="review-container"/>
+          </section>
+          <section className="business-show-col2">
+            <ContactInfo />
+          </section>
         </section>
       </div>
     )
