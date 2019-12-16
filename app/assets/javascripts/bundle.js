@@ -1307,7 +1307,7 @@ var reviewForm = function reviewForm(buttonText, props) {
   var htmlClass = "update";
   var review = {
     business_id: props.business.id,
-    // body: props.reviewState.body,
+    body: props.reviewState.body,
     rating: props.reviewState.rating
   };
   debugger;

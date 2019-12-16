@@ -80,7 +80,7 @@ const reviewForm = (buttonText, props) => {
   const htmlClass = "update";
   const review = {
     business_id: props.business.id,
-    // body: props.reviewState.body,
+    body: props.reviewState.body,
     rating: props.reviewState.rating
   }
   debugger
