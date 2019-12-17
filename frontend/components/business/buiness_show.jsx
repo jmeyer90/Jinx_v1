@@ -2,6 +2,9 @@ import React from 'react';
 import BusinessReviewConstructor from '../reviews/business_review_constructor';
 import { displayRating } from './../../util/display_util'
 import ContactInfo from './contact_info';
+import MapConstructor from '../map/map_constructor';
+import HoursOfOp from '../hours_of_op/hours_of_operation';
+import Attributes from './business_attributes';
 
 class BusinessShow extends React.Component{
   constructor(props){
@@ -10,14 +13,11 @@ class BusinessShow extends React.Component{
       business: this.props.business
     };
     this.bizRating = this.bizRating.bind(this);
-    this.bizAttrs = this.bizAttrs.bind(this);
-    this.bizHoursofOp = this.bizHoursofOp.bind(this);
     this.bizRatingImages = this.bizRatingImages.bind(this);
   }
 
   componentDidMount(){
     this.props.fetchBusiness( this.props.businessId );
-    
   }
 
   bizRatingImages(){
@@ -37,50 +37,15 @@ class BusinessShow extends React.Component{
     )
   }
 
-  bizAttrs() {
-    let categories = {};
-    const attr_items = this.props.business.attribute_items || [];
-
-    for (let i=0; i< attr_items.length; i++){
-      let category = attr_items[i].attr_type;
-      categories[category] = categories[category]  || [];
-      categories[category].push(attr_items[i].name)
-    }
-
-    if( attr_items){
-      return (
-        <section className="show-attribute-list">
-          <h2 className="attribute-heading">Known For</h2>
-          <ul className="all-attributes-container">
-            {Object.keys(categories).map(( category, idx1 )=>(
-              <li key={idx1} className="attribute-categories-container">
-                <ul className="attribute-categories">
-                  <h2 className="category">{category}</h2>
-                  {categories[category].map(( attr,idx2 )=>(
-                    <li key={idx2} className="attr-name">
-                      {attr}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
+  bizMapHrs(){
+    return(
+      <span className="business-map-hrs-container">
+        <h2 className="business-map-hrs-title">Location &amp; Hours</h2>
+        <section className="business-map-hrs">
+        <MapConstructor />
+        <HoursOfOp hoursOfOp={this.props.business.hours_of_operation} />
         </section>
-      )
-    } else {
-      return( <div></div> )
-    }
-  }
-
-  bizHoursofOp(){
-    return(
-      <h2 className="hours-of-op">Business Hours of Operation</h2>
-    )
-  }
-
-  bizMap(){
-    return(
-      <h2 className="map">Map</h2>
+      </span>
     )
   }
 
@@ -98,6 +63,7 @@ class BusinessShow extends React.Component{
   }
 
   render(){
+    debugger
     return(
       <div className="business-show-container">
         {this.bizRatingImages()}
@@ -110,13 +76,10 @@ class BusinessShow extends React.Component{
                   {this.bizRating()}
                   {this.reviewbutton()}
                 </span>
-                <span className="business-map-hrs">
-                  {this.bizMap()}
-                  {this.bizHoursofOp()}
-                </span>
+                {this.bizMapHrs()}
               </span>
               <span className="business-attr">
-                {this.bizAttrs()}
+                <Attributes business={this.props.business} />
               </span>
               <BusinessReviewConstructor className="review-container" />
             </span>

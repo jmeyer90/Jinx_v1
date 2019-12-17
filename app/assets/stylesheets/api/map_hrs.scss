@@ -1,0 +1,55 @@
+.business-map-hrs-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.business-map-hrs-title{
+    margin: 15px 5px 10px;
+}
+
+.business-map-hrs{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 580px;
+  height: 250px;
+  justify-content: left;
+  margin: 15px 5px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.map{
+  display: flex;
+  width: 55%;
+  height: 95%;
+}
+
+.hours-of-op-container{
+  display: flex;
+  width: 40%;
+  height: 90%;
+}
+
+.hours-of-op{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.day-sub-container{
+  display: flex;
+  flex-direction: row;
+  line-height: 1.5;
+}
+
+.hrs-of-op-title{
+  width: 60px;
+  font-size: 14px;
+}
+
+.business-hrs{
+  font-size: 14px;
+}

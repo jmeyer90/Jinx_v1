@@ -14,8 +14,8 @@ class HoursOfOperation < ApplicationRecord
   has_many :shared_business_hours, dependent: :destroy
   has_many :businesses, through: :shared_business_hours
 
-  validates :day, :time, presence: true
+  validates :day, :biz_time, presence: true
   validates :day, inclusion: 0..6
-  validates :time, inclusion: 0...24
+  validates :biz_time, inclusion: 0...24
 
 end

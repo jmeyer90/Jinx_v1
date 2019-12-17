@@ -6,11 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+AttributeList.destroy_all
 AttributeItem.destroy_all
 Review.destroy_all
 User.destroy_all
 MenuItem.destroy_all
 Menu.destroy_all
+SharedBusinessHour.destroy_all
+HoursOfOperation.destroy_all
 Business.destroy_all
 
 # Seed AttributeItems
@@ -49,11 +52,25 @@ attr32 = AttributeItem.create(attr_type: "Misc Attribute", name: "Pets Allowed")
 attr33 = AttributeItem.create(attr_type: "Misc Attribute", name: "Wheelchair Accessible")
 
 # Seed Business
-business1 = Business.create(name: "Business 1", address:"address1")
-business2 = Business.create(name: "Business 2", address:"address2")
-business3 = Business.create(name: "Business 3", address:"address3")
+business1 = Business.create(name: "Business 1", address:"address1", latitude: -37.872125, longitude: 175.682933)
+business2 = Business.create(name: "Business 2", address:"address2", latitude: -37.872125, longitude: 175.682933)
+business3 = Business.create(name: "Business 3", address:"address3", latitude: -37.872125, longitude: 175.682933)
 
 # Seed HoursOfOperation
+sunOpen = HoursOfOperation.create(day: 0, biz_time: 10)
+sunClose = HoursOfOperation.create(day: 0, biz_time: 22)
+monOpen = HoursOfOperation.create(day: 1, biz_time: 10)
+monClose = HoursOfOperation.create(day: 1, biz_time: 22)
+tuesOpen = HoursOfOperation.create(day: 2, biz_time: 10)
+tuesClose = HoursOfOperation.create(day: 2, biz_time: 22)
+wedOpen = HoursOfOperation.create(day: 3, biz_time: 10)
+wedClose = HoursOfOperation.create(day: 3, biz_time: 22)
+thursOpen = HoursOfOperation.create(day: 4, biz_time: 10)
+thursClose = HoursOfOperation.create(day: 4, biz_time: 22)
+friOpen = HoursOfOperation.create(day: 5, biz_time: 10)
+friClose = HoursOfOperation.create(day: 5, biz_time: 23)
+satOpen = HoursOfOperation.create(day: 6, biz_time: 10.5)
+satClose = HoursOfOperation.create(day: 6, biz_time: 23)
 
 # Seed Menu
 menu1 = Menu.create(business_id: business1.id)
@@ -103,3 +120,19 @@ AttrListB3A21 = AttributeList.create(business_id: business3.id, attribute_item_i
 AttrListB3A27 = AttributeList.create(business_id: business3.id, attribute_item_id: attr27.id)
 AttrListB3A29 = AttributeList.create(business_id: business3.id, attribute_item_id: attr29.id)
 AttrListB3A33 = AttributeList.create(business_id: business3.id, attribute_item_id: attr33.id)
+
+# Seed SharedBusinessHours: Joins table for businesses and hours_of_operation
+sbhB1H1 = SharedBusinessHour.create(business_id: business1.id, hours_of_operation_id: sunOpen.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business1.id, hours_of_operation_id: sunClose.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business1.id, hours_of_operation_id: monOpen.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business1.id, hours_of_operation_id: monClose.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business2.id, hours_of_operation_id: wedOpen.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business2.id, hours_of_operation_id: wedClose.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business2.id, hours_of_operation_id: thursOpen.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business2.id, hours_of_operation_id: thursClose.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business2.id, hours_of_operation_id: friOpen.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business2.id, hours_of_operation_id: friClose.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business3.id, hours_of_operation_id: friOpen.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business3.id, hours_of_operation_id: friClose.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business3.id, hours_of_operation_id: satOpen.id)
+sbhB1H1 = SharedBusinessHour.create(business_id: business3.id, hours_of_operation_id: satClose.id)

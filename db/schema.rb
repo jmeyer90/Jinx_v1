@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_13_214904) do
+ActiveRecord::Schema.define(version: 2019_12_16_223502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,13 +65,13 @@ ActiveRecord::Schema.define(version: 2019_12_13_214904) do
     t.index ["name"], name: "index_businesses_on_name", unique: true
   end
 
-  create_table "hours_of_operation", force: :cascade do |t|
+  create_table "hours_of_operations", force: :cascade do |t|
     t.integer "day", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "biz_time", null: false
-    t.index ["biz_time"], name: "index_hours_of_operation_on_biz_time", unique: true
-    t.index ["day"], name: "index_hours_of_operation_on_day"
+    t.index ["biz_time"], name: "index_hours_of_operations_on_biz_time"
+    t.index ["day"], name: "index_hours_of_operations_on_day"
   end
 
   create_table "menu_items", force: :cascade do |t|

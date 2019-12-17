@@ -79,25 +79,3 @@
   background-color: #c9f5f5;
   transition-duration: 2s;
 }
-
-.business-map-hrs{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 580px;
-  height: 250px;
-  justify-content: left;
-  margin: 15px 5px;
-  border-bottom: 1px solid lightgrey;
-}
-
-.map{
-  display: flex;
-  width: 60%;
-}
-
-.hours-of-op{
-  display: flex;
-  width: 40%;
-}
-

@@ -16,6 +16,8 @@ class Review < ApplicationRecord
   belongs_to :user
   belongs_to :business
 
+  has_one_attached :photo
+
   validates :rating, presence: true
   
 end
