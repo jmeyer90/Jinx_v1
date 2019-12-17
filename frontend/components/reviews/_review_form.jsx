@@ -16,8 +16,7 @@ const ReviewForm= props =>{
         <form className={'review-form-'.concat(props.htmlClass)} onSubmit={(e)=>props.handleSubmit(e, props.action)}>
           {selectRating(props.update, props.htmlClass)}
           <hr className={'review-line-'.concat(props.htmlClass)}/>
-          {actionLogic(review, props.update, props.htmlClass)}
-
+          {actionLogic(review, props.update, props.htmlClass, props.handleFile)}
             <input className={'review-submit-'.concat(props.htmlClass)} type='submit' value={props.buttonText} />
         </form>
 
@@ -60,26 +59,29 @@ const selectRating = (update, htmlClass) => {
   )
 }
 
-const actionLogic = ( review, update, htmlClass ) =>{
+const actionLogic = ( review, update, htmlClass, handleFile ) =>{
   debugger
   if (htmlClass === "create") {
     debugger
     return (
-      reviewDetails(review, update, htmlClass)
+      reviewDetails(review, update, htmlClass, handleFile)
     )
   } else {
     return(
-      reviewDetails( review, update, htmlClass )
+      reviewDetails( review, update, htmlClass, handleFile )
     )
   }
 }
 
-const reviewDetails = (review, update, htmlClass) => {
+const reviewDetails = (review, update, htmlClass, handleFile) => {
   debugger
   return(
-    <textarea className={'review-textarea-'.concat(htmlClass)}
-      placeholder='Sample Review Body'
-      onChange={update('body')} value={review.body} />
+    <section className="data-input">
+      <textarea className={'review-textarea-'.concat(htmlClass)}
+        placeholder='Sample Review Body'
+        onChange={update('body')} value={review.body} />
+      {/* <input type="file" onChange={(e) => handleFile(e)}/> */}
+    </section>
   )
 }
 

@@ -16,11 +16,13 @@ import { displayRating } from '../../util/display_util';
 //   resetState: ()
 
 const ReviewIndexItem = props =>{
+  debugger
   return(
     <li key={props.review.id} className="business-review-item">
         <section className="user-info">
-          <span className="username">{props.user.f_name} {props.user.l_name}</span>
-          <figure key={props.user.id} className="profile-img">User</figure>
+        <figure key={props.user.id} className="profile-img">User</figure>
+        <span className="username">{props.user.f_name} {props.user.l_name}</span>
+          <img src={props.review.photo} alt="cauldron"/>
         </section>
         {ReviewItemActions(props)}
     </li>
@@ -98,7 +100,8 @@ const reviewForm = (buttonText, props) => {
       action={props.updateReview} currentUserId={props.currentUserId}
       update={props.updateField} handleSubmit={props.handleSubmit}
       buttonText={buttonText} review={review} htmlClass={htmlClass}
-      deleteReview={props.deleteReview} resetState={props.resetState}/>
+      deleteReview={props.deleteReview} resetState={props.resetState} 
+      handleFile={props.handleFile}/>
   )
 }
 

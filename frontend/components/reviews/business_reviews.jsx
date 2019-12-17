@@ -5,13 +5,16 @@ import ReviewIndexItem from './review_index_item'
 class BusinessReviews extends React.Component{
   constructor(props){
     super(props);
-    this.state = { id:"", body: "", rating: "", reviewsDisp: this.reviewsDisp()};
+    this.state = { id:"", body: "", rating: "", img:"", 
+      imgFil: null, reviewsDisp: this.reviewsDisp()
+    };
     this.reviewItems = this.reviewItems.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateField = this.updateField.bind(this);
     this.reviewsDisp = this.reviewsDisp.bind(this);
     this.setReviewState = this.setReviewState.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.handleFile = this.handleFile.bind(this);
   }
 
   componentDidMount(){
@@ -39,7 +42,7 @@ class BusinessReviews extends React.Component{
           handleSubmit={this.handleSubmit} updateField={this.updateField} 
           deleteReview={this.props.deleteReview} updateReview={this.props.updateReview} 
           reviewState={this.state} setReviewState={this.setReviewState}
-          resetState={this.resetState}/>
+          resetState={this.resetState} handleFile={this.handleFile}/>
     )
   };
 
@@ -53,21 +56,36 @@ class BusinessReviews extends React.Component{
       debugger
     }
   }
+  handleFile(e) {
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0];
+    reader.onload = () => this.setState({ img: reader.result, imgFile: file});
+
+    if(file){
+      reader.readAsDataURL(file);
+    } else {
+      this.setState({ img: "", imgFile: null });
+    }
+  }
 
   resetState(reviewId){
     this.setState({ 
-      id: "", body: "",
-       rating: "", reviewsDisp: { [reviewId]: false } 
+      id: "", body: "", rating: "",
+       img: "", imgUrl: null,
+       reviewsDisp: { [reviewId]: false } 
     })
   }
 
   handleSubmit(e, action){
+    e.preventDefault();
     const review = { //set state to equal review
       business_id: this.props.business.id,
       body: this.state.body,
       rating: this.state.rating, 
       id: this.state.id
     }
+
+    
 
     this.resetState(review.id);
     action(this.props.business.id, review)
@@ -89,7 +107,8 @@ class BusinessReviews extends React.Component{
           <ReviewForm business={this.props.business} action={this.props.createReview}
             currentUserId={this.props.currentUserId} update={this.updateField}
             handleSubmit={this.handleSubmit} buttonText={buttonText} 
-            review={review} htmlClass={htmlClass}/>
+            review={review} htmlClass={htmlClass} 
+            handleFile={this.handleFile}/>
 
           <ul className="business-review-list" >
             { Object.keys(this.props.reviews).map( reviewId => {

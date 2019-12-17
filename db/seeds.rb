@@ -136,3 +136,9 @@ sbhB1H1 = SharedBusinessHour.create(business_id: business3.id, hours_of_operatio
 sbhB1H1 = SharedBusinessHour.create(business_id: business3.id, hours_of_operation_id: friClose.id)
 sbhB1H1 = SharedBusinessHour.create(business_id: business3.id, hours_of_operation_id: satOpen.id)
 sbhB1H1 = SharedBusinessHour.create(business_id: business3.id, hours_of_operation_id: satClose.id)
+
+# Seeding images
+review1.photo.attach(io: File.open("public/images/cauldron.jpg"), filename: "cauldron.jpg" )
+review2.photo.attach(io: File.open("public/images/cauldron.jpg"), filename: "cauldron.jpg" )
+review3.photo.attach(io: File.open("public/images/cauldron.jpg"), filename: "cauldron.jpg" )
+review4.photo.attach(io: File.open("public/images/cauldron.jpg"), filename: "cauldron.jpg" )

@@ -1,8 +1,9 @@
 .review-actions{
   display: flex;
   justify-content: flex-end;
+  position: relative;
   flex-wrap: wrap;
-  width: 75%;
+  width: 65%;
 }
 
 .review-actions-button{
@@ -62,14 +63,21 @@
   display: none;
 }
 
+.review-line-create{
+  margin: 0;
+}
+
 .review-submit-update{
-  width: 110px;
+  position: relative;
+  bottom: 1px;
+  right: 5px;
+  width: 109px;
   margin: 5px 0;
   padding: 5px;
   font-weight: 700;
   background-color: transparent;
   color: #452487;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .review-submit-update:hover {

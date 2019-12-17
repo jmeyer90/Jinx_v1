@@ -929,9 +929,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -946,46 +946,38 @@ function (_React$Component) {
   _inherits(Map, _React$Component);
 
   function Map(props) {
-    var _this;
-
     _classCallCheck(this, Map);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Map).call(this, props));
-    _this.addBusinessLocation = _this.addBusinessLocation.bind(_assertThisInitialized(_this));
-    return _this;
-  }
+    return _possibleConstructorReturn(this, _getPrototypeOf(Map).call(this, props)); // this.addBusinessLocation = this.addBusinessLocation.bind(this);
+  } // componentDidMount(){
+  //   if (this.props.center){
+  //   const map = ReactDOM.findDOMNode(this.refs.map);
+  //   const options = {
+  //     center: this.props.center,
+  //     zoom: 14
+  //   }
+  //   this.map = new google.maps.Map(map, options);
+  //   debugger
+  //   Object.values(this.props.businesses).forEach( business =>{
+  //     this.addBusinessLocation(business)
+  //   })}
+  // }
+  // addBusinessLocation(business){
+  //   const lat = business.latitude;
+  //   const lng = business.longitude;
+  //   debugger
+  //   const position = new google.maps.LatLng(
+  //     lat, lng
+  //   );
+  //   const marker = new google.maps.Marker({
+  //     position: position,
+  //     map: this.map
+  //   });
+  //   // Add event listener, click on business marker links to business page
+  // }
+
 
   _createClass(Map, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      if (this.props.center) {
-        var map = react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.findDOMNode(this.refs.map);
-        var options = {
-          center: this.props.center,
-          zoom: 14
-        };
-        this.map = new google.maps.Map(map, options);
-        debugger;
-        Object.values(this.props.businesses).forEach(function (business) {
-          _this2.addBusinessLocation(business);
-        });
-      }
-    }
-  }, {
-    key: "addBusinessLocation",
-    value: function addBusinessLocation(business) {
-      var lat = business.latitude;
-      var lng = business.longitude;
-      debugger;
-      var position = new google.maps.LatLng(lat, lng);
-      var marker = new google.maps.Marker({
-        position: position,
-        map: this.map
-      }); // Add event listener, click on business marker links to business page
-    }
-  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1220,7 +1212,7 @@ var ReviewForm = function ReviewForm(props) {
       }
     }, selectRating(props.update, props.htmlClass), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
       className: 'review-line-'.concat(props.htmlClass)
-    }), actionLogic(review, props.update, props.htmlClass), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), actionLogic(review, props.update, props.htmlClass, props.handleFile), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       className: 'review-submit-'.concat(props.htmlClass),
       type: "submit",
       value: props.buttonText
@@ -1267,25 +1259,27 @@ var selectRating = function selectRating(update, htmlClass) {
   }));
 };
 
-var actionLogic = function actionLogic(review, update, htmlClass) {
+var actionLogic = function actionLogic(review, update, htmlClass, handleFile) {
   debugger;
 
   if (htmlClass === "create") {
     debugger;
-    return reviewDetails(review, update, htmlClass);
+    return reviewDetails(review, update, htmlClass, handleFile);
   } else {
-    return reviewDetails(review, update, htmlClass);
+    return reviewDetails(review, update, htmlClass, handleFile);
   }
 };
 
-var reviewDetails = function reviewDetails(review, update, htmlClass) {
+var reviewDetails = function reviewDetails(review, update, htmlClass, handleFile) {
   debugger;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "data-input"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     className: 'review-textarea-'.concat(htmlClass),
     placeholder: "Sample Review Body",
     onChange: update('body'),
     value: review.body
-  });
+  }));
 };
 
 var updateButtons = function updateButtons(htmlClass, deleteReview, resetState, review) {
@@ -1415,6 +1409,8 @@ function (_React$Component) {
       id: "",
       body: "",
       rating: "",
+      img: "",
+      imgFil: null,
       reviewsDisp: _this.reviewsDisp()
     };
     _this.reviewItems = _this.reviewItems.bind(_assertThisInitialized(_this));
@@ -1423,6 +1419,7 @@ function (_React$Component) {
     _this.reviewsDisp = _this.reviewsDisp.bind(_assertThisInitialized(_this));
     _this.setReviewState = _this.setReviewState.bind(_assertThisInitialized(_this));
     _this.resetState = _this.resetState.bind(_assertThisInitialized(_this));
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1462,7 +1459,8 @@ function (_React$Component) {
         updateReview: this.props.updateReview,
         reviewState: this.state,
         setReviewState: this.setReviewState,
-        resetState: this.resetState
+        resetState: this.resetState,
+        handleFile: this.handleFile
       });
     }
   }, {
@@ -1483,18 +1481,45 @@ function (_React$Component) {
       };
     }
   }, {
+    key: "handleFile",
+    value: function handleFile(e) {
+      var _this3 = this;
+
+      var reader = new FileReader();
+      var file = e.currentTarget.files[0];
+
+      reader.onload = function () {
+        return _this3.setState({
+          img: reader.result,
+          imgFile: file
+        });
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        this.setState({
+          img: "",
+          imgFile: null
+        });
+      }
+    }
+  }, {
     key: "resetState",
     value: function resetState(reviewId) {
       this.setState({
         id: "",
         body: "",
         rating: "",
+        img: "",
+        imgUrl: null,
         reviewsDisp: _defineProperty({}, reviewId, false)
       });
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e, action) {
+      e.preventDefault();
       var review = {
         //set state to equal review
         business_id: this.props.business.id,
@@ -1508,7 +1533,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.props.business) {
         var buttonText = "Post Review";
@@ -1531,13 +1556,14 @@ function (_React$Component) {
           handleSubmit: this.handleSubmit,
           buttonText: buttonText,
           review: review,
-          htmlClass: htmlClass
+          htmlClass: htmlClass,
+          handleFile: this.handleFile
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           className: "business-review-list"
         }, Object.keys(this.props.reviews).map(function (reviewId) {
-          var review = _this3.props.reviews[reviewId];
-          var user = _this3.props.users[review.user_id];
-          return _this3.reviewItems(user, review);
+          var review = _this4.props.reviews[reviewId];
+          var user = _this4.props.users[review.user_id];
+          return _this4.reviewItems(user, review);
         })));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
@@ -1583,17 +1609,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //   resetState: ()
 
 var ReviewIndexItem = function ReviewIndexItem(props) {
+  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: props.review.id,
     className: "business-review-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "user-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "username"
-  }, props.user.f_name, " ", props.user.l_name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
     key: props.user.id,
     className: "profile-img"
-  }, "User")), ReviewItemActions(props));
+  }, "User"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "username"
+  }, props.user.f_name, " ", props.user.l_name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: props.review.photo,
+    alt: "cauldron"
+  })), ReviewItemActions(props));
 };
 
 var ReviewItemActions = function ReviewItemActions(props) {
@@ -1671,7 +1701,8 @@ var reviewForm = function reviewForm(buttonText, props) {
     review: review,
     htmlClass: htmlClass,
     deleteReview: props.deleteReview,
-    resetState: props.resetState
+    resetState: props.resetState,
+    handleFile: props.handleFile
   });
 };
 
