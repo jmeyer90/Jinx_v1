@@ -16,7 +16,6 @@ import { displayRating } from '../../util/display_util';
 //   resetState: ()
 
 const ReviewIndexItem = props =>{
-  debugger
   return(
     <li key={props.review.id} className="business-review-item">
         <section className="user-info">
@@ -54,14 +53,12 @@ const ReviewItemActions = (props) => {
 const displayUpdateForm =(props) =>{
   if (props.reviewState.reviewsDisp[props.review.id]) {
     const buttonText = "Update Review";
-    debugger
     return (
       <section className="update-review">
         {reviewForm(buttonText, props)}
       </section>
     )
   } else {
-    debugger
     return (
       <section className="display-review">
         <span className="review-item-details">
@@ -94,7 +91,6 @@ const reviewForm = (buttonText, props) => {
     body: props.reviewState.body,
     rating: props.reviewState.rating
   }
-  debugger
   return (
     <ReviewForm business={props.business}
       action={props.updateReview} currentUserId={props.currentUserId}

@@ -20,7 +20,6 @@ const UsersReducer = ( state={}, action ) => {
 
     case RECEIVE_REVIEW:
       newState = action.user;
-      debugger
       return Object.assign({}, state, newState);
 
     case RECEIVE_USER:

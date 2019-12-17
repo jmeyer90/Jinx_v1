@@ -189,7 +189,6 @@ var RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
 var receiveReviews = function receiveReviews(reviewsInfo) {
   var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(reviewsInfo, "reviews");
   var users = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(reviewsInfo, "users");
-  debugger;
   return {
     type: RECEIVE_REVIEWS,
     reviews: reviews,
@@ -208,7 +207,6 @@ var receiveReview = function receiveReview(reviewInfo) {
 };
 
 var removeReview = function removeReview(reviewId) {
-  debugger;
   return {
     type: REMOVE_REVIEW,
     reviewId: reviewId
@@ -224,7 +222,6 @@ var reviewErrors = function reviewErrors(errors) {
 
 var fetchReviews = function fetchReviews(businessId) {
   return function (dispatch) {
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["fetchReviews"](businessId).then(function (reviews) {
       return dispatch(receiveReviews(reviews));
     }, function (errors) {
@@ -243,7 +240,6 @@ var fetchReview = function fetchReview(reviewId) {
 };
 var updateReview = function updateReview(businessId, review) {
   return function (dispatch) {
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["updateReview"](businessId, review).then(function (review) {
       return dispatch(receiveReview(review));
     }, function (errors) {
@@ -254,7 +250,6 @@ var updateReview = function updateReview(businessId, review) {
 var createReview = function createReview(businessId, review) {
   return function (dispatch) {
     review.business_id = businessId;
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["createReview"](businessId, review).then(function (review) {
       return dispatch(receiveReview(review));
     }, function (errors) {
@@ -264,7 +259,6 @@ var createReview = function createReview(businessId, review) {
 };
 var deleteReview = function deleteReview(reviewId) {
   return function (dispatch) {
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["deleteReview"](reviewId).then(function (reviewId) {
       return dispatch(removeReview(reviewId));
     }, function (errors) {
@@ -556,7 +550,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "business-show-container"
       }, this.bizRatingImages(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -691,7 +684,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   var business = state.entities.businesses[ownProps.match.params.businessId] || {};
-  debugger;
   return {
     business: business,
     reviews: state.entities.reviews || {},
@@ -1426,7 +1418,7 @@ function (_React$Component) {
   _createClass(BusinessReviews, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      if (this.props.business) {
+      if (this.props.business.id) {
         this.props.fetchReviews(this.props.business.id);
       }
     }
@@ -1609,7 +1601,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //   resetState: ()
 
 var ReviewIndexItem = function ReviewIndexItem(props) {
-  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: props.review.id,
     className: "business-review-item"
@@ -1648,12 +1639,10 @@ var ReviewItemActions = function ReviewItemActions(props) {
 var displayUpdateForm = function displayUpdateForm(props) {
   if (props.reviewState.reviewsDisp[props.review.id]) {
     var buttonText = "Update Review";
-    debugger;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: "update-review"
     }, reviewForm(buttonText, props));
   } else {
-    debugger;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: "display-review"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -1690,7 +1679,6 @@ var reviewForm = function reviewForm(buttonText, props) {
     body: props.reviewState.body,
     rating: props.reviewState.rating
   };
-  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
     business: props.business,
     action: props.updateReview,
@@ -2344,13 +2332,10 @@ var ReviewsReducer = function ReviewsReducer() {
       return newState;
 
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_REVIEW"]:
-      debugger;
       newState = action.review;
-      debugger;
       return Object.assign({}, state, newState);
 
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_REVIEW"]:
-      debugger;
       newState = Object.assign({}, state);
       delete newState[action.reviewId];
       return newState;
@@ -2403,7 +2388,6 @@ var UsersReducer = function UsersReducer() {
 
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_REVIEW"]:
       newState = action.user;
-      debugger;
       return Object.assign({}, state, newState);
 
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
@@ -2501,7 +2485,6 @@ var ReviewReducer = function ReviewReducer() {
   switch (action.type) {
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__["REVIEW_ERRORS"]:
       var newState = action.errors;
-      debugger;
       return newState;
 
     default:
@@ -2698,7 +2681,6 @@ __webpack_require__.r(__webpack_exports__);
 var arrayToObject = function arrayToObject(array) {
   var newObj = {};
   var length = array.length;
-  debugger;
 
   for (var i = 0; i < length; i++) {
     var el = array.shift();
@@ -2712,7 +2694,6 @@ var extractAsObj = function extractAsObj(Obj, key) {
   var extracted = Obj[key];
   delete Obj[key];
   extracted = arrayToObject(extracted);
-  debugger;
   return extracted;
 };
 
@@ -2834,7 +2815,6 @@ var createReview = function createReview(businessId, review) {
   });
 };
 var updateReview = function updateReview(businessId, review) {
-  debugger;
   return $.ajax({
     url: "/api/businesses/".concat(businessId, "/reviews/").concat(review.id),
     method: "PATCH",

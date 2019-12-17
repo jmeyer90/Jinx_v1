@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom'
 const msp =  ( state, ownProps ) =>{
   const business = state.entities.businesses[ownProps.match.params.businessId] || {};
 
-  debugger
   return({
     business: business,
     reviews: state.entities.reviews || {},

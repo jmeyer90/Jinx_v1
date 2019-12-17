@@ -24,7 +24,6 @@ export const createReview = (businessId, review) => (
 )
 
 export const updateReview = (businessId, review)  => {
-  debugger
   return(
     $.ajax({
       url: `/api/businesses/${businessId}/reviews/${review.id}`,

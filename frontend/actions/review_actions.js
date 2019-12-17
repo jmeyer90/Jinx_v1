@@ -9,7 +9,6 @@ export const RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
 const receiveReviews = reviewsInfo => {
   const reviews = extractAsObj(reviewsInfo, "reviews");
   const users = extractAsObj(reviewsInfo, "users");
-  debugger
   
   return {
     type: RECEIVE_REVIEWS,
@@ -30,7 +29,6 @@ const receiveReview = reviewInfo => {
 };
 
 const removeReview = reviewId => {
-  debugger
   return {
     type: REMOVE_REVIEW,
     reviewId
@@ -45,7 +43,6 @@ const reviewErrors = (errors) => {
 };
 
 export const fetchReviews = businessId => dispatch => {
-  debugger
   return (ReviewUtils.fetchReviews( businessId )
     .then(
       reviews => dispatch(receiveReviews(reviews)),
@@ -65,7 +62,6 @@ export const fetchReview = reviewId => dispatch => {
 }
 
 export const updateReview = (businessId, review) => dispatch =>{
-  debugger
   return (
     ReviewUtils.updateReview(businessId, review)
     .then(
@@ -78,7 +74,6 @@ export const updateReview = (businessId, review) => dispatch =>{
 export const createReview = (businessId, review )=> dispatch => {
   review.business_id = businessId;
 
-  debugger
   return (
     ReviewUtils.createReview(businessId, review)
       .then(
@@ -89,7 +84,6 @@ export const createReview = (businessId, review )=> dispatch => {
 }
 
 export const deleteReview = reviewId => dispatch => {
-  debugger
   return (
     ReviewUtils.deleteReview(reviewId)
       .then(

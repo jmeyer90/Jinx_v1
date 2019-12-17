@@ -62,7 +62,6 @@ class BusinessShow extends React.Component{
   }
 
   render(){
-    debugger
     return(
       <div className="business-show-container">
         {this.bizRatingImages()}

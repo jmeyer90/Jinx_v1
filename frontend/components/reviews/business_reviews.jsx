@@ -18,7 +18,7 @@ class BusinessReviews extends React.Component{
   }
 
   componentDidMount(){
-    if(this.props.business){
+    if(this.props.business.id){
       this.props.fetchReviews(this.props.business.id)
     }
   }
