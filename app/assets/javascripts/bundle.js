@@ -929,9 +929,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -946,38 +946,46 @@ function (_React$Component) {
   _inherits(Map, _React$Component);
 
   function Map(props) {
+    var _this;
+
     _classCallCheck(this, Map);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Map).call(this, props)); // this.addBusinessLocation = this.addBusinessLocation.bind(this);
-  } // componentDidMount(){
-  //   if (this.props.center){
-  //   const map = ReactDOM.findDOMNode(this.refs.map);
-  //   const options = {
-  //     center: this.props.center,
-  //     zoom: 14
-  //   }
-  //   this.map = new google.maps.Map(map, options);
-  //   debugger
-  //   Object.values(this.props.businesses).forEach( business =>{
-  //     this.addBusinessLocation(business)
-  //   })}
-  // }
-  // addBusinessLocation(business){
-  //   const lat = business.latitude;
-  //   const lng = business.longitude;
-  //   debugger
-  //   const position = new google.maps.LatLng(
-  //     lat, lng
-  //   );
-  //   const marker = new google.maps.Marker({
-  //     position: position,
-  //     map: this.map
-  //   });
-  //   // Add event listener, click on business marker links to business page
-  // }
-
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Map).call(this, props));
+    _this.addBusinessLocation = _this.addBusinessLocation.bind(_assertThisInitialized(_this));
+    return _this;
+  }
 
   _createClass(Map, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      if (this.props.center) {
+        var map = react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.findDOMNode(this.refs.map);
+        var options = {
+          center: this.props.center,
+          zoom: 14
+        };
+        this.map = new google.maps.Map(map, options);
+        debugger;
+        Object.values(this.props.businesses).forEach(function (business) {
+          _this2.addBusinessLocation(business);
+        });
+      }
+    }
+  }, {
+    key: "addBusinessLocation",
+    value: function addBusinessLocation(business) {
+      var lat = business.latitude;
+      var lng = business.longitude;
+      debugger;
+      var position = new google.maps.LatLng(lat, lng);
+      var marker = new google.maps.Marker({
+        position: position,
+        map: this.map
+      }); // Add event listener, click on business marker links to business page
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
