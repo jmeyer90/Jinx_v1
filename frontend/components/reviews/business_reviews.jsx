@@ -53,7 +53,6 @@ class BusinessReviews extends React.Component{
   updateField(field){//unnecessary? onChange- update review directly in form
     return(e)=>{
       this.setState({[field]: e.currentTarget.value})
-      debugger
     }
   }
   handleFile(e) {

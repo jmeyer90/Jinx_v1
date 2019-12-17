@@ -18,6 +18,7 @@ const receiveBusinesses = businessesInfo =>{
 };
 
 const receiveBusiness = business => {
+  debugger
   const reviews = extractAsObj(business, "reviews");
   const users = extractAsObj(business, "users")
   return {

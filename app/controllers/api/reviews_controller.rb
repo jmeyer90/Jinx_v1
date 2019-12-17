@@ -1,17 +1,18 @@
 class Api::ReviewsController < ApplicationController
 
   def index
-    @reviews = Review.includes(:user, :photo).where('reviews.business_id =?', params[:business_id]).references(:reviews)
+    @reviews = Review.includes(:user).with_attached_photo.where('reviews.business_id =?', params[:business_id]).references(:reviews)
     
+    debugger
     if @reviews
-      render json: @reviews
+      render :index
     else 
       render json: @reviews.errors.full_messages
     end
   end
 
   def show
-    @review = Review.includes(user: :user, photo: :photo).find(params[:id])
+    @review = Review.includes(user: :user).with_attached_photo.find(params[:id])
     if @review
       render json: @review
     else

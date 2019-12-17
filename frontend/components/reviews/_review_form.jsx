@@ -7,7 +7,6 @@ const ReviewForm= props =>{
       rating: '',
       id: null
     };
-    debugger
 
     return (
       <section className={'review-form-container-'.concat(props.htmlClass)}>
@@ -60,9 +59,7 @@ const selectRating = (update, htmlClass) => {
 }
 
 const actionLogic = ( review, update, htmlClass, handleFile ) =>{
-  debugger
   if (htmlClass === "create") {
-    debugger
     return (
       reviewDetails(review, update, htmlClass, handleFile)
     )
@@ -74,7 +71,6 @@ const actionLogic = ( review, update, htmlClass, handleFile ) =>{
 }
 
 const reviewDetails = (review, update, htmlClass, handleFile) => {
-  debugger
   return(
     <section className="data-input">
       <textarea className={'review-textarea-'.concat(htmlClass)}
@@ -87,7 +83,6 @@ const reviewDetails = (review, update, htmlClass, handleFile) => {
 
 const updateButtons = ( htmlClass, deleteReview, resetState, review ) =>{
   if(htmlClass==="update"){
-    debugger
     return(
       <section className="form-button-section">
         <button type="button" className="review-actions-button" onClick={() => deleteReview(review)}>

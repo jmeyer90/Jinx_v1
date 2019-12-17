@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom'
 
 const msp = (state, ownProps) => {
   const business = Object.values( state.entities.businesses )[0];
-  debugger
 
   return({
     business: business || {},

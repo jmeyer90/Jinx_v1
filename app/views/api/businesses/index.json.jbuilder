@@ -17,8 +17,11 @@ json.reviews do
   json.array! @reviews do |review|
 
     json.set! review.id do
+
       json.extract! review, :id, :body, :rating, :business_id
+
       json.user_id review.user.id
+
     end
 
   end

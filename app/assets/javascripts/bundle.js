@@ -121,6 +121,7 @@ var receiveBusinesses = function receiveBusinesses(businessesInfo) {
 };
 
 var receiveBusiness = function receiveBusiness(business) {
+  debugger;
   var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(business, "reviews");
   var users = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(business, "users");
   return {
@@ -186,9 +187,25 @@ var REVIEW_ERRORS = "REVIEW_ERRORS";
 var RECEIVE_REVIEW = "RECEIVE_REVIEW";
 var RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
 
+var extractReviews = function extractReviews(reviewsArr) {
+  var reviewsObj = {};
+
+  for (var i = 0; i < reviewsArr.length; i++) {
+    var el = reviewsArr.shift();
+    debugger;
+    reviewsObj[Object.values(el)[0]] = el;
+    debugger;
+  }
+
+  debugger;
+  return reviewsObj;
+};
+
 var receiveReviews = function receiveReviews(reviewsInfo) {
+  debugger;
   var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(reviewsInfo, "reviews");
   var users = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(reviewsInfo, "users");
+  debugger;
   return {
     type: RECEIVE_REVIEWS,
     reviews: reviews,
@@ -199,6 +216,7 @@ var receiveReviews = function receiveReviews(reviewsInfo) {
 var receiveReview = function receiveReview(reviewInfo) {
   var review = reviewInfo.review;
   var user = reviewInfo.user;
+  debugger;
   return {
     type: RECEIVE_REVIEW,
     review: review,
@@ -222,6 +240,7 @@ var reviewErrors = function reviewErrors(errors) {
 
 var fetchReviews = function fetchReviews(businessId) {
   return function (dispatch) {
+    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["fetchReviews"](businessId).then(function (reviews) {
       return dispatch(receiveReviews(reviews));
     }, function (errors) {
@@ -231,6 +250,7 @@ var fetchReviews = function fetchReviews(businessId) {
 };
 var fetchReview = function fetchReview(reviewId) {
   return function (dispatch) {
+    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["fetchReview"](reviewId).then(function (review) {
       return dispatch(receiveReview(review));
     }, function (errors) {
@@ -1194,7 +1214,6 @@ var ReviewForm = function ReviewForm(props) {
       rating: '',
       id: null
     };
-    debugger;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: 'review-form-container-'.concat(props.htmlClass)
     }, profileImg(props.htmlClass), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -1252,10 +1271,7 @@ var selectRating = function selectRating(update, htmlClass) {
 };
 
 var actionLogic = function actionLogic(review, update, htmlClass, handleFile) {
-  debugger;
-
   if (htmlClass === "create") {
-    debugger;
     return reviewDetails(review, update, htmlClass, handleFile);
   } else {
     return reviewDetails(review, update, htmlClass, handleFile);
@@ -1263,7 +1279,6 @@ var actionLogic = function actionLogic(review, update, htmlClass, handleFile) {
 };
 
 var reviewDetails = function reviewDetails(review, update, htmlClass, handleFile) {
-  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "data-input"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
@@ -1276,7 +1291,6 @@ var reviewDetails = function reviewDetails(review, update, htmlClass, handleFile
 
 var updateButtons = function updateButtons(htmlClass, deleteReview, resetState, review) {
   if (htmlClass === "update") {
-    debugger;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: "form-button-section"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -1319,7 +1333,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   var business = Object.values(state.entities.businesses)[0];
-  debugger;
   return {
     business: business || {},
     reviews: state.entities.reviews || {},
@@ -1468,8 +1481,6 @@ function (_React$Component) {
       //unnecessary? onChange- update review directly in form
       return function (e) {
         _this2.setState(_defineProperty({}, field, e.currentTarget.value));
-
-        debugger;
       };
     }
   }, {
@@ -1611,10 +1622,7 @@ var ReviewIndexItem = function ReviewIndexItem(props) {
     className: "profile-img"
   }, "User"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "username"
-  }, props.user.f_name, " ", props.user.l_name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "cauldron.jpg",
-    alt: "cauldron"
-  })), ReviewItemActions(props));
+  }, props.user.f_name, " ", props.user.l_name)), ReviewItemActions(props));
 };
 
 var ReviewItemActions = function ReviewItemActions(props) {
@@ -2681,6 +2689,7 @@ __webpack_require__.r(__webpack_exports__);
 var arrayToObject = function arrayToObject(array) {
   var newObj = {};
   var length = array.length;
+  debugger;
 
   for (var i = 0; i < length; i++) {
     var el = array.shift();
@@ -35405,7 +35414,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

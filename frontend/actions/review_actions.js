@@ -1,15 +1,30 @@
 import * as ReviewUtils from '../util/review_util';
-import { extractAsObj } from '../util/action utils';
+import { extractAsObj} from '../util/action utils';
 
 export const REMOVE_REVIEW = "REMOVE_REVIEW";
 export const REVIEW_ERRORS = "REVIEW_ERRORS";
 export const RECEIVE_REVIEW = "RECEIVE_REVIEW";
 export const RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
 
+const extractReviews = reviewsArr => {
+  let reviewsObj = {};
+
+  for (let i = 0; i < reviewsArr.length; i++) {
+    let el = reviewsArr.shift();
+    debugger
+    reviewsObj[Object.values(el)[0]] = el;
+    debugger
+  }
+  debugger
+
+  return reviewsObj;
+}
+
 const receiveReviews = reviewsInfo => {
+  debugger
   const reviews = extractAsObj(reviewsInfo, "reviews");
   const users = extractAsObj(reviewsInfo, "users");
-  
+  debugger
   return {
     type: RECEIVE_REVIEWS,
     reviews,
@@ -20,7 +35,7 @@ const receiveReviews = reviewsInfo => {
 const receiveReview = reviewInfo => {
   const review = reviewInfo.review;
   const user = reviewInfo.user;
-
+debugger
   return {
     type: RECEIVE_REVIEW,
     review,
@@ -43,6 +58,7 @@ const reviewErrors = (errors) => {
 };
 
 export const fetchReviews = businessId => dispatch => {
+  debugger
   return (ReviewUtils.fetchReviews( businessId )
     .then(
       reviews => dispatch(receiveReviews(reviews)),
@@ -51,7 +67,7 @@ export const fetchReviews = businessId => dispatch => {
 };
 
 export const fetchReview = reviewId => dispatch => {
-  
+  debugger
   return (
     ReviewUtils.fetchReview(reviewId)
       .then(
