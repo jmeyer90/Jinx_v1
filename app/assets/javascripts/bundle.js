@@ -1544,13 +1544,7 @@ var ReviewIndexItem = function ReviewIndexItem(props) {
   }, props.user.f_name, " ", props.user.l_name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
     key: props.user.id,
     className: "profile-img"
-  }, "User")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "review-item-details"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "user-rating-container"
-  }, Object(_util_display_util__WEBPACK_IMPORTED_MODULE_2__["displayRating"])(props.review.rating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "review-body"
-  }, props.review.body)), ReviewItemActions(props));
+  }, "User")), ReviewItemActions(props));
 };
 
 var ReviewItemActions = function ReviewItemActions(props) {
@@ -1558,12 +1552,12 @@ var ReviewItemActions = function ReviewItemActions(props) {
     props;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: "review-actions"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, displayUpdateForm(props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "review-actions-button",
       onClick: function onClick() {
         return props.deleteReview(props.review.id);
       }
-    }, "Delete Review"), displayUpdateForm(props));
+    }, "Delete Review"));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
   }
@@ -1576,7 +1570,7 @@ var displayUpdateForm = function displayUpdateForm(props) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: "update-review"
     }, reviewForm(buttonText, props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "review-actions-button" // Instead of setting state, just go straight to reviewForm. Only change state on submit
+      className: "review-hide" // Instead of setting state, just go straight to reviewForm. Only change state on submit
       // onChange, update actualreview
       ,
       onClick: function onClick() {
@@ -1590,7 +1584,15 @@ var displayUpdateForm = function displayUpdateForm(props) {
     }, "Hide"));
   } else {
     debugger;
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "display-review"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "review-item-details"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "user-rating-container"
+    }, Object(_util_display_util__WEBPACK_IMPORTED_MODULE_2__["displayRating"])(props.review.rating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "review-body"
+    }, props.review.body)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "review-actions-button",
       onClick: function onClick() {
         return props.setReviewState({
@@ -1600,7 +1602,7 @@ var displayUpdateForm = function displayUpdateForm(props) {
           reviewsDisp: _defineProperty({}, props.review.id, true)
         });
       }
-    }, "Update Review");
+    }, "Update Review"));
   }
 };
 

@@ -21,13 +21,6 @@ const ReviewIndexItem = props =>{
           <span className="username">{props.user.f_name} {props.user.l_name}</span>
           <figure key={props.user.id} className="profile-img">User</figure>
         </section>
-        <span className="review-item-details"> 
-        {/* conditionally render.update form here in place of this.Use reviewsDisp */}
-          <section className="user-rating-container">
-            {displayRating( props.review.rating )}
-          </section> 
-          <p className="review-body">{props.review.body}</p>
-        </span>
         {ReviewItemActions(props)}
     </li>
   )
@@ -38,8 +31,8 @@ const ReviewItemActions = (props) => {
     props
     return (
       <section className="review-actions">
-        <button className="review-actions-button" onClick={() => props.deleteReview(props.review.id)}>Delete Review</button>
         {displayUpdateForm(props)}
+        <button className="review-actions-button" onClick={() => props.deleteReview(props.review.id)}>Delete Review</button>
       </section>
     )
   } else {
@@ -54,7 +47,7 @@ const displayUpdateForm =(props) =>{
     return (
       <section className="update-review">
         {reviewForm(buttonText, props)}
-        < button className="review-actions-button"
+        < button className="review-hide"
         // Instead of setting state, just go straight to reviewForm. Only change state on submit
         // onChange, update actualreview
           onClick={() => props.setReviewState({ id: "", body: "", rating: "", reviewsDisp: { [props.review.id]: false } })}>
@@ -65,13 +58,22 @@ const displayUpdateForm =(props) =>{
   } else {
     debugger
     return (
-      <button className="review-actions-button"
-        onClick={() => props.setReviewState({
-          id: props.review.id, body: props.review.body, rating: props.review.rating,
-          reviewsDisp: { [props.review.id]: true }
-        })}>
-        Update Review
+      <section className="display-review">
+        <span className="review-item-details">
+          {/* conditionally render.update form here in place of this.Use reviewsDisp */}
+          <section className="user-rating-container">
+            {displayRating(props.review.rating)}
+          </section>
+          <p className="review-body">{props.review.body}</p>
+        </span>
+        <button className="review-actions-button"
+          onClick={() => props.setReviewState({
+            id: props.review.id, body: props.review.body, rating: props.review.rating,
+            reviewsDisp: { [props.review.id]: true }
+          })}>
+          Update Review
         </button>
+      </section>
     )
   }
 }

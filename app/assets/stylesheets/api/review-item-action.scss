@@ -1,13 +1,16 @@
 .review-actions{
   display: flex;
   justify-content: flex-end;
-  width:100%;
+  flex-wrap: wrap;
+  width: 75%;
 }
 
 .review-actions-button{
   display: flex;
+  float: left;
   padding: 5px;
   margin: 5px;
+  justify-content: center;
   background-color: transparent;
   color: #452487;
   border-radius: 4px;
@@ -20,6 +23,45 @@
 }
 
 .update-review{
-
+  width: 350px;
 }
 
+.review-form-update{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.review-textarea-update{
+  height: 80px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.review-line-update{
+  display: none;
+}
+
+.review-submit-update{
+  width: 130px;
+  margin: 5px 0;
+  padding: 5px;
+  font-weight: 700;
+  background-color: transparent;
+  color: #452487;
+  border-radius: 3px;
+}
+
+.review-submit-update:hover {
+    background-color: #c9f5f5;
+    transition-duration: 2s;
+}
+
+.review-hide{
+  float: left;
+  padding: 5px;
+  font-weight: 700;
+  background-color: transparent;
+  color: #452487;
+  border-radius: 3px;
+}
