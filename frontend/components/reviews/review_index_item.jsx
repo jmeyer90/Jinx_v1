@@ -22,7 +22,7 @@ const ReviewIndexItem = props =>{
         <section className="user-info">
         <figure key={props.user.id} className="profile-img">User</figure>
         <span className="username">{props.user.f_name} {props.user.l_name}</span>
-          <img src={props.review.photo} alt="cauldron"/>
+          <img src='cauldron.jpg' alt="cauldron"/>
         </section>
         {ReviewItemActions(props)}
     </li>

@@ -3,7 +3,7 @@ class Api::ReviewsController < ApplicationController
   def index
     @reviews = Review.includes(:user, :photo).where('reviews.business_id =?', params[:business_id]).references(:reviews)
     
-    debugger
+    # debugger
     if @reviews
       render json: @reviews
     else 
@@ -13,7 +13,7 @@ class Api::ReviewsController < ApplicationController
 
   def show
     @review = Review.includes(user: :user, photo: :photo).find(params[:id])
-    debugger
+    # debugger
     if @review
       render json: @review
     else
@@ -24,6 +24,7 @@ class Api::ReviewsController < ApplicationController
   def create
     @review = current_user.reviews.new(review_params)
     @user = current_user
+    debugger
 
     if @review.save
       render :create

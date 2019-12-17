@@ -85,7 +85,7 @@ class BusinessReviews extends React.Component{
       id: this.state.id
     }
 
-    
+
 
     this.resetState(review.id);
     action(this.props.business.id, review)
