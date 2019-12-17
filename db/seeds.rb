@@ -92,10 +92,10 @@ user2 = User.create(email: "user2@mail.com", f_name: "user2", l_name: "user2", p
 user3 = User.create(email: "user3@mail.com", f_name: "user3", l_name: "user3", password: "password", zip_code:11111)
 
 # Seed Review
-review1 = Review.create(user_id: user1.id, business_id: business1.id, rating: 5, body: "Review One, Testing Reviews")
-review2 = Review.create(user_id: user2.id, business_id: business2.id, rating: 4, body: "Review Two, Testing Reviews")
-review3 = Review.create(user_id: user3.id, business_id: business3.id, rating: 3, body: "Review Three, Testing Reviews")
-review4 = Review.create(user_id: user1.id, business_id: business2.id, rating: 3, body: "Review Four, Testing Reviews")
+review1 = Review.create(user_id: user1.id, business_id: business1.id, rating: 5, body: "Review One, Testing Reviews. Review One, Testing Reviews. Review One, Testing Reviews. Review One, Testing Reviews")
+review2 = Review.create(user_id: user2.id, business_id: business2.id, rating: 4, body: "Review Two, Testing Reviews. Review Two, Testing Reviews. Review Two, Testing Reviews. Review Two, Testing Reviews")
+review3 = Review.create(user_id: user3.id, business_id: business3.id, rating: 3, body: "Review Three, Testing Reviews. Review Three, Testing Reviews. Review Three, Testing Reviews. Review Three, Testing Reviews")
+review4 = Review.create(user_id: user1.id, business_id: business2.id, rating: 3, body: "Review Four, Testing Reviews. Review Four, Testing Reviews. Review Four, Testing Reviews. Review Four, Testing Reviews")
 
 # Seed AttributeLists: Joins table for Bussiness and AttributeItem
 AttrListB1A1 = AttributeList.create(business_id: business1.id, attribute_item_id: attr1.id)

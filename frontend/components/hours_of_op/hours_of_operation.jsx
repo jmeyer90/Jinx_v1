@@ -1,11 +1,8 @@
 import React from 'react';
 
 const HoursOfOp = props =>{
-  debugger
   if(props.hoursOfOp){
     const days = bizDays(props.hoursOfOp);
-    // gives object where keys are days pointing to arrays of length two
-    // arrays values are integers, first is open time, last is close time
 
     return(
       <section className="hours-of-op-container">
@@ -32,7 +29,6 @@ const bizDays = hoursOfOp =>{
     days[day].push(hoursOfOp[i].biz_time);
   }
 
-  debugger
 
   return days;
 }
@@ -62,7 +58,6 @@ const displayDay = (days, day) => {
       text = "Sun";
   }
 
-  debugger
 
   if (!days[day]) {
     return (
@@ -91,7 +86,6 @@ const dayTimes = day =>{
   const startTime = formatTime(startHr, startMin);
   const closeTime = formatTime(closeHr, closeMin);
   
-  debugger
 
   return(
     <span className="business-hrs">
@@ -115,7 +109,6 @@ const formatTime = (hr, min) =>{
     hr = hr % 12;
   }
 
-  debugger
   return( `${hr}:${min} ${amPm}` )
 }
 
@@ -123,7 +116,6 @@ const isOpen = (day,start, close) =>{
   const now = new Date()
   const currentTime = now.getHours();
 
-  debugger
 
   if ( day ===  now.getDay() ){
     if( start.getHours() < currentTime && close.getHours() > currentTime ){

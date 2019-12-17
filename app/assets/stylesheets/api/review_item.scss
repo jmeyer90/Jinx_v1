@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
   margin: 15px 0 15px 0;
   border-bottom: 1px solid lightgray;
   padding: 0 0 15px 0;
@@ -29,17 +30,46 @@
 .review-item-details{
   display: flex;
   flex-direction: column;
+  flex-grow: initial;
   margin: 0 auto;
   width: 350px;
-  height: 100%;
 }
 
 .user-rating-container{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  position: relative;
+  left: 10px;
 }
 
 .review-body{
-  margin: 10px 0;
+  margin: 8px 6.5px 0;
+  min-height: 75px;
+  padding: 5px;
+}
+
+.review-index-button-container{
+  height: 40px;
+}
+
+.review-form-container-update{
+  display: flex;
+  flex-wrap: wrap;
+  width: 93%;
+  justify-content: space-between;
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+.ratings-selection-update{
+    flex-direction: column;
+    width: 200px;
+    height: 30px;
+}
+
+.form-buttons{
+  position: absolute;
+  bottom: 31px;
+  left: 360px;
 }

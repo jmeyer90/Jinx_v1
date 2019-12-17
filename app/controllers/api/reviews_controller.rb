@@ -4,7 +4,6 @@ class Api::ReviewsController < ApplicationController
     @reviews = Review.includes(:user).where('reviews.business_id =?', params[:business_id]).references(:reviews)
     
     if @reviews
-      
       render json: @reviews
     else 
       render json: @reviews.errors.full_messages

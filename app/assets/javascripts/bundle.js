@@ -189,6 +189,7 @@ var RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
 var receiveReviews = function receiveReviews(reviewsInfo) {
   var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(reviewsInfo, "reviews");
   var users = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(reviewsInfo, "users");
+  debugger;
   return {
     type: RECEIVE_REVIEWS,
     reviews: reviews,
@@ -223,6 +224,7 @@ var reviewErrors = function reviewErrors(errors) {
 
 var fetchReviews = function fetchReviews(businessId) {
   return function (dispatch) {
+    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["fetchReviews"](businessId).then(function (reviews) {
       return dispatch(receiveReviews(reviews));
     }, function (errors) {
@@ -543,8 +545,6 @@ function (_React$Component) {
   }, {
     key: "reviewbutton",
     value: function reviewbutton() {
-      debugger;
-
       if (this.props.currentUserId) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "modal-form-button"
@@ -773,12 +773,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var HoursOfOp = function HoursOfOp(props) {
-  debugger;
-
   if (props.hoursOfOp) {
-    var days = bizDays(props.hoursOfOp); // gives object where keys are days pointing to arrays of length two
-    // arrays values are integers, first is open time, last is close time
-
+    var days = bizDays(props.hoursOfOp);
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: "hours-of-op-container"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
@@ -803,7 +799,6 @@ var bizDays = function bizDays(hoursOfOp) {
     days[day].push(hoursOfOp[i].biz_time);
   }
 
-  debugger;
   return days;
 };
 
@@ -839,8 +834,6 @@ var displayDay = function displayDay(days, day) {
       text = "Sun";
   }
 
-  debugger;
-
   if (!days[day]) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: "day-sub-container"
@@ -867,7 +860,6 @@ var dayTimes = function dayTimes(day) {
   var closeMin = (close - closeHr) * 60;
   var startTime = formatTime(startHr, startMin);
   var closeTime = formatTime(closeHr, closeMin);
-  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "business-hrs"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -888,14 +880,12 @@ var formatTime = function formatTime(hr, min) {
     hr = hr % 12;
   }
 
-  debugger;
   return "".concat(hr, ":").concat(min, " ").concat(amPm);
 };
 
 var isOpen = function isOpen(day, start, close) {
   var now = new Date();
   var currentTime = now.getHours();
-  debugger;
 
   if (day === now.getDay()) {
     if (start.getHours() < currentTime && close.getHours() > currentTime) {
@@ -1029,7 +1019,6 @@ var msp = function msp(state) {
     };
   }
 
-  debugger;
   return {
     businesses: state.entities.businesses,
     center: center
@@ -1223,11 +1212,13 @@ var ReviewForm = function ReviewForm(props) {
       }
     }, selectRating(props.update, props.htmlClass), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
       className: 'review-line-'.concat(props.htmlClass)
-    }), reviewDeatils(review, props.update, props.htmlClass), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }), actionLogic(review, props.update, props.htmlClass), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       className: 'review-submit-'.concat(props.htmlClass),
       type: "submit",
       value: props.buttonText
-    })));
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "form-buttons"
+    }, updateButtons(props.htmlClass, props.deleteReview, props.resetState, props.review)));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
   }
@@ -1268,14 +1259,46 @@ var selectRating = function selectRating(update, htmlClass) {
   }));
 };
 
-var reviewDeatils = function reviewDeatils(review, update, htmlClass) {
+var actionLogic = function actionLogic(review, update, htmlClass) {
+  debugger;
+
+  if (htmlClass === "create") {
+    debugger;
+    return reviewDetails(review, update, htmlClass);
+  } else {
+    return reviewDetails(review, update, htmlClass);
+  }
+};
+
+var reviewDetails = function reviewDetails(review, update, htmlClass) {
+  debugger;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     className: 'review-textarea-'.concat(htmlClass),
     placeholder: "Sample Review Body",
     onChange: update('body'),
     value: review.body
-  }) // onChange={(e) => review=e.currentTarget.value}
-  ;
+  });
+};
+
+var updateButtons = function updateButtons(htmlClass, deleteReview, resetState, review) {
+  if (htmlClass === "update") {
+    debugger;
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "form-button-section"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      className: "review-actions-button",
+      onClick: function onClick() {
+        return deleteReview(review);
+      }
+    }, "Delete Review"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      type: "button",
+      className: "review-actions-button",
+      onClick: function onClick() {
+        return resetState(review.id);
+      }
+    }, "Hide"));
+  }
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ReviewForm);
@@ -1300,10 +1323,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var msp = function msp(state) {
+var msp = function msp(state, ownProps) {
   var business = Object.values(state.entities.businesses)[0];
+  debugger;
   return {
-    business: business,
+    business: business || {},
     reviews: state.entities.reviews || {},
     users: state.entities.users || {},
     currentUserId: state.session.currentUserId
@@ -1320,6 +1344,9 @@ var mdp = function mdp(dispatch) {
     },
     deleteReview: function deleteReview(reviewId) {
       return dispatch(Object(_actions_review_actions__WEBPACK_IMPORTED_MODULE_1__["deleteReview"])(reviewId));
+    },
+    fetchReviews: function fetchReviews(businessId) {
+      return dispatch(Object(_actions_review_actions__WEBPACK_IMPORTED_MODULE_1__["fetchReviews"])(businessId));
     }
   };
 };
@@ -1387,10 +1414,18 @@ function (_React$Component) {
     _this.updateField = _this.updateField.bind(_assertThisInitialized(_this));
     _this.reviewsDisp = _this.reviewsDisp.bind(_assertThisInitialized(_this));
     _this.setReviewState = _this.setReviewState.bind(_assertThisInitialized(_this));
+    _this.resetState = _this.resetState.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(BusinessReviews, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (this.props.business) {
+        this.props.fetchReviews(this.props.business.id);
+      }
+    }
+  }, {
     key: "reviewsDisp",
     value: function reviewsDisp() {
       if (this.props.reivews) {
@@ -1418,7 +1453,8 @@ function (_React$Component) {
         deleteReview: this.props.deleteReview,
         updateReview: this.props.updateReview,
         reviewState: this.state,
-        setReviewState: this.setReviewState
+        setReviewState: this.setReviewState,
+        resetState: this.resetState
       });
     }
   }, {
@@ -1439,6 +1475,16 @@ function (_React$Component) {
       };
     }
   }, {
+    key: "resetState",
+    value: function resetState(reviewId) {
+      this.setState({
+        id: "",
+        body: "",
+        rating: "",
+        reviewsDisp: _defineProperty({}, reviewId, false)
+      });
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e, action) {
       var review = {
@@ -1448,13 +1494,7 @@ function (_React$Component) {
         rating: this.state.rating,
         id: this.state.id
       };
-      this.setState({
-        id: "",
-        body: "",
-        rating: "",
-        reviewsDisp: _defineProperty({}, review.id, false)
-      }); //reset state after dispatch action
-
+      this.resetState(review.id);
       action(this.props.business.id, review);
     }
   }, {
@@ -1532,6 +1572,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //   setReviewState: ƒ(review)
 //   updateField: ƒ(field)
 //   updateReview: (review)
+//   resetState: ()
 
 var ReviewIndexItem = function ReviewIndexItem(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -1552,14 +1593,17 @@ var ReviewItemActions = function ReviewItemActions(props) {
     props;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: "review-actions"
-    }, displayUpdateForm(props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "review-actions-button",
-      onClick: function onClick() {
-        return props.deleteReview(props.review.id);
-      }
-    }, "Delete Review"));
+    }, displayUpdateForm(props));
   } else {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "display-review"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "review-item-details"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "user-rating-container"
+    }, Object(_util_display_util__WEBPACK_IMPORTED_MODULE_2__["displayRating"])(props.review.rating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "review-body"
+    }, props.review.body)));
   }
 };
 
@@ -1569,19 +1613,7 @@ var displayUpdateForm = function displayUpdateForm(props) {
     debugger;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
       className: "update-review"
-    }, reviewForm(buttonText, props), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "review-hide" // Instead of setting state, just go straight to reviewForm. Only change state on submit
-      // onChange, update actualreview
-      ,
-      onClick: function onClick() {
-        return props.setReviewState({
-          id: "",
-          body: "",
-          rating: "",
-          reviewsDisp: _defineProperty({}, props.review.id, false)
-        });
-      }
-    }, "Hide"));
+    }, reviewForm(buttonText, props));
   } else {
     debugger;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -1592,7 +1624,9 @@ var displayUpdateForm = function displayUpdateForm(props) {
       className: "user-rating-container"
     }, Object(_util_display_util__WEBPACK_IMPORTED_MODULE_2__["displayRating"])(props.review.rating)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "review-body"
-    }, props.review.body)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, props.review.body)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      className: "review-index-button-container"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "review-actions-button",
       onClick: function onClick() {
         return props.setReviewState({
@@ -1602,7 +1636,12 @@ var displayUpdateForm = function displayUpdateForm(props) {
           reviewsDisp: _defineProperty({}, props.review.id, true)
         });
       }
-    }, "Update Review"));
+    }, "Update Review"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "review-actions-button",
+      onClick: function onClick() {
+        return props.deleteReview(props.review.id);
+      }
+    }, "Delete Review")));
   }
 };
 
@@ -1622,7 +1661,9 @@ var reviewForm = function reviewForm(buttonText, props) {
     handleSubmit: props.handleSubmit,
     buttonText: buttonText,
     review: review,
-    htmlClass: htmlClass
+    htmlClass: htmlClass,
+    deleteReview: props.deleteReview,
+    resetState: props.resetState
   });
 };
 
@@ -2618,6 +2659,7 @@ __webpack_require__.r(__webpack_exports__);
 var arrayToObject = function arrayToObject(array) {
   var newObj = {};
   var length = array.length;
+  debugger;
 
   for (var i = 0; i < length; i++) {
     var el = array.shift();
@@ -2631,6 +2673,7 @@ var extractAsObj = function extractAsObj(Obj, key) {
   var extracted = Obj[key];
   delete Obj[key];
   extracted = arrayToObject(extracted);
+  debugger;
   return extracted;
 };
 

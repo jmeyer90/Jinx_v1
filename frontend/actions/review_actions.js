@@ -9,6 +9,7 @@ export const RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
 const receiveReviews = reviewsInfo => {
   const reviews = extractAsObj(reviewsInfo, "reviews");
   const users = extractAsObj(reviewsInfo, "users");
+  debugger
   
   return {
     type: RECEIVE_REVIEWS,
@@ -44,7 +45,7 @@ const reviewErrors = (errors) => {
 };
 
 export const fetchReviews = businessId => dispatch => {
-  
+  debugger
   return (ReviewUtils.fetchReviews( businessId )
     .then(
       reviews => dispatch(receiveReviews(reviews)),

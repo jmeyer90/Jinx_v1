@@ -11,6 +11,13 @@ class BusinessReviews extends React.Component{
     this.updateField = this.updateField.bind(this);
     this.reviewsDisp = this.reviewsDisp.bind(this);
     this.setReviewState = this.setReviewState.bind(this);
+    this.resetState = this.resetState.bind(this);
+  }
+
+  componentDidMount(){
+    if(this.props.business){
+      this.props.fetchReviews(this.props.business.id)
+    }
   }
 
   reviewsDisp(){
@@ -31,7 +38,8 @@ class BusinessReviews extends React.Component{
           currentUserId={this.props.currentUserId} business={this.props.business} 
           handleSubmit={this.handleSubmit} updateField={this.updateField} 
           deleteReview={this.props.deleteReview} updateReview={this.props.updateReview} 
-          reviewState={this.state} setReviewState={this.setReviewState}/>
+          reviewState={this.state} setReviewState={this.setReviewState}
+          resetState={this.resetState}/>
     )
   };
 
@@ -46,6 +54,13 @@ class BusinessReviews extends React.Component{
     }
   }
 
+  resetState(reviewId){
+    this.setState({ 
+      id: "", body: "",
+       rating: "", reviewsDisp: { [reviewId]: false } 
+    })
+  }
+
   handleSubmit(e, action){
     const review = { //set state to equal review
       business_id: this.props.business.id,
@@ -54,7 +69,7 @@ class BusinessReviews extends React.Component{
       id: this.state.id
     }
 
-    this.setState({ id: "", body: "", rating: "", reviewsDisp: { [review.id]: false } })//reset state after dispatch action
+    this.resetState(review.id);
     action(this.props.business.id, review)
   }
 

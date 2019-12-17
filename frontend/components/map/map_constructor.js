@@ -9,7 +9,7 @@ const msp = (state) =>{
       lng: Object.values(state.entities.businesses)[0].longitude
     }
   }
-  debugger
+  
   return({
     businesses: state.entities.businesses,
     center: center

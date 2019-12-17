@@ -11,15 +11,20 @@ const ReviewForm= props =>{
 
     return (
       <section className={'review-form-container-'.concat(props.htmlClass)}>
-        {/* use partial for rendering user info */}
+
         {profileImg(props.htmlClass)}
         <form className={'review-form-'.concat(props.htmlClass)} onSubmit={(e)=>props.handleSubmit(e, props.action)}>
           {selectRating(props.update, props.htmlClass)}
           <hr className={'review-line-'.concat(props.htmlClass)}/>
-          {reviewDeatils(review, props.update, props.htmlClass)}
+          {actionLogic(review, props.update, props.htmlClass)}
 
-          <input className={'review-submit-'.concat(props.htmlClass)} type='submit' value={props.buttonText} />
+            <input className={'review-submit-'.concat(props.htmlClass)} type='submit' value={props.buttonText} />
         </form>
+
+        <section className="form-buttons">
+          {updateButtons(props.htmlClass, props.deleteReview, props.resetState, props.review)}
+        </section>
+
       </section>
     )
   } else {
@@ -49,20 +54,49 @@ const selectRating = (update, htmlClass) => {
         <label key={rating}>
           <input key={rating} className={'rating-option-'.concat(htmlClass)} type='radio' name='rating' value={rating}
           onChange={update('rating')} required/>
-          {/* onChnage={(e) => rating=e.currentTarget.value} */}
       </label>
       ))}
     </section>
   )
 }
 
-const reviewDeatils = (review, update, htmlClass) => {
+const actionLogic = ( review, update, htmlClass ) =>{
+  debugger
+  if (htmlClass === "create") {
+    debugger
+    return (
+      reviewDetails(review, update, htmlClass)
+    )
+  } else {
+    return(
+      reviewDetails( review, update, htmlClass )
+    )
+  }
+}
+
+const reviewDetails = (review, update, htmlClass) => {
+  debugger
   return(
     <textarea className={'review-textarea-'.concat(htmlClass)}
       placeholder='Sample Review Body'
       onChange={update('body')} value={review.body} />
-      // onChange={(e) => review=e.currentTarget.value}
   )
+}
+
+const updateButtons = ( htmlClass, deleteReview, resetState, review ) =>{
+  if(htmlClass==="update"){
+    debugger
+    return(
+      <section className="form-button-section">
+        <button type="button" className="review-actions-button" onClick={() => deleteReview(review)}>
+          Delete Review
+        </button>
+        < button type="button" className="review-actions-button"onClick={() => resetState(review.id)}>
+          Hide
+        </button >
+      </section>
+    )
+  }
 }
 
 export default ReviewForm;

@@ -50,7 +50,6 @@ class BusinessShow extends React.Component{
   }
 
   reviewbutton(){
-    debugger
     if(this.props.currentUserId){
       return(
         <button className="modal-form-button">

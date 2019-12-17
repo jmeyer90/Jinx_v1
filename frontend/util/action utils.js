@@ -3,8 +3,9 @@
 // in serach utils- write b-search algorithm
 
 const arrayToObject = ( array ) =>{
-  let newObj = {}
+  let newObj = {};
   let length = array.length;
+  debugger
 
   for(let i=0; i < length; i++){
     let el = array.shift();
@@ -18,5 +19,6 @@ export const extractAsObj = ( Obj, key ) =>{
   let extracted = Obj[key];
   delete Obj[key];
   extracted = arrayToObject(extracted);
+  debugger
   return extracted
 };
