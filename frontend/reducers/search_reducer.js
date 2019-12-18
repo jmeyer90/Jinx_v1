@@ -8,13 +8,19 @@ const SearchReducer = ( state={}, action )=>{
       let attrs = {};
       let menuItems = {};
       let bizNames = {};
+      let attrCats = {};
 
       Object.values(action.businesses).forEach(business => {
         bizNames[business.name]= business.id;
+
         business.menu_items.forEach( menuItem=>{
           menuItems[menuItem.title] = business.id;
         });
-        business.attribute_items.forEach( attr =>{
+
+        business.attribute_items.forEach(attr => {
+          attrCats[attr.attr_type] = attrCats[attr.attr_type] || [];
+          attrCats[attr.attr_type] = [...new Set ( attrCats[attr.attr_type].concat(attr.name) )];
+          
           attrs[attr.name] = attrs[attr.name] || [];
           attrs[attr.name] = attrs[attr.name].concat(business.id);
         });
@@ -22,7 +28,7 @@ const SearchReducer = ( state={}, action )=>{
       });
       debugger
 
-      return { attrs: attrs, menuItems: menuItems, businessNames: bizNames }
+      return { attrs: attrs, attrCats: attrCats, menuItems: menuItems, businessNames: bizNames }
     default:
       return state;
   }

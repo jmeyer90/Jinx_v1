@@ -2799,6 +2799,14 @@ var RootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/business_actions */ "./frontend/actions/business_actions.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 
 
 var SearchReducer = function SearchReducer() {
@@ -2812,12 +2820,15 @@ var SearchReducer = function SearchReducer() {
       var attrs = {};
       var menuItems = {};
       var bizNames = {};
+      var attrCats = {};
       Object.values(action.businesses).forEach(function (business) {
         bizNames[business.name] = business.id;
         business.menu_items.forEach(function (menuItem) {
           menuItems[menuItem.title] = business.id;
         });
         business.attribute_items.forEach(function (attr) {
+          attrCats[attr.attr_type] = attrCats[attr.attr_type] || [];
+          attrCats[attr.attr_type] = _toConsumableArray(new Set(attrCats[attr.attr_type].concat(attr.name)));
           attrs[attr.name] = attrs[attr.name] || [];
           attrs[attr.name] = attrs[attr.name].concat(business.id);
         });
@@ -2826,6 +2837,7 @@ var SearchReducer = function SearchReducer() {
       debugger;
       return {
         attrs: attrs,
+        attrCats: attrCats,
         menuItems: menuItems,
         businessNames: bizNames
       };
