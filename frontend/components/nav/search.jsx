@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchFrom from './seach_form';
+import SearchForm from './search_form';
 
 class Search extends React.Component{
   constructor(props){
@@ -10,12 +10,19 @@ class Search extends React.Component{
       bizNames: []
     }
     this.searchableData = this.searchableData.bind(this);
-    this.searchResults = this.searchResults.bind(this);
+    this.searchForm = this.searchForm.bind(this);
   }
 
   componentDidMount(){
     this.props.fetchBusinesses();
     this.searchableData(this.props.businesses);
+  }
+
+  searchForm(){
+    debugger
+    return(
+      <SearchForm bizNames={this.state.bizNames} attrs={this.state.attrs} menuItems={this.state.menuItems}/>
+    )
   }
 
   searchableData(businesses){
@@ -43,10 +50,10 @@ class Search extends React.Component{
   }
 
   render(){
-
+    
     return(
       <section>
-        {this.searchFrom()}
+        {this.searchForm()}
       </section>
     )
   }

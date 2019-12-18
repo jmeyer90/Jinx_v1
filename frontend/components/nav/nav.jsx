@@ -37,7 +37,7 @@ class Nav extends React.Component{
       return (
         <>
           <section className="search-bar">
-            {/* <SearchConstructor /> */}
+            <SearchConstructor />
           </section>/>
           <div className="session-buttons">
             <Link to="/login">Login</Link>

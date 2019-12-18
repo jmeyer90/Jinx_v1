@@ -1151,7 +1151,7 @@ function (_React$Component) {
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "search-bar"
-        }), "/>", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_constructor__WEBPACK_IMPORTED_MODULE_2__["default"], null)), "/>", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "session-buttons"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/login"
@@ -1236,7 +1236,7 @@ var mdp = function mdp(dispacth) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-!(function webpackMissingModule() { var e = new Error("Cannot find module './seach_form'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _search_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search_form */ "./frontend/components/nav/search_form.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -1285,7 +1285,7 @@ function (_React$Component) {
       bizNames: []
     };
     _this.searchableData = _this.searchableData.bind(_assertThisInitialized(_this));
-    _this.searchResults = _this.searchResults.bind(_assertThisInitialized(_this));
+    _this.searchForm = _this.searchForm.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1294,6 +1294,16 @@ function (_React$Component) {
     value: function componentDidMount() {
       this.props.fetchBusinesses();
       this.searchableData(this.props.businesses);
+    }
+  }, {
+    key: "searchForm",
+    value: function searchForm() {
+      debugger;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        bizNames: this.state.bizNames,
+        attrs: this.state.attrs,
+        menuItems: this.state.menuItems
+      });
     }
   }, {
     key: "searchableData",
@@ -1319,7 +1329,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, this.searchFrom());
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, this.searchForm());
     }
   }]);
 
@@ -1362,6 +1372,28 @@ var mdp = function mdp(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_search__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/nav/search_form.jsx":
+/*!*************************************************!*\
+  !*** ./frontend/components/nav/search_form.jsx ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var SearchForm = function SearchForm(props) {
+  debugger;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SearchForm);
 
 /***/ }),
 
@@ -2257,9 +2289,7 @@ function (_React$Component) {
 
   _createClass(Splash, [{
     key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchBusinesses();
-    }
+    value: function componentDidMount() {}
   }, {
     key: "matchBizToReview",
     value: function matchBizToReview(review) {
