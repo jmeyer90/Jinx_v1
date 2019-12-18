@@ -23,6 +23,7 @@
   flex-direction: row;
   font-size: 18px;
   padding: 22px;
+  width: 100%;
 }
 
 .business-index-img{
@@ -44,12 +45,14 @@
   margin-bottom: 8px;
   font-weight: 900;
   font-size: 18px;
+  color:  #452487;
 }
 
 .index-attr{
-  color: gray;
+  color:  #452487;
   font-size: 15px;
   margin: 8px 0 8px;
+  font-weight: 600;
 }
 
 .business-index-review{
@@ -60,3 +63,4 @@
   margin: 8px 0 8px;
   line-height: 1.3;
 }
+

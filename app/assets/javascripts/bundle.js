@@ -1295,6 +1295,9 @@ function (_React$Component) {
       this.setState({
         results: {}
       });
+      var modal = document.getElementById("search-modal");
+      modal.style.display = "none";
+      modal.style.zIndex = -1;
     }
   }, {
     key: "searchForm",
@@ -1313,7 +1316,7 @@ function (_React$Component) {
       }, "Find"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "search-input",
         type: "text",
-        placeholder: "Burgers, American, Wheelchar Accessible",
+        placeholder: "Burgers, American, Wheelchair Accessible",
         onChange: function onChange(e) {
           return _this2.generalFilter(e);
         }
@@ -1327,6 +1330,9 @@ function (_React$Component) {
       var filter = e.currentTarget.value;
 
       if (filter === "") {
+        var modal = document.getElementById("search-modal");
+        modal.style.display = "none";
+        modal.style.zIndex = -1;
         this.setState({
           results: {}
         });
@@ -1375,7 +1381,11 @@ function (_React$Component) {
     value: function disp(category, title) {
       var _this3 = this;
 
+      var modal = document.getElementById("search-modal");
+
       if (category && Object.keys(category).length > 0) {
+        modal.style.display = "block";
+        modal.style.zIndex = 1;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "category"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
@@ -1393,6 +1403,11 @@ function (_React$Component) {
             }
           }, attrName);
         })));
+      } else {
+        if (category) {
+          modal.style.display = "none";
+          modal.style.zIndex = -1;
+        }
       }
     }
   }, {
@@ -1401,6 +1416,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "search-bar-container"
       }, this.searchForm(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        id: "search-modal",
         className: "search-dropdown-container"
       }, this.dispSearchResults(this.state.results)));
     }

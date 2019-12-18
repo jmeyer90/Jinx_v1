@@ -24,7 +24,11 @@ class Search extends React.Component{
     // Send state
     // display attributes with links to business page
     // display business index items.
-    this.setState({ results: {}});
+    this.setState({ results: {} });
+
+    const modal = document.getElementById("search-modal");
+    modal.style.display = "none";
+    modal.style.zIndex = -1;
   }
 
   searchForm(){
@@ -33,7 +37,7 @@ class Search extends React.Component{
         <form className="search-form" onSubmit={()=>this.handleSubmit()}>
           <h2 className="search-title">Find</h2>
           <input className="search-input" type="text" 
-            placeholder="Burgers, American, Wheelchar Accessible" 
+            placeholder="Burgers, American, Wheelchair Accessible" 
             onChange={(e)=>this.generalFilter(e)} />
         <button className="search-submit">Search</button>
         </form>
@@ -46,6 +50,9 @@ class Search extends React.Component{
 
     if (filter === "") {
 
+      const modal = document.getElementById("search-modal");
+      modal.style.display = "none";
+      modal.style.zIndex = -1;
       this.setState({ results: {} })
 
     } else {
@@ -95,8 +102,13 @@ class Search extends React.Component{
     )
   }
 
-  disp(category, title){
+  disp(category, title) {
+    const modal = document.getElementById("search-modal");
+
     if (category && Object.keys(category).length > 0) {
+      modal.style.display = "block";
+      modal.style.zIndex = 1;
+
       return (
         <section className="category">
           <h2 className="search-section-title">{title}</h2>
@@ -110,6 +122,11 @@ class Search extends React.Component{
           </label>
         </section>
       )
+    } else {
+      if (category) {
+        modal.style.display = "none";
+        modal.style.zIndex = -1;
+      }
     }
   }
 
@@ -118,7 +135,7 @@ class Search extends React.Component{
     return(
       <section className="search-bar-container">
         {this.searchForm()}
-        <section className="search-dropdown-container">
+        <section id="search-modal" className="search-dropdown-container">
           {this.dispSearchResults(this.state.results)}
         </section>
       </section>
