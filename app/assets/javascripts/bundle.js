@@ -568,7 +568,7 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "modal-form-button",
           onClick: function onClick() {
-            return _this2.dispModal();
+            return _this2.dispModal("block", 1);
           }
         }, "Write a Review");
       } else {
@@ -577,18 +577,25 @@ function (_React$Component) {
     }
   }, {
     key: "dispModal",
-    value: function dispModal() {
+    value: function dispModal(display, zIndex) {
       var modal = document.getElementById("form-modal-container");
-      modal.style.display = "block";
-      modal.style.zIndex = 1;
+      modal.style.display = display;
+      modal.style.zIndex = zIndex;
     }
   }, {
     key: "formModal",
     value: function formModal() {
-      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      var _this3 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "form-modal",
         id: "form-modal-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_review_form__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "close-form-modal",
+        onClick: function onClick() {
+          return _this3.dispModal("none", -1);
+        }
+      }, "Close"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_review_form__WEBPACK_IMPORTED_MODULE_7__["default"], {
         business: this.props.business,
         action: this.props.createReview,
         currentUserId: this.props.currentUserId,
@@ -602,11 +609,11 @@ function (_React$Component) {
   }, {
     key: "updateField",
     value: function updateField(field) {
-      var _this3 = this;
+      var _this4 = this;
 
       debugger;
       return function (e) {
-        _this3.setState(_defineProperty({}, field, e.currentTarget.value));
+        _this4.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {

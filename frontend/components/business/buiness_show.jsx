@@ -59,7 +59,7 @@ class BusinessShow extends React.Component{
   reviewbutton(){
     if(this.props.currentUserId){
       return(
-        <button className="modal-form-button" onClick={()=>this.dispModal()}>
+        <button className="modal-form-button" onClick={()=>this.dispModal("block", 1)}>
           Write a Review
         </button>
       )
@@ -68,20 +68,24 @@ class BusinessShow extends React.Component{
     }
   }
 
-  dispModal(){
+  dispModal(display, zIndex){
     const modal = document.getElementById("form-modal-container")
-    modal.style.display = "block";
-    modal.style.zIndex = 1;
+    modal.style.display = display;
+    modal.style.zIndex = zIndex;
   }
 
   formModal(){
-    <section className="form-modal" id="form-modal-container">
-      
+    return(
+      <section className="form-modal" id="form-modal-container">
+        <button className="close-form-modal" onClick={() => this.dispModal("none", -1)}>
+          Close
+        </button>
         <ReviewForm business={this.props.business} action={this.props.createReview}
           currentUserId={this.props.currentUserId} update={this.updateField}
           handleSubmit={this.handleSubmit} buttonText={"Post Review"}
           review={null} htmlClass={"form-modal"} />
-    </section>
+      </section>
+    )
   }
 
   updateField(field) {
