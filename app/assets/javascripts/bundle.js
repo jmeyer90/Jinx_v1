@@ -1272,15 +1272,11 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Search).call(this, props));
     _this.state = {
-      filter: {
-        general: ""
-      },
       results: {}
     };
     _this.searchableData = _this.searchableData.bind(_assertThisInitialized(_this));
     _this.searchForm = _this.searchForm.bind(_assertThisInitialized(_this));
-    _this.locationFilter = _this.locationFilter.bind(_assertThisInitialized(_this));
-    _this.generalFiler = _this.generalFiler.bind(_assertThisInitialized(_this));
+    _this.generalFilter = _this.generalFilter.bind(_assertThisInitialized(_this));
     _this.filter = _this.filter.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -1303,50 +1299,40 @@ function (_React$Component) {
         type: "text",
         placeholder: "Burgers, American, Lebanese",
         onChange: function onChange(e) {
-          return _this2.filter(e);
+          return _this2.generalFilter(e);
         }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "search-title"
-      }, "Near", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        placeholder: "The Shire, Helm's Deep, Atlantis...",
-        onChange: function onChange(e) {
-          return _this2.locationFilter(e);
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], null));
+      })));
     }
   }, {
-    key: "generalFiler",
-    value: function generalFiler(e) {
+    key: "generalFilter",
+    value: function generalFilter(e) {
       var filter = e.currentTarget.value;
-      var filteredVals = {};
-      fileredVals = filteredVals.concat(filter(filter, this.props.attrs));
-      fileredVals = filteredVals.concat(filter(filter, this.props.menuItems));
-      fileredVals = filteredVals.concat(filter(filter, this.props.businessNames));
-    }
-  }, {
-    key: "locationFilter",
-    value: function locationFilter(e) {
-      var filter = e.currentTarget.value;
-      var locations = [];
-      this.props.neighborhoods.forEach(function (location) {
-        if (location.includes(filter)) {
-          locations.push(location);
+      filteredAttrs = filter(filter, this.props.attrs);
+      filteredMenuItems = filter(filter, this.props.menuItems);
+      filteredBusinessNames = filter(filter, this.props.businessNames);
+      this.setState({
+        results: {
+          attrs: filteredAttrs,
+          menuItems: filteredMenuItems,
+          businessNames: filteredBusinessNames
         }
-      });
-      this.filter({
-        neighborhoods: locations
       });
     }
   }, {
     key: "filter",
-    value: function filter(e) {
-      var attrArr = Object.keys(this.props.attr);
+    value: function filter(_filter, attrs) {
+      var filtered = {};
+      Object.keys(this.props.attrs).forEach(function (attrKey) {
+        if (attrKey.includes(_filter)) {
+          filtered[attrKey] = attrs[attrKey];
+        }
+      });
+      return filtered;
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, this.searchForm());
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, this.searchForm(), this.dispSearchResults(this.state.results));
     }
   }]);
 

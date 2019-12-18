@@ -6,16 +6,12 @@ class Search extends React.Component{
   constructor(props){
     super(props)
     this.state={
-      filter: {
-        general: ""
-      },
       results: {}
     }
 
     this.searchableData = this.searchableData.bind(this);
     this.searchForm = this.searchForm.bind(this);
-    this.locationFilter = this.locationFilter.bind(this);
-    this.generalFiler = this.generalFiler.bind(this);
+    this.generalFilter = this.generalFilter.bind(this);
     this.filter = this.filter.bind(this);
   }
 
@@ -28,42 +24,37 @@ class Search extends React.Component{
       <section className="search-bar">
         <label className="search-title">
           Find
-          <input type="text" placeholder="Burgers, American, Lebanese" onChange={(e)=>this.filter(e)} />
+          <input type="text" placeholder="Burgers, American, Lebanese" onChange={(e)=>this.generalFilter(e)} />
         </label>
-        <label className="search-title">
-          Near
-          <input type="text" placeholder="The Shire, Helm's Deep, Atlantis..." onChange={(e) => this.locationFilter(e)}/>
-        </label>
-        <Link></Link>
       </section>
     )
   }
 
-  generalFiler(e){
+  generalFilter(e){
     const filter = e.currentTarget.value;
-    let filteredVals = {};
 
-    fileredVals = filteredVals.concat( filter( filter, this.props.attrs ));
-    fileredVals = filteredVals.concat( filter( filter, this.props.menuItems ));
-    fileredVals = filteredVals.concat( filter( filter, this.props.businessNames ));
-  }
-
-  locationFilter(e){
-    const filter = e.currentTarget.value;
-    let locations = [];
-
-    this.props.neighborhoods.forEach(location=>{
-      if ( location.includes(filter) ){
-        locations.push(location);
+    filteredAttrs= filter( filter, this.props.attrs );
+    filteredMenuItems = filter( filter, this.props.menuItems );
+    filteredBusinessNames = filter( filter, this.props.businessNames );
+    this.setState({
+      results: {
+        attrs: filteredAttrs,
+        menuItems: filteredMenuItems,
+        businessNames: filteredBusinessNames
       }
     })
-
-    this.filter({ neighborhoods: locations })
   }
 
-  filter(e){
-    const attrArr = Object.keys(this.props.attr);
+  filter(filter, attrs){
+    let filtered={}
+    
+    Object.keys(this.props.attrs).forEach( attrKey =>{
+      if( attrKey.includes( filter )){
+        filtered[attrKey] = attrs[attrKey];
+      }
+    });
 
+    return filtered;
   }
 
   render(){
@@ -71,6 +62,7 @@ class Search extends React.Component{
     return(
       <section>
         {this.searchForm()}
+        {this.dispSearchResults(this.state.results)}
       </section>
     )
   }
