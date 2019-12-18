@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Search from './search';
+import SearchConstructor from './search_constructor';
 
 class Nav extends React.Component{
   constructor(props){
@@ -25,7 +25,9 @@ class Nav extends React.Component{
     } else if ( this.props.loggedIn ){
       return (
         <>
-          <input className="search-bar" type="text" placeholder="Search Bar" />
+          <section className="search-bar">
+            <SearchConstructor />
+          </section>/>
           <div className="session-buttons">
             <button onClick={ ()=> this.props.logout() }>Log Out</button>
           </div>
@@ -34,7 +36,9 @@ class Nav extends React.Component{
     } else {
       return (
         <>
-          <input className="search-bar" type="text" placeholder="Search Bar" />
+          <section className="search-bar">
+            {/* <SearchConstructor /> */}
+          </section>/>
           <div className="session-buttons">
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>

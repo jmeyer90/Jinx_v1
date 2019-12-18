@@ -2,9 +2,12 @@ import { connect } from 'react-redux';
 import Search from "./search";
 import { fetchBusinesses } from "../../actions/business_actions";
 
-const msp = state =>({
-  businesses: state.businesses.entities || {}
-});
+const msp = state =>{
+  debugger
+  return({
+    businesses: state.entities.businesses || {}
+  })
+};
 
 const mdp = dispatch =>({
   fetchBusinesses: () => dispatch( fetchBusinesses())

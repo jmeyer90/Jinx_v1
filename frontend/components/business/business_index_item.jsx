@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const BusinessIndexItem = props =>{
 
-  debugger
   return(
     <li key={props.business.id} className="business-index-container">
       <Link key={props.business.id} className="business-index-link" to={`/businesses/${props.business.id}`}>
