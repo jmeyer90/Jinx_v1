@@ -1141,7 +1141,7 @@ function (_React$Component) {
       } else if (this.props.loggedIn) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "search-bar"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_constructor__WEBPACK_IMPORTED_MODULE_2__["default"], null)), "/>", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_constructor__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "session-buttons"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
@@ -1349,15 +1349,23 @@ function (_React$Component) {
       debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "search-dropdown"
-      }, this.disp(searchResults.businessNames), this.disp(searchResults.menuItems), this.disp(searchResults.attrs));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "search-business"
+      }, this.disp(searchResults.businessNames, "Businesses")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "search-menu"
+      }, this.disp(searchResults.menuItems, "Menu Items")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "search-attr"
+      }, this.disp(searchResults.attrs, "Business Attributes")));
     }
   }, {
     key: "disp",
-    value: function disp(category) {
-      if (category) {
+    value: function disp(category, title) {
+      if (category && Object.keys(category).length > 0) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "category"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+          className: "search-section-title"
+        }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "search-category"
         }, Object.keys(category).map(function (attrName, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {

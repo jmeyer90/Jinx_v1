@@ -27,7 +27,7 @@ class Nav extends React.Component{
         <>
           <section className="search-bar">
             <SearchConstructor />
-          </section>/>
+          </section>
           <div className="session-buttons">
             <button onClick={ ()=> this.props.logout() }>Log Out</button>
           </div>

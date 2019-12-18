@@ -73,22 +73,24 @@ class Search extends React.Component{
     debugger
     return (
       <section className="search-dropdown">
-        {this.disp(searchResults.businessNames)}
-        {this.disp(searchResults.menuItems)}
-        {this.disp(searchResults.attrs)}
-        {/* {this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs)}
-        {this.dispCat(this.props.attrCats.Cuisinse, searchResults.attrs)}
-        {this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs)}
-        {this.dispCat(this.props.attrCats.BusinessType, searchResults.attrs)}
-        {this.dispCat(this.props.attrCats.MiscAttribute, searchResults.attrs)} */}
+        <section className="search-business">
+          {this.disp(searchResults.businessNames, "Businesses")}
+        </section>
+        <section className="search-menu">
+          {this.disp(searchResults.menuItems, "Menu Items")}
+        </section>
+        <section className="search-attr">
+          {this.disp(searchResults.attrs, "Business Attributes")}
+        </section>
       </section>
     )
   }
 
-  disp(category){
-    if (category) {
+  disp(category, title){
+    if (category && Object.keys(category).length > 0) {
       return (
         <section className="category">
+          <h2 className="search-section-title">{title}</h2>
           <label className="search-category">
             {Object.keys(category).map((attrName, idx) => (
               <Link key={idx} to={`/businesses/${category[attrName]}`}>{attrName}</Link>
