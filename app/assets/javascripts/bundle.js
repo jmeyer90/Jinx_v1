@@ -683,7 +683,7 @@ var BusinessIndexItem = function BusinessIndexItem(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
     className: "business-index-img"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: window.businessImg,
+    href: "".concat(window.businessImg),
     alt: "wizard restaurant"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "business-index-info"
@@ -2277,15 +2277,13 @@ document.addEventListener('DOMContentLoaded', function () {
         businesses: {}
       }
     };
-  } // fetchBusinesses();
-
+  }
 
   var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState); // testing purposes
 
   window.getState = store.getState;
   window.fetchBusinesses = _actions_business_actions__WEBPACK_IMPORTED_MODULE_4__["fetchBusinesses"];
   window.fetchBusiness = _actions_business_actions__WEBPACK_IMPORTED_MODULE_4__["fetchBusiness"]; // end of testing
-  // store.subscribe( fetchBusinesses() ); c
 
   var root = document.getElementById('root');
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {

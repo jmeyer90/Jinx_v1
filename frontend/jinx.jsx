@@ -28,8 +28,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   }
 
-  // fetchBusinesses();
-
   const store = configureStore( preloadedState );
 
   // testing purposes
@@ -37,8 +35,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
   window.fetchBusinesses = fetchBusinesses;
   window.fetchBusiness = fetchBusiness;
   // end of testing
-
-  // store.subscribe( fetchBusinesses() ); c
 
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store}/>, root);

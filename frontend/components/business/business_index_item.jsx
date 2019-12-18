@@ -7,7 +7,7 @@ const BusinessIndexItem = props =>{
   return(
     <li key={props.business.id} className="business-index-container">
       <figure className="business-index-img">
-        <img src={window.businessImg} alt="wizard restaurant"/>
+        <img href={`${window.businessImg}`} alt="wizard restaurant"/>
       </figure>
       <section className="business-index-info">
         <Link key={ props.business.id } className="business-index-link" to={`/businesses/${props.business.id}`}>
