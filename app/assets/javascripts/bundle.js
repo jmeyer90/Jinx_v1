@@ -463,7 +463,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _map_map_constructor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../map/map_constructor */ "./frontend/components/map/map_constructor.js");
 /* harmony import */ var _hours_of_op_hours_of_operation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hours_of_op/hours_of_operation */ "./frontend/components/hours_of_op/hours_of_operation.jsx");
 /* harmony import */ var _business_attributes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./business_attributes */ "./frontend/components/business/business_attributes.jsx");
+/* harmony import */ var _reviews_review_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../reviews/_review_form */ "./frontend/components/reviews/_review_form.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -489,6 +492,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var BusinessShow =
 /*#__PURE__*/
 function (_React$Component) {
@@ -501,10 +505,19 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(BusinessShow).call(this, props));
     _this.state = {
-      business: _this.props.business
+      business: _this.props.business,
+      review: {
+        id: "",
+        body: "",
+        rating: "",
+        img: ""
+      }
     };
     _this.bizRating = _this.bizRating.bind(_assertThisInitialized(_this));
     _this.bizRatingImages = _this.bizRatingImages.bind(_assertThisInitialized(_this));
+    _this.formModal = _this.formModal.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.updateField = _this.updateField.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -549,13 +562,66 @@ function (_React$Component) {
   }, {
     key: "reviewbutton",
     value: function reviewbutton() {
+      var _this2 = this;
+
       if (this.props.currentUserId) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          className: "modal-form-button"
+          className: "modal-form-button",
+          onClick: function onClick() {
+            return _this2.dispModal();
+          }
         }, "Write a Review");
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
       }
+    }
+  }, {
+    key: "dispModal",
+    value: function dispModal() {
+      var modal = document.getElementById("form-modal-container");
+      modal.style.display = "block";
+      modal.style.zIndex = 1;
+    }
+  }, {
+    key: "formModal",
+    value: function formModal() {
+      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "form-modal",
+        id: "form-modal-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_review_form__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        business: this.props.business,
+        action: this.props.createReview,
+        currentUserId: this.props.currentUserId,
+        update: this.updateField,
+        handleSubmit: this.handleSubmit,
+        buttonText: "Post Review",
+        review: null,
+        htmlClass: "form-modal"
+      }));
+    }
+  }, {
+    key: "updateField",
+    value: function updateField(field) {
+      var _this3 = this;
+
+      debugger;
+      return function (e) {
+        _this3.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e, action) {
+      var review = {
+        //set state to equal review
+        business_id: this.props.business.id,
+        body: this.state.body,
+        rating: this.state.rating,
+        id: this.state.id
+      };
+      debugger;
+      this.resetState(review.id);
+      action(this.props.business.id, review);
     }
   }, {
     key: "render",
@@ -574,7 +640,7 @@ function (_React$Component) {
         className: "business-name-rating"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "business-name"
-      }, this.props.business.name), this.bizRating(), this.reviewbutton()), this.bizMapHrs()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, this.props.business.name), this.bizRating(), this.reviewbutton(), this.formModal()), this.bizMapHrs()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "business-attr"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_business_attributes__WEBPACK_IMPORTED_MODULE_6__["default"], {
         business: this.props.business
@@ -750,7 +816,20 @@ var mdp = function mdp(dispatch) {
     },
     fetchBusinesses: function fetchBusinesses() {
       return dispatch(Object(_actions_business_actions__WEBPACK_IMPORTED_MODULE_2__["fetchBusinesses"])());
-    }
+    },
+    createReview: function (_createReview) {
+      function createReview(_x, _x2) {
+        return _createReview.apply(this, arguments);
+      }
+
+      createReview.toString = function () {
+        return _createReview.toString();
+      };
+
+      return createReview;
+    }(function (businessId, review) {
+      return dispatch(createReview(businessId, review));
+    })
   };
 };
 
@@ -1725,7 +1804,6 @@ function (_React$Component) {
   }, {
     key: "reviewItems",
     value: function reviewItems(user, review) {
-      // send to review index items, pass everything we pass to ReviewIndexItem plus user
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
         key: review.id,
         review: review,
@@ -1751,8 +1829,6 @@ function (_React$Component) {
     value: function updateField(field) {
       var _this2 = this;
 
-      //unnecessary? onChange- update review directly in form
-      debugger;
       return function (e) {
         _this2.setState(_defineProperty({}, field, e.currentTarget.value));
       };
@@ -1779,7 +1855,6 @@ function (_React$Component) {
         rating: this.state.rating,
         id: this.state.id
       };
-      debugger;
       this.resetState(review.id);
       action(this.props.business.id, review);
     }

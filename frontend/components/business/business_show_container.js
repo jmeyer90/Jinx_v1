@@ -17,7 +17,8 @@ const msp =  ( state, ownProps ) =>{
 
 const mdp = dispatch =>({
   fetchBusiness: businessId => dispatch( fetchBusiness( businessId )),
-  fetchBusinesses: () => dispatch( fetchBusinesses() )
+  fetchBusinesses: () => dispatch( fetchBusinesses() ),
+  createReview: (businessId, review) => dispatch( createReview( businessId, review ))
 });
 
 export default connect( msp, mdp )( BusinessShow );

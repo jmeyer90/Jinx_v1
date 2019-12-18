@@ -34,7 +34,7 @@ class BusinessReviews extends React.Component{
     }
   }
 
-  reviewItems(user, review){ // send to review index items, pass everything we pass to ReviewIndexItem plus user
+  reviewItems(user, review){
     return (
         <ReviewIndexItem key={review.id} review={review} user={user} 
           currentUserId={this.props.currentUserId} business={this.props.business} 
@@ -49,8 +49,7 @@ class BusinessReviews extends React.Component{
     this.setState(review);
   }
 
-  updateField(field){//unnecessary? onChange- update review directly in form
-    debugger
+  updateField(field){
     return(e)=>{
       this.setState({[field]: e.currentTarget.value})
     }
@@ -72,7 +71,6 @@ class BusinessReviews extends React.Component{
       id: this.state.id
     }
 
-    debugger
     this.resetState(review.id);
     action(this.props.business.id, review)
   }

@@ -5,15 +5,22 @@ import ContactInfo from './contact_info';
 import MapConstructor from '../map/map_constructor';
 import HoursOfOp from '../hours_of_op/hours_of_operation';
 import Attributes from './business_attributes';
+import ReviewForm from '../reviews/_review_form';
 
 class BusinessShow extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      business: this.props.business
+      business: this.props.business,
+      review: {
+        id: "", body: "", rating: "", img: ""
+      }
     };
     this.bizRating = this.bizRating.bind(this);
     this.bizRatingImages = this.bizRatingImages.bind(this);
+    this.formModal = this.formModal.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateField = this.updateField.bind(this);
   }
 
   componentDidMount(){
@@ -52,13 +59,49 @@ class BusinessShow extends React.Component{
   reviewbutton(){
     if(this.props.currentUserId){
       return(
-        <button className="modal-form-button">
+        <button className="modal-form-button" onClick={()=>this.dispModal()}>
           Write a Review
         </button>
       )
     } else {
       return( <div></div> )
     }
+  }
+
+  dispModal(){
+    const modal = document.getElementById("form-modal-container")
+    modal.style.display = "block";
+    modal.style.zIndex = 1;
+  }
+
+  formModal(){
+    <section className="form-modal" id="form-modal-container">
+      
+        <ReviewForm business={this.props.business} action={this.props.createReview}
+          currentUserId={this.props.currentUserId} update={this.updateField}
+          handleSubmit={this.handleSubmit} buttonText={"Post Review"}
+          review={null} htmlClass={"form-modal"} />
+    </section>
+  }
+
+  updateField(field) {
+    debugger
+    return (e) => {
+      this.setState({ [field]: e.currentTarget.value })
+    }
+  }
+
+  handleSubmit(e, action) {
+    const review = { //set state to equal review
+      business_id: this.props.business.id,
+      body: this.state.body,
+      rating: this.state.rating,
+      id: this.state.id
+    }
+
+    debugger
+    this.resetState(review.id);
+    action(this.props.business.id, review)
   }
 
   render(){
@@ -73,6 +116,7 @@ class BusinessShow extends React.Component{
                   <h2 className="business-name">{this.props.business.name}</h2>
                   {this.bizRating()}
                   {this.reviewbutton()}
+                  {this.formModal()}
                 </span>
                 {this.bizMapHrs()}
               </span>
