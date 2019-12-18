@@ -1278,6 +1278,7 @@ function (_React$Component) {
     _this.searchForm = _this.searchForm.bind(_assertThisInitialized(_this));
     _this.generalFilter = _this.generalFilter.bind(_assertThisInitialized(_this));
     _this.filter = _this.filter.bind(_assertThisInitialized(_this));
+    _this.dispSearchResults = _this.dispSearchResults.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1330,9 +1331,20 @@ function (_React$Component) {
       return filtered;
     }
   }, {
+    key: "dispSearchResults",
+    value: function dispSearchResults(searchResults) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "search-dropdown"
+      }, this.disp(searchResults.businessNames), this.disp(searchResults.menuItems), this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs), this.dispCat(this.props.attrCats.Cuisinse, searchResults.attrs), this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs), this.dispCat(this.props.attrCats.BusinessType, searchResults.attrs), this.dispCat(this.props.attrCats.MiscAttribute, searchResults.attrs));
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, this.searchForm(), this.dispSearchResults(this.state.results));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "search-bar-container"
+      }, this.searchForm(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "search-dropdown-container"
+      }, this.dispSearchResults(this.state.results)));
     }
   }]);
 

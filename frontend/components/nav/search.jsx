@@ -13,6 +13,7 @@ class Search extends React.Component{
     this.searchForm = this.searchForm.bind(this);
     this.generalFilter = this.generalFilter.bind(this);
     this.filter = this.filter.bind(this);
+    this.dispSearchResults = this.dispSearchResults.bind(this);
   }
 
   componentDidMount(){
@@ -36,6 +37,7 @@ class Search extends React.Component{
     filteredAttrs= filter( filter, this.props.attrs );
     filteredMenuItems = filter( filter, this.props.menuItems );
     filteredBusinessNames = filter( filter, this.props.businessNames );
+
     this.setState({
       results: {
         attrs: filteredAttrs,
@@ -57,12 +59,28 @@ class Search extends React.Component{
     return filtered;
   }
 
+  dispSearchResults(searchResults) {
+    return (
+      <section className="search-dropdown">
+        {this.disp(searchResults.businessNames)}
+        {this.disp(searchResults.menuItems)}
+        {this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs)}
+        {this.dispCat(this.props.attrCats.Cuisinse, searchResults.attrs)}
+        {this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs)}
+        {this.dispCat(this.props.attrCats.BusinessType, searchResults.attrs)}
+        {this.dispCat(this.props.attrCats.MiscAttribute, searchResults.attrs)}
+      </section>
+    )
+  }
+
   render(){
     
     return(
-      <section>
+      <section className="search-bar-container">
         {this.searchForm()}
-        {this.dispSearchResults(this.state.results)}
+        <section className="search-dropdown-container">
+          {this.dispSearchResults(this.state.results)}
+        </section>
       </section>
     )
   }
