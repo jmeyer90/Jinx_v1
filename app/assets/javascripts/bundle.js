@@ -1272,10 +1272,15 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Search).call(this, props));
     _this.state = {
+      filter: {
+        general: ""
+      },
       results: {}
     };
     _this.searchableData = _this.searchableData.bind(_assertThisInitialized(_this));
     _this.searchForm = _this.searchForm.bind(_assertThisInitialized(_this));
+    _this.locationFilter = _this.locationFilter.bind(_assertThisInitialized(_this));
+    _this.generalFiler = _this.generalFiler.bind(_assertThisInitialized(_this));
     _this.filter = _this.filter.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -1298,7 +1303,7 @@ function (_React$Component) {
         type: "text",
         placeholder: "Burgers, American, Lebanese",
         onChange: function onChange(e) {
-          return _this2.filter(e, "general");
+          return _this2.filter(e);
         }
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "search-title"
@@ -1306,13 +1311,38 @@ function (_React$Component) {
         type: "text",
         placeholder: "The Shire, Helm's Deep, Atlantis...",
         onChange: function onChange(e) {
-          return _this2.filter(e, "neighborhood");
+          return _this2.locationFilter(e);
         }
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], null));
     }
   }, {
-    key: "filer",
-    value: function filer(e, field) {}
+    key: "generalFiler",
+    value: function generalFiler(e) {
+      var filter = e.currentTarget.value;
+      var filteredVals = {};
+      fileredVals = filteredVals.concat(filter(filter, this.props.attrs));
+      fileredVals = filteredVals.concat(filter(filter, this.props.menuItems));
+      fileredVals = filteredVals.concat(filter(filter, this.props.businessNames));
+    }
+  }, {
+    key: "locationFilter",
+    value: function locationFilter(e) {
+      var filter = e.currentTarget.value;
+      var locations = [];
+      this.props.neighborhoods.forEach(function (location) {
+        if (location.includes(filter)) {
+          locations.push(location);
+        }
+      });
+      this.filter({
+        neighborhoods: locations
+      });
+    }
+  }, {
+    key: "filter",
+    value: function filter(e) {
+      var attrArr = Object.keys(this.props.attr);
+    }
   }, {
     key: "render",
     value: function render() {
@@ -1345,6 +1375,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state) {
   return {
+    businesses: state.entities.businesses,
     attrs: state.search.attrs,
     attrCats: state.search.attrCats,
     menuItems: state.search.menuItems,

@@ -3,6 +3,7 @@ import Search from "./search";
 import { fetchBusinesses } from "../../actions/business_actions";
 
 const msp = state =>({
+  businesses: state.entities.businesses,
   attrs: state.search.attrs,
   attrCats: state.search.attrCats,
   menuItems: state.search.menuItems,
