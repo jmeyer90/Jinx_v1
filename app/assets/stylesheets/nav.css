@@ -26,20 +26,14 @@
   font-size: 50px;
   font-family: impact, fantasy;
   font-weight: 1000;
-  margin: auto;
+  margin: 15px auto;
 	-webkit-text-stroke-width: 3px;
   -webkit-text-stroke-color: white;
 }
 
-.search-bar{
-  width: 800px;
-  height: 45px;
-  border-radius: 4px;
-  background: white;
-}
-
 .session-buttons {
-  float: right;
+  float: left;
+  width: 325px;
   margin: 20px;
   font-family: inherit;
 }
