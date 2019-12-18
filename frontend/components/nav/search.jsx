@@ -1,52 +1,41 @@
 import React from 'react';
 import SearchForm from './search_form';
+import { Link } from 'react-router-dom';
 
 class Search extends React.Component{
   constructor(props){
     super(props)
-    this.state = {
-      attrs: [],
-      menuItems: [],
-      bizNames: []
+    this.state={
+      results: {}
     }
+
     this.searchableData = this.searchableData.bind(this);
     this.searchForm = this.searchForm.bind(this);
+    this.filter = this.filter.bind(this);
   }
 
   componentDidMount(){
     this.props.fetchBusinesses();
-    // this.searchableData(this.props.businesses);
   }
 
   searchForm(){
-    debugger
     return(
-      <SearchForm bizNames={this.state.bizNames} attrs={this.state.attrs} menuItems={this.state.menuItems}/>
+      <section className="search-bar">
+        <label className="search-title">
+          Find
+          <input type="text" placeholder="Burgers, American, Lebanese" onChange={(e)=>this.filter(e, "general")} />
+        </label>
+        <label className="search-title">
+          Near
+          <input type="text" placeholder="The Shire, Helm's Deep, Atlantis..." onChange={(e) => this.filter(e, "neighborhood")}/>
+        </label>
+        <Link></Link>
+      </section>
     )
   }
 
-  searchableData(businesses){
-    if(businesses){
-
-      let attrs = [];
-      let menuItems = [];
-
-      const bizNames = Object.values(businesses).map(business => {
-        debugger
-        bizName = { [business.name]: businesses.id };
-        attrs.concat(business.attribute_items);
-        menuItems.concat(business.menuItems);
-        return (bizName)
-      });
-
-      attrs = [...new Set(attrs)];
-
-      this.setState({
-        attrs: attrs,
-        menuItems: menuItems,
-        bizNames: bizNames
-      })
-    }
+  filer(e, field){
+    
   }
 
   render(){
