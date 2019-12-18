@@ -13,7 +13,7 @@
 .nav-bar {
   display: flex;
   position: relative;
-  width: 1000px;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   margin: auto;
@@ -32,9 +32,10 @@
 }
 
 .search-bar{
-  width: 400px;
-  padding: 10px;
+  width: 800px;
+  height: 45px;
   border-radius: 4px;
+  background: white;
 }
 
 .session-buttons {

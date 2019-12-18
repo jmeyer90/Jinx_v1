@@ -1302,22 +1302,22 @@ function (_React$Component) {
       var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "search-bar"
+        className: "search-form-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "search-form",
         onSubmit: function onSubmit() {
           return _this2.handleSubmit();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "search-title"
-      }, "Find", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Find"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "search-input",
         type: "text",
         placeholder: "Burgers, American, Wheelchar Accessible",
         onChange: function onChange(e) {
           return _this2.generalFilter(e);
         }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Search")));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Search")));
     }
   }, {
     key: "generalFilter",

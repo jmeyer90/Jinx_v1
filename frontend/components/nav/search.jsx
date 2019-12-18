@@ -29,14 +29,12 @@ class Search extends React.Component{
 
   searchForm(){
     return(
-      <section className="search-bar">
+      <section className="search-form-container">
         <form className="search-form" onSubmit={()=>this.handleSubmit()}>
-        <label className="search-title">
-          Find
+          <h2 className="search-title">Find</h2>
           <input className="search-input" type="text" 
             placeholder="Burgers, American, Wheelchar Accessible" 
             onChange={(e)=>this.generalFilter(e)} />
-        </label>
         <button>Search</button>
         </form>
       </section>
