@@ -1335,11 +1335,12 @@ function (_React$Component) {
     value: function filter(_filter, attrs) {
       var filtered = {};
       debugger;
-      Object.keys(this.props.attrs).forEach(function (attrKey) {
-        if (attrKey.includes(_filter)) {
+      Object.keys(attrs).forEach(function (attrKey) {
+        if (attrKey.toLowerCase().includes(_filter.toLowerCase())) {
           filtered[attrKey] = attrs[attrKey];
         }
       });
+      debugger;
       return filtered;
     }
   }, {
@@ -1348,7 +1349,7 @@ function (_React$Component) {
       debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "search-dropdown"
-      }, this.disp(searchResults.businessNames), this.disp(searchResults.menuItems));
+      }, this.disp(searchResults.businessNames), this.disp(searchResults.menuItems), this.disp(searchResults.attrs));
     }
   }, {
     key: "disp",

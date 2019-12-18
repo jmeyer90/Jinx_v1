@@ -59,12 +59,13 @@ class Search extends React.Component{
     let filtered={}
     
     debugger
-    Object.keys(this.props.attrs).forEach( attrKey =>{
-      if( attrKey.includes( filter )){
+    Object.keys(attrs).forEach( attrKey =>{
+      if( attrKey.toLowerCase().includes( filter.toLowerCase() )){
         filtered[attrKey] = attrs[attrKey];
       }
     });
 
+    debugger
     return filtered;
   }
 
@@ -74,6 +75,7 @@ class Search extends React.Component{
       <section className="search-dropdown">
         {this.disp(searchResults.businessNames)}
         {this.disp(searchResults.menuItems)}
+        {this.disp(searchResults.attrs)}
         {/* {this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs)}
         {this.dispCat(this.props.attrCats.Cuisinse, searchResults.attrs)}
         {this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs)}
