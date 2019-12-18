@@ -5,8 +5,17 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    # <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['MAPS_API_KEY']}" %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+
+    <script type="text/javascript">
+      window.background = <%= image_url("hogwarts.jpg").html_safe %>
+      window.reviewImg = <%= image_url("cauldron.jpg").html_safe %>
+      window.profileImg = <%= image_url("wizard.png").html_safe %>
+      window.businessImg = <%= image_url("leaky-cauldron.jpg").html_safe %>
+    </script>
+
     <% if logged_in? %>
       <script type="text/javascript">
         window.current_user = 

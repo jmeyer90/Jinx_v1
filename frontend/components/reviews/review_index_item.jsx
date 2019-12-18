@@ -96,8 +96,7 @@ const reviewForm = (buttonText, props) => {
       action={props.updateReview} currentUserId={props.currentUserId}
       update={props.updateField} handleSubmit={props.handleSubmit}
       buttonText={buttonText} review={review} htmlClass={htmlClass}
-      deleteReview={props.deleteReview} resetState={props.resetState} 
-      handleFile={props.handleFile}/>
+      deleteReview={props.deleteReview} resetState={props.resetState}/>
   )
 }
 

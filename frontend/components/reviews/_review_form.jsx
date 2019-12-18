@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ReviewForm= props =>{
+  debugger
   if (props.business && props.currentUserId) {
     const review = props.review || {
       body: '',
@@ -70,7 +71,7 @@ const actionLogic = ( review, update, htmlClass, handleFile ) =>{
   }
 }
 
-const reviewDetails = (review, update, htmlClass, handleFile) => {
+const reviewDetails = (review, update, htmlClass ) => {
   return(
     <section className="data-input">
       <textarea className={'review-textarea-'.concat(htmlClass)}

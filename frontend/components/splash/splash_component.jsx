@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { fetchBusiness, fetchBusinesses } from '../../actions/business_actions';
 
 const msp = state =>({
-  businesses: state.entities.businesses
+  businesses: state.entities.businesses,
+  reviews: state.entities.reviews
 });
 
 const mdp = dispatch =>({

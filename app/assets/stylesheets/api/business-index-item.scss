@@ -1,0 +1,56 @@
+.splash{
+  display: flex;
+  justify-content: center;
+}
+
+.splash-index-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.business-index-container{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    width: 647px;
+    padding: 20px;
+    margin: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.business-index-img{
+  width: 130px;
+  height: 130px;
+  border: 1px solid lightgrey;
+  margin: 0 20px 0 0;
+  border-radius: 5px;
+}
+
+.business-index-info{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 0 20px 0 0;
+}
+
+.business-index-link{
+  margin-bottom: 8px;
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.index-attr{
+  color: gray;
+  font-size: 15px;
+  margin: 8px 0 8px;
+}
+
+.business-index-review{
+  display: flex;
+  flex-wrap: wrap;
+  color: gray;
+  font-size: 15px;
+  margin: 8px 0 8px;
+  line-height: 1.3;
+}

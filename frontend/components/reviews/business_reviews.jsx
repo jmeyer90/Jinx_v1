@@ -14,7 +14,6 @@ class BusinessReviews extends React.Component{
     this.reviewsDisp = this.reviewsDisp.bind(this);
     this.setReviewState = this.setReviewState.bind(this);
     this.resetState = this.resetState.bind(this);
-    this.handleFile = this.handleFile.bind(this);
   }
 
   componentDidMount(){
@@ -42,7 +41,7 @@ class BusinessReviews extends React.Component{
           handleSubmit={this.handleSubmit} updateField={this.updateField} 
           deleteReview={this.props.deleteReview} updateReview={this.props.updateReview} 
           reviewState={this.state} setReviewState={this.setReviewState}
-          resetState={this.resetState} handleFile={this.handleFile}/>
+          resetState={this.resetState} />
     )
   };
 
@@ -51,19 +50,9 @@ class BusinessReviews extends React.Component{
   }
 
   updateField(field){//unnecessary? onChange- update review directly in form
+    debugger
     return(e)=>{
       this.setState({[field]: e.currentTarget.value})
-    }
-  }
-  handleFile(e) {
-    const reader = new FileReader();
-    const file = e.currentTarget.files[0];
-    reader.onload = () => this.setState({ img: reader.result, imgFile: file});
-
-    if(file){
-      reader.readAsDataURL(file);
-    } else {
-      this.setState({ img: "", imgFile: null });
     }
   }
 
@@ -76,7 +65,6 @@ class BusinessReviews extends React.Component{
   }
 
   handleSubmit(e, action){
-    e.preventDefault();
     const review = { //set state to equal review
       business_id: this.props.business.id,
       body: this.state.body,
@@ -84,8 +72,7 @@ class BusinessReviews extends React.Component{
       id: this.state.id
     }
 
-
-
+    debugger
     this.resetState(review.id);
     action(this.props.business.id, review)
   }
@@ -106,8 +93,7 @@ class BusinessReviews extends React.Component{
           <ReviewForm business={this.props.business} action={this.props.createReview}
             currentUserId={this.props.currentUserId} update={this.updateField}
             handleSubmit={this.handleSubmit} buttonText={buttonText} 
-            review={review} htmlClass={htmlClass} 
-            handleFile={this.handleFile}/>
+            review={review} htmlClass={htmlClass}/>
 
           <ul className="business-review-list" >
             { Object.keys(this.props.reviews).map( reviewId => {
