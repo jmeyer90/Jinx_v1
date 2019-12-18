@@ -1,5 +1,4 @@
 import React from 'react';
-import SearchForm from './search_form';
 import { Link } from 'react-router-dom';
 
 class Search extends React.Component{
@@ -22,7 +21,10 @@ class Search extends React.Component{
 
   handleSubmit(){
     // Link to page to display search reulst
-    // Send businesses, display business index items.
+    // Send state
+    // display attributes with links to business page
+    // display business index items.
+    this.setState({ results: {}});
   }
 
   searchForm(){
@@ -31,7 +33,9 @@ class Search extends React.Component{
         <form className="search-form" onSubmit={()=>this.handleSubmit()}>
         <label className="search-title">
           Find
-          <input className="search-input" type="text" placeholder="Burgers, American, Wheelchar Accessible" onChange={(e)=>this.generalFilter(e)} />
+          <input className="search-input" type="text" 
+            placeholder="Burgers, American, Wheelchar Accessible" 
+            onChange={(e)=>this.generalFilter(e)} />
         </label>
         <button>Search</button>
         </form>
@@ -42,17 +46,24 @@ class Search extends React.Component{
   generalFilter(e){
     const filter = e.currentTarget.value;
 
-    const filteredAttrs= this.filter( filter, this.props.attrs );
-    const filteredMenuItems = this.filter( filter, this.props.menuItems );
-    const filteredBusinessNames = this.filter( filter, this.props.businessNames );
+    if (filter === "") {
 
-    this.setState({
-      results: {
-        attrs: filteredAttrs,
-        menuItems: filteredMenuItems,
-        businessNames: filteredBusinessNames
-      }
-    })
+      this.setState({ results: {} })
+
+    } else {
+
+      const filteredAttrs = this.filter(filter, this.props.attrs);
+      const filteredMenuItems = this.filter(filter, this.props.menuItems);
+      const filteredBusinessNames = this.filter(filter, this.props.businessNames);
+
+      this.setState({
+        results: {
+          attrs: filteredAttrs,
+          menuItems: filteredMenuItems,
+          businessNames: filteredBusinessNames
+        }
+      })
+    }
   }
 
   filter(filter, attrs){
@@ -93,16 +104,15 @@ class Search extends React.Component{
           <h2 className="search-section-title">{title}</h2>
           <label className="search-category">
             {Object.keys(category).map((attrName, idx) => (
-              <Link key={idx} to={`/businesses/${category[attrName]}`}>{attrName}</Link>
+              <Link key={idx} to={`/businesses/${category[attrName]}`}
+               onClick={()=>this.setState({ results: {} })}>
+                 {attrName}
+              </Link>
             ))}
           </label>
         </section>
       )
     }
-  }
-
-  dispCat(){
-
   }
 
   render(){

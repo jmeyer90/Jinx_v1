@@ -1151,7 +1151,7 @@ function (_React$Component) {
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "search-bar"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_constructor__WEBPACK_IMPORTED_MODULE_2__["default"], null)), "/>", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_constructor__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "session-buttons"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/login"
@@ -1236,8 +1236,7 @@ var mdp = function mdp(dispacth) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _search_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search_form */ "./frontend/components/nav/search_form.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1255,7 +1254,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -1289,8 +1287,14 @@ function (_React$Component) {
     }
   }, {
     key: "handleSubmit",
-    value: function handleSubmit() {// Link to page to display search reulst
-      // Send businesses, display business index items.
+    value: function handleSubmit() {
+      // Link to page to display search reulst
+      // Send state
+      // display attributes with links to business page
+      // display business index items.
+      this.setState({
+        results: {}
+      });
     }
   }, {
     key: "searchForm",
@@ -1319,16 +1323,23 @@ function (_React$Component) {
     key: "generalFilter",
     value: function generalFilter(e) {
       var filter = e.currentTarget.value;
-      var filteredAttrs = this.filter(filter, this.props.attrs);
-      var filteredMenuItems = this.filter(filter, this.props.menuItems);
-      var filteredBusinessNames = this.filter(filter, this.props.businessNames);
-      this.setState({
-        results: {
-          attrs: filteredAttrs,
-          menuItems: filteredMenuItems,
-          businessNames: filteredBusinessNames
-        }
-      });
+
+      if (filter === "") {
+        this.setState({
+          results: {}
+        });
+      } else {
+        var filteredAttrs = this.filter(filter, this.props.attrs);
+        var filteredMenuItems = this.filter(filter, this.props.menuItems);
+        var filteredBusinessNames = this.filter(filter, this.props.businessNames);
+        this.setState({
+          results: {
+            attrs: filteredAttrs,
+            menuItems: filteredMenuItems,
+            businessNames: filteredBusinessNames
+          }
+        });
+      }
     }
   }, {
     key: "filter",
@@ -1360,6 +1371,8 @@ function (_React$Component) {
   }, {
     key: "disp",
     value: function disp(category, title) {
+      var _this3 = this;
+
       if (category && Object.keys(category).length > 0) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "category"
@@ -1368,16 +1381,18 @@ function (_React$Component) {
         }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "search-category"
         }, Object.keys(category).map(function (attrName, idx) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
             key: idx,
-            to: "/businesses/".concat(category[attrName])
+            to: "/businesses/".concat(category[attrName]),
+            onClick: function onClick() {
+              return _this3.setState({
+                results: {}
+              });
+            }
           }, attrName);
         })));
       }
     }
-  }, {
-    key: "dispCat",
-    value: function dispCat() {}
   }, {
     key: "render",
     value: function render() {
@@ -1431,28 +1446,6 @@ var mdp = function mdp(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_search__WEBPACK_IMPORTED_MODULE_1__["default"]));
-
-/***/ }),
-
-/***/ "./frontend/components/nav/search_form.jsx":
-/*!*************************************************!*\
-  !*** ./frontend/components/nav/search_form.jsx ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var SearchForm = function SearchForm(props) {
-  debugger;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (SearchForm);
 
 /***/ }),
 

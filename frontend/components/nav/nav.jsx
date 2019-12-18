@@ -38,7 +38,7 @@ class Nav extends React.Component{
         <>
           <section className="search-bar">
             <SearchConstructor />
-          </section>/>
+          </section>
           <div className="session-buttons">
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
