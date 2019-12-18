@@ -15,7 +15,7 @@ class Search extends React.Component{
 
   componentDidMount(){
     this.props.fetchBusinesses();
-    this.searchableData(this.props.businesses);
+    // this.searchableData(this.props.businesses);
   }
 
   searchForm(){
@@ -33,7 +33,7 @@ class Search extends React.Component{
 
       const bizNames = Object.values(businesses).map(business => {
         debugger
-        bizName = { [business.name]: businesses.values[0] };
+        bizName = { [business.name]: businesses.id };
         attrs.concat(business.attribute_items);
         menuItems.concat(business.menuItems);
         return (bizName)

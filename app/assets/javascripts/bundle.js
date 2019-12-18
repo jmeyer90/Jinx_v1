@@ -1292,8 +1292,7 @@ function (_React$Component) {
   _createClass(Search, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchBusinesses();
-      this.searchableData(this.props.businesses);
+      this.props.fetchBusinesses(); // this.searchableData(this.props.businesses);
     }
   }, {
     key: "searchForm",
@@ -1313,7 +1312,7 @@ function (_React$Component) {
         var menuItems = [];
         var bizNames = Object.values(businesses).map(function (business) {
           debugger;
-          bizName = _defineProperty({}, business.name, businesses.values[0]);
+          bizName = _defineProperty({}, business.name, businesses.id);
           attrs.concat(business.attribute_items);
           menuItems.concat(business.menuItems);
           return bizName;
@@ -2774,6 +2773,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_reducer */ "./frontend/reducers/session_reducer.js");
 /* harmony import */ var _entitites_entities_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./entitites/entities_reducer */ "./frontend/reducers/entitites/entities_reducer.js");
 /* harmony import */ var _errors_errors_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./errors/errors_reducer */ "./frontend/reducers/errors/errors_reducer.js");
+/* harmony import */ var _search_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./search_reducer */ "./frontend/reducers/search_reducer.js");
+
 
 
 
@@ -2781,9 +2782,60 @@ __webpack_require__.r(__webpack_exports__);
 var RootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   entities: _entitites_entities_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  errors: _errors_errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  errors: _errors_errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  search: _search_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (RootReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/search_reducer.js":
+/*!*********************************************!*\
+  !*** ./frontend/reducers/search_reducer.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/business_actions */ "./frontend/actions/business_actions.js");
+
+
+var SearchReducer = function SearchReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  debugger;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESSES"]:
+      var attrs = {};
+      var menuItems = {};
+      var bizNames = {};
+      Object.values(action.businesses).forEach(function (business) {
+        bizNames[business.name] = business.id;
+        business.menu_items.forEach(function (menuItem) {
+          menuItems[menuItem.title] = business.id;
+        });
+        business.attribute_items.forEach(function (attr) {
+          attrs[attr.name] = attrs[attr.name] || [];
+          attrs[attr.name] = attrs[attr.name].concat(business.id);
+        });
+        debugger;
+      });
+      debugger;
+      return {
+        attrs: attrs,
+        menuItems: menuItems,
+        businessNames: bizNames
+      };
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SearchReducer);
 
 /***/ }),
 
