@@ -6,6 +6,7 @@ import { fetchBusiness, fetchBusinesses } from './actions/business_actions';
 
 document.addEventListener('DOMContentLoaded', ()=>{
 
+  debugger
   let preloadedState;
 
   if (window.current_user) {

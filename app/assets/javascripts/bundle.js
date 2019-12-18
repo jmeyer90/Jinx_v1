@@ -680,6 +680,10 @@ var BusinessIndexItem = function BusinessIndexItem(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     key: props.business.id,
     className: "business-index-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    key: props.business.id,
+    className: "business-index-link",
+    to: "/businesses/".concat(props.business.id)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
     className: "business-index-img"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -687,17 +691,15 @@ var BusinessIndexItem = function BusinessIndexItem(props) {
     alt: "wizard restaurant"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "business-index-info"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    key: props.business.id,
-    className: "business-index-link",
-    to: "/businesses/".concat(props.business.id)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "business-index-name"
   }, props.business.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "business-index-rating-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "business-index-rating"
   }, props.business.rating)), businessType(props.business), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "business-index-review"
-  }, props.review.body)));
+  }, props.review.body))));
 };
 
 var businessType = function businessType(business) {
@@ -2259,6 +2261,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 document.addEventListener('DOMContentLoaded', function () {
+  debugger;
   var preloadedState;
 
   if (window.current_user) {

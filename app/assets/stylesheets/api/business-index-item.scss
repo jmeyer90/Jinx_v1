@@ -14,9 +14,15 @@
     border: 1px solid lightgrey;
     border-radius: 4px;
     width: 647px;
-    padding: 20px;
     margin: 20px;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.business-index-link{
+  display: flex;
+  flex-direction: row;
+  font-size: 18px;
+  padding: 22px;
 }
 
 .business-index-img{
@@ -34,7 +40,7 @@
   margin: 0 20px 0 0;
 }
 
-.business-index-link{
+.business-index-name{
   margin-bottom: 8px;
   font-weight: 900;
   font-size: 18px;

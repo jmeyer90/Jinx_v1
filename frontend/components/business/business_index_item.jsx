@@ -6,19 +6,21 @@ const BusinessIndexItem = props =>{
   debugger
   return(
     <li key={props.business.id} className="business-index-container">
+      <Link key={props.business.id} className="business-index-link" to={`/businesses/${props.business.id}`}>
       <figure className="business-index-img">
         <img href={`${window.businessImg}`} alt="wizard restaurant"/>
       </figure>
       <section className="business-index-info">
-        <Link key={ props.business.id } className="business-index-link" to={`/businesses/${props.business.id}`}>
-          { props.business.name }
-        </Link>
+        <span className="business-index-name">
+            {props.business.name}
+        </span>
         <span className="business-index-rating-container">
           <div className="business-index-rating">{props.business.rating}</div>
         </span>
         {businessType(props.business)}
         <p className="business-index-review">{ props.review.body }</p>
       </section>
+      </Link>
     </li>
   )
 }

@@ -3,7 +3,6 @@ class Api::ReviewsController < ApplicationController
   def index
     @reviews = Review.includes(:user).with_attached_photo.where('reviews.business_id =?', params[:business_id]).references(:reviews)
     
-    debugger
     if @reviews
       render :index
     else 

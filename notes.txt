@@ -32,3 +32,16 @@ Home Page-
 Footer-
 1- image
 2- links
+
+Bootstrap Images: 
+
+  To application.html.erb:
+
+    <script type="text/javascript">
+      window.background = <%= image_url("hogwarts.jpg").html_safe %>
+      window.reviewImg = <%= image_url("cauldron.jpg").html_safe %>
+      window.profileImg = <%= image_url("wizard.png").html_safe %>
+      window.businessImg = <%= image_url("leaky-cauldron.jpg").html_safe %>
+    </script>
+
+  recieve "unexpected token :" error when in file
