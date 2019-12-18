@@ -6,20 +6,6 @@ export const REVIEW_ERRORS = "REVIEW_ERRORS";
 export const RECEIVE_REVIEW = "RECEIVE_REVIEW";
 export const RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
 
-const extractReviews = reviewsArr => {
-  let reviewsObj = {};
-
-  for (let i = 0; i < reviewsArr.length; i++) {
-    let el = reviewsArr.shift();
-    debugger
-    reviewsObj[Object.values(el)[0]] = el;
-    debugger
-  }
-  debugger
-
-  return reviewsObj;
-}
-
 const receiveReviews = reviewsInfo => {
   debugger
   const reviews = extractAsObj(reviewsInfo, "reviews");
@@ -27,8 +13,8 @@ const receiveReviews = reviewsInfo => {
   debugger
   return {
     type: RECEIVE_REVIEWS,
-    reviews
-    // users
+    reviews,
+    users
   }
 };
 

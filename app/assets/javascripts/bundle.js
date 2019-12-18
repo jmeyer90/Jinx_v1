@@ -112,6 +112,7 @@ var receiveBusinesses = function receiveBusinesses(businessesInfo) {
   var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(businessesInfo, "reviews");
   var users = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(businessesInfo, "users");
   var businesses = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(businessesInfo, "businesses");
+  debugger;
   return {
     type: RECEIVE_BUSINESSES,
     businesses: businesses,
@@ -187,20 +188,6 @@ var REVIEW_ERRORS = "REVIEW_ERRORS";
 var RECEIVE_REVIEW = "RECEIVE_REVIEW";
 var RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
 
-var extractReviews = function extractReviews(reviewsArr) {
-  var reviewsObj = {};
-
-  for (var i = 0; i < reviewsArr.length; i++) {
-    var el = reviewsArr.shift();
-    debugger;
-    reviewsObj[Object.values(el)[0]] = el;
-    debugger;
-  }
-
-  debugger;
-  return reviewsObj;
-};
-
 var receiveReviews = function receiveReviews(reviewsInfo) {
   debugger;
   var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(reviewsInfo, "reviews");
@@ -208,8 +195,8 @@ var receiveReviews = function receiveReviews(reviewsInfo) {
   debugger;
   return {
     type: RECEIVE_REVIEWS,
-    reviews: reviews // users
-
+    reviews: reviews,
+    users: users
   };
 };
 
@@ -2261,7 +2248,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  debugger;
   var preloadedState;
 
   if (window.current_user) {
@@ -2306,11 +2292,7 @@ document.addEventListener('DOMContentLoaded', function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
-/* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/review_actions */ "./frontend/actions/review_actions.js");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
 
 
 
@@ -2326,6 +2308,7 @@ var BusinessesReducer = function BusinessesReducer() {
       businesses.forEach(function (business) {
         newState[business.id] = business;
       });
+      debugger;
       return newState;
 
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESS"]:
@@ -2401,6 +2384,7 @@ var ReviewsReducer = function ReviewsReducer() {
       reviews.forEach(function (review) {
         return newState[review.id] = review;
       });
+      debugger;
       return newState;
 
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_REVIEW"]:

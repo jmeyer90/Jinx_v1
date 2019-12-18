@@ -9,6 +9,7 @@ const receiveBusinesses = businessesInfo =>{
   const reviews = extractAsObj(businessesInfo, "reviews");
   const users = extractAsObj(businessesInfo, "users");
   const businesses = extractAsObj(businessesInfo, "businesses");
+  debugger
   return {
     type: RECEIVE_BUSINESSES,
     businesses,
