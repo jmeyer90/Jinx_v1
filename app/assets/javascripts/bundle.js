@@ -1317,7 +1317,9 @@ function (_React$Component) {
         onChange: function onChange(e) {
           return _this2.generalFilter(e);
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Search")));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "search-submit"
+      }, "Search")));
     }
   }, {
     key: "generalFilter",

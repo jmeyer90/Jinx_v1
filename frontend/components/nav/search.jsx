@@ -35,7 +35,7 @@ class Search extends React.Component{
           <input className="search-input" type="text" 
             placeholder="Burgers, American, Wheelchar Accessible" 
             onChange={(e)=>this.generalFilter(e)} />
-        <button>Search</button>
+        <button className="search-submit">Search</button>
         </form>
       </section>
     )
