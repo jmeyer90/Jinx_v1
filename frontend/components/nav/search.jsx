@@ -9,24 +9,32 @@ class Search extends React.Component{
       results: {}
     }
 
-    this.searchableData = this.searchableData.bind(this);
     this.searchForm = this.searchForm.bind(this);
     this.generalFilter = this.generalFilter.bind(this);
     this.filter = this.filter.bind(this);
     this.dispSearchResults = this.dispSearchResults.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount(){
     this.props.fetchBusinesses();
   }
 
+  handleSubmit(){
+    // Link to page to display search reulst
+    // Send businesses, display business index items.
+  }
+
   searchForm(){
     return(
       <section className="search-bar">
+        <form className="search-form" onSubmit={()=>this.handleSubmit()}>
         <label className="search-title">
           Find
-          <input type="text" placeholder="Burgers, American, Lebanese" onChange={(e)=>this.generalFilter(e)} />
+          <input className="search-input" type="text" placeholder="Burgers, American, Wheelchar Accessible" onChange={(e)=>this.generalFilter(e)} />
         </label>
+        <button>Search</button>
+        </form>
       </section>
     )
   }
@@ -34,9 +42,9 @@ class Search extends React.Component{
   generalFilter(e){
     const filter = e.currentTarget.value;
 
-    filteredAttrs= filter( filter, this.props.attrs );
-    filteredMenuItems = filter( filter, this.props.menuItems );
-    filteredBusinessNames = filter( filter, this.props.businessNames );
+    const filteredAttrs= this.filter( filter, this.props.attrs );
+    const filteredMenuItems = this.filter( filter, this.props.menuItems );
+    const filteredBusinessNames = this.filter( filter, this.props.businessNames );
 
     this.setState({
       results: {
@@ -50,6 +58,7 @@ class Search extends React.Component{
   filter(filter, attrs){
     let filtered={}
     
+    debugger
     Object.keys(this.props.attrs).forEach( attrKey =>{
       if( attrKey.includes( filter )){
         filtered[attrKey] = attrs[attrKey];
@@ -60,17 +69,36 @@ class Search extends React.Component{
   }
 
   dispSearchResults(searchResults) {
+    debugger
     return (
       <section className="search-dropdown">
         {this.disp(searchResults.businessNames)}
         {this.disp(searchResults.menuItems)}
-        {this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs)}
+        {/* {this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs)}
         {this.dispCat(this.props.attrCats.Cuisinse, searchResults.attrs)}
         {this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs)}
         {this.dispCat(this.props.attrCats.BusinessType, searchResults.attrs)}
-        {this.dispCat(this.props.attrCats.MiscAttribute, searchResults.attrs)}
+        {this.dispCat(this.props.attrCats.MiscAttribute, searchResults.attrs)} */}
       </section>
     )
+  }
+
+  disp(category){
+    if (category) {
+      return (
+        <section className="category">
+          <label className="search-category">
+            {Object.keys(category).map((attrName, idx) => (
+              <Link key={idx} to={`/businesses/${category[attrName]}`}>{attrName}</Link>
+            ))}
+          </label>
+        </section>
+      )
+    }
+  }
+
+  dispCat(){
+
   }
 
   render(){

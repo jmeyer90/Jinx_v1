@@ -1274,11 +1274,11 @@ function (_React$Component) {
     _this.state = {
       results: {}
     };
-    _this.searchableData = _this.searchableData.bind(_assertThisInitialized(_this));
     _this.searchForm = _this.searchForm.bind(_assertThisInitialized(_this));
     _this.generalFilter = _this.generalFilter.bind(_assertThisInitialized(_this));
     _this.filter = _this.filter.bind(_assertThisInitialized(_this));
     _this.dispSearchResults = _this.dispSearchResults.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1288,29 +1288,40 @@ function (_React$Component) {
       this.props.fetchBusinesses();
     }
   }, {
+    key: "handleSubmit",
+    value: function handleSubmit() {// Link to page to display search reulst
+      // Send businesses, display business index items.
+    }
+  }, {
     key: "searchForm",
     value: function searchForm() {
       var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "search-bar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "search-form",
+        onSubmit: function onSubmit() {
+          return _this2.handleSubmit();
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "search-title"
       }, "Find", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "search-input",
         type: "text",
-        placeholder: "Burgers, American, Lebanese",
+        placeholder: "Burgers, American, Wheelchar Accessible",
         onChange: function onChange(e) {
           return _this2.generalFilter(e);
         }
-      })));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Search")));
     }
   }, {
     key: "generalFilter",
     value: function generalFilter(e) {
       var filter = e.currentTarget.value;
-      filteredAttrs = filter(filter, this.props.attrs);
-      filteredMenuItems = filter(filter, this.props.menuItems);
-      filteredBusinessNames = filter(filter, this.props.businessNames);
+      var filteredAttrs = this.filter(filter, this.props.attrs);
+      var filteredMenuItems = this.filter(filter, this.props.menuItems);
+      var filteredBusinessNames = this.filter(filter, this.props.businessNames);
       this.setState({
         results: {
           attrs: filteredAttrs,
@@ -1323,6 +1334,7 @@ function (_React$Component) {
     key: "filter",
     value: function filter(_filter, attrs) {
       var filtered = {};
+      debugger;
       Object.keys(this.props.attrs).forEach(function (attrKey) {
         if (attrKey.includes(_filter)) {
           filtered[attrKey] = attrs[attrKey];
@@ -1333,10 +1345,30 @@ function (_React$Component) {
   }, {
     key: "dispSearchResults",
     value: function dispSearchResults(searchResults) {
+      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "search-dropdown"
-      }, this.disp(searchResults.businessNames), this.disp(searchResults.menuItems), this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs), this.dispCat(this.props.attrCats.Cuisinse, searchResults.attrs), this.dispCat(this.props.attrCats.Neighbothood, searchResults.attrs), this.dispCat(this.props.attrCats.BusinessType, searchResults.attrs), this.dispCat(this.props.attrCats.MiscAttribute, searchResults.attrs));
+      }, this.disp(searchResults.businessNames), this.disp(searchResults.menuItems));
     }
+  }, {
+    key: "disp",
+    value: function disp(category) {
+      if (category) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+          className: "category"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+          className: "search-category"
+        }, Object.keys(category).map(function (attrName, idx) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+            key: idx,
+            to: "/businesses/".concat(category[attrName])
+          }, attrName);
+        })));
+      }
+    }
+  }, {
+    key: "dispCat",
+    value: function dispCat() {}
   }, {
     key: "render",
     value: function render() {
