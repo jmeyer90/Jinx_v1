@@ -25,6 +25,7 @@ class BusinessShow extends React.Component{
 
   componentDidMount(){
     this.props.fetchBusiness( this.props.businessId );
+    this.props.fetchReviews( this.props.businessId )
   }
 
   bizRatingImages(){
@@ -75,6 +76,8 @@ class BusinessShow extends React.Component{
   }
 
   formModal(){
+    const review = this.state.review;
+
     return(
       <section className="form-modal" id="form-modal-container">
         <span className="close-form-span">
@@ -85,7 +88,7 @@ class BusinessShow extends React.Component{
         <ReviewForm business={this.props.business} action={this.props.createReview}
           currentUserId={this.props.currentUserId} update={this.updateField}
           handleSubmit={this.handleSubmit} buttonText={"Post Review"}
-          review={null} htmlClass={"modal"} />
+          review={review} htmlClass={"modal"} />
       </section>
     )
   }

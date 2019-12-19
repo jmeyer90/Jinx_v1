@@ -279,6 +279,48 @@ var deleteReview = function deleteReview(reviewId) {
 
 /***/ }),
 
+/***/ "./frontend/actions/search_actions.js":
+/*!********************************************!*\
+  !*** ./frontend/actions/search_actions.js ***!
+  \********************************************/
+/*! exports provided: RECEIVE_SEARCH_RESULTS, REMOVE_SEARCH_RESULTS, fetchSearchResults, clearSearchResults */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SEARCH_RESULTS", function() { return RECEIVE_SEARCH_RESULTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_SEARCH_RESULTS", function() { return REMOVE_SEARCH_RESULTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSearchResults", function() { return fetchSearchResults; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearSearchResults", function() { return clearSearchResults; });
+var RECEIVE_SEARCH_RESULTS = "RECEIVE_SEARCH_RESULTS";
+var REMOVE_SEARCH_RESULTS = "REMOVE_SEARCH_RESULTS";
+
+var receiveSearchResults = function receiveSearchResults(searchResults) {
+  return {
+    type: RECEIVE_SEARCH_RESULTS,
+    searchResults: searchResults
+  };
+};
+
+var removeSearchResults = function removeSearchResults() {
+  return {
+    type: REMOVE_SEARCH_RESULTS
+  };
+};
+
+var fetchSearchResults = function fetchSearchResults(searchResults) {
+  return function (dispatch) {
+    return dispatch(receiveSearchResults(searchResults));
+  };
+};
+var clearSearchResults = function clearSearchResults() {
+  return function (dispatch) {
+    return dispatch(removeSearchResults());
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -530,6 +572,7 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchBusiness(this.props.businessId);
+      this.props.fetchReviews(this.props.businessId);
     }
   }, {
     key: "bizRatingImages",
@@ -592,6 +635,7 @@ function (_React$Component) {
     value: function formModal() {
       var _this3 = this;
 
+      var review = this.state.review;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "form-modal",
         id: "form-modal-container"
@@ -609,7 +653,7 @@ function (_React$Component) {
         update: this.updateField,
         handleSubmit: this.handleSubmit,
         buttonText: "Post Review",
-        review: null,
+        review: review,
         htmlClass: "modal"
       }));
     }
@@ -807,7 +851,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _buiness_show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./buiness_show */ "./frontend/components/business/buiness_show.jsx");
 /* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/review_actions */ "./frontend/actions/review_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 
@@ -832,19 +878,12 @@ var mdp = function mdp(dispatch) {
     fetchBusinesses: function fetchBusinesses() {
       return dispatch(Object(_actions_business_actions__WEBPACK_IMPORTED_MODULE_2__["fetchBusinesses"])());
     },
-    createReview: function (_createReview) {
-      function createReview(_x, _x2) {
-        return _createReview.apply(this, arguments);
-      }
-
-      createReview.toString = function () {
-        return _createReview.toString();
-      };
-
-      return createReview;
-    }(function (businessId, review) {
-      return dispatch(createReview(businessId, review));
-    })
+    fetchReviews: function fetchReviews(businessId) {
+      return dispatch(Object(_actions_review_actions__WEBPACK_IMPORTED_MODULE_3__["fetchReviews"])(businessId));
+    },
+    createReview: function createReview(businessId, review) {
+      return dispatch(Object(_actions_review_actions__WEBPACK_IMPORTED_MODULE_3__["createReview"])(businessId, review));
+    }
   };
 };
 
@@ -1378,12 +1417,13 @@ function (_React$Component) {
   _createClass(Search, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchBusinesses();
+      if (!this.props.businessNames || this.props.businessNames.length <= 1) {
+        this.props.fetchBusinesses();
+      }
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit() {
-      //
       this.setState({
         results: {}
       });
@@ -1673,7 +1713,7 @@ var actionLogic = function actionLogic(review, update, htmlClass, handleFile) {
 
 var reviewDetails = function reviewDetails(review, update, htmlClass) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    className: "data-input"
+    className: "data-input-".concat(htmlClass)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     className: 'review-textarea-'.concat(htmlClass),
     placeholder: "Sample Review Body",
@@ -1725,9 +1765,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state, ownProps) {
-  var business = Object.values(state.entities.businesses)[0];
+  var business = {};
+
+  if (state.entities.businesses.currentBusinessId) {
+    business = state.entities.businesses[state.entities.businesses.currentBusinessId];
+  }
+
   return {
-    business: business || {},
+    business: business,
     reviews: state.entities.reviews || {},
     users: state.entities.users || {},
     currentUserId: state.session.currentUserId
@@ -1823,6 +1868,8 @@ function (_React$Component) {
   _createClass(BusinessReviews, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      debugger;
+
       if (this.props.business.id) {
         this.props.fetchReviews(this.props.business.id);
       }
@@ -1907,9 +1954,7 @@ function (_React$Component) {
         var htmlClass = "create";
         var review = {
           body: this.state.body,
-          //set to empty string
-          rating: this.state.rating //set to empty string
-
+          rating: this.state.rating
         };
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "business-reviews"
@@ -2432,6 +2477,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _business_business_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../business/business_index_item */ "./frontend/components/business/business_index_item.jsx");
+/* harmony import */ var _util_business_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/business_util */ "./frontend/util/business_util.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2449,6 +2495,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -2473,7 +2520,9 @@ function (_React$Component) {
 
   _createClass(Splash, [{
     key: "componentDidMount",
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      this.props.fetchBusinesses();
+    }
   }, {
     key: "matchBizToReview",
     value: function matchBizToReview(review) {
@@ -2625,6 +2674,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var BusinessesReducer = function BusinessesReducer() {
+  var _newState;
+
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
@@ -2640,7 +2691,7 @@ var BusinessesReducer = function BusinessesReducer() {
       return newState;
 
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESS"]:
-      newState = _defineProperty({}, action.business.id, action.business);
+      newState = (_newState = {}, _defineProperty(_newState, action.business.id, action.business), _defineProperty(_newState, "currentBusinessId", action.business.id), _newState);
       return Object.assign({}, state, newState);
 
     default:
@@ -2965,10 +3016,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var RootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
+  search: _search_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
   entities: _entitites_entities_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   session: _session_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  errors: _errors_errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
-  search: _search_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
+  errors: _errors_errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (RootReducer);
 
@@ -2984,6 +3035,7 @@ var RootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/business_actions */ "./frontend/actions/business_actions.js");
+/* harmony import */ var _actions_search_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/search_actions */ "./frontend/actions/search_actions.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -2991,6 +3043,7 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 
 
 
@@ -3027,6 +3080,13 @@ var SearchReducer = function SearchReducer() {
         businessNames: bizNames
       };
 
+    case _actions_search_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SEARCH_RESULTS"]:
+      var newState = action.searchResults;
+      return Object.assign({}, state, {
+        searchResults: newState
+      });
+
+    case _actions_search_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_SEARCH_RESULTS"]:
     default:
       return state;
   }

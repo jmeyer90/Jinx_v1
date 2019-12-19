@@ -1,5 +1,6 @@
 import React from 'react';
 import BuinessIndexItem from '../business/business_index_item';
+import { fetchBusinesses } from '../../util/business_util';
 
 class Splash extends React.Component{
   constructor(props){
@@ -11,7 +12,7 @@ class Splash extends React.Component{
   }
 
   componentDidMount(){
-    
+    this.props.fetchBusinesses()
   }
 
   matchBizToReview(review){

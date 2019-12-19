@@ -1,4 +1,5 @@
 import { RECEIVE_BUSINESSES } from '../actions/business_actions';
+import { RECEIVE_SEARCH_RESULTS, REMOVE_SEARCH_RESULTS } from '../actions/search_actions';
 
 const SearchReducer = ( state={}, action )=>{
   debugger
@@ -29,6 +30,12 @@ const SearchReducer = ( state={}, action )=>{
       debugger
 
       return { attrs: attrs, attrCats: attrCats, menuItems: menuItems, businessNames: bizNames }
+    case RECEIVE_SEARCH_RESULTS:
+      let newState = action.searchResults;
+      return Object.assign({}, state, {searchResults: newState});
+
+    case REMOVE_SEARCH_RESULTS:
+
     default:
       return state;
   }

@@ -73,7 +73,7 @@ const actionLogic = ( review, update, htmlClass, handleFile ) =>{
 
 const reviewDetails = (review, update, htmlClass ) => {
   return(
-    <section className="data-input">
+    <section className={`data-input-${htmlClass}`}>
       <textarea className={'review-textarea-'.concat(htmlClass)}
         placeholder='Sample Review Body'
         onChange={update('body')} value={review.body} />

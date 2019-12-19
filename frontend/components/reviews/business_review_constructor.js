@@ -4,10 +4,13 @@ import BusinessReviews from './business_reviews';
 import { withRouter } from 'react-router-dom'
 
 const msp = (state, ownProps) => {
-  const business = Object.values( state.entities.businesses )[0];
+ let business = {}
+  if (state.entities.businesses.currentBusinessId){
+    business = state.entities.businesses[state.entities.businesses.currentBusinessId];
+  }
 
   return({
-    business: business || {},
+    business: business,
     reviews: state.entities.reviews || {},
     users: state.entities.users || {},
     currentUserId: state.session.currentUserId

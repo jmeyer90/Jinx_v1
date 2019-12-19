@@ -17,12 +17,12 @@ class Search extends React.Component{
   }
 
   componentDidMount(){
-    this.props.fetchBusinesses();
+    if (!this.props.businessNames || this.props.businessNames.length <= 1 ){
+      this.props.fetchBusinesses()
+    }
   }
 
   handleSubmit(){
-    
-    //
     this.setState({ results: {} });
 
     const modal = document.getElementById("search-modal");

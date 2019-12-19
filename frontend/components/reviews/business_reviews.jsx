@@ -17,6 +17,7 @@ class BusinessReviews extends React.Component{
   }
 
   componentDidMount(){
+    debugger
     if(this.props.business.id){
       this.props.fetchReviews(this.props.business.id)
     }
@@ -80,8 +81,8 @@ class BusinessReviews extends React.Component{
       const buttonText = "Post Review";
       const htmlClass ="create";
       const review={
-        body: this.state.body, //set to empty string
-        rating: this.state.rating //set to empty string
+        body: this.state.body, 
+        rating: this.state.rating 
       }
 
       return (
