@@ -69,30 +69,35 @@ class SessionForm extends React.Component {
     let { email, password, } = this.state;
 
     return (
-      <div className="session-container">
-        <div className="session-form">
-          <h1 className="title">{ this.props.formType }</h1>
-          { this.topGreeting() }
-          <button className="submit" onClick={() => this.logDemoUser()}>Log In with Demo User</button>
-          <h2 className="disclamer">{this.props.disclamer}</h2>
-          <hr className="session-line"/>
-          <form onSubmit={(e) => this.handleSubmit(e)}>
-            <label>
-              <input type="email" placeholder="Email" value={ email } onChange={ this.update("email") } required />
+      <section className="session-page-container">
+        <div className="session-container">
+          <div className="session-form">
+            <h1 className="title">{ this.props.formType }</h1>
+            { this.topGreeting() }
+            <button className="submit" onClick={() => this.logDemoUser()}>Log In with Demo User</button>
+            <h2 className="disclamer">{this.props.disclamer}</h2>
+            <hr className="session-line"/>
+            <form onSubmit={(e) => this.handleSubmit(e)}>
+              <label>
+                <input type="email" placeholder="Email" value={ email } onChange={ this.update("email") } required />
+              </label>
+              < SignupFields formType={ this.props.formType} user={ this.state } update={ this.update }/>
+              <label>
+                <input type="password" placeholder="Password" value={password} onChange={this.update("password")} required />
+              </label>
+              { this.bottomNotes() }
+              <input className="submit" type="submit" value={this.props.formType} />
+            </form>
+            <label className="bottom change-session-form">
+              {this.props.linkTitle}
+              <Link className="session-link" to={this.props.alternatePath}>{this.props.alternateForm}</Link>
             </label>
-            < SignupFields formType={ this.props.formType} user={ this.state } update={ this.update }/>
-            <label>
-              <input type="password" placeholder="Password" value={password} onChange={this.update("password")} required />
-            </label>
-            { this.bottomNotes() }
-            <input className="submit" type="submit" value={this.props.formType} />
-          </form>
-          <label className="bottom change-session-form">
-            {this.props.linkTitle}
-            <Link className="session-link" to={this.props.alternatePath}>{this.props.alternateForm}</Link>
-          </label>
+          </div>
         </div>
-      </div>
+        <figure className="session-img">
+          <img className="session-img-src" src={window.logoCircleImg} alt="profile-image" />
+        </figure>
+      </section >
     )
   }
 }

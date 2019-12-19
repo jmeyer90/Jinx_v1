@@ -784,8 +784,9 @@ var BusinessIndexItem = function BusinessIndexItem(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
     className: "business-index-img"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    href: "".concat(window.businessImg),
-    alt: "wizard restaurant"
+    className: "business-img-src",
+    src: window.bizImg,
+    alt: "business-image"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "business-index-info"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -1293,7 +1294,11 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/",
         className: "logo"
-      }, "Jinx"), this.sessionLinks()));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "logo-img-src",
+        src: window.logoImg,
+        alt: "profile-image"
+      })), this.sessionLinks()));
     }
   }]);
 
@@ -1657,9 +1662,13 @@ var ReviewForm = function ReviewForm(props) {
 var profileImg = function profileImg(htmlClass) {
   // partial for displaying user profile pic? or just image tag?
   if (htmlClass === 'create') {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
       className: "profile-img"
-    }, "User");
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      className: "profile-img-src",
+      src: window.userImg,
+      alt: "profile-image"
+    }));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
   }
@@ -2033,7 +2042,11 @@ var ReviewIndexItem = function ReviewIndexItem(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
     key: props.user.id,
     className: "profile-img"
-  }, "User"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "profile-img-src",
+    src: window.userImg,
+    alt: "profile-image"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "username"
   }, props.user.f_name, " ", props.user.l_name)), ReviewItemActions(props));
 };
@@ -2312,7 +2325,9 @@ function (_React$Component) {
       var _this$state = this.state,
           email = _this$state.email,
           password = _this$state.password;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "session-page-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-form"
@@ -2356,7 +2371,13 @@ function (_React$Component) {
       }, this.props.linkTitle, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "session-link",
         to: this.props.alternatePath
-      }, this.props.alternateForm))));
+      }, this.props.alternateForm)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
+        className: "session-img"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "session-img-src",
+        src: window.logoCircleImg,
+        alt: "profile-image"
+      })));
     }
   }]);
 

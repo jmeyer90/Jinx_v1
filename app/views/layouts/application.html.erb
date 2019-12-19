@@ -7,6 +7,16 @@
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+
+    <script>
+      window.userImg = `<%= image_url('wizard.png') %>`
+      window.bizImg = `<%= image_url('leaky_cauldron') %>`
+      window.logoImg = `<%= image_url('jinx_logo.png') %>`
+      window.logoCircleImg = `<%= image_url('jinx_logo_circle.png') %>`
+      window.reviewImg = `<%= image_url('cauldron.jpg') %>`
+      window.splashImg = `<%= image_url('hogwarts.jpg') %>`
+    </script>
+
     <% if logged_in? %>
       <script type="text/javascript">
         window.current_user = 

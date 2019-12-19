@@ -54,7 +54,9 @@ class Nav extends React.Component{
 
       <header className="nav-container">
         <nav className="nav-bar">
-        <Link to="/" className="logo">Jinx</Link>
+        <Link to="/" className="logo">
+            <img className="logo-img-src" src={window.logoImg} alt="profile-image" />
+        </Link>
         { this.sessionLinks() }
         </nav>
       </header>

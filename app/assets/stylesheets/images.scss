@@ -1,0 +1,31 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile-img-src{
+  width: 100%;
+  height: 100%;
+}
+
+.business-img-src{
+  width: 100%;
+  height: 100%;
+}
+
+.logo-img-src{
+  width: 100%;
+  height: 100%;
+}
+
+.session-img{
+  display: flex;
+  width: 29%;
+  height: 22%;
+  position: relative;
+}
+
+.session-img-src{
+  display: flex;
+  width: 100%;
+  position: relative;
+}

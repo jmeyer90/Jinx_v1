@@ -19,9 +19,10 @@ const ReviewIndexItem = props =>{
   return(
     <li key={props.review.id} className="business-review-item">
         <section className="user-info">
-        <figure key={props.user.id} className="profile-img">User</figure>
+        <figure key={props.user.id} className="profile-img">
+          <img className="profile-img-src" src={window.userImg} alt="profile-image"/>
+        </figure>
         <span className="username">{props.user.f_name} {props.user.l_name}</span>
-          {/* <img src='cauldron.jpg' alt="cauld */}
         </section>
         {ReviewItemActions(props)}
     </li>

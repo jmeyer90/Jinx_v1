@@ -22,11 +22,13 @@
 .logo {
   display: inline;
   justify-content: center;
+  height: 85px;
+  width: 100px;
   color: #452487;
   font-size: 50px;
   font-family: impact, fantasy;
   font-weight: 1000;
-  margin: 15px auto;
+  margin: auto;
 	-webkit-text-stroke-width: 3px;
   -webkit-text-stroke-color: white;
 }

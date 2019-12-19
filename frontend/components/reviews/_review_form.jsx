@@ -34,7 +34,9 @@ const ReviewForm= props =>{
 const profileImg = htmlClass =>{ // partial for displaying user profile pic? or just image tag?
   if(htmlClass === 'create'){
     return(
-      <h2 className='profile-img'>User</h2>
+      <figure className="profile-img">
+        <img className="profile-img-src" src={window.userImg} alt="profile-image" />
+      </figure>
     )
   } else {
     return( <div></div> )
