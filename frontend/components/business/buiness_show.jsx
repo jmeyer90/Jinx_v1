@@ -59,7 +59,7 @@ class BusinessShow extends React.Component{
   reviewbutton(){
     if(this.props.currentUserId){
       return(
-        <button className="modal-form-button" onClick={()=>this.dispModal("block", 1)}>
+        <button className="modal-form-button" onClick={()=>this.dispModal("flex", 1)}>
           Write a Review
         </button>
       )
@@ -77,13 +77,15 @@ class BusinessShow extends React.Component{
   formModal(){
     return(
       <section className="form-modal" id="form-modal-container">
-        <button className="close-form-modal" onClick={() => this.dispModal("none", -1)}>
-          Close
-        </button>
+        <span className="close-form-span">
+          <button className="close-form-button" onClick={() => this.dispModal("none", -1)}>
+            Close
+          </button>
+        </span>
         <ReviewForm business={this.props.business} action={this.props.createReview}
           currentUserId={this.props.currentUserId} update={this.updateField}
           handleSubmit={this.handleSubmit} buttonText={"Post Review"}
-          review={null} htmlClass={"form-modal"} />
+          review={null} htmlClass={"modal"} />
       </section>
     )
   }

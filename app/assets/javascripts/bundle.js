@@ -568,7 +568,7 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "modal-form-button",
           onClick: function onClick() {
-            return _this2.dispModal("block", 1);
+            return _this2.dispModal("flex", 1);
           }
         }, "Write a Review");
       } else {
@@ -590,12 +590,14 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "form-modal",
         id: "form-modal-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "close-form-span"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "close-form-modal",
+        className: "close-form-button",
         onClick: function onClick() {
           return _this3.dispModal("none", -1);
         }
-      }, "Close"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_review_form__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }, "Close")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews_review_form__WEBPACK_IMPORTED_MODULE_7__["default"], {
         business: this.props.business,
         action: this.props.createReview,
         currentUserId: this.props.currentUserId,
@@ -603,7 +605,7 @@ function (_React$Component) {
         handleSubmit: this.handleSubmit,
         buttonText: "Post Review",
         review: null,
-        htmlClass: "form-modal"
+        htmlClass: "modal"
       }));
     }
   }, {
