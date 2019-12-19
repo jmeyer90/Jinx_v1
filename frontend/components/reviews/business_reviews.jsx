@@ -14,17 +14,21 @@ class BusinessReviews extends React.Component{
     this.reviewsDisp = this.reviewsDisp.bind(this);
     this.setReviewState = this.setReviewState.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.reviewList = this.reviewList.bind(this);
   }
 
   componentDidMount(){
     debugger
-    if(this.props.business.id){
-      this.props.fetchReviews(this.props.business.id)
+    if (this.props.currentBusinessId){
+      this.props.fetchBusiness( this.props.currentBusinessId)
+      this.props.fetchReviews(this.props.currentBusinessId)
     }
   }
 
   reviewsDisp(){
+    debugger
     if (this.props.reivews){
+      debugger
       const reviewsArr = Object.values(this.props.reivews);
       let reviewsDisp = {}
       reviewsArr.forEach( review =>{
@@ -36,6 +40,7 @@ class BusinessReviews extends React.Component{
   }
 
   reviewItems(user, review){
+    debugger
     return (
         <ReviewIndexItem key={review.id} review={review} user={user} 
           currentUserId={this.props.currentUserId} business={this.props.business} 
@@ -45,6 +50,25 @@ class BusinessReviews extends React.Component{
           resetState={this.resetState} />
     )
   };
+
+  reviewList() {
+    debugger
+    if(this.props.reviews){
+      return(
+        Object.keys(this.props.reviews).map(reviewId => {
+
+          let review = this.props.reviews[reviewId];
+          let user = this.props.users[review.user_id];
+
+          return (
+            this.reviewItems(user, review)
+          )
+        })
+      )
+    } else {
+      return( <div></div> )
+    }
+  }
 
   setReviewState(review){
     this.setState(review);
@@ -66,14 +90,15 @@ class BusinessReviews extends React.Component{
 
   handleSubmit(e, action){
     const review = { //set state to equal review
-      business_id: this.props.business.id,
+      business_id: this.props.currentBusinessId,
       body: this.state.body,
       rating: this.state.rating, 
       id: this.state.id
     }
 
+    debugger
     this.resetState(review.id);
-    action(this.props.business.id, review)
+    action(this.props.currentBusinessId, review)
   }
 
   render(){
@@ -95,16 +120,7 @@ class BusinessReviews extends React.Component{
             review={review} htmlClass={htmlClass}/>
 
           <ul className="business-review-list" >
-            { Object.keys(this.props.reviews).map( reviewId => {
-
-              let review = this.props.reviews[reviewId];
-              let user = this.props.users[review.user_id];
-
-              return(
-                this.reviewItems(user, review)
-              )}
-            )}
-
+            {this.reviewList()}
           </ul>
         </section >
       )

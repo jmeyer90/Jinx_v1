@@ -220,6 +220,7 @@ var removeReview = function removeReview(reviewId) {
 };
 
 var reviewErrors = function reviewErrors(errors) {
+  debugger;
   return {
     type: REVIEW_ERRORS,
     errors: errors
@@ -571,6 +572,7 @@ function (_React$Component) {
   _createClass(BusinessShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      debugger;
       this.props.fetchBusiness(this.props.businessId);
       this.props.fetchReviews(this.props.businessId);
     }
@@ -662,7 +664,6 @@ function (_React$Component) {
     value: function updateField(field) {
       var _this4 = this;
 
-      debugger;
       return function (e) {
         _this4.setState({
           review: _defineProperty({}, field, e.currentTarget.value)
@@ -1337,7 +1338,6 @@ __webpack_require__.r(__webpack_exports__);
  // import { withRouter } from 'react-router-dom';
 
 var msp = function msp(state, ownProps) {
-  debugger;
   return {
     loggedIn: Boolean(state.session.currentUserId)
   };
@@ -1417,6 +1417,8 @@ function (_React$Component) {
   _createClass(Search, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      debugger;
+
       if (!this.props.businessNames || this.props.businessNames.length <= 1) {
         this.props.fetchBusinesses();
       }
@@ -1490,19 +1492,16 @@ function (_React$Component) {
     key: "filter",
     value: function filter(_filter, attrs) {
       var filtered = {};
-      debugger;
       Object.keys(attrs).forEach(function (attrKey) {
         if (attrKey.toLowerCase().includes(_filter.toLowerCase())) {
           filtered[attrKey] = attrs[attrKey];
         }
       });
-      debugger;
       return filtered;
     }
   }, {
     key: "dispSearchResults",
     value: function dispSearchResults(searchResults) {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "search-dropdown"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -1518,13 +1517,11 @@ function (_React$Component) {
     value: function disp(category, title) {
       var _this3 = this;
 
-      debugger;
       var modal = document.getElementById("search-modal");
 
       if (category && Object.keys(category).length > 0) {
         modal.style.display = "block";
         modal.style.zIndex = 1;
-        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "category"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
@@ -1639,8 +1636,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ReviewForm = function ReviewForm(props) {
-  debugger;
-
   if (props.business && props.currentUserId) {
     var review = props.review || {
       body: '',
@@ -1757,25 +1752,35 @@ var updateButtons = function updateButtons(htmlClass, deleteReview, resetState, 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_review_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/review_actions */ "./frontend/actions/review_actions.js");
-/* harmony import */ var _business_reviews__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./business_reviews */ "./frontend/components/reviews/business_reviews.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
+/* harmony import */ var _business_reviews__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./business_reviews */ "./frontend/components/reviews/business_reviews.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 
 
 
 var msp = function msp(state, ownProps) {
-  var business = {};
+  var business = {}; //  let reviews = {};
+  //  let users = {};
 
-  if (state.entities.businesses.currentBusinessId) {
-    business = state.entities.businesses[state.entities.businesses.currentBusinessId];
+  if (state.session.currentBusinessId) {
+    debugger;
+    business = state.entities.businesses[state.session.currentBusinessId]; // Object.values(state.entities.reviews).forEach(review=> {
+    //   if (review.businessId === state.entities.businesses.currentBusinessId){
+    //     reviews[review.id] = review;
+    //   }
+    // });
   }
 
+  debugger;
   return {
     business: business,
-    reviews: state.entities.reviews || {},
-    users: state.entities.users || {},
-    currentUserId: state.session.currentUserId
+    reviews: state.entities.reviews,
+    users: state.entities.users,
+    currentUserId: state.session.currentUserId,
+    currentBusinessId: state.session.currentBusinessId || null
   };
 };
 
@@ -1792,11 +1797,14 @@ var mdp = function mdp(dispatch) {
     },
     fetchReviews: function fetchReviews(businessId) {
       return dispatch(Object(_actions_review_actions__WEBPACK_IMPORTED_MODULE_1__["fetchReviews"])(businessId));
+    },
+    fetchBusiness: function fetchBusiness(businessId) {
+      return dispatch(Object(_actions_business_actions__WEBPACK_IMPORTED_MODULE_2__["fetchBusiness"])(businessId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_business_reviews__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_business_reviews__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -1862,6 +1870,7 @@ function (_React$Component) {
     _this.reviewsDisp = _this.reviewsDisp.bind(_assertThisInitialized(_this));
     _this.setReviewState = _this.setReviewState.bind(_assertThisInitialized(_this));
     _this.resetState = _this.resetState.bind(_assertThisInitialized(_this));
+    _this.reviewList = _this.reviewList.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1870,14 +1879,18 @@ function (_React$Component) {
     value: function componentDidMount() {
       debugger;
 
-      if (this.props.business.id) {
-        this.props.fetchReviews(this.props.business.id);
+      if (this.props.currentBusinessId) {
+        this.props.fetchBusiness(this.props.currentBusinessId);
+        this.props.fetchReviews(this.props.currentBusinessId);
       }
     }
   }, {
     key: "reviewsDisp",
     value: function reviewsDisp() {
+      debugger;
+
       if (this.props.reivews) {
+        debugger;
         var reviewsArr = Object.values(this.props.reivews);
         var reviewsDisp = {};
         reviewsArr.forEach(function (review) {
@@ -1890,6 +1903,7 @@ function (_React$Component) {
   }, {
     key: "reviewItems",
     value: function reviewItems(user, review) {
+      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
         key: review.id,
         review: review,
@@ -1906,6 +1920,23 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "reviewList",
+    value: function reviewList() {
+      var _this2 = this;
+
+      debugger;
+
+      if (this.props.reviews) {
+        return Object.keys(this.props.reviews).map(function (reviewId) {
+          var review = _this2.props.reviews[reviewId];
+          var user = _this2.props.users[review.user_id];
+          return _this2.reviewItems(user, review);
+        });
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }
+    }
+  }, {
     key: "setReviewState",
     value: function setReviewState(review) {
       this.setState(review);
@@ -1913,10 +1944,10 @@ function (_React$Component) {
   }, {
     key: "updateField",
     value: function updateField(field) {
-      var _this2 = this;
+      var _this3 = this;
 
       return function (e) {
-        _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        _this3.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {
@@ -1936,19 +1967,18 @@ function (_React$Component) {
     value: function handleSubmit(e, action) {
       var review = {
         //set state to equal review
-        business_id: this.props.business.id,
+        business_id: this.props.currentBusinessId,
         body: this.state.body,
         rating: this.state.rating,
         id: this.state.id
       };
+      debugger;
       this.resetState(review.id);
-      action(this.props.business.id, review);
+      action(this.props.currentBusinessId, review);
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
       if (this.props.business) {
         var buttonText = "Post Review";
         var htmlClass = "create";
@@ -1971,11 +2001,7 @@ function (_React$Component) {
           htmlClass: htmlClass
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           className: "business-review-list"
-        }, Object.keys(this.props.reviews).map(function (reviewId) {
-          var review = _this3.props.reviews[reviewId];
-          var user = _this3.props.users[review.user_id];
-          return _this3.reviewItems(user, review);
-        })));
+        }, this.reviewList()));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
       }
@@ -2674,8 +2700,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var BusinessesReducer = function BusinessesReducer() {
-  var _newState;
-
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
@@ -2687,11 +2711,10 @@ var BusinessesReducer = function BusinessesReducer() {
       businesses.forEach(function (business) {
         newState[business.id] = business;
       });
-      debugger;
       return newState;
 
     case _actions_business_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BUSINESS"]:
-      newState = (_newState = {}, _defineProperty(_newState, action.business.id, action.business), _defineProperty(_newState, "currentBusinessId", action.business.id), _newState);
+      newState = _defineProperty({}, action.business.id, action.business);
       return Object.assign({}, state, newState);
 
     default:
@@ -3050,7 +3073,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var SearchReducer = function SearchReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  debugger;
   Object.freeze(state);
 
   switch (action.type) {
@@ -3070,9 +3092,7 @@ var SearchReducer = function SearchReducer() {
           attrs[attr.name] = attrs[attr.name] || [];
           attrs[attr.name] = attrs[attr.name].concat(business.id);
         });
-        debugger;
       });
-      debugger;
       return {
         attrs: attrs,
         attrCats: attrCats,
@@ -3107,6 +3127,8 @@ var SearchReducer = function SearchReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/business_actions */ "./frontend/actions/business_actions.js");
+
 
 
 
@@ -3134,6 +3156,12 @@ var SessionReducer = function SessionReducer() {
         currentUserId: null
       };
       return newState;
+
+    case _actions_business_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_BUSINESS"]:
+      newState = {
+        currentBusinessId: action.business.id
+      };
+      return Object.assign({}, state, newState);
 
     default:
       return state;
@@ -3191,7 +3219,6 @@ __webpack_require__.r(__webpack_exports__);
 var arrayToObject = function arrayToObject(array) {
   var newObj = {};
   var length = array.length;
-  debugger;
 
   for (var i = 0; i < length; i++) {
     var el = array.shift();

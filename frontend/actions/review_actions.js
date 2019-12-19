@@ -39,6 +39,7 @@ const removeReview = reviewId => {
 };
 
 const reviewErrors = (errors) => {
+  debugger
   return {
     type: REVIEW_ERRORS,
     errors

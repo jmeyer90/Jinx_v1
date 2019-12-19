@@ -5,7 +5,7 @@
 const arrayToObject = ( array ) =>{
   let newObj = {};
   let length = array.length;
-  debugger
+ 
   for(let i=0; i < length; i++){
     let el = array.shift();
     newObj[Object.keys(el)[0]] = Object.values(el)[0];

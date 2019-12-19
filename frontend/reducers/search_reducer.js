@@ -2,7 +2,6 @@ import { RECEIVE_BUSINESSES } from '../actions/business_actions';
 import { RECEIVE_SEARCH_RESULTS, REMOVE_SEARCH_RESULTS } from '../actions/search_actions';
 
 const SearchReducer = ( state={}, action )=>{
-  debugger
   Object.freeze(state);
   switch(action.type){
     case RECEIVE_BUSINESSES:
@@ -25,9 +24,7 @@ const SearchReducer = ( state={}, action )=>{
           attrs[attr.name] = attrs[attr.name] || [];
           attrs[attr.name] = attrs[attr.name].concat(business.id);
         });
-        debugger
       });
-      debugger
 
       return { attrs: attrs, attrCats: attrCats, menuItems: menuItems, businessNames: bizNames }
     case RECEIVE_SEARCH_RESULTS:

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ReviewForm= props =>{
-  debugger
+  
   if (props.business && props.currentUserId) {
     const review = props.review || {
       body: '',

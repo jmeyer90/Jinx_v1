@@ -5,7 +5,6 @@ import { fetchBusinesses } from '../../actions/business_actions';
 // import { withRouter } from 'react-router-dom';
 
 const msp = ( state, ownProps ) => {  
-  debugger
   return({
     loggedIn: Boolean( state.session.currentUserId )
   })

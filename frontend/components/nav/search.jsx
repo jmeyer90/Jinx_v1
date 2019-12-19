@@ -17,6 +17,7 @@ class Search extends React.Component{
   }
 
   componentDidMount(){
+    debugger
     if (!this.props.businessNames || this.props.businessNames.length <= 1 ){
       this.props.fetchBusinesses()
     }
@@ -75,19 +76,16 @@ class Search extends React.Component{
   filter(filter, attrs){
     let filtered={}
     
-    debugger
     Object.keys(attrs).forEach( attrKey =>{
       if( attrKey.toLowerCase().includes( filter.toLowerCase() )){
         filtered[attrKey] = attrs[attrKey];
       }
     });
 
-    debugger
     return filtered;
   }
 
   dispSearchResults(searchResults) {
-    debugger
     return (
       <section className="search-dropdown">
         <section className="search-category-container">
@@ -104,14 +102,12 @@ class Search extends React.Component{
   }
 
   disp(category, title) {
-    debugger
     const modal = document.getElementById("search-modal");
 
     if (category && Object.keys(category).length > 0) {
       modal.style.display = "block";
       modal.style.zIndex = 1;
 
-      debugger
       return (
         <section className="category">
           <h2 className="search-section-title">{title}</h2>

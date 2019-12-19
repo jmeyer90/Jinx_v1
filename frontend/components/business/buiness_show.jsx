@@ -24,6 +24,7 @@ class BusinessShow extends React.Component{
   }
 
   componentDidMount(){
+    debugger
     this.props.fetchBusiness( this.props.businessId );
     this.props.fetchReviews( this.props.businessId )
   }
@@ -94,7 +95,6 @@ class BusinessShow extends React.Component{
   }
 
   updateField(field) {
-    debugger
     return (e) => {
       this.setState({ review: {[field]: e.currentTarget.value} })
     }

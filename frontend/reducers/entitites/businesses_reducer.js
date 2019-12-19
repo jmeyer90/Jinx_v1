@@ -9,10 +9,10 @@ const BusinessesReducer = (state = {}, action) => {
       businesses.forEach( business => {
         newState[business.id] = business;
       });
-      debugger
+      
       return newState;
     case RECEIVE_BUSINESS:
-      newState = { [action.business.id]: action.business, currentBusinessId: action.business.id };
+      newState = { [action.business.id]: action.business };
 
       return Object.assign({}, state, newState);
     default:
