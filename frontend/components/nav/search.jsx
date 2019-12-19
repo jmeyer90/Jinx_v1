@@ -89,13 +89,13 @@ class Search extends React.Component{
     debugger
     return (
       <section className="search-dropdown">
-        <section className="search-business">
+        <section className="search-category-container">
           {this.disp(searchResults.businessNames, "Businesses")}
         </section>
-        <section className="search-menu">
+        <section className="search-category-container">
           {this.disp(searchResults.menuItems, "Menu Items")}
         </section>
-        <section className="search-attr">
+        <section className="search-category-container">
           {this.disp(searchResults.attrs, "Business Attributes")}
         </section>
       </section>
@@ -114,7 +114,8 @@ class Search extends React.Component{
           <h2 className="search-section-title">{title}</h2>
           <label className="search-category">
             {Object.keys(category).map((attrName, idx) => (
-              <Link key={idx} to={`/businesses/${category[attrName]}`}
+              <Link key={idx} className="search-result-text"
+               to={`/businesses/${category[attrName]}`}
                onClick={()=>this.setState({ results: {} })}>
                  {attrName}
               </Link>

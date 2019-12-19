@@ -1458,11 +1458,11 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "search-dropdown"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "search-business"
+        className: "search-category-container"
       }, this.disp(searchResults.businessNames, "Businesses")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "search-menu"
+        className: "search-category-container"
       }, this.disp(searchResults.menuItems, "Menu Items")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "search-attr"
+        className: "search-category-container"
       }, this.disp(searchResults.attrs, "Business Attributes")));
     }
   }, {
@@ -1484,6 +1484,7 @@ function (_React$Component) {
         }, Object.keys(category).map(function (attrName, idx) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
             key: idx,
+            className: "search-result-text",
             to: "/businesses/".concat(category[attrName]),
             onClick: function onClick() {
               return _this3.setState({
