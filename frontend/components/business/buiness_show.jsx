@@ -93,16 +93,16 @@ class BusinessShow extends React.Component{
   updateField(field) {
     debugger
     return (e) => {
-      this.setState({ [field]: e.currentTarget.value })
+      this.setState({ review: {[field]: e.currentTarget.value} })
     }
   }
 
   handleSubmit(e, action) {
-    const review = { //set state to equal review
+    const review = { 
       business_id: this.props.business.id,
-      body: this.state.body,
-      rating: this.state.rating,
-      id: this.state.id
+      body: this.state.review.body,
+      rating: this.state.review.rating,
+      id: this.state.reivew.id
     }
 
     debugger

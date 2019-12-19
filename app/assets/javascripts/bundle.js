@@ -615,18 +615,19 @@ function (_React$Component) {
 
       debugger;
       return function (e) {
-        _this4.setState(_defineProperty({}, field, e.currentTarget.value));
+        _this4.setState({
+          review: _defineProperty({}, field, e.currentTarget.value)
+        });
       };
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e, action) {
       var review = {
-        //set state to equal review
         business_id: this.props.business.id,
-        body: this.state.body,
-        rating: this.state.rating,
-        id: this.state.id
+        body: this.state.review.body,
+        rating: this.state.review.rating,
+        id: this.state.reivew.id
       };
       debugger;
       this.resetState(review.id);
