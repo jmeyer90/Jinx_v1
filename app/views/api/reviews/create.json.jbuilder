@@ -1,2 +1,2 @@
-json.partial! "api/reviews/review", review: @reviews
-json.partial! "api/userss/user", user: @user
+json.partial! "api/reviews/review", review: @review
+json.partial! "api/users/user", user: @user

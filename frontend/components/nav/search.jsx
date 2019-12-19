@@ -17,16 +17,13 @@ class Search extends React.Component{
   }
 
   componentDidMount(){
-    debugger
-    if (!this.props.businessNames || this.props.businessNames.length <= 1 ){
-      this.props.fetchBusinesses()
-    }
+    this.clearSearch();
   }
 
   handleSubmit(){
     this.setState({ results: {} });
 
-    const modal = document.getElementById("search-modal");
+    const modal = document.getElementById("search-modal-background");
     modal.style.display = "none";
     modal.style.zIndex = -1;
   }
@@ -36,7 +33,7 @@ class Search extends React.Component{
       <section className="search-form-container">
         <form className="search-form" onSubmit={()=>this.handleSubmit()}>
           <h2 className="search-title">Find</h2>
-          <input className="search-input" type="text" 
+          <input id="search-input-text" className="search-input" type="text" 
             placeholder="Burgers, American, Wheelchair Accessible" 
             onChange={(e)=>this.generalFilter(e)} />
         <button className="search-submit">Search</button>
@@ -46,10 +43,13 @@ class Search extends React.Component{
   }
 
   clearSearch(){
-    const modal = document.getElementById("search-modal");
+    const modal = document.getElementById("search-modal-background");
     modal.style.display = "none";
     modal.style.zIndex = -1;
     this.setState({ results: {} })
+
+    const input = document.getElementById("search-input-text");
+    input.value = "";
   }
 
   generalFilter(e){
@@ -102,7 +102,7 @@ class Search extends React.Component{
   }
 
   disp(category, title) {
-    const modal = document.getElementById("search-modal");
+    const modal = document.getElementById("search-modal-background");
 
     if (category && Object.keys(category).length > 0) {
       modal.style.display = "block";
@@ -130,9 +130,11 @@ class Search extends React.Component{
     return(
       <section className="search-bar-container">
         {this.searchForm()}
-        <section id="search-modal" className="search-dropdown-container">
-          {this.dispSearchResults(this.state.results)}
-        </section>
+        <span id="search-modal-background" className="search-modal-background" onClick={ ()=> this.clearSearch() }>
+          <section id="search-modal" className="search-dropdown-container">
+            {this.dispSearchResults(this.state.results)}
+          </section>
+        </span>
       </section>
     )
   }

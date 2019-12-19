@@ -12,9 +12,7 @@ class BusinessShow extends React.Component{
     super(props);
     this.state={
       business: this.props.business,
-      review: {
-        id: "", body: "", rating: "", img: ""
-      }
+      id: "", body: ""
     };
     this.bizRating = this.bizRating.bind(this);
     this.bizRatingImages = this.bizRatingImages.bind(this);
@@ -26,7 +24,7 @@ class BusinessShow extends React.Component{
   componentDidMount(){
     debugger
     this.props.fetchBusiness( this.props.businessId );
-    this.props.fetchReviews( this.props.businessId )
+    this.props.fetchReviews( this.props.businessId );
   }
 
   bizRatingImages(){
@@ -77,7 +75,10 @@ class BusinessShow extends React.Component{
   }
 
   formModal(){
-    const review = this.state.review;
+    const review = {
+      rating: this.state.rating,
+      body: this.state.body
+    };
 
     return(
       <section className="form-modal" id="form-modal-container">
@@ -96,20 +97,21 @@ class BusinessShow extends React.Component{
 
   updateField(field) {
     return (e) => {
-      this.setState({ review: {[field]: e.currentTarget.value} })
+
+      this.setState({ [field]: e.currentTarget.value })
     }
   }
 
   handleSubmit(e, action) {
     const review = { 
       business_id: this.props.business.id,
-      body: this.state.review.body,
-      rating: this.state.review.rating,
-      id: this.state.reivew.id
+      body: this.state.body,
+      rating: this.state.rating
     }
 
     debugger
-    this.resetState(review.id);
+    this.setState({review: {}});
+    debugger
     action(this.props.business.id, review)
   }
 

@@ -554,12 +554,8 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(BusinessShow).call(this, props));
     _this.state = {
       business: _this.props.business,
-      review: {
-        id: "",
-        body: "",
-        rating: "",
-        img: ""
-      }
+      id: "",
+      body: ""
     };
     _this.bizRating = _this.bizRating.bind(_assertThisInitialized(_this));
     _this.bizRatingImages = _this.bizRatingImages.bind(_assertThisInitialized(_this));
@@ -637,7 +633,10 @@ function (_React$Component) {
     value: function formModal() {
       var _this3 = this;
 
-      var review = this.state.review;
+      var review = {
+        rating: this.state.rating,
+        body: this.state.body
+      };
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "form-modal",
         id: "form-modal-container"
@@ -665,9 +664,7 @@ function (_React$Component) {
       var _this4 = this;
 
       return function (e) {
-        _this4.setState({
-          review: _defineProperty({}, field, e.currentTarget.value)
-        });
+        _this4.setState(_defineProperty({}, field, e.currentTarget.value));
       };
     }
   }, {
@@ -675,12 +672,14 @@ function (_React$Component) {
     value: function handleSubmit(e, action) {
       var review = {
         business_id: this.props.business.id,
-        body: this.state.review.body,
-        rating: this.state.review.rating,
-        id: this.state.reivew.id
+        body: this.state.body,
+        rating: this.state.rating
       };
       debugger;
-      this.resetState(review.id);
+      this.setState({
+        review: {}
+      });
+      debugger;
       action(this.props.business.id, review);
     }
   }, {
@@ -1417,11 +1416,7 @@ function (_React$Component) {
   _createClass(Search, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
-
-      if (!this.props.businessNames || this.props.businessNames.length <= 1) {
-        this.props.fetchBusinesses();
-      }
+      this.clearSearch();
     }
   }, {
     key: "handleSubmit",
@@ -1429,7 +1424,7 @@ function (_React$Component) {
       this.setState({
         results: {}
       });
-      var modal = document.getElementById("search-modal");
+      var modal = document.getElementById("search-modal-background");
       modal.style.display = "none";
       modal.style.zIndex = -1;
     }
@@ -1448,6 +1443,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "search-title"
       }, "Find"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "search-input-text",
         className: "search-input",
         type: "text",
         placeholder: "Burgers, American, Wheelchair Accessible",
@@ -1461,12 +1457,14 @@ function (_React$Component) {
   }, {
     key: "clearSearch",
     value: function clearSearch() {
-      var modal = document.getElementById("search-modal");
+      var modal = document.getElementById("search-modal-background");
       modal.style.display = "none";
       modal.style.zIndex = -1;
       this.setState({
         results: {}
       });
+      var input = document.getElementById("search-input-text");
+      input.value = "";
     }
   }, {
     key: "generalFilter",
@@ -1517,7 +1515,7 @@ function (_React$Component) {
     value: function disp(category, title) {
       var _this3 = this;
 
-      var modal = document.getElementById("search-modal");
+      var modal = document.getElementById("search-modal-background");
 
       if (category && Object.keys(category).length > 0) {
         modal.style.display = "block";
@@ -1543,12 +1541,20 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "search-bar-container"
-      }, this.searchForm(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      }, this.searchForm(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "search-modal-background",
+        className: "search-modal-background",
+        onClick: function onClick() {
+          return _this4.clearSearch();
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         id: "search-modal",
         className: "search-dropdown-container"
-      }, this.dispSearchResults(this.state.results)));
+      }, this.dispSearchResults(this.state.results))));
     }
   }]);
 
@@ -1577,7 +1583,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state) {
   return {
-    businesses: state.entities.businesses,
     attrs: state.search.attrs,
     attrCats: state.search.attrCats,
     menuItems: state.search.menuItems,
@@ -1766,7 +1771,6 @@ var msp = function msp(state, ownProps) {
   //  let users = {};
 
   if (state.session.currentBusinessId) {
-    debugger;
     business = state.entities.businesses[state.session.currentBusinessId]; // Object.values(state.entities.reviews).forEach(review=> {
     //   if (review.businessId === state.entities.businesses.currentBusinessId){
     //     reviews[review.id] = review;
@@ -1876,13 +1880,11 @@ function (_React$Component) {
 
   _createClass(BusinessReviews, [{
     key: "componentDidMount",
-    value: function componentDidMount() {
-      debugger;
-
-      if (this.props.currentBusinessId) {
-        this.props.fetchBusiness(this.props.currentBusinessId);
-        this.props.fetchReviews(this.props.currentBusinessId);
-      }
+    value: function componentDidMount() {// debugger
+      // if (this.props.currentBusinessId){
+      //   this.props.fetchBusiness( this.props.currentBusinessId)
+      //   this.props.fetchReviews(this.props.currentBusinessId)
+      // }
     }
   }, {
     key: "reviewsDisp",

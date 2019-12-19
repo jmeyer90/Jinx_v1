@@ -9,7 +9,6 @@ const msp = (state, ownProps) => {
 //  let reviews = {};
 //  let users = {};
   if (state.session.currentBusinessId){
-    debugger
     business = state.entities.businesses[state.session.currentBusinessId];
     // Object.values(state.entities.reviews).forEach(review=> {
     //   if (review.businessId === state.entities.businesses.currentBusinessId){
