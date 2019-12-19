@@ -601,9 +601,7 @@ function (_React$Component) {
         className: "business-map-hrs-title"
       }, "Location & Hours"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "business-map-hrs"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_map_map_constructor__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_hours_of_op_hours_of_operation__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        hoursOfOp: this.props.business.hours_of_operation
-      })));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_map_map_constructor__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
     }
   }, {
     key: "reviewbutton",

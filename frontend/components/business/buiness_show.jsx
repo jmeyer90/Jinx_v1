@@ -50,7 +50,7 @@ class BusinessShow extends React.Component{
         <h2 className="business-map-hrs-title">Location &amp; Hours</h2>
         <section className="business-map-hrs">
         <MapConstructor />
-        <HoursOfOp hoursOfOp={this.props.business.hours_of_operation} />
+        {/* <HoursOfOp hoursOfOp={this.props.business.hours_of_operation} /> */}
         </section>
       </span>
     )
