@@ -31,8 +31,8 @@ class Splash extends React.Component{
     
     return(
       <section className="splash">
-        <figure className="splash-background">
-          
+        <figure className="splash-img">
+          <img className="splash-img-src" src={window.splashImg} alt="background-image" />
         </figure>
         <section className="splash-index-container">
           <ul className="splash-index">

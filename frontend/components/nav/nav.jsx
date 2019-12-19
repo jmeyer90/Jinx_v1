@@ -15,9 +15,7 @@ class Nav extends React.Component{
     });
   }
 
-  sessionLinks(){
-    const path = this.props.location.pathname;
-
+  sessionLinks(path, htmlClass){
     if ( path && ( path === '/login' ) || ( path === '/signup' ) ){
       return ( 
         <></>
@@ -25,10 +23,10 @@ class Nav extends React.Component{
     } else if ( this.props.loggedIn ){
       return (
         <>
-          <section className="search-bar">
+          <section className={`search-bar${htmlClass}`}>
             <SearchConstructor />
           </section>
-          <div className="session-buttons">
+          <div className={`session-buttons${htmlClass}`}>
             <button onClick={ ()=> this.props.logout() }>Log Out</button>
           </div>
         </>
@@ -36,10 +34,10 @@ class Nav extends React.Component{
     } else {
       return (
         <>
-          <section className="search-bar">
+          <section className={`search-bar${htmlClass}`}>
             <SearchConstructor />
           </section>
-          <div className="session-buttons">
+          <div className={`session-buttons${htmlClass}`}>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
             <button onClick={ ()=>this.logDemoUser() }>Demo User</button>
@@ -49,15 +47,18 @@ class Nav extends React.Component{
     }
   }
 
-  render(){
-    return(
+  render() {
+    const path = this.props.location.pathname;
+    let htmlClass = "";
+    if (path === "/") htmlClass="-splash"
 
-      <header className="nav-container">
-        <nav className="nav-bar">
-        <Link to="/" className="logo">
-            <img className="logo-img-src" src={window.logoImg} alt="profile-image" />
+    return(
+      <header className={`nav-container${htmlClass}`}>
+        <nav className={`nav-bar${htmlClass}`}>
+          <Link to="/" className={`logo${htmlClass}`}>
+            <img className={`logo-img-src${htmlClass}`} src={window.logoImg} alt="profile-image" />
         </Link>
-        { this.sessionLinks() }
+        { this.sessionLinks(path, htmlClass) }
         </nav>
       </header>
     )

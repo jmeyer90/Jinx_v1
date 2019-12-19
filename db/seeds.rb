@@ -86,10 +86,10 @@ menuItem5 = MenuItem.create(menu_id: menu3.id, title: "Mutton", price: 12)
 menuItem6 = MenuItem.create(menu_id: menu3.id, title: "Frog Leg Tacos", price: 7)
 
 # Seed User
-demoUser =  User.create(email: "demo@mail.com", f_name: "demo", l_name: "demo", password: "password", zip_code:11111)
-user1 = User.create(email: "user1@mail.com", f_name: "user1", l_name: "user1", password: "password", zip_code:11111)
-user2 = User.create(email: "user2@mail.com", f_name: "user2", l_name: "user2", password: "password", zip_code:11111)
-user3 = User.create(email: "user3@mail.com", f_name: "user3", l_name: "user3", password: "password", zip_code:11111)
+demoUser =  User.create(email: "demo@mail.com", f_name: "demo", l_name: "l_name", password: "password", zip_code:11111)
+user1 = User.create(email: "user1@mail.com", f_name: "user1", l_name: "l_name1", password: "password", zip_code:11111)
+user2 = User.create(email: "user2@mail.com", f_name: "user2", l_name: "l_name2", password: "password", zip_code:11111)
+user3 = User.create(email: "user3@mail.com", f_name: "user3", l_name: "l_name3", password: "password", zip_code:11111)
 
 # Seed Review
 review1 = Review.create(user_id: user1.id, business_id: business1.id, rating: 5, body: "Review One, Testing Reviews. Review One, Testing Reviews. Review One, Testing Reviews. Review One, Testing Reviews")

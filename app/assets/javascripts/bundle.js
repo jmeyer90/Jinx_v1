@@ -1251,18 +1251,16 @@ function (_React$Component) {
     }
   }, {
     key: "sessionLinks",
-    value: function sessionLinks() {
+    value: function sessionLinks(path, htmlClass) {
       var _this2 = this;
-
-      var path = this.props.location.pathname;
 
       if (path && path === '/login' || path === '/signup') {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
       } else if (this.props.loggedIn) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-          className: "search-bar"
+          className: "search-bar".concat(htmlClass)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_constructor__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "session-buttons"
+          className: "session-buttons".concat(htmlClass)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick() {
             return _this2.props.logout();
@@ -1270,9 +1268,9 @@ function (_React$Component) {
         }, "Log Out")));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-          className: "search-bar"
+          className: "search-bar".concat(htmlClass)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_constructor__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "session-buttons"
+          className: "session-buttons".concat(htmlClass)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/login"
         }, "Login"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -1287,18 +1285,21 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var path = this.props.location.pathname;
+      var htmlClass = "";
+      if (path === "/") htmlClass = "-splash";
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
-        className: "nav-container"
+        className: "nav-container".concat(htmlClass)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-        className: "nav-bar"
+        className: "nav-bar".concat(htmlClass)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/",
-        className: "logo"
+        className: "logo".concat(htmlClass)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "logo-img-src",
+        className: "logo-img-src".concat(htmlClass),
         src: window.logoImg,
         alt: "profile-image"
-      })), this.sessionLinks()));
+      })), this.sessionLinks(path, htmlClass)));
     }
   }]);
 
@@ -2567,8 +2568,12 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "splash"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
-        className: "splash-background"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "splash-img"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "splash-img-src",
+        src: window.splashImg,
+        alt: "background-image"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "splash-index-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "splash-index"
