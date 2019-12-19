@@ -23,6 +23,7 @@ class Api::BusinessesController < ApplicationController
     @business = Business.find( params[:id] )
     @reviews = @business.reviews.includes(:user)
     
+    debugger
     if @business
       render :show
     else
