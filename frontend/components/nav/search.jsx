@@ -13,6 +13,7 @@ class Search extends React.Component{
     this.filter = this.filter.bind(this);
     this.dispSearchResults = this.dispSearchResults.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
   componentDidMount(){
@@ -20,10 +21,8 @@ class Search extends React.Component{
   }
 
   handleSubmit(){
-    // Link to page to display search reulst
-    // Send state
-    // display attributes with links to business page
-    // display business index items.
+    
+    //
     this.setState({ results: {} });
 
     const modal = document.getElementById("search-modal");
@@ -45,16 +44,18 @@ class Search extends React.Component{
     )
   }
 
+  clearSearch(){
+    const modal = document.getElementById("search-modal");
+    modal.style.display = "none";
+    modal.style.zIndex = -1;
+    this.setState({ results: {} })
+  }
+
   generalFilter(e){
     const filter = e.currentTarget.value;
 
     if (filter === "") {
-
-      const modal = document.getElementById("search-modal");
-      modal.style.display = "none";
-      modal.style.zIndex = -1;
-      this.setState({ results: {} })
-
+      this.clearSearch();
     } else {
 
       const filteredAttrs = this.filter(filter, this.props.attrs);
@@ -103,12 +104,14 @@ class Search extends React.Component{
   }
 
   disp(category, title) {
+    debugger
     const modal = document.getElementById("search-modal");
 
     if (category && Object.keys(category).length > 0) {
       modal.style.display = "block";
       modal.style.zIndex = 1;
 
+      debugger
       return (
         <section className="category">
           <h2 className="search-section-title">{title}</h2>
@@ -116,19 +119,14 @@ class Search extends React.Component{
             {Object.keys(category).map((attrName, idx) => (
               <Link key={idx} className="search-result-text"
                to={`/businesses/${category[attrName]}`}
-               onClick={()=>this.setState({ results: {} })}>
+               onClick={()=>this.clearSearch()}>
                  {attrName}
               </Link>
             ))}
           </label>
         </section>
       )
-    } else {
-      if (category) {
-        modal.style.display = "none";
-        modal.style.zIndex = -1;
-      }
-    }
+    } 
   }
 
   render(){

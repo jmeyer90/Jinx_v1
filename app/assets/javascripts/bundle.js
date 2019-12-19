@@ -413,6 +413,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _business_business_show_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./business/business_show_container */ "./frontend/components/business/business_show_container.js");
 /* harmony import */ var _splash_splash_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./splash/splash_component */ "./frontend/components/splash/splash_component.jsx");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.js");
+/* harmony import */ var _nav_search_results__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./nav/search_results */ "./frontend/components/nav/search_results.jsx");
+
 
 
 
@@ -430,6 +432,9 @@ var App = function App() {
     exact: true,
     path: "/",
     component: _splash_splash_component__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/search",
+    component: _nav_search_results__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/businesses/:businessId",
     component: _business_business_show_container__WEBPACK_IMPORTED_MODULE_5__["default"]
@@ -1366,6 +1371,7 @@ function (_React$Component) {
     _this.filter = _this.filter.bind(_assertThisInitialized(_this));
     _this.dispSearchResults = _this.dispSearchResults.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.clearSearch = _this.clearSearch.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1377,10 +1383,7 @@ function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit() {
-      // Link to page to display search reulst
-      // Send state
-      // display attributes with links to business page
-      // display business index items.
+      //
       this.setState({
         results: {}
       });
@@ -1414,17 +1417,22 @@ function (_React$Component) {
       }, "Search")));
     }
   }, {
+    key: "clearSearch",
+    value: function clearSearch() {
+      var modal = document.getElementById("search-modal");
+      modal.style.display = "none";
+      modal.style.zIndex = -1;
+      this.setState({
+        results: {}
+      });
+    }
+  }, {
     key: "generalFilter",
     value: function generalFilter(e) {
       var filter = e.currentTarget.value;
 
       if (filter === "") {
-        var modal = document.getElementById("search-modal");
-        modal.style.display = "none";
-        modal.style.zIndex = -1;
-        this.setState({
-          results: {}
-        });
+        this.clearSearch();
       } else {
         var filteredAttrs = this.filter(filter, this.props.attrs);
         var filteredMenuItems = this.filter(filter, this.props.menuItems);
@@ -1470,11 +1478,13 @@ function (_React$Component) {
     value: function disp(category, title) {
       var _this3 = this;
 
+      debugger;
       var modal = document.getElementById("search-modal");
 
       if (category && Object.keys(category).length > 0) {
         modal.style.display = "block";
         modal.style.zIndex = 1;
+        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           className: "category"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
@@ -1487,17 +1497,10 @@ function (_React$Component) {
             className: "search-result-text",
             to: "/businesses/".concat(category[attrName]),
             onClick: function onClick() {
-              return _this3.setState({
-                results: {}
-              });
+              return _this3.clearSearch();
             }
           }, attrName);
         })));
-      } else {
-        if (category) {
-          modal.style.display = "none";
-          modal.style.zIndex = -1;
-        }
       }
     }
   }, {
@@ -1554,6 +1557,31 @@ var mdp = function mdp(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_search__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/nav/search_results.jsx":
+/*!****************************************************!*\
+  !*** ./frontend/components/nav/search_results.jsx ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _business_business_index_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../business/business_index_item */ "./frontend/components/business/business_index_item.jsx");
+
+
+
+
+var SearchResults = function SearchResults(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SearchResults);
 
 /***/ }),
 
