@@ -19,11 +19,9 @@ const ReviewsReducer = (state={}, action) =>{
       reviews.forEach( review =>(
         newState[review.id] = review
       ))
-      debugger
       return newState;
       
     case RECEIVE_REVIEW:
-      debugger
       newState = action.review;
       return Object.assign({}, state, newState);
       

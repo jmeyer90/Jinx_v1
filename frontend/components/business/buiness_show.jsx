@@ -22,7 +22,6 @@ class BusinessShow extends React.Component{
   }
 
   componentDidMount(){
-    debugger
     this.props.fetchBusiness( this.props.businessId );
     this.props.fetchReviews( this.props.businessId );
   }
@@ -109,9 +108,7 @@ class BusinessShow extends React.Component{
       rating: this.state.rating
     }
 
-    debugger
     this.setState({review: {}});
-    debugger
     action(this.props.business.id, review)
   }
 

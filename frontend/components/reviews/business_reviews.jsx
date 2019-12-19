@@ -18,7 +18,6 @@ class BusinessReviews extends React.Component{
   }
 
   componentDidMount(){
-    // debugger
     // if (this.props.currentBusinessId){
     //   this.props.fetchBusiness( this.props.currentBusinessId)
     //   this.props.fetchReviews(this.props.currentBusinessId)
@@ -26,9 +25,7 @@ class BusinessReviews extends React.Component{
   }
 
   reviewsDisp(){
-    debugger
     if (this.props.reivews){
-      debugger
       const reviewsArr = Object.values(this.props.reivews);
       let reviewsDisp = {}
       reviewsArr.forEach( review =>{
@@ -40,7 +37,6 @@ class BusinessReviews extends React.Component{
   }
 
   reviewItems(user, review){
-    debugger
     return (
         <ReviewIndexItem key={review.id} review={review} user={user} 
           currentUserId={this.props.currentUserId} business={this.props.business} 
@@ -52,7 +48,6 @@ class BusinessReviews extends React.Component{
   };
 
   reviewList() {
-    debugger
     if(this.props.reviews){
       return(
         Object.keys(this.props.reviews).map(reviewId => {
@@ -96,7 +91,6 @@ class BusinessReviews extends React.Component{
       id: this.state.id
     }
 
-    debugger
     this.resetState(review.id);
     action(this.props.currentBusinessId, review)
   }

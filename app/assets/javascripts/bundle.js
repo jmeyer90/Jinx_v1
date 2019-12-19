@@ -112,7 +112,6 @@ var receiveBusinesses = function receiveBusinesses(businessesInfo) {
   var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(businessesInfo, "reviews");
   var users = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(businessesInfo, "users");
   var businesses = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(businessesInfo, "businesses");
-  debugger;
   return {
     type: RECEIVE_BUSINESSES,
     businesses: businesses,
@@ -122,7 +121,6 @@ var receiveBusinesses = function receiveBusinesses(businessesInfo) {
 };
 
 var receiveBusiness = function receiveBusiness(business) {
-  debugger;
   var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(business, "reviews");
   var users = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(business, "users");
   return {
@@ -189,10 +187,8 @@ var RECEIVE_REVIEW = "RECEIVE_REVIEW";
 var RECEIVE_REVIEWS = "RECEIVE_REVIEWS";
 
 var receiveReviews = function receiveReviews(reviewsInfo) {
-  debugger;
   var reviews = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(reviewsInfo, "reviews");
   var users = Object(_util_action_utils__WEBPACK_IMPORTED_MODULE_1__["extractAsObj"])(reviewsInfo, "users");
-  debugger;
   return {
     type: RECEIVE_REVIEWS,
     reviews: reviews,
@@ -201,10 +197,8 @@ var receiveReviews = function receiveReviews(reviewsInfo) {
 };
 
 var receiveReview = function receiveReview(reviewInfo) {
-  debugger;
   var review = reviewInfo.review;
   var user = reviewInfo.user;
-  debugger;
   return {
     type: RECEIVE_REVIEW,
     review: review,
@@ -220,7 +214,6 @@ var removeReview = function removeReview(reviewId) {
 };
 
 var reviewErrors = function reviewErrors(errors) {
-  debugger;
   return {
     type: REVIEW_ERRORS,
     errors: errors
@@ -229,7 +222,6 @@ var reviewErrors = function reviewErrors(errors) {
 
 var fetchReviews = function fetchReviews(businessId) {
   return function (dispatch) {
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["fetchReviews"](businessId).then(function (reviews) {
       return dispatch(receiveReviews(reviews));
     }, function (errors) {
@@ -239,7 +231,6 @@ var fetchReviews = function fetchReviews(businessId) {
 };
 var fetchReview = function fetchReview(reviewId) {
   return function (dispatch) {
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["fetchReview"](reviewId).then(function (review) {
       return dispatch(receiveReview(review));
     }, function (errors) {
@@ -249,7 +240,6 @@ var fetchReview = function fetchReview(reviewId) {
 };
 var updateReview = function updateReview(businessId, review) {
   return function (dispatch) {
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["updateReview"](businessId, review).then(function (review) {
       return dispatch(receiveReview(review));
     }, function (errors) {
@@ -260,7 +250,6 @@ var updateReview = function updateReview(businessId, review) {
 var createReview = function createReview(businessId, review) {
   return function (dispatch) {
     review.business_id = businessId;
-    debugger;
     return _util_review_util__WEBPACK_IMPORTED_MODULE_0__["createReview"](businessId, review).then(function (review) {
       return dispatch(receiveReview(review));
     }, function (errors) {
@@ -568,7 +557,6 @@ function (_React$Component) {
   _createClass(BusinessShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      debugger;
       this.props.fetchBusiness(this.props.businessId);
       this.props.fetchReviews(this.props.businessId);
     }
@@ -675,11 +663,9 @@ function (_React$Component) {
         body: this.state.body,
         rating: this.state.rating
       };
-      debugger;
       this.setState({
         review: {}
       });
-      debugger;
       action(this.props.business.id, review);
     }
   }, {
@@ -1778,7 +1764,6 @@ var msp = function msp(state, ownProps) {
     // });
   }
 
-  debugger;
   return {
     business: business,
     reviews: state.entities.reviews,
@@ -1880,8 +1865,7 @@ function (_React$Component) {
 
   _createClass(BusinessReviews, [{
     key: "componentDidMount",
-    value: function componentDidMount() {// debugger
-      // if (this.props.currentBusinessId){
+    value: function componentDidMount() {// if (this.props.currentBusinessId){
       //   this.props.fetchBusiness( this.props.currentBusinessId)
       //   this.props.fetchReviews(this.props.currentBusinessId)
       // }
@@ -1889,10 +1873,7 @@ function (_React$Component) {
   }, {
     key: "reviewsDisp",
     value: function reviewsDisp() {
-      debugger;
-
       if (this.props.reivews) {
-        debugger;
         var reviewsArr = Object.values(this.props.reivews);
         var reviewsDisp = {};
         reviewsArr.forEach(function (review) {
@@ -1905,7 +1886,6 @@ function (_React$Component) {
   }, {
     key: "reviewItems",
     value: function reviewItems(user, review) {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
         key: review.id,
         review: review,
@@ -1925,8 +1905,6 @@ function (_React$Component) {
     key: "reviewList",
     value: function reviewList() {
       var _this2 = this;
-
-      debugger;
 
       if (this.props.reviews) {
         return Object.keys(this.props.reviews).map(function (reviewId) {
@@ -1974,7 +1952,6 @@ function (_React$Component) {
         rating: this.state.rating,
         id: this.state.id
       };
-      debugger;
       this.resetState(review.id);
       action(this.props.currentBusinessId, review);
     }
@@ -2788,11 +2765,9 @@ var ReviewsReducer = function ReviewsReducer() {
       reviews.forEach(function (review) {
         return newState[review.id] = review;
       });
-      debugger;
       return newState;
 
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_REVIEW"]:
-      debugger;
       newState = action.review;
       return Object.assign({}, state, newState);
 

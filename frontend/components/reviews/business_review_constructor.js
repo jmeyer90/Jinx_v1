@@ -17,7 +17,6 @@ const msp = (state, ownProps) => {
     // });
 
   }
-  debugger
 
   return({
     business: business,
