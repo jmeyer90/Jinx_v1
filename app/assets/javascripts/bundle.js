@@ -569,7 +569,7 @@ function (_React$Component) {
     key: "bizRatingImages",
     value: function bizRatingImages() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        className: "busines-review-images-container"
+        className: "business-review-images-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "business-review-images"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {

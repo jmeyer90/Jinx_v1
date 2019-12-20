@@ -28,7 +28,7 @@ class BusinessShow extends React.Component{
 
   bizRatingImages(){
     return(
-      <section className="busines-review-images-container">
+      <section className="business-review-images-container">
         <ul className="business-review-images">
           <li className="review-image">
             <img className="review-img-src" src={window.reviewImg} alt="business-image" />
