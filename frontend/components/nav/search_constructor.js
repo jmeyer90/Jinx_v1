@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Search from "./search";
 import { fetchBusinesses } from "../../actions/business_actions";
 
-const msp = state =>(
+const msp = (state, ownProps) =>(
   {
     attrs: state.search.attrs,
     attrCats: state.search.attrCats,

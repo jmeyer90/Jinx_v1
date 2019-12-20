@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Nav from './nav';
 import { logout, login } from '../../actions/session_actions';
-import { fetchBusinesses } from '../../actions/business_actions';
+// import { fetchBusinesses } from '../../actions/business_actions';
 // import { withRouter } from 'react-router-dom';
 
 const msp = ( state, ownProps ) => {  

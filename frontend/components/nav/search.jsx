@@ -125,13 +125,13 @@ class Search extends React.Component{
     } 
   }
 
-  render(){
+  render() {
     
     return(
       <section className="search-bar-container">
         {this.searchForm()}
         <span id="search-modal-background" className="search-modal-background" onClick={ ()=> this.clearSearch() }>
-          <section id="search-modal" className="search-dropdown-container">
+          <section id="search-modal" className={`search-dropdown-container`}>
             {this.dispSearchResults(this.state.results)}
           </section>
         </span>

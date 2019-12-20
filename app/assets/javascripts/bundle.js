@@ -1322,11 +1322,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _nav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nav */ "./frontend/components/nav/nav.jsx");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _actions_business_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/business_actions */ "./frontend/actions/business_actions.js");
 
 
-
- // import { withRouter } from 'react-router-dom';
+ // import { fetchBusinesses } from '../../actions/business_actions';
+// import { withRouter } from 'react-router-dom';
 
 var msp = function msp(state, ownProps) {
   return {
@@ -1573,7 +1572,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var msp = function msp(state) {
+var msp = function msp(state, ownProps) {
   return {
     attrs: state.search.attrs,
     attrCats: state.search.attrCats,
@@ -2504,7 +2503,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _business_business_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../business/business_index_item */ "./frontend/components/business/business_index_item.jsx");
-/* harmony import */ var _util_business_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/business_util */ "./frontend/util/business_util.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _util_business_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/business_util */ "./frontend/util/business_util.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2522,6 +2522,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -2551,6 +2552,29 @@ function (_React$Component) {
       this.props.fetchBusinesses();
     }
   }, {
+    key: "regions",
+    value: function regions() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "regions-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "regions-title"
+      }, "Jinx Middle Earth"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+        className: "regions-hr"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "regions-list"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "region-item"
+      }, "The Shire"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "region-item"
+      }, "Atlantis"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "region-item"
+      }, "Diagon Alley"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "region-item"
+      }, "Helm's Deep"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "region-item"
+      }, "Hogsmeade")));
+    }
+  }, {
     key: "matchBizToReview",
     value: function matchBizToReview(review) {
       if (this.props.businesses) {
@@ -2565,7 +2589,7 @@ function (_React$Component) {
       var _this2 = this;
 
       var reviews = Object.values(this.props.reviews);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "splash"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
         className: "splash-img"
@@ -2575,7 +2599,7 @@ function (_React$Component) {
         alt: "background-image"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "splash-index-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, this.regions(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "splash-index"
       }, reviews.map(function (review) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_business_business_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -2583,7 +2607,7 @@ function (_React$Component) {
           business: _this2.matchBizToReview(review),
           review: review
         });
-      }))));
+      })))));
     }
   }]);
 
