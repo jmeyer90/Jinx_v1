@@ -6,7 +6,8 @@ import NavComponent from './nav/nav_component';
 import BusinessShowContainer from './business/business_show_container';
 import SplashComponent from './splash/splash_component';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
-import SearchResults from './nav/search_results'
+import SearchResults from './nav/search_results';
+import Footer from './footer/footer';
 
 const App = () =>{
   return(
@@ -17,6 +18,7 @@ const App = () =>{
       <Route path={`/businesses/:businessId`} component={ BusinessShowContainer } />
       <AuthRoute path="/signup" component={ SignUpComponent } />
       <AuthRoute path="/login" component={ LoginComponent } />
+      <Route path="/" component={ Footer } />
     </>
   )
 };

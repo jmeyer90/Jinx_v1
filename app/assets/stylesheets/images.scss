@@ -35,11 +35,33 @@
   position: relative;
   width: 100%;
   height: 600px;
-  z-index: -1;
+  z-index: 1;
 }
 
 .splash-img-src{
   width: 100%;
   position: relative;
   z-index: inherit;
+}
+
+.business-review-images-container{
+  width: 100%;
+}
+
+.business-review-images{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.review-image{
+  display: flex;
+  width: 510px;
+  height: auto;
+}
+
+.review-img-src{
+  width: 470px;
+  height: auto;
 }
