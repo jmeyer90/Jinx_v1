@@ -18,10 +18,10 @@ class BusinessReviews extends React.Component{
   }
 
   componentDidMount(){
-    // if (this.props.currentBusinessId){
+    if (this.props.currentBusinessId){
     //   this.props.fetchBusiness( this.props.currentBusinessId)
-    //   this.props.fetchReviews(this.props.currentBusinessId)
-    // }
+      this.props.fetchReviews(this.props.currentBusinessId)
+    }
   }
 
   reviewsDisp(){

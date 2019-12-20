@@ -1936,10 +1936,11 @@ function (_React$Component) {
 
   _createClass(BusinessReviews, [{
     key: "componentDidMount",
-    value: function componentDidMount() {// if (this.props.currentBusinessId){
-      //   this.props.fetchBusiness( this.props.currentBusinessId)
-      //   this.props.fetchReviews(this.props.currentBusinessId)
-      // }
+    value: function componentDidMount() {
+      if (this.props.currentBusinessId) {
+        //   this.props.fetchBusiness( this.props.currentBusinessId)
+        this.props.fetchReviews(this.props.currentBusinessId);
+      }
     }
   }, {
     key: "reviewsDisp",
