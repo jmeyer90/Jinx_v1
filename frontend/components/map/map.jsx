@@ -4,40 +4,40 @@ import ReactDOM from 'react-dom';
 class Map extends React.Component{
   constructor(props){
     super(props);
-    // this.addBusinessLocation = this.addBusinessLocation.bind(this);
+    this.addBusinessLocation = this.addBusinessLocation.bind(this);
   }
 
-  // componentDidMount(){
-  //   if (this.props.center){
-  //   const map = ReactDOM.findDOMNode(this.refs.map);
-  //   const options = {
-  //     center: this.props.center,
-  //     zoom: 14
-  //   }
-  //   this.map = new google.maps.Map(map, options);
+  componentDidMount(){
+    if (this.props.center){
+    const map = ReactDOM.findDOMNode(this.refs.map);
+    const options = {
+      center: this.props.center,
+      zoom: 14
+    }
+    this.map = new google.maps.Map(map, options);
 
-  //   debugger
+    debugger
 
-  //   Object.values(this.props.businesses).forEach( business =>{
-  //     this.addBusinessLocation(business)
-  //   })}
-  // }
+    Object.values(this.props.businesses).forEach( business =>{
+      this.addBusinessLocation(business)
+    })}
+  }
 
-  // addBusinessLocation(business){
-  //   const lat = business.latitude;
-  //   const lng = business.longitude;
-  //   debugger
-  //   const position = new google.maps.LatLng(
-  //     lat, lng
-  //   );
+  addBusinessLocation(business){
+    const lat = business.latitude;
+    const lng = business.longitude;
+    debugger
+    const position = new google.maps.LatLng(
+      lat, lng
+    );
 
-  //   const marker = new google.maps.Marker({
-  //     position: position,
-  //     map: this.map
-  //   });
+    const marker = new google.maps.Marker({
+      position: position,
+      map: this.map
+    });
 
-  //   // Add event listener, click on business marker links to business page
-  // }
+    // Add event listener, click on business marker links to business page
+  }
 
   render(){
     return(
