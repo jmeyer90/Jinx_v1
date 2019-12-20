@@ -90,7 +90,7 @@ const dayTimes = day =>{
   return(
     <span className="business-hrs">
       <p className="day-hrs">
-        {startTime}-{closeTime}
+        {startTime} - {closeTime}
       </p>
       {isOpen(day, start, close)}
     </span>
@@ -109,7 +109,11 @@ const formatTime = (hr, min) =>{
     hr = hr % 12;
   }
 
-  return( `${hr}:${min} ${amPm}` )
+  if(min < 10){
+    return (`${hr}:${min}0 ${amPm}`)
+  } else {
+    return (`${hr}:${min} ${amPm}`)
+  }
 }
 
 const isOpen = (day,start, close) =>{

@@ -1084,7 +1084,7 @@ var dayTimes = function dayTimes(day) {
     className: "business-hrs"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "day-hrs"
-  }, startTime, "-", closeTime), isOpen(day, start, close));
+  }, startTime, " - ", closeTime), isOpen(day, start, close));
 };
 
 var formatTime = function formatTime(hr, min) {
@@ -1100,7 +1100,11 @@ var formatTime = function formatTime(hr, min) {
     hr = hr % 12;
   }
 
-  return "".concat(hr, ":").concat(min, " ").concat(amPm);
+  if (min < 10) {
+    return "".concat(hr, ":").concat(min, "0 ").concat(amPm);
+  } else {
+    return "".concat(hr, ":").concat(min, " ").concat(amPm);
+  }
 };
 
 var isOpen = function isOpen(day, start, close) {
@@ -3389,15 +3393,19 @@ var htmlRatingDispaly = function htmlRatingDispaly(lefthalf, righthalf, idx) {
     className: "left-half"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: filled(lefthalf)
-  }, idx)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
+  }, dispStar(lefthalf))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("figure", {
     className: "right-half"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: filled(righthalf)
-  }, idx)));
+  }, dispStar(righthalf))));
 };
 
 var filled = function filled(half) {
   return half ? "filled" : "empty";
+};
+
+var dispStar = function dispStar(half) {
+  return half ? "1" : "0";
 };
 
 /***/ }),

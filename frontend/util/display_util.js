@@ -22,12 +22,12 @@ const htmlRatingDispaly = ( lefthalf, righthalf, idx ) =>{
     <figure key={idx} className="star">
       <figure className="left-half">
         <div className={filled(lefthalf)}>
-          {idx}
+          {dispStar(lefthalf)}
         </div>
       </figure>
       <figure className="right-half">
         <div className={filled(righthalf)}>
-          {idx}
+          {dispStar(righthalf)}
         </div>
       </figure>
     </figure>
@@ -36,4 +36,8 @@ const htmlRatingDispaly = ( lefthalf, righthalf, idx ) =>{
 
 const filled = half =>(
   half ? "filled" : "empty"
+)
+
+const dispStar = half =>(
+  half ? "1" : "0"
 )
