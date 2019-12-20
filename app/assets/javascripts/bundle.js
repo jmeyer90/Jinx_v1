@@ -1938,8 +1938,7 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       if (this.props.currentBusinessId) {
-        //   this.props.fetchBusiness( this.props.currentBusinessId)
-        this.props.fetchReviews(this.props.currentBusinessId);
+        this.props.fetchBusiness(this.props.currentBusinessId);
       }
     }
   }, {
@@ -2024,8 +2023,9 @@ function (_React$Component) {
         rating: this.state.rating,
         id: this.state.id
       };
-      this.resetState(review.id);
       action(this.props.currentBusinessId, review);
+      this.resetState(review.id);
+      this.props.fetchReviews(this.props.currentBusinessId);
     }
   }, {
     key: "render",
@@ -36037,7 +36037,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

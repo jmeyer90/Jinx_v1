@@ -19,8 +19,7 @@ class BusinessReviews extends React.Component{
 
   componentDidMount(){
     if (this.props.currentBusinessId){
-    //   this.props.fetchBusiness( this.props.currentBusinessId)
-      this.props.fetchReviews(this.props.currentBusinessId)
+      this.props.fetchBusiness( this.props.currentBusinessId)
     }
   }
 
@@ -91,8 +90,9 @@ class BusinessReviews extends React.Component{
       id: this.state.id
     }
 
+    action(this.props.currentBusinessId, review);
     this.resetState(review.id);
-    action(this.props.currentBusinessId, review)
+    this.props.fetchReviews(this.props.currentBusinessId);
   }
 
   render(){
