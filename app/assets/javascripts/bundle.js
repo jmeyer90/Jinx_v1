@@ -2154,6 +2154,7 @@ function (_React$Component) {
       var modal = document.getElementById("search-modal-background");
       modal.style.display = "none";
       modal.style.zIndex = -1;
+      debugger;
       this.props.populateSearchResults(this.state.results);
       this.setState({
         results: {}
@@ -2317,7 +2318,9 @@ function (_React$Component) {
         };
         this.clearSearch();
         this.setState({
-          results: menuItems
+          results: menuItems,
+          attrs: {},
+          businessNames: {}
         });
       } else {
         var attrs = {
@@ -2325,7 +2328,9 @@ function (_React$Component) {
         };
         this.clearSearch();
         this.setState({
-          results: attrs
+          results: attrs,
+          menuItems: {},
+          businessNames: {}
         });
       }
 

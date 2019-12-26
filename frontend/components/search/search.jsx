@@ -29,6 +29,7 @@ class Search extends React.Component{
     modal.style.display = "none";
     modal.style.zIndex = -1;
 
+    debugger
     this.props.populateSearchResults(this.state.results);
     this.setState({ results: {} });
     this.setState({ redirectToResults: true })
@@ -169,13 +170,21 @@ class Search extends React.Component{
         attrName: category[attrName]
       };
       this.clearSearch();
-      this.setState({results: menuItems})
+      this.setState({results: 
+        menuItems,
+        attrs: {},
+        businessNames: {}
+      });
     } else {
       const attrs = {
         attrName: category[attrName]
       };
       this.clearSearch();
-      this.setState({ results: attrs })
+      this.setState({ results: 
+        attrs,
+        menuItems: {},
+        businessNames: {}
+      });
     }
     debugger
 
