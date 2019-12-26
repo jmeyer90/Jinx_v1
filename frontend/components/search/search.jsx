@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import searchResultsConstructor from './search_results_constructor';
 
 class Search extends React.Component{
   constructor(props){
     super(props)
     this.state={
-      results: {}
+      results: {},
+      redirectToResults: false
     }
 
     this.searchForm = this.searchForm.bind(this);
@@ -15,6 +15,7 @@ class Search extends React.Component{
     this.dispSearchResults = this.dispSearchResults.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
+    this.sendToResults = this.sendToResults.bind(this);
   }
 
   componentDidMount(){
@@ -28,8 +29,8 @@ class Search extends React.Component{
     modal.style.display = "none";
     modal.style.zIndex = -1;
 
-    this.props.populateSearchResults( this.state );
-    <Redirect to="/search"/>
+    this.props.populateSearchResults( this.state.results );
+    this.setState({ redirectToResults: true })
   }
 
   searchForm(){
@@ -54,6 +55,15 @@ class Search extends React.Component{
 
     const input = document.getElementById("search-input-text");
     input.value = "";
+  }
+
+  sendToResults(){
+    if(this.state.redirectToResults) {
+
+      return (
+        <Redirect to="/search" />
+      )
+    }
   }
 
   generalFilter(e){
@@ -132,14 +142,17 @@ class Search extends React.Component{
   render() {
     
     return(
-      <section className="search-bar-container">
-        {this.searchForm()}
-        <span id="search-modal-background" className="search-modal-background" onClick={ ()=> this.clearSearch() }>
-          <section id="search-modal" className={`search-dropdown-container`}>
-            {this.dispSearchResults(this.state.results)}
-          </section>
-        </span>
-      </section>
+      <>
+        <section className="search-bar-container">
+          {this.searchForm()}
+          <span id="search-modal-background" className="search-modal-background" onClick={ ()=> this.clearSearch() }>
+            <section id="search-modal" className={`search-dropdown-container`}>
+              {this.dispSearchResults(this.state.results)}
+            </section>
+          </span>
+        </section>
+        {this.sendToResults()}
+      </>
     )
   }
 }

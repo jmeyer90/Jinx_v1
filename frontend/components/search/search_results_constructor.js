@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import SearchResults from './search_results';
 
 const msp = state => ({
+  businesses: state.entities.businesses,
+  reviews: state.entities.reviews,
   attrs: state.search.attrs,
   attrCats: state.search.attrCats,
   menuItems: state.search.menuItems,

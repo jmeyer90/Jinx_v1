@@ -2095,7 +2095,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _search_results_constructor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./search_results_constructor */ "./frontend/components/search/search_results_constructor.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2117,7 +2116,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
 var Search =
 /*#__PURE__*/
 function (_React$Component) {
@@ -2130,7 +2128,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Search).call(this, props));
     _this.state = {
-      results: {}
+      results: {},
+      redirectToResults: false
     };
     _this.searchForm = _this.searchForm.bind(_assertThisInitialized(_this));
     _this.generalFilter = _this.generalFilter.bind(_assertThisInitialized(_this));
@@ -2138,6 +2137,7 @@ function (_React$Component) {
     _this.dispSearchResults = _this.dispSearchResults.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.clearSearch = _this.clearSearch.bind(_assertThisInitialized(_this));
+    _this.sendToResults = _this.sendToResults.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2155,9 +2155,9 @@ function (_React$Component) {
       var modal = document.getElementById("search-modal-background");
       modal.style.display = "none";
       modal.style.zIndex = -1;
-      this.props.populateSearchResults(this.state);
-      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-        to: "/search"
+      this.props.populateSearchResults(this.state.results);
+      this.setState({
+        redirectToResults: true
       });
     }
   }, {
@@ -2197,6 +2197,15 @@ function (_React$Component) {
       });
       var input = document.getElementById("search-input-text");
       input.value = "";
+    }
+  }, {
+    key: "sendToResults",
+    value: function sendToResults() {
+      if (this.state.redirectToResults) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+          to: "/search"
+        });
+      }
     }
   }, {
     key: "generalFilter",
@@ -2275,7 +2284,7 @@ function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "search-bar-container"
       }, this.searchForm(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "search-modal-background",
@@ -2286,7 +2295,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         id: "search-modal",
         className: "search-dropdown-container"
-      }, this.dispSearchResults(this.state.results))));
+      }, this.dispSearchResults(this.state.results)))), this.sendToResults());
     }
   }]);
 
@@ -2363,9 +2372,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -2382,15 +2391,61 @@ function (_React$Component) {
   _inherits(SearchResults, _React$Component);
 
   function SearchResults(props) {
+    var _this;
+
     _classCallCheck(this, SearchResults);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(SearchResults).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchResults).call(this, props));
+    _this.dispResults = _this.dispResults.bind(_assertThisInitialized(_this));
+    _this.dispBusinesses = _this.dispBusinesses.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(SearchResults, [{
+    key: "dispResults",
+    value: function dispResults() {
+      debugger; // const searchMemuItems = this.props.searchResults.menuItems;
+      // const searchAttrs = this.props.searchResults.attrs;
+
+      if (this.props.searchResults) {
+        var searchBizs = this.props.searchResults.businessNames;
+        debugger;
+        return this.dispBusinesses(searchBizs);
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }
+    }
+  }, {
+    key: "dispBusinesses",
+    value: function dispBusinesses(searchBizs) {
+      var _this2 = this;
+
+      var reviews = {};
+      var businesses = {};
+      var businessIds = Object.values(searchBizs);
+      businessIds.forEach(function (businessId) {
+        businesses[businessId] = _this2.props.businesses[businessId];
+      });
+      Object.values(this.props.reviews).forEach(function (review) {
+        if (businessIds.includes(review.business_id)) {
+          reviews[review.id] = review;
+        }
+      });
+      debugger;
+      return Object.keys(reviews).map(function (reviewId) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_business_business_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          key: reviewId,
+          business: businesses[reviews[reviewId].business_id],
+          review: reviews[reviewId]
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Search Results");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "search-results-container"
+      }, this.dispResults());
     }
   }]);
 
@@ -2419,6 +2474,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state) {
   return {
+    businesses: state.entities.businesses,
+    reviews: state.entities.reviews,
     attrs: state.search.attrs,
     attrCats: state.search.attrCats,
     menuItems: state.search.menuItems,
