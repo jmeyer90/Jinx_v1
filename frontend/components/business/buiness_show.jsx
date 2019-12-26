@@ -83,9 +83,13 @@ class BusinessShow extends React.Component{
   }
 
   dispModal(display, zIndex){
-    const modal = document.getElementById("form-modal-container")
+    const modal = document.getElementById("form-modal-outer-container")
+    const closeModal = document.getElementById("close-modal");
+    const formModal = document.getElementById("form-modal");
     modal.style.display = display;
     modal.style.zIndex = zIndex;
+    closeModal.style.zIndex = zIndex;
+    formModal.style.zIndex = zIndex;
   }
 
   formModal(){
@@ -95,16 +99,14 @@ class BusinessShow extends React.Component{
     };
 
     return(
-      <section className="form-modal" id="form-modal-container">
-        <span className="close-form-span">
-          <button className="close-form-button" onClick={() => this.dispModal("none", -1)}>
-            Close
-          </button>
-        </span>
-        <ReviewForm business={this.props.business} action={this.props.createReview}
-          currentUserId={this.props.currentUserId} update={this.updateField}
-          handleSubmit={this.handleSubmit} buttonText={"Post Review"}
-          review={review} htmlClass={"modal"} />
+      <section className="form-modal-outer-container" id="form-modal-outer-container">
+        <span className="close-form-background" id="close-modal" onClick={() => this.dispModal("none", -1)}></span>
+        <section className="form-modal-inner-container" id="form-modal">
+          <ReviewForm business={this.props.business} action={this.props.createReview}
+            currentUserId={this.props.currentUserId} update={this.updateField}
+            handleSubmit={this.handleSubmit} buttonText={"Post Review"}
+            review={review} htmlClass={"modal"} />
+        </section>
       </section>
     )
   }
@@ -124,6 +126,7 @@ class BusinessShow extends React.Component{
     }
 
     this.setState({review: {}});
+    this.dispModal("none", -1)
     action(this.props.business.id, review)
   }
 

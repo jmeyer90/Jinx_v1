@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import searchResultsConstructor from './search_results_constructor';
 
 class Search extends React.Component{
   constructor(props){
@@ -26,6 +27,9 @@ class Search extends React.Component{
     const modal = document.getElementById("search-modal-background");
     modal.style.display = "none";
     modal.style.zIndex = -1;
+
+    this.props.populateSearchResults( this.state );
+    <Redirect to="/search"/>
   }
 
   searchForm(){

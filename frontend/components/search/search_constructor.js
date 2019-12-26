@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Search from "./search";
 import { fetchBusinesses } from "../../actions/business_actions";
+import { populateSearchResults } from '../../actions/search_actions';
 
 const msp = (state, ownProps) =>(
   {
@@ -12,7 +13,8 @@ const msp = (state, ownProps) =>(
 );
 
 const mdp = dispatch =>({
-  fetchBusinesses: () => dispatch( fetchBusinesses())
+  fetchBusinesses: () => dispatch( fetchBusinesses()),
+  populateSearchResults: searchResults => dispatch( populateSearchResults( searchResults ))
 })
 
 export default connect( msp, mdp )( Search );

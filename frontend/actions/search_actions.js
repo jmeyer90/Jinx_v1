@@ -14,7 +14,7 @@ const removeSearchResults = () =>{
   })
 }
 
-export const fetchSearchResults = searchResults => dispatch =>{
+export const populateSearchResults = searchResults => dispatch =>{
   return(
     dispatch(receiveSearchResults(searchResults))
   )

@@ -32,6 +32,7 @@ const SearchReducer = ( state={}, action )=>{
       return Object.assign({}, state, {searchResults: newState});
 
     case REMOVE_SEARCH_RESULTS:
+      return Object.assign({}, state, {searchResults: {}})
 
     default:
       return state;

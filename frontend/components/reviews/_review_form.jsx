@@ -31,7 +31,7 @@ const ReviewForm= props =>{
   }
 };
 
-const profileImg = htmlClass =>{ // partial for displaying user profile pic? or just image tag?
+const profileImg = htmlClass =>{ 
   if(htmlClass === 'create'){
     return(
       <figure className="profile-img">
@@ -63,15 +63,25 @@ const selectRating = (update, htmlClass) => {
 
 const actionLogic = ( review, update, htmlClass, handleFile ) =>{
   if (htmlClass === "create") {
-    return (
-      reviewDetails(review, update, htmlClass, handleFile)
-    )
-  } else {
+    // let show = false;
+    // if (show){
+      return(
+        reviewDetails(review, update, htmlClass)
+    //   )
+    // } else {
+    //   return(
+    //     <>
+    //       <button type="button" onClick={() => {show=true}}>Write a Review </button>
+    //       { show ? reviewDetails(review, update, htmlClass, handleFile) : <div></div>}
+    //     </>
+      )
+    } else {
     return(
       reviewDetails( review, update, htmlClass, handleFile )
     )
   }
 }
+
 
 const reviewDetails = (review, update, htmlClass ) => {
   return(

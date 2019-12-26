@@ -3,7 +3,26 @@
   display: none;
   position: absolute;
   flex-direction: column;
-  z-index: 1;
+  z-index: -1;
+}
+
+.form-modal::-webkit-scrollbar {
+  display: none;
+}
+
+.close-form-background{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.form-modal-inner-container{
+  position: absolute;
+  flex-direction: column;
+  z-index: -1;
   width: 500px;
   height: 380px;
   resize: none;
@@ -15,26 +34,13 @@
   font-family: inherit;
 }
 
-.form-modal::-webkit-scrollbar {
+.form-modal-inner-container::-webkit-scrollbar {
   display: none;
-}
-
-.close-form-span{
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-}
-
-.close-form-button{
-  width: 100px;
-  display: flex;
-  background: transparent;
-  border: none;
-  justify-content: flex-end;
 }
 
 .review-form-container-modal{
   height: 100%;
+  padding-top: 20px;
 }
 
 .review-form-modal{

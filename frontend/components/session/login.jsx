@@ -36,10 +36,10 @@ class Login extends React.Component{
               <h2 className="disclamer">By logging in, you agree to solemnly swear you are up to no good</h2>
               <hr/>
               <label>
-              <input type="email" placeholder="Email" value={email} onChange={this.update("email")} />
+              <input type="email" placeholder="Email" value={email} onChange={this.update("email")} required/>
               </label>
               <label>
-              <input type="password" placeholder="Password" value={password} onChange={this.update("password")} />
+              <input type="password" placeholder="Password" value={password} onChange={this.update("password")} required/>
               </label>
               <input className="submit" type="submit" value="Log In" />
             </form>

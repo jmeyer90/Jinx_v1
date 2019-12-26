@@ -1,0 +1,58 @@
+.login-modal-outer-container{
+  display: none;
+  position: absolute;
+  flex-direction: column;
+  z-index: -1;
+}
+
+.login-modal-background{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.login-modal-inner-container{
+  position: absolute;
+  flex-direction: column;
+  z-index: 1;
+  resize: none;
+  margin: 10px auto;
+  overflow: auto;
+  background-color: #f5f5f5;
+  box-shadow: 2px 2px 7px;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.login-modal-form{
+  display: flex;
+  flex-direction: column;
+  width: 277px;
+  margin: auto;
+}
+
+.login-modal-input{
+  padding: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  margin: 8px;
+  border-radius: 4px;
+}
+
+.login-modal-submit{
+  width: 130px;
+  padding: 8px;
+  font-weight: 700;
+  margin: 4px auto;
+  background-color: transparent;
+  color: #452487;
+  border-radius: 4px;
+}
+
+.login-modal-submit:hover{
+  transition-duration: 1s;
+  background-color: #452487;;
+  color: #f5f5f5;
+}

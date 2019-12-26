@@ -1,6 +1,7 @@
-// convert array to object
-// sort alphabetically by attribute_item name, menu_item name, business_name
-// in serach utils- write b-search algorithm
+// Converts an array to an object.
+// JBuilder is fetching multiple types of objects at once.
+// When JBuilder returns an array, we convert the array to an object
+// So we can easily normalize state when we reach the reducers.
 
 const arrayToObject = ( array ) =>{
   let newObj = {};
