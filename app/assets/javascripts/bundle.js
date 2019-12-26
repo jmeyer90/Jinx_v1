@@ -2202,6 +2202,7 @@ function (_React$Component) {
     key: "sendToResults",
     value: function sendToResults() {
       if (this.state.redirectToResults) {
+        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
           to: "/search"
         });
@@ -2232,11 +2233,19 @@ function (_React$Component) {
     value: function filter(_filter, attrs) {
       var filtered = {};
       Object.keys(attrs).forEach(function (attrKey) {
-        if (attrKey.toLowerCase().includes(_filter.toLowerCase())) {
-          filtered[attrKey] = attrs[attrKey];
-        }
+        var attrKeys = attrKey.split(" ");
+        attrKeys.forEach(function (ak) {
+          if (ak.toLowerCase().startsWith(_filter.toLowerCase())) {
+            filtered[attrKey] = attrs[attrKey];
+          }
+        });
       });
       return filtered;
+    }
+  }, {
+    key: "toArray",
+    value: function toArray(el) {
+      return el instanceof Array ? el : [el];
     }
   }, {
     key: "dispSearchResults",
@@ -2398,19 +2407,25 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchResults).call(this, props));
     _this.dispResults = _this.dispResults.bind(_assertThisInitialized(_this));
     _this.dispBusinesses = _this.dispBusinesses.bind(_assertThisInitialized(_this));
+    _this.dispItems = _this.dispItems.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(SearchResults, [{
     key: "dispResults",
     value: function dispResults() {
-      debugger; // const searchMemuItems = this.props.searchResults.menuItems;
-      // const searchAttrs = this.props.searchResults.attrs;
+      debugger;
 
       if (this.props.searchResults) {
         var searchBizs = this.props.searchResults.businessNames;
+        var searchMenuItems = this.props.searchResults.menuItems;
+        var searchAttrs = this.props.searchResults.attrs;
         debugger;
-        return this.dispBusinesses(searchBizs);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+          className: "search-results-business-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+          className: "search-results-businesses-title"
+        }, "Businesses"), this.dispBusinesses(searchBizs)), this.dispItems(searchMenuItems), this.dispItems(searchAttrs));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
       }
@@ -2422,7 +2437,14 @@ function (_React$Component) {
 
       var reviews = {};
       var businesses = {};
-      var businessIds = Object.values(searchBizs);
+      var businessIds = [];
+      Object.values(searchBizs).forEach(function (value) {
+        if (value instanceof Array) {
+          businessIds = value;
+        } else {
+          businessIds = Object.values(searchBizs);
+        }
+      });
       businessIds.forEach(function (businessId) {
         businesses[businessId] = _this2.props.businesses[businessId];
       });
@@ -2432,12 +2454,32 @@ function (_React$Component) {
         }
       });
       debugger;
-      return Object.keys(reviews).map(function (reviewId) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_business_business_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          key: reviewId,
-          business: businesses[reviews[reviewId].business_id],
-          review: reviews[reviewId]
+
+      if (businessIds.length > 0) {
+        return Object.keys(reviews).map(function (reviewId) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_business_business_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            key: reviewId,
+            business: businesses[reviews[reviewId].business_id],
+            review: reviews[reviewId]
+          });
         });
+      }
+    }
+  }, {
+    key: "dispItems",
+    value: function dispItems(items) {
+      var _this3 = this;
+
+      debugger;
+      return Object.keys(items).map(function (item) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+          key: item,
+          className: "search-results-item-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+          className: "search-results-item-title"
+        }, item), _this3.dispBusinesses({
+          businessIds: items[item]
+        }));
       });
     }
   }, {

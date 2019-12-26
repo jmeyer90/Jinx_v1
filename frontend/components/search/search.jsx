@@ -59,7 +59,7 @@ class Search extends React.Component{
 
   sendToResults(){
     if(this.state.redirectToResults) {
-
+      debugger
       return (
         <Redirect to="/search" />
       )
@@ -91,12 +91,19 @@ class Search extends React.Component{
     let filtered={}
     
     Object.keys(attrs).forEach( attrKey =>{
-      if( attrKey.toLowerCase().includes( filter.toLowerCase() )){
-        filtered[attrKey] = attrs[attrKey];
-      }
+      let attrKeys = attrKey.split(" ");
+      attrKeys.forEach(ak=>{
+        if( ak.toLowerCase().startsWith( filter.toLowerCase() )){
+          filtered[attrKey] = attrs[attrKey];
+        }
+      })
     });
 
     return filtered;
+  }
+
+  toArray(el){
+     return el instanceof Array ? el : [el];
   }
 
   dispSearchResults(searchResults) {
