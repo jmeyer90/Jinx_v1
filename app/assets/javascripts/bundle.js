@@ -2138,6 +2138,8 @@ function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.clearSearch = _this.clearSearch.bind(_assertThisInitialized(_this));
     _this.sendToResults = _this.sendToResults.bind(_assertThisInitialized(_this));
+    _this.dispLink = _this.dispLink.bind(_assertThisInitialized(_this));
+    _this.setResults = _this.setResults.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2149,13 +2151,13 @@ function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit() {
-      this.setState({
-        results: {}
-      });
       var modal = document.getElementById("search-modal-background");
       modal.style.display = "none";
       modal.style.zIndex = -1;
       this.props.populateSearchResults(this.state.results);
+      this.setState({
+        results: {}
+      });
       this.setState({
         redirectToResults: true
       });
@@ -2277,21 +2279,63 @@ function (_React$Component) {
         }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
           className: "search-category"
         }, Object.keys(category).map(function (attrName, idx) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-            key: idx,
-            className: "search-result-text",
-            to: "/businesses/".concat(category[attrName]),
-            onClick: function onClick() {
-              return _this3.clearSearch();
-            }
-          }, attrName);
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            key: idx
+          }, _this3.dispLink(category, attrName, title));
         })));
       }
     }
   }, {
+    key: "dispLink",
+    value: function dispLink(category, attrName, title) {
+      var _this4 = this;
+
+      if (title === "Businesses") {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          className: "search-result-text",
+          to: "/businesses/".concat(category[attrName]),
+          onClick: function onClick() {
+            return _this4.clearSearch();
+          }
+        }, attrName);
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          className: "search-result-text",
+          to: "/search",
+          onClick: function onClick() {
+            return _this4.setResults(category, attrName, title);
+          }
+        }, attrName);
+      }
+    }
+  }, {
+    key: "setResults",
+    value: function setResults(category, attrName, title) {
+      if (title === "Menu Items") {
+        var menuItems = {
+          attrName: category[attrName]
+        };
+        this.clearSearch();
+        this.setState({
+          results: menuItems
+        });
+      } else {
+        var attrs = {
+          attrName: category[attrName]
+        };
+        this.clearSearch();
+        this.setState({
+          results: attrs
+        });
+      }
+
+      debugger;
+      this.handleSubmit();
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "search-bar-container"
@@ -2299,7 +2343,7 @@ function (_React$Component) {
         id: "search-modal-background",
         className: "search-modal-background",
         onClick: function onClick() {
-          return _this4.clearSearch();
+          return _this5.clearSearch();
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         id: "search-modal",

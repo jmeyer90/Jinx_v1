@@ -16,6 +16,8 @@ class Search extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
     this.sendToResults = this.sendToResults.bind(this);
+    this.dispLink = this.dispLink.bind(this);
+    this.setResults = this.setResults.bind(this);
   }
 
   componentDidMount(){
@@ -23,13 +25,12 @@ class Search extends React.Component{
   }
 
   handleSubmit(){
-    this.setState({ results: {} });
-
     const modal = document.getElementById("search-modal-background");
     modal.style.display = "none";
     modal.style.zIndex = -1;
 
-    this.props.populateSearchResults( this.state.results );
+    this.props.populateSearchResults(this.state.results);
+    this.setState({ results: {} });
     this.setState({ redirectToResults: true })
   }
 
@@ -134,16 +135,51 @@ class Search extends React.Component{
           <h2 className="search-section-title">{title}</h2>
           <label className="search-category">
             {Object.keys(category).map((attrName, idx) => (
-              <Link key={idx} className="search-result-text"
-               to={`/businesses/${category[attrName]}`}
-               onClick={()=>this.clearSearch()}>
-                 {attrName}
-              </Link>
+              <span key={idx}>{this.dispLink(category, attrName, title)}</span> 
             ))}
           </label>
         </section>
       )
     } 
+  }
+
+  dispLink(category, attrName, title){
+    if(title === "Businesses"){
+      return(
+        <Link className="search-result-text"
+          to={`/businesses/${category[attrName]}`}
+          onClick={() => this.clearSearch()}>
+          {attrName}
+        </Link>
+      )
+    } else {
+      return(
+        <Link className="search-result-text"
+          to='/search'
+          onClick={() => this.setResults(category, attrName, title)}>
+          {attrName}
+        </Link>
+      )
+    }
+  }
+
+  setResults( category, attrName, title){
+    if (title === "Menu Items"){
+      const menuItems = {
+        attrName: category[attrName]
+      };
+      this.clearSearch();
+      this.setState({results: menuItems})
+    } else {
+      const attrs = {
+        attrName: category[attrName]
+      };
+      this.clearSearch();
+      this.setState({ results: attrs })
+    }
+    debugger
+
+    this.handleSubmit();
   }
 
   render() {
