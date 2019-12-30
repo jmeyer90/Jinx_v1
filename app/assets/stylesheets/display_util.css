@@ -17,3 +17,9 @@
   display: flex;
   padding: 3px;
 }
+
+.rating-img{
+  display: flex;
+  height: 20px;
+  width: auto;
+}
