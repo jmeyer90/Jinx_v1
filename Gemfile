@@ -8,7 +8,7 @@ gem 'rails_12factor'
 gem 'aws-sdk-s3'
 
 gem 'jquery-rails'
-gem 'gon', '~> 6.2'
+gem 'gon', '~> 6.4'
 gem 'figaro'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
